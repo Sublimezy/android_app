@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/sanshi"
+        android:text="订单提醒"
+        android:textColor="@color/colorOrange"
+        android:textSize="@dimen/text_seveneensp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/shiwu"
+        android:text="请在拿到驾照后，参与评价！"
+        android:textColor="@color/test_color"
+        android:textSize="@dimen/text_fourteensp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/shisi"
+        android:text="学易车旨在打造五星级驾考服务"
+        android:textColor="@color/test_color"
+        android:textSize="@dimen/side_letter_bar_letter_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/seven"
+        android:text="教学质量：教学严谨，认真负责，技术精湛。"
+        android:textColor="@color/test_color"
+        android:textSize="9sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/seven"
+        android:text="服务态度：廉洁教学，待人谦和，耐心解答。"
+        android:textColor="@color/test_color"
+        android:textSize="9sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/slide_top_and_left_two"
+        android:text="您的评价会让我们更好！"
+        android:textColor="@color/test_color"
+        android:textSize="9sp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/sishi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="@color/_cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_quxiao"
+                android:layout_width="@dimen/zero"
+                android:layout_height="@dimen/sishiwu"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/quxiao"
+                android:textColor="@color/test_color"
+                android:textSize="@dimen/text_ershisp" />
+            <View
+                android:layout_width="1px"
+                android:background="@color/_cccccc"
+                android:layout_height="@dimen/sishiwu"/>
+
+            <TextView
+                android:id="@+id/tv_queren"
+                android:layout_width="@dimen/zero"
+                android:layout_height="@dimen/sishiwu"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="去评价"
+                android:textColor="@color/colorOrange"
+                android:textSize="@dimen/text_ershisp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

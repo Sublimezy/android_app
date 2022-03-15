@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="options">
+        <item>选择图片</item>
+        <item>拍照</item>
+    </string-array>
+    <string-array name="markArray2">
+        <item>-1</item>
+        <item>-0.5</item>
+        <item>0.1</item>
+        <item>0.5</item>
+        <item>0.9</item>
+    </string-array>
+
+</resources>

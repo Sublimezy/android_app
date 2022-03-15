@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/shopping_cart_bottom"
+        android:background="@color/all_line_color"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:paddingLeft="@dimen/all_16dp"
+            android:background="@color/white">
+            <TextView
+                android:id="@+id/tv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清空"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@mipmap/csh_guc_clear"
+                android:drawablePadding="3dp"
+                android:textColor="#ffff5000"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金额交易明细"
+                android:layout_marginTop="18dp"
+                android:layout_centerInParent="true"
+                android:textColor="#333333"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:id="@+id/iv_close"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/csh_guc_close"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/color_white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/shopping_cart_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_white"
+        android:clickable="true"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/all_16dp">
+
+                <TextView
+                    android:id="@+id/tv_shoping_car_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥----"
+                    android:gravity="center_horizontal"
+                    android:textColor="#ffd81e06"
+                    android:textSize="23sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_shoping_car_money_menshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="门市价￥---"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#ff666666"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/bt_shoping_car_buy"
+                android:layout_width="168dp"
+                android:layout_marginRight="@dimen/all_16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_height="40dp"
+                android:background="@drawable/csh_xd_bg"
+                android:text="立即下单"
+                android:textStyle="bold"
+                android:textColor="@color/color_white"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
