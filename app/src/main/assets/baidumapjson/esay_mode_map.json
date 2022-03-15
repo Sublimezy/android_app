@@ -1,0 +1,41 @@
+[
+  {
+    "featureType": "educationlabel",
+    "elementType": "labels",
+    "stylers": {
+      "color": "#b52127ff",
+      "visibility": "off"
+    }
+  },
+  {
+    "featureType": "medicallabel",
+    "elementType": "labels",
+    "stylers": {
+      "color": "#b52127ff",
+      "visibility": "off"
+    }
+  },
+  {
+    "featureType": "local",
+    "elementType": "labels",
+    "stylers": {
+      "color": "#ed0e17ff",
+      "visibility": "off"
+    }
+  },
+  {
+    "featureType": "highway",
+    "elementType": "labels.icon",
+    "stylers": {
+      "visibility": "off"
+    }
+  },
+  {
+    "featureType": "poilabel",
+    "elementType": "labels",
+    "stylers": {
+      "visibility": "off"
+    }
+  }
+
+]
