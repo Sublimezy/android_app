@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="57dp"
+                android:layout_marginRight="57dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_keer_xuzhi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@mipmap/test_shuoming"
+                    android:drawablePadding="7dp"
+                    android:text="@string/keerxuzhi"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_must_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@mipmap/test_skill"
+                    android:drawablePadding="7dp"
+                    android:text="@string/biguojiqiao"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:background="#979797" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/all_16dp"
+                android:layout_marginLeft="@dimen/all_16dp"
+                android:text="科目二教程"
+                android:textColor="#ff333333"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/yibaisi">
+
+                <LinearLayout
+                    android:id="@+id/ll_daoche"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/all_16dp"
+                    android:orientation="vertical">
+
+                    <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+                        android:layout_width="170dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/subject_b_01" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="@string/daocheruku"
+                        android:textColor="@color/_3232"
+
+                        android:textSize="@dimen/text_fourteensp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_poting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/all_16dp"
+                    android:orientation="vertical">
+
+                    <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+                        android:layout_width="170dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/subject_b_02" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="@string/qibu"
+                        android:textColor="@color/_3232"
+                        android:textSize="@dimen/text_fourteensp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/yibaisi">
+
+                <LinearLayout
+                    android:id="@+id/ll_cefang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/all_16dp"
+                    android:orientation="vertical">
+
+                    <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+
+                        android:layout_width="170dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/subject_b_03" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="@string/cefangwei"
+                        android:textColor="@color/_3232"
+                        android:textSize="@dimen/text_fourteensp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_quxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/all_16dp"
+                    android:orientation="vertical">
+
+                    <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+                        android:layout_width="170dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/subject_b_04" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="@string/xuxianxingshi"
+                        android:textColor="@color/_3232"
+                        android:textSize="@dimen/text_fourteensp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/yibaisi">
+
+                <LinearLayout
+                    android:id="@+id/ll_zhijiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/all_16dp"
+                    android:orientation="vertical">
+
+                    <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+                        android:layout_width="170dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/subject_b_05" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="@string/zhijiaozhuanwan"
+                        android:textColor="@color/_3232"
+                        android:textSize="@dimen/text_fourteensp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

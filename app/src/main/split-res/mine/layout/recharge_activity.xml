@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/recharge_include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/bianji_include"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_height="@dimen/qishi">
+        <TextView
+            android:text="@string/chongzhijine"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/ed_recharge_money"
+            android:hint="@string/qingshuruchongzhijine"
+            android:background="@null"
+            android:textColor="@color/_3232"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:textSize="@dimen/text_sixteensp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/slide_top_and_left_two"/>
+    <RelativeLayout
+        android:id="@+id/rl_recharge_pos"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:layout_height="@dimen/qishi">
+        <ImageView
+            android:id="@+id/iv_pos"
+            android:layout_marginLeft="@dimen/shiyi"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/recharge_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_toRightOf="@+id/iv_pos"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp"
+                android:text="@string/xianshangposzhifu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/colorOrange"
+                android:textSize="12sp"
+                android:text="@string/tuijianshiyong"
+                android:layout_marginLeft="@dimen/slide_top_and_left"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_post"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/recharge_no"
+            android:layout_marginRight="@dimen/ershisan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+<RelativeLayout
+    android:id="@+id/rl_recharge_zhifubao"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginLeft="@dimen/all_zouyou"
+    android:layout_marginRight="@dimen/all_zouyou"
+    android:layout_height="@dimen/qishi">
+    <ImageView
+        android:id="@+id/iv_zhifubao"
+        android:layout_marginLeft="@dimen/shiyi"
+      android:layout_centerVertical="true"
+        android:src="@mipmap/recharge_zhifubao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_toRightOf="@+id/iv_zhifubao"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp"
+            android:text="@string/zhifubaozhifu"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/colorOrange"
+            android:textSize="12sp"
+            android:text="@string/tuijianshiyong"
+            android:layout_marginLeft="@dimen/slide_top_and_left"
+           android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_zhifubao_no"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/recharge_ok"
+        android:layout_marginRight="@dimen/ershisan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"/>
+    <RelativeLayout
+        android:id="@+id/rl_recharge_wechat"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:layout_height="@dimen/qishi">
+        <ImageView
+            android:id="@+id/iv_wechat"
+            android:layout_marginLeft="@dimen/shiyi"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/recharge_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_toRightOf="@+id/iv_wechat"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp"
+                android:text="@string/weixinzhifu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/colorOrange"
+                android:textSize="@dimen/side_letter_bar_letter_size"
+                android:text="@string/fangbiankuaijie"
+                android:layout_marginLeft="@dimen/slide_top_and_left"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_wechat_no"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/recharge_no"
+            android:layout_marginRight="@dimen/ershisan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"/>
+    <Button
+        android:id="@+id/bt_ok_recharge"
+        android:text="@string/querenchongzhi"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_eightteensp"
+        android:layout_marginTop="@dimen/wushisi"
+        android:layout_width="@dimen/sanbai"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="@dimen/all_include_height"
+        android:background="@drawable/my_wallet_back"
+        android:shadowColor="@color/green"
+        android:shadowRadius="5"
+        />
+</LinearLayout>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/dialog_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ershiwu"
+            android:layout_marginRight="@dimen/ershiwu"
+            android:layout_marginTop="@dimen/sishi"
+            android:background="@drawable/surper_huiyuan_round_bg">
+
+            <ImageView
+                android:id="@+id/iv_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/slide_top_and_left_two"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:src="@mipmap/jisuanqi_exit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_exit"
+                android:layout_marginTop="@dimen/shiba"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="hi,实力土豪 尊敬用户"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sanshiqi">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:drawableLeft="@mipmap/jisuanqi_point"
+                        android:text="  C1学费"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:text="¥500.00"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ershisan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:drawableLeft="@mipmap/jisuanqi_point"
+                        android:text="  积分双倍"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:text="¥500.00"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ershisan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:drawableLeft="@mipmap/jisuanqi_point"
+                        android:text="  代金券4/每月x12"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:text="¥500.00"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ershisan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:drawableLeft="@mipmap/jisuanqi_point"
+                        android:text="  有证练车x6小时"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:text="¥500.00"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ershisan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:drawableLeft="@mipmap/jisuanqi_point"
+                        android:text="  每月100多重优惠"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:text="¥500.00"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+                </RelativeLayout>
+
+                <View
+                    style="@style/_cccline"
+                    android:layout_marginLeft="@dimen/shiwu"
+                    android:layout_marginRight="@dimen/shiwu"
+                    android:layout_marginTop="@dimen/ershisan" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ershisan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:text="成为VIP3平均可省"
+                        android:textColor="#4f4f4f"
+                        android:textSize="@dimen/text_eightteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:text="¥5050.00"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="@dimen/text_eightteensp" />
+                </RelativeLayout>
+
+                <Button
+                    android:layout_width="250dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/sanshi"
+                    android:layout_marginTop="@dimen/ershiba"
+                    android:background="@drawable/button_shape"
+                    android:text="立即开通"
+                    android:textColor="@color/color_white"
+                    android:textSize="25sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/jisuanqi_round"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:src="@mipmap/jisuanqi_huangguan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:text="易级会员"
+                android:textColor="#ecc63f"
+                android:textSize="@dimen/text_fifteensp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

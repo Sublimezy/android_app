@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/papertest_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/papertest_include"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:srlEnableAutoLoadMore="false"
+            app:srlPrimaryColor="@color/color_white">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@color/colorOrange"
+                app:srlDrawableProgress="@drawable/animation_loading_frame"
+                app:srlPrimaryColor="@color/color_white" />
+            <ListView
+                android:id="@+id/listview_all_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="@android:color/transparent"
+                android:listSelector="@android:color/transparent" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <TextView
+            android:id="@+id/tv_letter_city"
+            android:layout_width="@dimen/yibaier"
+            android:layout_height="@dimen/yibaier"
+            android:layout_centerInParent="true"
+            android:background="@drawable/overlay_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sishibasp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <com.xueyiche.zjyk.xueyiche.homepage.view.QuickIndexBar
+        android:id="@+id/bar_city"
+        android:layout_width="60px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="#f2f3f5" />
+
+    </RelativeLayout>
+
+</LinearLayout>

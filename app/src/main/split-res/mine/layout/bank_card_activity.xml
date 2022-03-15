@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/bank_card_include"
+        layout="@layout/bianji_include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sishiqi"
+        android:background="@color/all_line_color">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:text="@string/qingbaodingbenren"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/text_sixteensp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/all_include_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/side_letter_bar_letter_size"
+            android:text="@string/chikaren"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp" />
+
+        <EditText
+            android:id="@+id/ed_bank_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:textColor="@color/test_color"
+            android:textSize="@dimen/text_sixteensp" />
+    </LinearLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/all_include_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/side_letter_bar_letter_size"
+            android:text="卡    号："
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp" />
+
+        <EditText
+            android:numeric="integer"
+            android:id="@+id/ed_bank_card"
+            android:maxLength="19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:textColor="@color/test_color"
+            android:textSize="@dimen/text_sixteensp" />
+    </LinearLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/all_include_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/side_letter_bar_letter_size"
+            android:text="开户行："
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp" />
+
+        <EditText
+            android:numeric="integer"
+            android:id="@+id/ed_bank_kaihuhang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:hint="例：哈尔滨融汇松北支行"
+            android:textColor="@color/test_color"
+            android:textSize="@dimen/text_sixteensp" />
+    </LinearLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"/>
+    <RelativeLayout
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/bt_bangding"
+            android:text="@string/querenbangding"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_eightteensp"
+            android:layout_marginTop="@dimen/sishisi"
+            android:layout_width="@dimen/sanbai"
+           android:layout_centerHorizontal="true"
+            android:layout_height="@dimen/all_include_height"
+            android:background="@drawable/my_wallet_back"
+            android:shadowColor="@color/green"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rl_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:minHeight="44dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_car_service_title"
+        android:layout_marginLeft="@dimen/ershi"
+      android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/shuxian"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/shuxian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title_include"
+        layout="@layout/new_top_include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_include"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu"
+            android:layout_marginTop="13dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/shop_title_40"
+                android:layout_gravity="center_vertical"
+                android:text="车架号" />
+
+            <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.xueyiche.zjyk.xueyiche.mine.view.MClearEditText
+                android:id="@+id/ed_chejia"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:gravity="right"
+                android:hint="请输入车架号"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/_3232"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="@dimen/text_sixteensp"
+                app:mClearEditText_showBottomLine="false"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/shisan"
+            android:layout_marginTop="@dimen/shisan"
+            android:background="@color/_cccccc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/shop_title_40"
+                android:layout_gravity="center_vertical"
+                android:text="发动机号" />
+
+            <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.xueyiche.zjyk.xueyiche.mine.view.MClearEditText
+                android:id="@+id/ed_fadongji"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:gravity="right"
+                android:hint="请输入发动机号"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/_3232"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="@dimen/text_sixteensp"
+                app:mClearEditText_showBottomLine="false"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/shisan"
+            android:layout_marginTop="@dimen/shisan"
+            android:background="@color/_cccccc" />
+
+        <LinearLayout
+            android:id="@+id/ll_chepai"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/shop_title_40"
+                android:layout_gravity="center_vertical"
+                android:text="车牌号" />
+
+            <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/ed_chepai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="请输入车牌号"
+                android:lines="1"
+                android:maxLength="8"
+                android:singleLine="true"
+                android:textColor="@color/_3232"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="@dimen/text_sixteensp"
+                app:mClearEditText_showBottomLine="false"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/xian_chepai"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/shisan"
+            android:layout_marginTop="@dimen/shisan"
+            android:background="@color/_cccccc" />
+
+        <LinearLayout
+            android:id="@+id/ll_sheng"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/shop_title_40"
+                android:layout_gravity="center_vertical"
+                android:text="省份缩写" />
+
+            <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/ed_sheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="例如:闽 桂 黑"
+                android:lines="1"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textColor="@color/_3232"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="@dimen/text_sixteensp"
+                app:mClearEditText_showBottomLine="false"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/xian_sheng"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/shisan"
+            android:layout_marginTop="@dimen/shisan"
+            android:background="@color/_cccccc"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="实付金额: "
+                android:gravity="center_vertical"
+                android:textColor="@color/_4f4f4f"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:gravity="center_vertical"
+
+                android:textColor="#ffef3a2e"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:layout_marginLeft="7dp"
+                android:textColor="#ffef3a2e"
+                android:textSize="21sp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_query"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/cheng_yuan_bg"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:text="立即查询"
+            android:textColor="@color/color_white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/aa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <android.inputmethodservice.KeyboardView
+            android:id="@+id/keyboard_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/aa"
+            android:layout_alignParentBottom="true"
+            android:background="#d1d5db"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:keyBackground="@drawable/selector_key_background"
+            android:keyPreviewHeight="43dp"
+            android:keyPreviewLayout="@layout/key_preview_layout"
+            android:keyTextColor="#333333"
+            android:keyTextSize="16sp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:shadowColor="#00000000"
+            android:shadowRadius="0.0"
+            android:visibility="gone" />
+
+        <android.inputmethodservice.KeyboardView
+            android:id="@+id/keyboard_view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/aa"
+            android:layout_alignParentBottom="true"
+            android:background="#d1d5db"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:keyBackground="@drawable/selector_key_background"
+            android:keyPreviewHeight="43dp"
+            android:keyPreviewLayout="@layout/key_preview_layout"
+            android:keyTextColor="#333333"
+            android:keyTextSize="16sp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:shadowColor="#00000000"
+            android:shadowRadius="0.0"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:background="@color/_cccccc" />
+
+    </LinearLayout>
+
+</RelativeLayout>

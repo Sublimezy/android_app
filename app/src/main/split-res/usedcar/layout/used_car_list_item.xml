@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+            <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+                android:id="@+id/iv_used_car_photo"
+                android:layout_width="100dp"
+                android:scaleType="fitXY"
+                android:layout_height="100dp"
+                android:src="@mipmap/lunbotu" />
+
+            <ImageView
+                android:id="@+id/iv_used_car_state"
+                android:layout_width="40dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_height="20dp"
+                android:src="@mipmap/chuzuzhong" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/shiqi"
+            android:layout_height="110dp">
+
+            <TextView
+                android:id="@+id/tv_usedcar_title"
+                android:layout_width="wrap_content"
+                android:maxLines="2"
+                android:text="学易车"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/six"
+                android:textSize="@dimen/text_sixteensp"
+                android:lineSpacingExtra="@dimen/er"
+                android:textColor="@color/_3333"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_shangpan_gongli"
+                android:layout_width="wrap_content"
+                android:maxLines="1"
+                android:textSize="@dimen/text_fourteensp"
+                android:text="行驶里程：0公里"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:textColor="@color/test_color"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:visibility="gone"
+                    android:src="@mipmap/used_car_sell"
+                    android:layout_height="16dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:textColor="@color/test_color"
+                    android:text="售价："
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_car_price"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/text_seveneensp"
+                    android:textColor="#D0021B"
+                    android:textStyle="bold"
+                    android:text="0万"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_new_car_price"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:textSize="9sp"
+                    android:textColor="@color/_9999"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_money_buy_loan"
+                android:layout_width="wrap_content"
+                android:textSize="9sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#ff5000"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/ll_rent_content"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:visibility="gone"
+                    android:src="@mipmap/used_car_rent"
+                    android:layout_height="16dp" />
+                <TextView
+                    android:id="@+id/tv_rent_price"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="9sp"
+                    android:textColor="@color/colorOrange"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_new_rent_price"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:textSize="9sp"
+                    android:textColor="@color/_9999"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        style="@style/_cccline"
+        android:layout_marginTop="15dp" />
+</LinearLayout>

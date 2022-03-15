@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/title"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <RadioGroup
+        android:id="@+id/rg_practice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sishi"
+        android:layout_below="@+id/choice_card_title"
+        android:background="@color/color_white"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/ll_choice_area"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sishier"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector"
+            android:gravity="center"
+            android:text="区域"
+            android:textColor="@drawable/shaixuan_text_color"
+            android:textSize="@dimen/text_fifteensp" />
+
+        <TextView style="@style/kongxi" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/all_line_color" />
+
+        <TextView style="@style/kongxi"
+            android:id="@+id/tv_kongxi"
+            />
+
+        <RadioButton
+            android:id="@+id/ll_choice_carstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sishier"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector"
+            android:gravity="center"
+            android:text="全部车型"
+            android:textColor="@drawable/shaixuan_text_color"
+            android:textSize="@dimen/text_fifteensp" />
+
+        <TextView style="@style/kongxi"
+            />
+
+        <View
+            android:id="@+id/view_shuline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/all_line_color" />
+
+        <TextView style="@style/kongxi"
+            android:id="@+id/tv_kongxi1"
+            />
+
+        <RadioButton
+            android:id="@+id/ll_choice_shaixuan"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sishier"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector"
+            android:gravity="center"
+            android:text="变速箱"
+            android:textColor="@drawable/shaixuan_text_color"
+            android:textSize="@dimen/text_fifteensp" />
+
+        <TextView style="@style/kongxi" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/all_line_color" />
+
+        <TextView style="@style/kongxi" />
+
+        <RadioButton
+            android:id="@+id/ll_choice_price"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sishier"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector"
+            android:gravity="center"
+            android:text="价格"
+            android:textColor="@drawable/shaixuan_text_color"
+            android:textSize="@dimen/text_fifteensp" />
+
+        <TextView style="@style/kongxi" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"
+        android:background="@color/all_line_color" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:srlEnableAutoLoadMore="false"
+            app:srlPrimaryColor="@color/color_white">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@color/colorOrange"
+                app:srlDrawableProgress="@drawable/animation_loading_frame"
+                app:srlPrimaryColor="@color/color_white" />
+
+            <ListView
+                android:id="@+id/lv_choice_jiaolian"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:divider="#00000000"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" />
+
+
+            <com.scwang.smartrefresh.header.StoreHouseHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:shhEnableFadeAnimation="true"
+                app:shhText="XueYiChe" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_youzheng_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/not_indent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/slide_top_and_left_two"
+                android:text="@string/zanwujiaolian"
+                android:textColor="@color/_666"
+                android:textSize="@dimen/text_fourteensp" />
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="@color/color_white"
+        android:scrollbars="none"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/all_zouyou"
+            android:paddingRight="@dimen/all_zouyou">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/all_include_height"
+                android:text="免费上门接送"
+                android:textColor="@color/_666"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/rl_time_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开始时间"
+                        android:textColor="@color/_666"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:text="请选择开始时间"
+                        android:textColor="@color/_9999"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_total_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="共0小时"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="结束时间"
+                        android:textColor="@color/_666"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:text="请选择结束时间"
+                        android:textColor="@color/_9999"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                style="@style/_cccline"
+                android:layout_marginTop="@dimen/all_include_height" />
+
+            <RelativeLayout
+                android:id="@+id/rl_carstyle_jibie"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="车辆级别" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_carstyle_jibie"
+                        style="@style/order_practice_chooice_content" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_carstyle_money"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="选择价格  " />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_carstyle_money"
+                        style="@style/order_practice_chooice_content" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_jie_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="上车地址" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/tv_jie_location"
+                        style="@style/order_practice_chooice_content"
+                        android:ellipsize="end"
+                        android:maxEms="7"
+                        android:maxLines="1" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/driver_school_location" />
+
+                </LinearLayout>
+            </RelativeLayout>
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_song_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="下车地址" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/tv_song_location"
+                        style="@style/order_practice_chooice_content"
+                        android:ellipsize="end"
+                        android:maxEms="7"
+                        android:maxLines="1" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/driver_school_location" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_will_practice_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="意向练车项目" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_will_practice_content"
+                        style="@style/order_practice_chooice_content" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_will_practice_area"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="意向练车区域" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_will_practice_area"
+                        style="@style/order_practice_chooice_content" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/all_include_height"
+                android:text="学员技能"
+                android:textColor="@color/_666"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/_cccline"
+                android:layout_marginTop="@dimen/ershiwu" />
+
+            <RelativeLayout
+                android:id="@+id/rl_getcard_time"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="下证时间" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_getcard_time"
+                        style="@style/order_practice_chooice_content"
+                        android:text="时间选择" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_graduation_level"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="毕业水平" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_graduation_level"
+                        style="@style/order_practice_chooice_content" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <RelativeLayout
+                android:id="@+id/rl_practice_experience"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiba">
+
+                <TextView
+                    style="@style/order_practice_title"
+                    android:text="练车经验" />
+
+                <LinearLayout style="@style/order_practice_right_ll">
+
+                    <TextView
+                        android:id="@+id/tv_practice_experience"
+                        style="@style/order_practice_chooice_content" />
+
+                    <ImageView
+                        style="@style/order_practice_right_jiantou"
+                        android:src="@mipmap/jiantou" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/_cccline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:background="#f5f5f5"
+                android:orientation="vertical">
+
+
+                <EditText
+                    android:id="@+id/ed_practice_talk"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_marginTop="@dimen/slide_top_and_left_two"
+                    android:background="#f5f5f5"
+                    android:gravity="top"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:hint="@string/_80"
+                    android:maxLength="80"
+                    android:textColor="@color/_9999"
+                    android:textColorHint="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_fabu"
+                android:layout_width="280dp"
+                android:layout_height="@dimen/all_include_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/all_include_height"
+                android:layout_marginTop="@dimen/all_include_height"
+                android:background="@drawable/button_shape"
+                android:text="提交"
+                android:textColor="@color/color_white"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCFC"
+    android:orientation="vertical"
+    tools:context=".newdriverschool.coach.activity.TrainingRecordActivity">
+
+    <include
+        android:id="@+id/include_layout"
+        layout="@layout/title_bar"
+
+        />
+
+    <include
+        layout="@layout/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F2F3F5" />
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/tv_lianche_manage"
+            android:layout_width="96dp"
+            android:layout_height="33dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="51dp"
+            android:layout_marginRight="64dp"
+            android:background="@drawable/orange_btn_no_fill"
+            android:gravity="center"
+            android:text="练车管理"
+            android:textColor="@color/colorOrange">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_start"
+            android:layout_width="96dp"
+            android:layout_height="33dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/tv_lianche_manage"
+            android:background="@drawable/orange_btn_fill"
+            android:gravity="center"
+            android:text="练车管理"
+            android:textColor="@color/white">
+
+        </TextView>
+
+
+    </LinearLayout>
+</LinearLayout>

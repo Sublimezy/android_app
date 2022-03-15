@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.xueyiche.zjyk.xueyiche.homepage.fragments.bannerview.ViewPager
+        android:id="@+id/slide_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        android:clipToPadding="false"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/slide_viewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/all_include_height"
+        android:layout_below="@id/slide_viewPager"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" />
+</RelativeLayout>

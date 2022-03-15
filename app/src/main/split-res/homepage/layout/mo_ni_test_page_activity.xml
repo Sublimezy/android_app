@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/test_moni_activity_include"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        layout="@layout/test_license_activity_include"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorOrange"
+        android:layout_height="195dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+            <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                android:id="@+id/mo_ni_head"
+                android:src="@mipmap/mo_ni_head"
+                android:layout_width="75dp"
+                android:layout_height="75dp" />
+            <TextView
+                android:text="学易车"
+                android:textSize="@dimen/text_fifteensp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shiwu"
+                android:textColor="@color/color_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="32dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_one"
+                android:text="考试题库"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="107dp"
+                android:text="全国通用小车（C1,C2,C3)"
+                android:textColor="#232323"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="考试时间"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_marginLeft="107dp"
+                android:text="45分钟"
+                android:textColor="#232323"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="合格标准"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="107dp"
+                android:text="90分"
+                android:textColor="#232323"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="出题规则"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="107dp"
+                android:text="模拟真实考试"
+                android:id="@+id/tv_guize"
+                android:textColor="#232323"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="18dp"
+        android:background="@color/all_line_color"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/start_test"
+            android:layout_marginTop="@dimen/all_16dp"
+            android:text="@string/start_exam"
+            android:textColor="@color/color_white"
+            android:textSize="20sp"
+           android:layout_centerHorizontal="true"
+            android:background="@drawable/button_shape"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/all_16dp"
+            android:layout_marginRight="@dimen/all_16dp"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

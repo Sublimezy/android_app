@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/jiaxiao_pingjia_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/shiwu">
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="@dimen/bashi"
+                    android:layout_height="@dimen/liushi"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/lunbotu" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/shiwu"
+                    android:orientation="vertical">
+
+
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@color/_4f4f4f"
+                        android:textSize="25sp" />
+                    <CheckBox
+                        android:id="@+id/check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/niming_pingjia_bg"
+                        android:text="  匿名评价"
+                        android:checked="true"
+                        android:visibility="gone"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sishi"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="您的评价会让教练做得更好！"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_sixteensp" />
+
+                <RatingBar
+                    android:id="@+id/rb_one"
+                    style="@style/MyRatingBarNow"
+                    android:layout_marginRight="@dimen/shiqi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/shiwu"
+                    android:isIndicator="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:numStars="5"
+                    android:stepSize="0.5" />
+            </LinearLayout>
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/yi"-->
+            <!--android:background="@color/all_line_color" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sishisi"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/seven"
+                    android:text="@string/tv_fuwutaidu"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_sixteensp" />
+
+                <RatingBar
+                    android:id="@+id/rb_two"
+                    style="@style/MyRatingBarNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:numStars="5"
+                    android:stepSize="1" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/yi"
+                android:background="@color/all_line_color"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sishisi"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/seven"
+                    android:text="@string/tv_jishushuiping"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_sixteensp" />
+
+                <RatingBar
+                    android:id="@+id/rb_three"
+                    style="@style/MyRatingBarNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:numStars="5"
+                    android:stepSize="1" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/sanshi"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="教学质量"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RatingBar
+                    android:id="@+id/rb_jiaoxue"
+                    android:layout_width="wrap_content"
+                    android:stepSize="1"
+                    android:layout_marginLeft="@dimen/shiwu"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MyRatingBarNowSmall"
+                    android:layout_height="wrap_content"
+                    android:numStars="5" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/shiwu"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="服务态度"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RatingBar
+                    android:id="@+id/rb_service"
+                    android:layout_width="wrap_content"
+                    android:stepSize="1"
+                    android:layout_marginLeft="@dimen/shiwu"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MyRatingBarNowSmall"
+                    android:layout_height="wrap_content"
+                    android:numStars="5" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:background="@drawable/pingjia_edittext_shape"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_height="@dimen/yibaidp">
+
+                <EditText
+                    android:id="@+id/ed_think_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="@dimen/slide_top_and_left_two"
+                    android:layout_height="@dimen/yibaidp"
+                    android:paddingLeft="@dimen/slide_top_and_left"
+                    android:gravity="top"
+                    android:background="@null"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:maxLines="6"
+                    android:maxEms="50"
+                    android:hint="输入文字评论~（最少5个字）"
+                    />
+
+                <TextView
+                    android:id="@+id/text_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:textColor="@color/_9999"
+                    android:layout_marginRight="@dimen/ershi"
+                    android:layout_marginBottom="@dimen/slide_top_and_left_two"
+                    android:text="0/50"/>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_jiashizheng"
+                android:layout_width="310dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="@dimen/sanshi"
+                android:background="@mipmap/bg_xuxian"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="310dp"
+                    android:layout_height="150dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:src="@mipmap/add_image" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="上传驾驶证"
+                        android:textColor="@color/_cccccc"
+                        android:textSize="@dimen/text_eightteensp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_jiashizheng"
+                    android:layout_width="310dp"
+                    android:layout_height="150dp"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
+            <TextView
+                android:id="@+id/tv_gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:text="注：下证日期7个工作内评价有效"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorOrange"
+                android:textSize="@dimen/side_letter_bar_letter_size" />
+            <Button
+                android:id="@+id/bt_submit"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/sishi"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/all_include_height"
+                android:layout_marginBottom="@dimen/ershiwu"
+                android:background="@drawable/button_shape"
+                android:text="提   交"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_eightteensp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

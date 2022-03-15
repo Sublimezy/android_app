@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/all_zouyou"
+            android:paddingRight="@dimen/all_zouyou">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershi"
+                android:text="支付金额"
+                android:textColor="@color/test_color"
+                android:textSize="@dimen/text_eightteensp" />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/ershi"
+                android:text="0元"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/ershi"
+            android:visibility="gone"
+            android:background="@color/_cccccc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:paddingLeft="@dimen/all_zouyou"
+            android:paddingRight="@dimen/all_zouyou"
+            android:text="报告有效期30天"
+            android:visibility="gone"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+        <include
+            android:id="@+id/jiayou_include"
+            layout="@layout/app_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/slide_top_and_left_two" />
+
+        <Button
+            android:id="@+id/bt_pay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/all_include_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/sishi"
+            android:layout_marginRight="@dimen/sishi"
+            android:layout_marginTop="@dimen/liushi"
+            android:background="@drawable/driver_submit_shape"
+            android:paddingLeft="@dimen/all_zouyou"
+            android:paddingRight="@dimen/all_zouyou"
+            android:text="立即支付"
+            android:layout_marginBottom="@dimen/sanshi"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_ershisp" />
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

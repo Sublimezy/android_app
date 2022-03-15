@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/papertest_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <EditText
+        android:id="@+id/et_liuyan"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="12dp"
+        android:textSize="15sp"
+        android:gravity="top"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/_9999"
+        android:hint="备注：第一次叫代驾，希望代驾没喝酒！"
+        android:layout_marginRight="12dp"
+        android:background="@color/_f5f5f5"
+        android:layout_height="150dp" />
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/bianji_title_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sishisi">
+        <com.xueyiche.zjyk.xueyiche.mine.view.MClearEditText
+            android:id="@+id/ed_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/liushiba"
+            android:lines="1"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:textColor="@color/test_color"
+            android:textSize="@dimen/text_ershisp"
+            app:mClearEditText_showBottomLine="false"
+            />
+
+    </RelativeLayout>
+<View
+    android:layout_width="match_parent"
+    android:background="@color/_cccccc"
+    android:layout_marginRight="@dimen/all_zouyou"
+    android:layout_marginLeft="@dimen/all_zouyou"
+    android:layout_height="1px"/>
+</LinearLayout>

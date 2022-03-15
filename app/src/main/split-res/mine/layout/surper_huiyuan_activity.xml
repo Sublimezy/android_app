@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dedede"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/surper_huiyuan_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@mipmap/surper_huiyuan_bg"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/ershiwu"
+            android:src="@mipmap/surper_huiyuan_hat_bigger"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/shiwu"
+            android:text="开通易级超级VIP 享受尊贵特权"
+            android:textColor="#f6d755"
+            android:textSize="@dimen/text_eightteensp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tv_lijikaitong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/shiwu"
+            android:background="@drawable/surper_huiyuan_textbg"
+            android:gravity="center"
+            android:text="立即开通"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/text_fifteensp"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/all_zouyou"
+            android:background="@drawable/surper_huiyuan_round_bg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/sishier"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="成为VIP3平均可省"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                <TextView
+                    android:id="@+id/tv_jiesheng_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/slide_top_and_left"
+                    android:text="¥2500"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="@dimen/side_letter_bar_letter_size"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_jiquanqi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ershi"
+                    android:src="@mipmap/jisuanqi" />
+            </LinearLayout>
+
+            <View style="@style/_cccline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_dalibao"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/surper_huiyuan_dalibao" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:text="大礼包"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="每月100元"
+                        android:textColor="@color/_9999"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_fanjifen"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/surper_huiyuan_fanjifen" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:text="返积分"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="双倍返还"
+                        android:textColor="@color/_9999"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_zengsong"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/surper_huiyuan_give" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:text="赠送"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="每月4张"
+                        android:textColor="@color/_9999"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_maijiusong"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/surper_huiyuan_maijiusong" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/shiwu"
+                        android:text="买就送"
+                        android:textColor="@color/test_color"
+                        android:textSize="@dimen/text_fifteensp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:text="全套优惠券"
+                        android:textColor="@color/_9999"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kaitong_vip1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiwu"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:background="@drawable/pingjia_shape"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:text="立即开通"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="易级超级会员VIP1  ¥30/月"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/six"
+                        android:text="¥80/月"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kaitong_vip2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushiwu"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:background="@drawable/pingjia_shape"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:text="立即开通"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="易级超级会员VIP2  ¥299/月"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/six"
+                        android:text="¥650/月"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kaitong_yitiaolong"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bashiwu"
+                android:layout_marginBottom="@dimen/ershiwu"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:background="@drawable/pingjia_shape"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:text="立即开通 多送30天会员"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:text="学易车超级学车会员一条龙 你的必经之路"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ba"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="¥50/月"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/six"
+                        android:text="¥3208/月"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/ershiwu"
+            android:background="@drawable/surper_huiyuan_round_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:text="易级超级VIP3专属价格"
+                android:textColor="#4f4f4f"
+                android:textSize="@dimen/text_fifteensp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:text="¥2080"
+                android:textColor="@color/colorOrange"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/shiwu"
+                android:text="年费VIP2+C1驾驶证+练车6小时+4x12优惠券+双倍易币"
+                android:singleLine="false"
+                android:lineSpacingExtra="@dimen/si"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/ershiwu"
+                android:textColor="@color/test_color"
+                android:textSize="@dimen/text_fifteensp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/ershiwu"
+            android:layout_marginBottom="@dimen/ershiwu"
+            android:background="@drawable/surper_huiyuan_round_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:text="尊享 学易车联名信用卡VIP1超级会员"
+                android:textColor="#4f4f4f"
+                android:textSize="@dimen/text_fifteensp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:text="（首刷礼） 1个月易级超级VIP1"
+                android:textColor="#4f4f4f"
+                android:textSize="@dimen/text_fifteensp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/shiwu"
+                android:text="（首刷礼） 全套优惠券5张"
+                android:textColor="#4f4f4f"
+                android:textSize="@dimen/text_fifteensp" />
+            <View
+                android:layout_marginTop="@dimen/ershiwu"
+                style="@style/_cccline"
+                />
+            <TextView
+                android:id="@+id/tv_lijibanka"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/sishiwu"
+                android:text="立即办卡  "
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/lijibanka"
+                android:textColor="@color/colorOrange"
+                android:textSize="@dimen/text_eightteensp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
+
+    </ScrollView>
+</LinearLayout>

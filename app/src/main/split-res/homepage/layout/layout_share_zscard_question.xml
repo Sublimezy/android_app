@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@mipmap/viewpager_question_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/viewpager_question_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sanshiwu"
+            android:layout_marginTop="@dimen/ershi"
+            android:text="“如何顺利通过科二考试”"
+            android:textColor="@color/test_color"
+            android:textSize="@dimen/text_seveneensp" />
+
+        <TextView
+            android:id="@+id/viewpager_question_content"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/sanshiwu"
+            android:layout_marginRight="@dimen/ershi"
+            android:layout_marginTop="@dimen/shiwu"
+            android:layout_weight="1"
+            android:lineSpacingExtra="5dp"
+            android:text="“如何顺利通过科二考试”,通过率比较低 好 奥迪厉害房间很舒服控件蓝思科技福克斯个复活卡萨飞机撒fj"
+            android:textColor="@color/_9999"
+            android:textSize="@dimen/text_threeteensp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/sanshi"
+                android:layout_marginTop="@dimen/er"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/viewpager_pinglun" />
+
+                <TextView
+                    android:id="@+id/tv_viewpager_pinglun_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/slide_top_and_left"
+                    android:text="100"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                <ImageView
+                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/viewpager_dianzan" />
+
+                <TextView
+                    android:id="@+id/tv_viewpager_dianzan_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/slide_top_and_left"
+                    android:text="100"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/side_letter_bar_letter_size" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/shiwu"
+            android:layout_height="wrap_content">
+            <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                android:id="@+id/cv_remark_head"
+                android:src="@mipmap/lunbotu"
+                android:layout_marginLeft="@dimen/shisan"
+                android:layout_width="@dimen/sanshijiu"
+                android:layout_height="@dimen/sanshijiu" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:text="学易车"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:textColor="@color/_3333"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:text="02.07"
+                    android:layout_marginLeft="@dimen/seven"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:textColor="#ffb3b3b3"
+                    android:layout_marginTop="@dimen/seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/er"
+                    android:layout_height="wrap_content">
+                    <RatingBar
+                        android:id="@+id/rb_remark_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        style="@style/PracticeRemarkRatingBar"
+                        android:isIndicator="true"
+                        android:layout_height="wrap_content"
+                        android:stepSize="0.5"
+                        android:numStars="5" />
+                    <TextView
+                        android:id="@+id/tv_start_grade"
+                        android:text="5分"
+                        android:layout_marginLeft="@dimen/san"
+                        android:textSize="@dimen/side_letter_bar_letter_size"
+                        android:textColor="#F8A528"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:text="学教练技术特别好，脾气温和，对学员很有耐心，认真负责，车内非常干净。"
+                    android:layout_marginLeft="@dimen/seven"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="@dimen/si"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_marginTop="@dimen/seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_car_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/seven"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_marginTop="@dimen/shisan"
+                    android:scrollbars="none"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

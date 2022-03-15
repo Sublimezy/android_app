@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F7F7F7" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/fujiaxinxi"
+        android:textColor="@color/all_black"
+        android:textSize="@dimen/text_sixteensp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_open_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/_666"
+            android:textSize="14sp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/car_open_time"
+            android:drawablePadding="10dp"
+            android:text="8:00-22:00"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_fuwu_park"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/_666"
+            android:textSize="14sp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/car_park"
+            android:drawablePadding="10dp"
+            android:text="免费泊车"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_fuwu_wifi"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/_666"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:drawableTop="@mipmap/car_wifi"
+            android:drawablePadding="10dp"
+            android:text="wifi"
+            android:layout_marginBottom="@dimen/sanshi"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

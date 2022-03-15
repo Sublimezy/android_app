@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rg_indent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                app:srlEnableAutoLoadMore="false"
+                app:srlPrimaryColor="@color/color_white">
+
+                <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srlAccentColor="@color/colorOrange"
+                    app:srlDrawableProgress="@drawable/animation_loading_frame"
+                    app:srlPrimaryColor="@color/color_white" />
+
+                <GridView
+                    android:id="@+id/lv_collection"
+                    android:layout_marginTop="@dimen/slide_top_and_left"
+                    android:layout_width="match_parent"
+                    android:numColumns="2"
+                    android:focusableInTouchMode="true"
+                    android:layout_height="match_parent" />
+                <com.scwang.smartrefresh.header.StoreHouseHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shhEnableFadeAnimation="true"
+                    app:shhText="XueYiChe" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_not_indent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/yiyisan"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_collection_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/zanwu_collection" />
+
+                <TextView
+                    android:id="@+id/tv_collection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/shiwu"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>

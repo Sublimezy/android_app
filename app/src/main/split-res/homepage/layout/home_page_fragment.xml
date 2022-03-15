@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/color_white"
+        android:clickable="true">
+
+        <LinearLayout
+            android:id="@+id/ll_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="3dp"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/text_include_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="哈尔滨"
+                android:textColor="#161616"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/image_include_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/pic_home_xiangxia" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="12dp"
+            android:layout_toLeftOf="@id/iv_kefu"
+            android:layout_toRightOf="@id/ll_address"
+            android:background="@mipmap/pic_home_serch_bg"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="14dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/pic_home_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:text="雅阁 | 奔腾B70领 | 克06"
+                android:textColor="#ff000000"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_kefu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="@dimen/all_16dp"
+            android:src="@mipmap/pic_home_kefu" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3E3E3"
+        android:visibility="gone"></View>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:srlEnableAutoLoadMore="false"
+        app:srlPrimaryColor="@color/color_white">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/colorOrange"
+            app:srlDrawableProgress="@drawable/animation_loading_frame"
+            app:srlPrimaryColor="@color/color_white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:id="@+id/ll_one"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@mipmap/pic_home_kaojiazhao" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="考驾照"
+                            android:textColor="#ff000000"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_three"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@mipmap/pic_home_youzhenglianche" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="有证练车"
+                            android:textColor="#ff000000"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_four"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@mipmap/pic_home_gouche" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="购车"
+                            android:textColor="#ff000000"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_five"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@mipmap/pic_home_daijia" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="代驾"
+                            android:textColor="#ff000000"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llBaoxian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/iv_weizhang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/sy_jtwz" />
+
+                    <ImageView
+                        android:id="@+id/iv_baoxian"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/sy_cxjl" />
+
+                    <ImageView
+                        android:id="@+id/iv_weibao"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/sy_wbjl" />
+
+                    <ImageView
+                        android:id="@+id/iv_zhengxin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/sy_grzx"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <com.xueyiche.zjyk.xueyiche.homepage.view.FlyBanner
+                    android:id="@+id/fb_shouye"
+                    android:layout_width="match_parent"
+                    android:layout_height="121dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/sy_xw_bg"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/pic_home_reyi" />
+
+                    <ViewFlipper
+                        android:id="@+id/marqueeView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="14dp"
+                        android:layout_weight="1"
+                        android:autoStart="true"
+                        android:flipInterval="2500"
+                        android:inAnimation="@anim/anim_marquee_in"
+                        android:outAnimation="@anim/anim_marquee_out" />
+
+                    <ImageView
+                        android:id="@+id/iv_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/all_zouyou"
+                        android:src="@mipmap/sy_xw_more"
+                        android:textColor="#ff5000"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/rg_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginTop="22dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_zixun"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_shequ"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:button="@null"
+                            android:checked="true"
+                            android:gravity="center_horizontal"
+                            android:text="资讯"
+                            android:textColor="#ff000000"
+                            android:textSize="15dp" />
+
+                        <ImageView
+                            android:id="@+id/iv_zixun"
+                            android:layout_width="7dp"
+                            android:layout_height="6dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/pic_home_rb" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_shipin"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp">
+
+                        <RadioButton
+                            android:layout_centerInParent="true"
+                            android:id="@+id/rb_video"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:gravity="center_horizontal"
+                            android:text="视频"
+                            android:textColor="#ff000000"
+                            android:textSize="15dp" />
+
+                        <ImageView
+                            android:id="@+id/iv_shipin"
+                            android:layout_width="7dp"
+                            android:layout_height="6dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/pic_home_rb" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_wenda"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_wenda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerInParent="true"
+                            android:button="@null"
+                            android:gravity="center_horizontal"
+                            android:text="问答"
+                            android:textColor="#ff000000"
+                            android:textSize="15dp" />
+
+                        <ImageView
+                            android:id="@+id/iv_wenda"
+                            android:layout_width="7dp"
+                            android:layout_height="6dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/pic_home_rb" />
+                    </RelativeLayout>
+
+
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_shipin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:divider="#00000000"
+                        android:listSelector="@android:color/transparent"
+                        android:overScrollMode="never"
+                        android:scrollbars="none" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_gengduo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rv_shipin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="查看更多"
+                    android:textColor="#ffff4211"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/new_top_include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/all_line_color"
+        android:layout_height="1px"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sishi"
+        android:src="@mipmap/jiedan_jujue_bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/all_zouyou"
+        android:text="司机正在火速赶来，请您耐心等待"
+        android:textColor="@color/_3333"
+        android:textSize="@dimen/text_seveneensp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ershi"
+        android:text="12:10后取消订单，将需要支付取消费用"
+        android:textColor="@color/test_color"
+        android:textSize="@dimen/text_threeteensp" />
+
+    <ImageView
+        android:id="@+id/iv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/iv_daijia_no" />
+
+    <ImageView
+        android:id="@+id/iv_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/all_include_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ershi"
+        android:src="@mipmap/iv_daijia_ok" />
+</LinearLayout>

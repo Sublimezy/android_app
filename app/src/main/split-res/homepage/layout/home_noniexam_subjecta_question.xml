@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoDragView="@+id/dragView"
+        sothree:umanoOverlay="true"
+        sothree:umanoPanelHeight="@dimen/sishiwu"
+        sothree:umanoParallaxOffset="@dimen/zero"
+        sothree:umanoScrollableView="@+id/list"
+        sothree:umanoShadowHeight="@dimen/yi">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/moni_test_one_include"
+                layout="@layout/moni_test_one_include"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.xueyiche.zjyk.xueyiche.homepage.view.ReaderViewPager
+                android:id="@+id/vp_subjectA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/moni_test_one_include" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/dragView"
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/yibaidp"
+            android:background="@color/color_white"
+            android:clickable="true"
+            android:focusable="false"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sishiwu"
+                android:background="@color/all_line_color"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/qishiwu"
+                    android:layout_marginTop="@dimen/shiba"
+                    android:src="@mipmap/topic_true" />
+
+                <TextView
+                    android:id="@+id/tv_true_num"
+                    android:layout_width="@dimen/sanshi"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/_3232"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <ImageView
+                    android:id="@+id/iv_topic_jiantou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sishiqi"
+                    android:layout_marginTop="@dimen/slide_top_and_left"
+                    android:src="@mipmap/topic_up" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/liushi"
+                    android:layout_marginTop="@dimen/shiqi"
+                    android:src="@mipmap/topic_flase" />
+
+                <TextView
+                    android:id="@+id/tv_false_num"
+                    android:layout_width="@dimen/sanshi"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/_3232"
+                    android:textSize="@dimen/text_eightteensp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_xuzhi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <RelativeLayout
+            android:id="@+id/rl_know_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/_99000000"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/sanshier"
+                android:layout_marginRight="@dimen/sanshier"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:lineSpacingExtra="@dimen/slide_top_and_left"
+                    android:text="@string/_6_50"
+                    android:textColor="@color/color_white" />
+
+                <Button
+                    android:id="@+id/bt_know_one"
+                    android:layout_width="@dimen/sanbai"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/ershi"
+                    android:background="@color/colorOrange"
+                    android:text="@string/know"
+                    android:textColor="@color/color_white" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</RelativeLayout>

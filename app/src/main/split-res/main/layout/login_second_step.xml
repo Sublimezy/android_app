@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    xmlns:ver="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/shop_top_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sanshier"
+        android:layout_marginTop="@dimen/sanshiba"
+        android:text="输入验证码"
+        android:textColor="@color/_4f4f4f"
+        android:textSize="30sp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/ershiwu"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sanshier"
+            android:text="验证码已发送至"
+            android:textColor="@color/_cccccc"
+            android:textSize="@dimen/text_fifteensp" />
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:textColor="@color/_cccccc"
+            android:textSize="@dimen/text_fifteensp" />
+    </LinearLayout>
+
+    <com.xueyiche.zjyk.xueyiche.homepage.view.VerificationCodeInput
+        android:id="@+id/verificationCodeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        ver:box="4"
+        ver:child_width="40dp"
+        ver:child_height="50dp"
+
+        android:layout_marginLeft="@dimen/shiwu"
+        android:layout_marginTop="@dimen/sanshiwu"
+
+        android:layout_gravity="center_horizontal"
+        ver:box_bg_normal="@drawable/verification_edit_bg_normal"
+        ver:box_bg_focus="@drawable/verification_edit_bg_focus"
+        ver:child_h_padding="@dimen/shiwu"
+        />
+    <TextView
+        android:id="@+id/tvGetPassWord"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:numeric="integer"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ershiwu"
+        android:text="@string/get_yanzhengma"
+        android:textColor="@color/colorOrange"
+        android:textSize="@dimen/text_fifteensp" />
+
+    <Button
+        android:id="@+id/btLogin"
+        android:layout_width="280dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="@color/color_white"
+        android:text="登录"
+        android:textSize="25sp"
+        android:layout_marginTop="@dimen/sanshisi"
+        android:background="@drawable/button_shape"
+        android:layout_height="@dimen/all_include_height" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ershi"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="@dimen/shiwu"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/ba"
+            android:text="@string/tongyi_jieshou"
+            android:textColor="@color/_9999"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+        <TextView
+            android:id="@+id/tv_user_xieyi"
+            android:text="@string/xueyiche_xieyi"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/side_letter_bar_letter_size"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

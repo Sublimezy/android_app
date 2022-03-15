@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/slide_top_and_left"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_shop_pingjia_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/shiwu"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                android:id="@+id/cv_pingjia_one"
+                android:layout_width="@dimen/sanshiba"
+                android:layout_height="@dimen/sanshiba"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/mine_head" />
+
+            <TextView
+                android:id="@+id/tv_pingjia_name_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/_3333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_pingjia_date_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:gravity="right"
+                android:textColor="@color/_9999"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_pingjia_content_one"
+            style="@style/shop_title_2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:gravity="left"
+            android:lineSpacingExtra="5dp"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"
+        android:background="@color/_f5f5f5" />
+</LinearLayout>

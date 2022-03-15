@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/title_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/ll_home"
+            android:layout_height="68dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/home_mudi"
+                android:layout_marginLeft="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_jia"
+                    android:layout_width="wrap_content"
+                    android:text="家"
+                    android:maxLines="1"
+                    android:layout_marginTop="@dimen/shiwu"
+                    android:textColor="@color/_4f4f4f"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/slide_top_and_left_two"
+                    android:maxLines="1"
+                    android:text="设置地址"
+                    android:textSize="13sp"
+                    android:textColor="@color/_9999"
+                    android:id="@+id/tv_jia_address"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+    </LinearLayout>
+    <View
+        style="@style/_cccline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/slide_top_and_left"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:background="@color/_cccccc" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ll_company"
+        android:layout_height="68dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/company_mudi"
+            android:layout_marginLeft="22dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_gongsi"
+                android:layout_width="wrap_content"
+                android:text="公司"
+                android:maxLines="1"
+                android:layout_marginTop="@dimen/shiwu"
+                android:textColor="@color/_4f4f4f"
+                android:textSize="15sp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:id="@+id/tv_gongsi_address"
+                android:maxLines="1"
+                android:text="设置地址"
+                android:textSize="13sp"
+                android:textColor="@color/_9999"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        style="@style/_cccline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/slide_top_and_left"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:background="@color/_cccccc" />
+</LinearLayout>

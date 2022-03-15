@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginTop="@dimen/shiwu"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/new_activity_time" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/shiwu"
+            android:background="@color/_cccccc" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ll_message_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/slide_top_and_left_two"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:layout_marginTop="@dimen/shiwu"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_new_activity_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/er"
+            android:text="10:00"
+            android:textColor="@color/_9999"
+            android:textSize="@dimen/text_fifteensp" />
+
+        <TextView
+            android:id="@+id/tv_new_activity_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ershiwu"
+            android:text="张磊"
+            android:textColor="@color/_4f4f4f"
+            android:textSize="@dimen/text_ershisp" />
+        <ImageView
+            android:id="@+id/iv_new_activity_picture"
+            android:src="@mipmap/lunbotu"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:layout_width="match_parent"
+            android:layout_height="82dp" />
+
+        <TextView
+            android:id="@+id/tv_new_activity_look"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:text="查看详情"
+            android:layout_marginBottom="@dimen/slide_top_and_left_two"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+    </LinearLayout>
+</LinearLayout>

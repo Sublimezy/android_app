@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/dialog_bg"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:textColor="@color/_3232"
+        android:textStyle="bold"
+        android:text="@string/wenxinTishi"
+        android:textSize="@dimen/text_seveneensp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/sanshi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:text="提交成功！工作人员会尽快与您联系办理！"
+        android:textSize="@dimen/text_fourteensp"
+        android:textColor="@color/test_color"
+        android:layout_marginLeft="@dimen/sishi"
+        android:layout_marginRight="@dimen/shiwu"
+        android:layout_marginTop="@dimen/sanshi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/ll_xieyi"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/sishi"
+        android:layout_marginTop="@dimen/shiwu"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_xieyi"
+            android:layout_width="@dimen/shiwu"
+            android:layout_height="@dimen/shiwu"
+            android:background="@drawable/zhengxin_xieyi_select"
+            android:button="@null"
+            android:checked="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:text="我已阅读并同意"
+            android:textColor="@color/_cccccc"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+        <TextView
+            android:id="@+id/tv_xieyi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《服务协议》"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/sanshiwu"
+        android:background="@color/_cccccc"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_no"
+            android:text="@string/quxiao"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_eightteensp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="@dimen/sishiwu" />
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="1px"
+            android:background="@color/_cccccc"
+            android:layout_height="@dimen/sishiwu"/>
+        <TextView
+            android:id="@+id/tv_ok"
+            android:text="确定"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/text_eightteensp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="@dimen/sishiwu" />
+    </LinearLayout>
+
+</LinearLayout>

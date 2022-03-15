@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rg_indent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                app:srlEnableAutoLoadMore="false"
+                app:srlPrimaryColor="@color/color_white">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@color/colorOrange"
+                app:srlDrawableProgress="@drawable/animation_loading_frame"
+                app:srlPrimaryColor="@color/color_white" />
+
+            <ListView
+                android:id="@+id/lv_myindent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none"
+
+                />
+                <com.scwang.smartrefresh.header.StoreHouseHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shhEnableFadeAnimation="true"
+                    app:shhText="XueYiChe" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            <LinearLayout
+                android:id="@+id/ll_not_indent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/yiyisan"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/not_indent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/ershisi"
+                    android:text="@string/zanwuindent"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>

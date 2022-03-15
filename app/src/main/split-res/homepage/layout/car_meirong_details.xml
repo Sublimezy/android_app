@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/car_meirong_details_exit"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/car_meirong_details_exit"
+        android:layout_width="wrap_content"
+       android:layout_marginTop="225dp"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/ll_one"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_white"
+        android:layout_alignParentBottom="true"
+        android:layout_height="323dp">
+        <TextView
+            android:id="@+id/car_meirong_details_name"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/car_meirong_details_content"
+            android:textColor="@color/_9999"
+            android:textSize="14sp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:layout_marginLeft="17dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/rl_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/car_meirong_details_money"
+                        android:textSize="15sp"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/_9999"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:id="@+id/yuanjia_xian"
+                        android:layout_centerVertical="true"
+                        android:background="@color/_9999"
+                        android:layout_width="50dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+            </FrameLayout>
+            <TextView
+                android:id="@+id/car_meirong_details_pay"
+                android:textColor="@color/red"
+                android:layout_marginLeft="80dp"
+                android:layout_toRightOf="@+id/car_service_content_money"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/bt_car_meirong_details_pay"
+        android:text="买单"
+        android:textColor="@color/color_white"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:background="@color/colorOrange"
+        android:layout_alignParentBottom="true"
+        android:layout_height="50dp" />
+
+</RelativeLayout>

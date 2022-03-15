@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCFC"
+    android:orientation="vertical"
+    tools:context=".newdriverschool.coach.activity.TrainingDetailsActivity">
+
+
+    <include layout="@layout/title_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:background="@color/colorOrange">
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_student_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="待练车"
+                    android:textColor="#ffffffff"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <com.lihang.ShadowLayout
+                    android:layout_width="341dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    app:hl_cornerRadius="10dp"
+                    app:hl_shadowColor="#1ca2a2a2"
+                    app:hl_shadowLimit="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="14dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="14dp"
+                                android:src="@mipmap/pic_kemu_2" />
+
+                            <TextView
+                                android:id="@+id/tv_kemu_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="科目二"
+                                android:textColor="#ff333333"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="提交时间"
+                                android:textColor="#ff333333"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_submit_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2020-12-20 10:30:32"
+                                android:textColor="#ff333333"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="总计学时"
+                                android:textColor="#ff333333"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_train_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="（2020年12月20 星期二）"
+                                android:textColor="#FF5000"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_total_xueshi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="共2学时"
+                                android:textColor="#ff333333"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tv_lianche_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="9:00-10:00、10:00-11:00"
+                                android:textColor="#ff333333"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+
+                                android:layout_height="wrap_content"
+                                android:text="学习内容："
+                                android:textColor="#ff333333"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_study_info"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="直角转弯、曲线行驶、倒车入库、侧方停车"
+                                android:textColor="#ff333333"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="联系电话"
+                                android:textColor="#ff666666"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="18673648273"
+                                android:textColor="#ff333333"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="上车时间"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_get_in_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2021-02-20 10:3032"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="上车地点"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_get_in_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2021-02-20 10:3032"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="下车时间"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_get_out_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2021-02-20 10:3032"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="下车地点"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_get_out_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2021-02-20 10:3032"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="对学员点评"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_dianping"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2021-02-20 10:3032"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15dp"
+                                android:text="点评详细"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_dianping_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:gravity="right"
+                                android:text="这个教练还行这个教练还行这个教练还行这个教练还行"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="学员评价"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_xueyuan_pingjia"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2021-02-20 10:3032"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+android:layout_marginBottom="35dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15dp"
+                                android:text="点评详细"
+                                android:textColor="#ff666666"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_xueyuan_pingjia_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:gravity="right"
+                                android:text="这个教练还行这个教练还行这个教练还行这个教练还行"
+                                android:textColor="#ff333333"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                </com.lihang.ShadowLayout>
+
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

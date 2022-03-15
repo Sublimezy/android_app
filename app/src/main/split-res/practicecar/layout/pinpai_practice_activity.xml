@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_height="match_parent">
+
+        <com.xueyiche.zjyk.xueyiche.usedcar.view.MyDrawerLayout
+            android:id="@+id/drawerlayout"
+            android:layout_above="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:clickable="false">
+            <!--主布局-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/ll_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/papertest_include"
+                    android:orientation="horizontal">
+
+                    <ListView
+                        android:id="@+id/listview_all_car"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/all_zouyou"
+                        android:layout_marginRight="@dimen/all_zouyou"
+                        android:cacheColorHint="@android:color/transparent"
+                        android:divider="@null"
+                        android:listSelector="@android:color/transparent"
+                        android:scrollbars="none" />
+
+                    <TextView
+                        android:id="@+id/tv_letter"
+                        android:layout_width="@dimen/yibaier"
+                        android:layout_height="@dimen/yibaier"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/overlay_bg"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sishibasp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <com.xueyiche.zjyk.xueyiche.homepage.view.QuickIndexBar
+                        android:id="@+id/bar_pinpai"
+                        android:layout_width="@dimen/sanshi"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true" />
+
+                </RelativeLayout>
+            </LinearLayout>
+            <!--侧滑菜单-->
+            <LinearLayout
+                android:id="@+id/ll_cehua"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="@color/color_white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_car_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/slide_top_and_left"
+                    android:layout_marginLeft="@dimen/ershi"
+                    android:layout_marginTop="@dimen/ershiwu"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_fifteensp" />
+
+                <ListView
+                    android:id="@+id/right_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </com.xueyiche.zjyk.xueyiche.usedcar.view.MyDrawerLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

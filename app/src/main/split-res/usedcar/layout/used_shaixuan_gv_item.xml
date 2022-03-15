@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/bt_gv_content"
+        android:button="@null"
+        android:layout_width="@dimen/liushi"
+        android:layout_height="@dimen/sanshi"
+        android:layout_centerInParent="true"
+        android:background="@drawable/usedcar_grid_item_bg"
+        android:gravity="center"
+        android:maxLines="1"
+        android:maxEms="5"
+        android:ellipsize="end"
+        android:textColor="@color/_666"
+        android:textSize="13sp" />
+</RelativeLayout>

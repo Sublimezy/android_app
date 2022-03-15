@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/change_head_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                android:background="#f5f5f5">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@mipmap/change_head_bg" />
+
+                <ImageView
+                    android:id="@+id/iv_change_head"
+                    android:layout_width="215dp"
+                    android:layout_height="215dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/lunbotu" />
+
+                <ImageView
+                    android:id="@+id/iv_head_xuanze"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/slide_top_and_left_two"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:src="@mipmap/change_head_xuanze" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:text="昵称"
+                android:textColor="@color/test_color"
+                android:textSize="@dimen/text_fifteensp" />
+
+            <EditText
+                android:id="@+id/et_nackname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/shiwu"
+                android:background="@null"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:hint="请输入昵称"
+                android:textColor="@color/_4f4f4f"
+                android:textColorHint="@color/_cccccc"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/_cccline"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginTop="@dimen/slide_top_and_left_two" />
+
+            <Button
+                android:id="@+id/bt_baocun"
+                android:layout_width="150dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25sp"
+                android:textColor="@color/color_white"
+                android:text="保存"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/yibaidp"
+                android:layout_marginBottom="@dimen/yibaidp"
+                android:background="@drawable/button_shape"
+                android:layout_height="@dimen/all_include_height" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

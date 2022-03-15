@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/dialog_comment_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="36dp"
+        android:layout_marginBottom="@dimen/slide_top_and_left_two"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginTop="@dimen/slide_top_and_left_two"
+        android:background="@drawable/text_yuanjiao"
+        android:textCursorDrawable="@drawable/edittext_cursor"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/all_zouyou"
+        android:hint="我也说两句"
+        android:textColor="@color/_666"
+        android:textSize="@dimen/text_fifteensp" />
+
+<TextView
+    android:id="@+id/dialog_comment_send"
+    android:layout_width="wrap_content"
+    android:text="发送"
+    android:layout_gravity="center_vertical"
+    android:textSize="@dimen/text_fifteensp"
+    android:textColor="@color/test_color"
+    android:layout_marginRight="@dimen/all_zouyou"
+    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+    android:layout_height="wrap_content" />
+</LinearLayout>
+</RelativeLayout>

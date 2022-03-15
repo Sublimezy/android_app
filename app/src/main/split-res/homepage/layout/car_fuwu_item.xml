@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:id="@+id/rl_car_fuwu_item_top"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_fuwu_chick"
+            android:layout_width="wrap_content"
+            android:paddingLeft="15dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/csh_fuwu_item_false"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_shop_service_cartype"
+            android:layout_marginLeft="56dp"
+            android:layout_centerVertical="true"
+            android:maxLength="12"
+            android:text="-----"
+            android:textColor="#ff333333"
+            android:textSize="17sp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/all_16dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="￥-----"
+                android:id="@+id/tv_goods_money_shop"
+                android:textColor="#ffd81e06"
+                android:textSize="21sp"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/ll_menshi"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="门市价"
+                    android:textColor="#ff666666"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_goods_oldmoney_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="￥---"
+                    android:textColor="#ff666666"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/all_16dp"
+        android:layout_marginRight="@dimen/all_16dp"
+        android:background="#E3E3E3"
+        android:layout_height="@dimen/yi"/>
+</LinearLayout>

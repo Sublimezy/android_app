@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_kefu_time"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="2012-01-20 12:02:06"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_zaixian_kefu"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/jiushi"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="12dp"
+            android:layout_height="wrap_content">
+
+            <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                android:id="@+id/ci_kefu_zaixian_head"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/kefu_zaixin_heard" />
+            <TextView
+                android:id="@+id/tv_kefu_zaixian"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/text_back_kefu"
+                android:text="您好，有什么可以帮助你什么可以帮帮助你什么可以帮助你什么可以助帮助什么可以帮助"
+                android:paddingLeft="17dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:lineSpacingExtra="5dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

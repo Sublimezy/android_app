@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--标题-->
+    <include
+        android:id="@+id/baoxian_new_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <WebView
+        android:id="@+id/wv_baoxian_huodong"
+        android:layout_below="@+id/baoxian_new_include"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_baoxian_duihuan"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="立即兑换"
+            android:gravity="center"
+            android:textColor="@color/colorOrange"
+            android:background="@color/color_white"
+            android:textSize="18sp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_baoxian_xiadan"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="立即投保"
+            android:textColor="@color/color_white"
+            android:background="@color/colorOrange"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

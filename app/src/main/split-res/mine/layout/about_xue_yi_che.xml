@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/about_xue_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/wushiliu"
+        android:id="@+id/aa"
+        android:layout_below="@+id/about_xue_include"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/about_xueyiche"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_version"
+            android:text="@string/app_banben"
+            android:textSize="@dimen/text_sixteensp"
+            android:layout_marginTop="@dimen/sanshi"
+            android:textColor="@color/colorOrange"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/aa"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_fuwu"
+            android:layout_width="wrap_content"
+            android:text="服务协议"
+            android:textColor="@color/_4f4f4f"
+            android:textSize="22sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_yinsi"
+            android:layout_width="wrap_content"
+            android:text="隐私政策"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/_4f4f4f"
+            android:textSize="22sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/sanshiba"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/copyright_c_2017_2018"
+            android:textColor="@color/test_color"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/gongsi"
+            android:textColor="@color/test_color"
+            android:layout_marginTop="@dimen/shisi"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>

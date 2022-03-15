@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/chongzhi_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_changjian_wenti"
+        android:layout_below="@+id/chongzhi_include">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/my_wallet_bg"
+                android:orientation="vertical">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="@dimen/shiwu"
+    android:src="@mipmap/my_wallet_top_logo"
+    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的零钱"
+                    android:layout_marginBottom="@dimen/shiwu"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/test_color"
+                    android:layout_marginTop="@dimen/shiyi"
+                    android:textSize="@dimen/text_fourteensp" />
+                    <TextView
+                        android:id="@+id/tv_remain_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00元"
+                        android:layout_marginBottom="@dimen/ershi"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textColor="@color/_3333"
+                        android:textSize="30sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_white"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bt_recharge"
+                    android:layout_width="280dp"
+                    android:layout_height="@dimen/all_include_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qishi"
+                    android:background="@drawable/pingjia_shape"
+                    android:text="@string/chongzhi"
+                    android:visibility="gone"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <Button
+                    android:id="@+id/bt_cash"
+                    android:layout_width="280dp"
+                    android:layout_height="@dimen/all_include_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/all_include_height"
+                    android:layout_marginTop="200dp"
+                    android:background="@drawable/my_wallet_back"
+                    android:shadowColor="@color/_9999"
+                    android:shadowRadius="0"
+                    android:text="@string/tixian"
+                    android:textColor="@color/color_white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_changjian_wenti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/all_zouyou"
+        android:text="常见问题"
+        android:visibility="gone"
+        android:textColor="@color/colorOrange"
+        android:textSize="@dimen/text_fourteensp" />
+
+</RelativeLayout>

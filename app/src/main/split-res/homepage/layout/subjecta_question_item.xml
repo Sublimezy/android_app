@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_dati"
+    android:windowTranslucentNavigation="false"
+    android:background="@color/color_white">
+    <!--标题-->
+
+    <ScrollView
+        android:layout_below="@+id/exam_question_include"
+        android:layout_width="wrap_content"
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:id="@+id/ll_question"
+                android:layout_below="@+id/vv_kemu4"
+                android:paddingTop="@dimen/all_16dp"
+                android:paddingLeft="@dimen/all_16dp"
+                android:paddingRight="@dimen/all_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_questiontype"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="@dimen/si"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/danxuan" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/slide_top_and_left"
+                    android:id="@+id/tv_question"
+                    android:textSize="@dimen/all_16dp"
+                    android:textColor="@color/_3232"
+                    />
+            </FrameLayout>
+
+            <ImageView
+                android:layout_below="@+id/ll_question"
+                android:id="@+id/iv_kemu1"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_below="@+id/iv_kemu1"
+                android:src="@mipmap/xian"
+                android:paddingTop="@dimen/slide_top_and_left_two"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/slide_top_and_left_two"
+                android:id="@+id/ll_answer"
+                android:layout_below="@id/iv_kemu1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_a"
+                    android:paddingBottom="@dimen/slide_top_and_left_two"
+                    android:background="@drawable/exam_xuanxiang"
+                    android:paddingLeft="@dimen/all_16dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_a"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:src="@mipmap/a" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_ansa"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:textSize="@dimen/all_16dp"
+                        android:textColor="@color/_3232"
+                        android:paddingLeft="@dimen/shiba"
+                        android:layout_height="wrap_content"
+                     />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@mipmap/xian"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_b"
+                    android:background="@drawable/exam_xuanxiang"
+                    android:paddingBottom="@dimen/slide_top_and_left_two"
+                    android:paddingLeft="@dimen/all_16dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_b"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:src="@mipmap/b" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:id="@+id/tv_ansb"
+                        android:paddingLeft="@dimen/shiba"
+                        android:textSize="@dimen/all_16dp"
+                        android:textColor="@color/_3232"
+                        android:layout_height="wrap_content"
+                       />
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@mipmap/xian"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/slide_top_and_left_two"
+                    android:id="@+id/ll_c"
+                    android:background="@drawable/exam_xuanxiang"
+                    android:paddingLeft="@dimen/all_16dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:id="@+id/iv_c"
+                        android:src="@mipmap/c" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:id="@+id/tv_ansc"
+                        android:textSize="@dimen/all_16dp"
+                        android:textColor="@color/_3232"
+                        android:paddingLeft="@dimen/shiba"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@mipmap/xian"
+                    android:id="@+id/xian_c"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_d"
+                    android:paddingBottom="@dimen/slide_top_and_left_two"
+                    android:background="@drawable/exam_xuanxiang"
+                    android:paddingLeft="@dimen/all_16dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/iv_d"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/d" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:paddingTop="@dimen/slide_top_and_left_two"
+                        android:id="@+id/tv_ansd"
+                        android:paddingLeft="@dimen/shiba"
+                        android:textSize="@dimen/all_16dp"
+                        android:textColor="@color/_3232"
+                        android:layout_height="wrap_content"
+                       />
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@mipmap/xian"
+                    android:id="@+id/xian_d"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/ll_answer"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/all_16dp"
+                android:paddingRight="@dimen/all_16dp"
+                android:id="@+id/ll_explan"
+                android:visibility="invisible"
+                android:paddingTop="@dimen/ershi"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/zuijiajiexi"
+                    android:textSize="@dimen/all_16dp"
+                    android:id="@+id/tv_analysis_title"
+                    android:paddingLeft="@dimen/slide_top_and_left_two"
+                    android:textColor="@color/_3232"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="@dimen/shiwu"
+                    android:paddingTop="@dimen/slide_top_and_left_two"
+                    android:id="@+id/tv_analysis"
+                    android:textSize="@dimen/text_fourteensp"
+                    android:textColor="@color/_3232"
+                    android:lineSpacingExtra="5dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--第一层阴影-->
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <!-- view背景色 -->
+            <gradient
+                android:endColor="#33e0e0e0"
+                android:startColor="#33e0e0e0"
+                />
+            <!-- 边框圆角 -->
+            <corners
+                android:bottomRightRadius="10dp"
+                android:bottomLeftRadius="10dp"
+                android:topLeftRadius="10dp"
+                android:topRightRadius="10dp" />
+        </shape>
+    </item>
+    <!--第二层前景-->
+    <item
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+</layer-list>

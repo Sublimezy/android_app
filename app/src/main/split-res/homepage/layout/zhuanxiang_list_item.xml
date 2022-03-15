@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/all_16dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    >
+
+    <ImageView
+        android:gravity="center"
+        android:id="@+id/iv_xuhao"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ershi"
+        android:paddingLeft="@dimen/all_16dp"
+        android:src="@drawable/zhuanxiang_b" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ershi"
+        android:paddingLeft="@dimen/liushier"
+        android:id="@+id/tv_leixing"
+        android:textColor="@color/_3232"
+        android:textSize="@dimen/text_fourteensp" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ershi"
+        android:paddingRight="@dimen/sanshier"
+        android:id="@+id/tv_shuliang"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/_9999"
+        android:textSize="@dimen/text_fourteensp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:paddingTop="@dimen/all_16dp"
+        android:layout_below="@+id/tv_shuliang"
+        android:src="@mipmap/xian"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

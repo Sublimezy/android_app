@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/message_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_new_activity"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/jiushiwu"
+                android:layout_marginLeft="@dimen/san"
+                android:layout_marginTop="@dimen/shiwu"
+                android:layout_marginRight="@dimen/san"
+                android:background="@mipmap/wenda_top_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/ershiwu"
+                    android:layout_width="@dimen/sishiyi"
+                    android:layout_marginLeft="@dimen/shiba"
+                    android:layout_height="@dimen/sishiyi"
+                    android:src="@mipmap/new_activity" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/ershi"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_height="wrap_content">
+                   <TextView
+                    android:text="最新活动"
+                    android:textColor="@color/_4f4f4f"
+                    android:textSize="@dimen/text_ershisp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="学易车联合大地保险举办大型活动"
+                        android:textColor="@color/_666"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:textSize="@dimen/side_letter_bar_letter_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kefu_zhushou"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/jiushiwu"
+                android:layout_marginLeft="@dimen/san"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:layout_marginRight="@dimen/san"
+                android:background="@mipmap/wenda_top_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/ershiwu"
+                    android:layout_width="@dimen/sishiyi"
+                    android:layout_marginLeft="@dimen/shiba"
+                    android:layout_height="@dimen/sishiyi"
+                    android:src="@mipmap/kefu_zhushou" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/ershi"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="客服助手"
+                        android:textColor="@color/_4f4f4f"
+                        android:textSize="@dimen/text_ershisp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="学易车联合大地保险举办大型活动"
+                        android:textColor="@color/_666"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:textSize="@dimen/side_letter_bar_letter_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_zichan"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/jiushiwu"
+                android:layout_marginLeft="@dimen/san"
+
+                android:layout_marginTop="@dimen/ershiwu"
+                android:layout_marginRight="@dimen/san"
+                android:background="@mipmap/wenda_top_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/ershiwu"
+                    android:layout_width="@dimen/sishiyi"
+                    android:layout_marginLeft="@dimen/shiba"
+                    android:layout_height="@dimen/sishiyi"
+                    android:src="@mipmap/my_zichan" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/ershi"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="我的资产"
+                        android:textColor="@color/_4f4f4f"
+                        android:textSize="@dimen/text_ershisp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="学易车联合大地保险举办大型活动"
+                        android:textColor="@color/_666"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:textSize="@dimen/side_letter_bar_letter_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_system_message"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/jiushiwu"
+                android:layout_marginLeft="@dimen/san"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/ershiwu"
+                android:layout_marginRight="@dimen/san"
+                android:background="@mipmap/wenda_top_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/ershiwu"
+                    android:layout_width="@dimen/sishiyi"
+                    android:layout_marginLeft="@dimen/shiba"
+                    android:layout_height="@dimen/sishiyi"
+                    android:src="@mipmap/system_message" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/ershi"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="系统消息"
+                        android:textColor="@color/_4f4f4f"
+                        android:textSize="@dimen/text_ershisp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="hi，欢迎加入学易车"
+                        android:textColor="@color/_666"
+                        android:layout_marginTop="@dimen/slide_top_and_left_two"
+                        android:textSize="@dimen/side_letter_bar_letter_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

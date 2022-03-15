@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:background="@color/color_white"
+        android:fitsSystemWindows="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/xian_yuan_bg"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_danbao"
+                    android:layout_width="144dp"
+                    android:layout_height="33dp"
+                    android:button="@null"
+                    android:background="@drawable/zx_bg_select"
+                    android:text="担保公司"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:textColor="@drawable/zx_text_select"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_other"
+                    android:layout_width="144dp"
+                    android:layout_height="33dp"
+                    android:button="@null"
+                    android:background="@drawable/zx_bg_qita_select"
+                    android:text="其他"
+                    android:gravity="center"
+                    android:textColor="@drawable/zx_text_select"
+                    android:textSize="16sp" />
+            </RadioGroup>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="姓名"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWriteName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入姓名"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="身份证号"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWriteIdCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:digits="0123456789Xx"
+                    android:gravity="right"
+                    android:hint="请输入身份证号"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="手机号"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWritePhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:inputType="phone"
+                    android:hint="请输入手机号"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <RelativeLayout
+                android:id="@+id/ll_saomiao"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etWriteYZM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:inputType="phone"
+                    android:hint="请输入业务代码"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp"/>
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/zhengxin_saomiao"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/zx_sys"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="银行卡号"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWriteBankCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入银行卡号"
+                    android:inputType="number"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cb_xieyi"
+                        android:layout_width="@dimen/shiwu"
+                        android:layout_height="@dimen/shiwu"
+                        android:background="@drawable/zhengxin_xieyi_select"
+                        android:button="@null"
+                        android:checked="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                        android:text="我已阅读并同意"
+                        android:textColor="@color/_cccccc"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+
+                    <TextView
+                        android:id="@+id/tv_xieyi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="《个人信息查询授权书》"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="@dimen/side_letter_bar_letter_size" />
+                </LinearLayout>
+                <Button
+                    android:id="@+id/bt_chaxun"
+                    android:layout_width="259dp"
+                    android:layout_height="@dimen/all_include_height"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/cheng_yuan_bg"
+                    android:text="立即查询"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_ershisp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

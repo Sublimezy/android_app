@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dp"
+    android:background="#50000000">
+
+    <LinearLayout
+        android:id="@+id/ll_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/tv_take_photo"
+            android:text="拍照"
+            android:gravity="center"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu" />
+        <View
+            android:background="@color/all_line_color"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/yi"/>
+        <TextView
+            android:id="@+id/tv_photo_book"
+            android:text="从相册选择"
+            android:gravity="center"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu" />
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/_cccccc"
+            android:layout_height="@dimen/slide_top_and_left"/>
+        <TextView
+            android:id="@+id/tv_exit"
+            android:text="取消"
+            android:gravity="center"
+            android:textSize="@dimen/text_sixteensp"
+            android:textColor="@color/test_color"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishiwu" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/lv_customize_item_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/lv_customize_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:text="热干面"
+        android:textSize="18sp"
+        android:textColor="#323232" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="12dp"
+        android:background="@color/_cccccc"
+        android:layout_height="1px"/>
+</LinearLayout>

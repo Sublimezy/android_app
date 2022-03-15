@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/pop"
+    android:windowTranslucentNavigation="false">
+
+    <com.xueyiche.zjyk.xueyiche.main.view.NoScrollViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/fl_queren"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dialog_bg"
+        android:clickable="true"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"
+        android:background="@color/all_line_color" />
+
+    <RadioGroup
+        android:id="@+id/rg_menutab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sishiliu"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/er"
+        android:paddingTop="@dimen/yi">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/MenuTabB"
+            android:checked="true"
+            android:drawableTop="@drawable/my_menu1_selector"
+            android:text="@string/tv_home"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+        <RadioButton
+            android:id="@+id/rb_car"
+            style="@style/MenuTabB"
+            android:drawableTop="@drawable/my_menu2_selector"
+            android:text="车生活"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+        <RadioButton
+            android:id="@+id/rb_discover"
+            style="@style/MenuTabB"
+            android:drawableTop="@drawable/my_menu3_selector"
+            android:text="车知乎"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+
+        <RadioButton
+            android:id="@+id/rb_my"
+            style="@style/MenuTabB"
+            android:drawableTop="@drawable/my_menu5_selector"
+            android:text="@string/tv_mine"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+    </RadioGroup>
+
+</LinearLayout>

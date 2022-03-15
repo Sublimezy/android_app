@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/order_practice_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/slide_top_and_left_two"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/text_sixteensp"
+            android:text="@string/zhenshixingming_"
+            android:textColor="@color/_3232"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="@dimen/text_fifteensp"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:id="@+id/ed_order_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/liushi"
+            android:background="@null"
+            android:hint="@string/shuruzhenhsi" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/slide_top_and_left_two"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_idcard"
+            android:textColor="@color/_3232"
+            android:textSize="@dimen/text_sixteensp"
+            android:text="@string/jiashizhneghao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:textSize="@dimen/text_fifteensp"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:id="@+id/ed_order_driver_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/liushi"
+            android:background="@null"
+            android:hint="@string/qingshurujiashi" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

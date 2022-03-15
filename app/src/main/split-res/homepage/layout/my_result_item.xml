@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="@dimen/all_include_height"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_toRightOf="@+id/my_result_grade"
+        android:id="@+id/my_result_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/qishi"
+        android:layout_centerVertical="true"
+        android:textColor="@color/test_color" />
+
+    <TextView
+        android:id="@+id/my_result_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/test_color" />
+
+    <TextView
+        android:id="@+id/my_result_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/sanshi"
+        android:textColor="@color/test_color" />
+
+
+</RelativeLayout>

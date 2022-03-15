@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:background="@drawable/pop_shape_bg"
+        android:layout_height="@dimen/all_include_height">
+        <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+            android:id="@+id/pop_head"
+            android:layout_width="@dimen/sanshi"
+            android:src="@mipmap/lunbotu"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:layout_height="@dimen/sanshi" />
+        <LinearLayout
+            android:layout_toRightOf="@+id/pop_head"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/slide_top_and_left_two"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_pop_name"
+                android:text="学员 ：150****1251"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/side_letter_bar_letter_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_pop_content"
+                android:text="就在刚刚，TA报了环球驾校，省了300元"
+                android:textColor="@color/color_white"
+                android:textSize="9sp"
+                android:layout_marginTop="@dimen/all_zouyou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/pop_exit"
+            android:src="@mipmap/pop_exit"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:layout_marginRight="@dimen/slide_top_and_left_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

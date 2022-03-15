@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:id="@+id/ll_dot_iv"
+        android:layout_width="13dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/dot_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/wuliu_point" />
+        <!--时间轴的竖线-->
+        <View
+            android:id="@+id/time_line_view"
+            android:layout_width="@dimen/yi"
+            android:layout_height="wrap_content"
+            android:background="#ececec" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/shiwu"
+        android:layout_height="match_parent">
+        <!--快件接收站点-->
+        <TextView
+            android:id="@+id/accept_station_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/shiqi"
+            android:layout_toRightOf="@id/ll_dot_iv"
+            android:textColor="@color/test_color"
+            android:textSize="@dimen/text_fifteensp"
+            tools:text="--------------" />
+        <!--快件接收时间-->
+        <TextView
+            android:id="@+id/accept_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/shiwu"
+            android:layout_marginTop="@dimen/slide_top_and_left_two"
+            android:textColor="@color/_9999"
+            android:textSize="12sp"
+            tools:text="---------------" />
+
+        <!--分割线-->
+        <View
+            android:id="@+id/divider_line_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="@dimen/shiqi"
+            android:layout_marginBottom="@dimen/ershi"
+            android:layout_marginTop="@dimen/ershi"
+            android:background="#ececec" />
+    </LinearLayout>
+</LinearLayout>

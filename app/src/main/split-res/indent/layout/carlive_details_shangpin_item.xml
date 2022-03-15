@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/all_zouyou"
+    android:layout_marginRight="@dimen/all_zouyou"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_shangpin"
+            style="@style/shop_title_40"
+            android:text="产品金额" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            style="@style/shop_title_40"
+            android:layout_alignParentRight="true"
+            android:text=""
+            android:textColor="@color/colorOrange" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yipx"
+        android:layout_marginTop="25dp"
+        android:background="@color/_cccccc" />
+</LinearLayout>

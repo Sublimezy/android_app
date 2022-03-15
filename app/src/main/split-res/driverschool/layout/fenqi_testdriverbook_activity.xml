@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_bottom"
+        android:layout_below="@+id/title"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ershiwu"
+                android:background="#efefef"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/all_zouyou"
+                android:text="您的个人征信良好，符合分期考驾照资格"
+                android:textColor="#0d52af"
+                android:lineSpacingExtra="@dimen/ba"
+                android:textSize="@dimen/side_letter_bar_letter_size" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="联名卡号"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/et_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:hint="请输入联名卡"
+                    android:inputType="number"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:lineSpacingExtra="@dimen/ba"
+                android:layout_marginTop="@dimen/ershi"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:text="征信查询征信查询征信查询征信查询征信查询征信查询征信查询征信查询征信查询征信查询征信查询"
+                android:textColor="@color/_9999"
+                android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/liushi"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/all_include_height">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="分期期数"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+                <TextView
+                    android:id="@+id/tv_choose_qishu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="请选择分期数  "
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/test_color"
+                    android:drawableRight="@mipmap/jiantou_orange"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/shiwu"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="每期应还"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="¥--"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/sanshi"
+                    android:text="其中每期本金"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+
+                    android:text="¥--"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/sanshi"
+                    android:text="每期手续费"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="¥--"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/_9999"
+                    android:textSize="@dimen/text_fifteensp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        style="@style/_cccline"
+        android:layout_above="@+id/rl_bottom" />
+
+    <LinearLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sishiba"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:gravity="center_vertical"
+            android:text="实付金额:"
+            android:textColor="@color/title_one"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_pay_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textColor="@color/title_one"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:gravity="center_vertical"
+            android:text="@string/yuan"
+            android:textColor="@color/title_one"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_fenqi"
+            android:layout_width="@dimen/qishi"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorOrange"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/bt_indent_content_ok"
+            android:layout_width="145dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#ffb10c"
+            android:text="立即提交"
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

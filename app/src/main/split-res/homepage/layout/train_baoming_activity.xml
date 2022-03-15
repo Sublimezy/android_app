@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_gonwu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/zhengxin_selector"
+                    android:text="  公务员"
+                    android:textColor="@color/test_color"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_sifa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/liushi"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/zhengxin_selector"
+                    android:text="  司法"
+                    android:textColor="@color/test_color"
+                    android:textSize="16sp" />
+            </RadioGroup>
+            <com.xueyiche.zjyk.xueyiche.homepage.view.AdListView
+                android:id="@+id/lv_train_fuwu"
+                android:scrollbars="none"
+                android:listSelector="@color/color_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/_f2f3f4f5" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="姓名"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWriteName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入姓名"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="身份证号"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWriteIdCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:digits="0123456789Xx"
+                    android:gravity="right"
+                    android:hint="请输入身份证号"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/liushi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/all_zouyou"
+                    android:text="手机号"
+                    android:textColor="@color/test_color"
+                    android:textSize="@dimen/text_eightteensp" />
+
+                <EditText
+                    android:id="@+id/etWritePhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/all_zouyou"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:inputType="phone"
+                    android:hint="请输入手机号"
+                    android:textColor="@color/_4f4f4f"
+                    android:textColorHint="@color/_cccccc"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/text_eightteensp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/all_zouyou"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:background="@color/_cccccc" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="有无驾驶证"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/_666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_you"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/zhengxin_selector"
+                        android:text="  有"
+                        android:textColor="@color/test_color"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_wu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/liushi"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableLeft="@drawable/zhengxin_selector"
+                        android:text="  无"
+                        android:textColor="@color/test_color"
+                        android:textSize="16sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_uploading_drivecard"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/shangchuanjiashizheng"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/bt_pay"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/all_include_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/driver_submit_shape"
+                android:text="支付"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_ershisp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

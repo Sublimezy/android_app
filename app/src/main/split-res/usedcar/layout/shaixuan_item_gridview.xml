@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xueyiche.zjyk.xueyiche.homepage.view.MyGridView
+        android:id="@+id/gv_shaixuan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/slide_top_and_left_two"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginBottom="@dimen/ershi"
+        android:listSelector="@color/color_white"
+        android:verticalSpacing="@dimen/shiwu" />
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/my_result_include"
+        layout="@layout/indent_tijiao_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/all_16dp"
+        android:layout_marginRight="@dimen/all_16dp"
+        android:layout_height="@dimen/liushiyi">
+        <TextView
+            android:id="@+id/t_grade"
+            android:text="@string/tv_fenshu"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_fifteensp"
+            android:textColor="@color/test_color"
+            android:layout_marginLeft="@dimen/sanshi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+
+            android:text="@string/tv_usetime"
+            android:layout_centerVertical="true"
+            android:textColor="@color/test_color"
+           android:layout_marginLeft="@dimen/qishi"
+            android:textSize="@dimen/text_fifteensp"
+           android:layout_toRightOf="@+id/t_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/tv_date"
+            android:textColor="@color/test_color"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/side_letter_bar_width"
+            android:textSize="@dimen/text_fifteensp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:background="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yi"/>
+    <ListView
+        android:id="@+id/my_result_list_view"
+        android:layout_marginRight="@dimen/all_16dp"
+        android:layout_marginLeft="@dimen/all_16dp"
+        android:dividerHeight="@dimen/yi"
+
+        android:scrollbars="none"
+        android:divider="@color/all_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

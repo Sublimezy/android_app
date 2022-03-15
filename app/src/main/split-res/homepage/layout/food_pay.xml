@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/jiayou_include"
+        layout="@layout/bianji_include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/all_include_height"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/shiwu"
+                android:text="@string/xiaofeizonge"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+            <EditText
+                android:id="@+id/ed_food_chongzhi_zong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/slide_top_and_left"
+                android:layout_toLeftOf="@+id/tv_yuan_one"
+                android:layout_toRightOf="@+id/tv_total"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="@string/shuruxiaofei"
+                android:numeric="integer"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+            <TextView
+                android:id="@+id/tv_yuan_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/slide_top_and_left"
+                android:text="@string/yuan"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/yi"
+            android:background="@color/all_line_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/all_include_height"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_noyouhui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/shiwu"
+                android:text="@string/bukeyouhui"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+            <EditText
+                android:id="@+id/ed_food_chongzhi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toLeftOf="@+id/tv_yuan_two"
+                android:layout_toRightOf="@+id/tv_noyouhui"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="@string/qingshuruxiaofeijine"
+                android:numeric="integer"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+            <TextView
+                android:id="@+id/tv_yuan_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/slide_top_and_left"
+                android:layout_weight="1"
+                android:text="@string/yuan"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/slide_top_and_left_two"
+            android:background="@color/all_line_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishi"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou">
+
+            <TextView
+                android:id="@+id/tv_shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:ellipsize="end"
+                android:maxEms="15"
+                android:maxLines="1"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/text_sixteensp" />
+
+            <TextView
+                android:id="@+id/tv_service_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:text=""
+                android:textColor="@color/_666"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/all_line_color" />
+
+        <TextView
+            android:id="@+id/jiayou_jifen"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sishi"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="27dp"
+            android:gravity="center_vertical"
+            android:text="可用0积分抵扣0.00元"
+            android:textColor="@color/colorOrange"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/yi"
+            android:background="@color/all_line_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishi"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginRight="@dimen/all_zouyou">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="实付金额" />
+
+            <TextView
+                android:id="@+id/jiayou_shifu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:text="¥0"
+                android:textColor="@color/colorOrange"
+                android:textSize="@dimen/text_sixteensp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/slide_top_and_left_two"
+            android:background="@color/all_line_color" />
+
+            <include
+                android:id="@+id/jiayou_include"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/slide_top_and_left_two"
+            android:layout_below="@+id/scroll_view"
+            android:background="@color/all_line_color" />
+
+        <Button
+            android:id="@+id/bt_pay"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/sanshi"
+            android:layout_marginBottom="@dimen/sanshi"
+            android:background="@drawable/my_wallet_back"
+            android:shadowColor="@color/green"
+            android:shadowRadius="5"
+            android:text="支付"
+            android:textColor="@color/color_white"
+            android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

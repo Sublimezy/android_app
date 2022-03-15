@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:srlEnableAutoLoadMore="false"
+            app:srlPrimaryColor="@color/color_white">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@color/colorOrange"
+                app:srlDrawableProgress="@drawable/animation_loading_frame"
+                app:srlPrimaryColor="@color/color_white" />
+
+            <ListView
+                android:id="@+id/lv_wenda"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/all_16dp"
+                android:layout_marginLeft="@dimen/all_16dp"
+                android:divider="#00000000"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" />
+
+
+            <com.scwang.smartrefresh.header.StoreHouseHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:shhEnableFadeAnimation="true"
+                app:shhText="XueYiChe" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </FrameLayout>
+        <ImageView
+
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_width="48dp"
+            android:src="@mipmap/fabu_wenda"
+            android:id="@+id/iv_fabu"
+            android:layout_gravity="right"
+            android:layout_height="48dp" />
+</RelativeLayout>

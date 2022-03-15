@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_white"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_exam_back"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/sishi"
+        android:layout_marginLeft="@dimen/slide_top_and_left_two"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_login_back"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/driver_school_back_hei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/ll_choice_search"
+            android:orientation="horizontal"
+            android:layout_width="250dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/sousuo_background"
+            android:layout_marginLeft="@dimen/sanshiqi"
+            android:layout_height="wrap_content">
+            <ImageView
+                tools:ignore="ContentDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/ba"
+                android:paddingRight="@dimen/ba"
+                android:scaleType="center"
+                android:src="@mipmap/carlife_service_search" />
+
+            <EditText
+                android:id="@+id/keyword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/poi_search_choice"
+                android:inputType="text"
+                android:singleLine="true"
+                android:layout_marginLeft="@dimen/si"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textColor="@color/_9999"
+                android:textColorHint="@color/_9999"
+                android:textSize="@dimen/text_fourteensp" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:text="搜索结果"
+        android:layout_marginTop="@dimen/sanshi"
+        android:textSize="@dimen/text_ershisp"
+        android:textColor="@color/_4f4f4f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/_cccccc"
+        android:layout_marginLeft="@dimen/all_zouyou"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:layout_marginTop="@dimen/shiwu"
+        android:layout_height="1px"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/lv_poi"
+        android:divider="@null"
+        android:paddingRight="@dimen/all_zouyou"
+        android:paddingLeft="@dimen/all_zouyou"
+        android:scrollbars="none"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
