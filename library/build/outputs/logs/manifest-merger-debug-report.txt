@@ -1,33 +1,33 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:1-11:12
+ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:1-11:12
 	package
-		ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:3:5-49
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
+		ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:3:5-49
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:5:5-32
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
+		ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:5:5-32
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:2:11-69
+		ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:4:5-29
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
+		ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:4:5-29
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
 application
-ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml:6:5-9:19
+ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml:6:5-9:19
 uses-sdk
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
-INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
+INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
-		ADDED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
-		INJECTED from /Users/zhanglei/Desktop/androidProject/xueyiche/xueyiche4.0/library/src/main/AndroidManifest.xml
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
+		ADDED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
+		INJECTED from D:\a_xyc_workspace\xueyiche_new_daijia\library\src\main\AndroidManifest.xml
