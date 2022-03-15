@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'androidx.legacy:legacy-support-v4:1.0.0'
+    compile 'androidx.appcompat:appcompat:1.0.0'
+    compile 'androidx.annotation:annotation:1.0.0'
+    compile 'androidx.recyclerview:recyclerview:1.0.0'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    lintOptions {
+        abortOnError false
+    }
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+    }
+}

@@ -1,0 +1,252 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+android {
+    // apache包
+    useLibrary 'org.apache.http.legacy'
+    //为了解决部分第三方库重复打包了META-INF的问题
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'xueyiche_qq'
+            keyPassword '123456'
+            storeFile file('../xueyiche_qq.jks')
+            storePassword '13645528009qq'
+        }
+    }
+    dexOptions {
+        preDexLibraries true
+        incremental true
+        dexInProcess = true
+        javaMaxHeapSize "4g"
+    }
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId "com.xueyiche.zjyk.xueyiche"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        // 避免"64K 引用限制"
+        multiDexEnabled true
+        // 导航SDK内部使用了annotationProcessor，需要添加下面代码，防止编译异常
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    sourceSets {
+        main {
+
+            jniLibs.srcDirs = ['libs']
+            res.srcDirs = ['src/main/res',
+                           'src/main/split-res/base',
+                           'src/main/split-res/homepage',
+                           'src/main/split-res/practicecar',
+                           'src/main/split-res/discover',
+                           'src/main/split-res/driverschool',
+                           'src/main/split-res/guide',
+                           'src/main/split-res/main',
+                           'src/main/split-res/splash',
+                           'src/main/split-res/indent',
+                           'src/main/split-res/usedcar',
+                           'src/main/split-res/daijia',
+                           'src/main/split-res/carlife',
+                           'src/main/split-res/newdriverschool',
+                           'src/main/split-res/mine']
+            debug.setRoot('build-types/debug')
+            release.setRoot('build-types/release')
+            jni.srcDirs = []//不编译jni
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            // 自定义输出配置
+            // 自定义输出配置
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "xueyiche_v${defaultConfig.versionName}.apk"
+                }
+            }
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    productFlavors {
+    }
+//    sourceSets.main {
+//        assets.srcDirs = ['assets']
+//        jniLibs.srcDirs = ['libs']//指定jniLibs文件夹路径
+//
+//
+//    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+MobSDK {
+    appKey "199e773a12ce6"
+    appSecret "74002ed878b2fef3fef8161d16d778f3"
+
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            Wechat {
+                id 1
+                sortId 1
+                appId "wx3c3dcf4648234b46"
+                appSecret "dec2ff4d18c519960b31d884370fa1e1"
+            }
+            QQ {
+                id 3
+                sortId 3
+                appId "1105958616"
+                appKey "uTP042BnrrLAVIc5"
+                shareByAppClient true
+            }
+            WechatMoments {
+                id 2
+                sortId 2
+                AppId = "wx3c3dcf4648234b46"
+                AppSecret = "dec2ff4d18c519960b31d884370fa1e1"
+                BypassApproval = "false"
+                Enable = "true"
+            }
+//            SinaWeibo {
+//                id 3
+//                sortId 3
+//                appKey "2512510913"
+//                appSecret "3aadf9a6b5d21ce60ec752a8be4d1c2b"
+//                callbackUri "http://www.xueyiche.cn"
+//                shareByAppClient true
+//                enable true
+//            }
+        }
+    }
+}
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+
+}
+
+dependencies {
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //考题的module
+    compile project(':library')
+    //textview的module
+    compile project(':textlibrary')
+    //gson解析
+    compile files('libs/gson-2.2.1.jar')
+    //picasso和glide的图片处理机制
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //自适应布局
+    implementation 'im.quar:autolayout-annotations:1.0.3'
+    implementation 'im.quar:autolayout:1.0.3'
+    implementation 'org.tinygroup:autolayout:0.0.12'
+    implementation 'de.jodamob.android:android-autolayout:1.2.3'
+    //点9图片
+    compile files('libs/nineoldandroids-2.4.0.jar')
+    //谷歌混淆解决
+    implementation 'com.google.android.gms:play-services-appindexing:8.1.0'
+    //okhttps请求
+    implementation 'com.zhy:okhttputils:2.0.0'
+    //eventbus
+    compile files('libs/eventbus-2.4.0.jar')
+    //下拉刷新上拉加载
+    implementation 'com.xw.repo:PullToRefresh:2.1@aar'
+    //极光推送
+    compile files('libs/jpush-android-3.3.6.jar')
+    //百度地图
+    compile files('libs/BaiduLBS_Android.jar')
+    //支付宝支付
+    compile files('libs/alipaySdk-20161222.jar')
+    compile files('libs/libammsdk.jar')
+    //友盟统计
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+    //七牛云图片存储
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
+    implementation 'com.qiniu:happy-dns:0.2.13'
+    //webview加载htlm5代码
+    compile files('libs/xUtils-2.6.2.jar')
+    implementation 'org.jsoup:jsoup:1.10.3'
+    // recyclerview-v7包，导航SDK必要的依赖
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    //二维码生成和扫描
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
+    implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
+    //权限的依赖
+    implementation 'pub.devrel:easypermissions:0.1.7'
+    //v7
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    //v4
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //design包
+    implementation 'com.google.android.material:material:1.0.0'
+    // 底部弹出视图
+    implementation 'com.flipboard:bottomsheet-core:1.5.0'
+    compile files('libs/Msc.jar')
+    //年月日
+    implementation 'cn.carbswang.android:NumberPickerView:1.1.0'
+    compile project(':refresh-footer')
+    compile project(':refresh-header')
+    compile project(':refresh-layout')
+    //shipinbofang
+    //工商银行的SDK
+    compile files('libs/ICBCPaySDK-V2.0-proguard.jar')
+    compile files('libs/sardar.jar')
+    implementation 'com.yinglan.scrolllayout:scrolllayout:1.0.2'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'me.jessyan:autosize:1.2.1'
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    implementation 'com.tencent.bugly:nativecrashreport:2.2.0'
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    // 基础依赖包，必须要依赖
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+// fragment快速实现（可选）
+    implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+    implementation 'com.github.lihangleo2:ShadowLayout:3.0.1'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //网络请求
+    implementation 'com.lzy.net:okgo:3.0.4'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    //rx异步处理
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    //json解析
+
+    implementation 'com.haibin:calendarview:3.7.0'
+    implementation 'com.yanzhenjie:permission:2.0.0-rc4'
+
+    implementation('com.github.tohodog:QSVideoPlayer:2.2.8') {
+        exclude group: 'org.slf4j'
+    }
+    implementation 'com.qq.e.union:union:4.373.1243'
+
+}
