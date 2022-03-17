@@ -57,7 +57,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     //头像
     private CircleImageView mine_head;
     //名字
-    private TextView tv_mine_name,  tv_wait_pay_number, tv_on_number;
+    private TextView tv_mine_name;
     //我的积分
     private LinearLayout  ll_my_wallet;
     //查看全部订单
@@ -69,7 +69,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private String head_img, nickname;
     //电话号  id 的字段
     private String user_phone, user_id;
-    private LinearLayout ll_usually_location, ll_question, ll_my_collection, ll_shared_app, ll_kefu, ll_about ;
+    private LinearLayout  ll_shared_app, ll_kefu, ll_about ;
 
     @Override
     protected void lazyLoad() {
@@ -91,20 +91,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         iv_mine_message = (ImageView) viewHead.findViewById(R.id.iv_mine_message);
         mine_head = (CircleImageView) viewHead.findViewById(R.id.mine_head);
         tv_mine_name = (TextView) viewHead.findViewById(R.id.tv_mine_name);
-        tv_on_number = (TextView) viewHead.findViewById(R.id.tv_on_number);
         tv_mine_title = (TextView) viewHead.findViewById(R.id.tv_mine_title);
-        ll_my_collection = (LinearLayout) viewHead.findViewById(R.id.ll_my_collection);
         ll_shared_app = (LinearLayout) viewHead.findViewById(R.id.ll_shared_app);
         ll_about = (LinearLayout) viewHead.findViewById(R.id.ll_about);
         ll_kefu = (LinearLayout) viewHead.findViewById(R.id.ll_kefu);
-        ll_question = (LinearLayout) viewHead.findViewById(R.id.ll_question);
         ll_my_wallet = (LinearLayout) viewHead.findViewById(R.id.ll_my_wallet);
         tv_mine_all_indent =  viewHead.findViewById(R.id.tv_mine_all_indent);
-        tv_wait_pay_number = (TextView) viewHead.findViewById(R.id.tv_wait_pay_number);
         ll_mine_indent_wait = (LinearLayout) viewHead.findViewById(R.id.ll_mine_indent_wait);
         ll_mine_indent_jinxingzhong = (LinearLayout) viewHead.findViewById(R.id.ll_mine_indent_jinxingzhong);
         ll_mine_indent_end = (LinearLayout) viewHead.findViewById(R.id.ll_mine_indent_end);
-        ll_usually_location = (LinearLayout) viewHead.findViewById(R.id.ll_usually_location);
+
 
         //点击事件
         iv_mine_setting.setOnClickListener(this);
@@ -115,9 +111,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         ll_mine_indent_wait.setOnClickListener(this);
         ll_mine_indent_jinxingzhong.setOnClickListener(this);
         ll_mine_indent_end.setOnClickListener(this);
-        ll_usually_location.setOnClickListener(this);
-        ll_question.setOnClickListener(this);
-        ll_my_collection.setOnClickListener(this);
         ll_shared_app.setOnClickListener(this);
         ll_kefu.setOnClickListener(this);
         ll_about.setOnClickListener(this);
@@ -183,13 +176,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 }
                 tv_mine_title.setText("Hi~，学易车用户");
                 tv_mine_name.setVisibility(View.VISIBLE);
-                tv_wait_pay_number.setVisibility(View.VISIBLE);
-                tv_on_number.setVisibility(View.VISIBLE);
             } else {
                 mine_head.setImageResource(R.mipmap.mine_head);
                 tv_mine_name.setVisibility(View.GONE);
-                tv_wait_pay_number.setVisibility(View.GONE);
-                tv_on_number.setVisibility(View.GONE);
                 tv_mine_title.setText("点击头像登录");
             }
         }
@@ -389,24 +378,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                                             if (200 == code) {
                                                 if (!TextUtils.isEmpty(nickname)) {
                                                     tv_mine_name.setText(nickname);
-                                                }
-                                                if (!TextUtils.isEmpty(dfk_num)) {
-                                                    if ("0".equals(dfk_num)) {
-                                                        tv_wait_pay_number.setVisibility(View.GONE);
-                                                    } else {
-                                                        tv_wait_pay_number.setVisibility(View.VISIBLE);
-                                                        tv_wait_pay_number.setText(dfk_num);
-                                                    }
-
-                                                }
-                                                if (!TextUtils.isEmpty(jxz_num)) {
-                                                    if ("0".equals(jxz_num)) {
-                                                        tv_on_number.setVisibility(View.GONE);
-                                                    } else {
-                                                        tv_on_number.setVisibility(View.VISIBLE);
-                                                        tv_on_number.setText(jxz_num);
-                                                    }
-
                                                 }
                                                 if (!TextUtils.isEmpty(head_img)) {
                                                     Picasso.with(App.context).load(head_img).placeholder(R.mipmap.mine_head).error(R.mipmap.mine_head).into(mine_head);

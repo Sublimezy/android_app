@@ -94,6 +94,7 @@
 
     <!-- 透明背景颜色 -->
     <color name="translucent">#00000000</color>
+    <color name="_000000">#000000</color>
     <color name="translucentSec">#80000000</color>
     <!-- 窗口颜色-->
     <color name="colorwindowBackground">#f2f5f7</color>

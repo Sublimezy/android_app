@@ -59,6 +59,7 @@ import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.ChoiceCardDetails;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.DriverPracticeActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.JinjiPhoneActivity;
@@ -327,9 +328,7 @@ public class PracticeCarMapFragment extends BaseFragment implements SensorEventL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rb_driverbaoming:
-                Intent intent = new Intent(App.context, UrlActivity.class);
-                intent.putExtra("url", "http://www.xueyiche.vip:89//wap/Driver/youzheng");
-                intent.putExtra("type", "11");
+                Intent intent = new Intent(App.context, RegistSiJiActivity.class);
                 startActivity(intent);
                 break;
             case R.id.iv_user:
