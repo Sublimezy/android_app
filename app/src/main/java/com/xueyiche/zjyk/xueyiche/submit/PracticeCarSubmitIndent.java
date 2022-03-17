@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -18,14 +17,13 @@ import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.pay.AppPay;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.newactivity.PracticeCarMapActivity;
+import com.xueyiche.zjyk.xueyiche.practicecar.activity.newactivity.PracticeCarMapFragment;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderPracticeOkBean;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-import com.xueyiche.zjyk.xueyiche.utils.ToastUtil;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.IndentDetailsOrderPractice;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.PingJia;
@@ -394,7 +392,7 @@ public class PracticeCarSubmitIndent extends BaseActivity implements View.OnClic
                                 AppUtils.deleteIndent(PracticeCarSubmitIndent.this, AppUrl.Delete_Indent_Practice, user_id, order_number_now);
                             }
                         }else if ("2".equals(order_status)){
-                            Intent intent = new Intent(App.context, PracticeCarMapActivity.class);
+                            Intent intent = new Intent(App.context, PracticeCarMapFragment.class);
                             startActivity(intent);
                             finish();
                         }

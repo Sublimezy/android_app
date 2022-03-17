@@ -35,8 +35,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
-import com.xueyiche.zjyk.xueyiche.driverschool.driverschool.DriverSchoolContent;
-import com.xueyiche.zjyk.xueyiche.homepage.activities.carlive.activity.ReWebViewClient;
+import com.xueyiche.zjyk.xueyiche.homepage.activities.ReWebViewClient;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
@@ -465,8 +464,6 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
 
         @JavascriptInterface
         public void openJiaXiao() {
-            Intent intent = new Intent(UrlActivity.this, DriverSchoolContent.class);
-            startActivity(intent);
         }
 
         @JavascriptInterface

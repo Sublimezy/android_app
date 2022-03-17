@@ -22,7 +22,7 @@ import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
@@ -30,16 +30,11 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitYuYueActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.GoDaiJiaBean;
-import com.xueyiche.zjyk.xueyiche.discover.bean.SuccessDisCoverBackBean;
-import com.xueyiche.zjyk.xueyiche.homepage.activities.TrainBaoMingActivity;
 import com.xueyiche.zjyk.xueyiche.pay.bean.ZhiFuBaoBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.OrderFaBuOkActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.nobook.activity.NoBookPracticeCarYuYueSubmitIndent;
-import com.xueyiche.zjyk.xueyiche.submit.CarLiveSubmitIndent;
-import com.xueyiche.zjyk.xueyiche.submit.DirectDriverSchoolSubmitIndent;
-import com.xueyiche.zjyk.xueyiche.submit.DriverSchoolSubmitIndent;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.submit.PracticeCarSubmitIndent;
-import com.xueyiche.zjyk.xueyiche.submit.UsedCarSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LogUtil;
@@ -182,17 +177,11 @@ public class AppPay extends BaseActivity implements View.OnClickListener {
                 goDaiJia();
                 return;
             } else if ("driver_school".equals(pay_style) || "kaituan".equals(pay_style)) {
-                DriverSchoolSubmitIndent.instance.finish();
             } else if ("car_life".equals(pay_style)) {
-                CarLiveSubmitIndent.instance.finish();
             }else if ("usedcar".equals(pay_style)) {
-                UsedCarSubmitIndent.instance.finish();
             } else if ("practice_wz".equals(pay_style)) {
                 NoBookPracticeCarYuYueSubmitIndent.instance.finish();
-            } else if ("train".equals(pay_style)) {
-                TrainBaoMingActivity.instance.finish();
-            } else if ("zhitongche".equals(pay_style)) {
-                DirectDriverSchoolSubmitIndent.instance.finish();
+            }else if ("zhitongche".equals(pay_style)) {
             }else if ("practice".equals(pay_style)) {
                 PracticeCarSubmitIndent.instance.finish();
                 queRenFaBu();
@@ -254,7 +243,7 @@ public class AppPay extends BaseActivity implements View.OnClickListener {
                                             intent.putExtra("order_number", order_number);
                                             startActivity(intent);
                                         } else {
-                                            Intent intent = new Intent(App.context, DaiJiaActivity.class);
+                                            Intent intent = new Intent(App.context, DaiJiaFragment.class);
                                             startActivity(intent);
                                         }
                                         finish();

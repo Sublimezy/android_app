@@ -35,14 +35,14 @@ import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.bean.GuangGaoBean;
 import com.xueyiche.zjyk.xueyiche.constants.bean.GuangGaoHomeBean;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.discover.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.homepage.db.MyGuangGaoDB;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.main.view.NoScrollViewPager;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.myhttp.MyHttpUtils;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.myhttp.RequestCallBack;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.service.UpLocationService;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.receive.LocationService;
+import com.xueyiche.zjyk.xueyiche.receive.UpLocationService;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     private Intent homeIntent;
     private GuangGaoHomeBean guangGaoHomeBean;
-    private RadioButton rb_car, rb_home, rb_discover,rb_my;
+    private RadioButton rb_car, rb_home,rb_my;
     private ToastUtil toastUtils;
     //    private CountDownTimer cdt;
 
@@ -93,7 +93,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mRG_menutab = (RadioGroup) view.findViewById(R.id.rg_menutab);
         rb_car = (RadioButton) view.findViewById(R.id.rb_car);
         rb_home = (RadioButton) view.findViewById(R.id.rb_home);
-        rb_discover = (RadioButton) view.findViewById(R.id.rb_discover);
         rb_my = (RadioButton) view.findViewById(R.id.rb_my);
         mVP_main.setCurrentItem(0);
         DisplayMetrics metric = new DisplayMetrics();
@@ -356,35 +355,15 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_home:
                 mVP_main.setCurrentItem(0, false);//禁用动画
                 EventBus.getDefault().post(new MyEvent("首页"));
-//                AppUtils.dissList(MainActivity.this);
-//                if (cdt != null) {
-//                    cdt.cancel();
-//                }
                 break;
             case R.id.rb_car:
                 mVP_main.setCurrentItem(1, false);
                 EventBus.getDefault().post(new MyEvent("车生活"));
-//                AppUtils.dissList(MainActivity.this);
-//                if (cdt != null) {
-//                    cdt.cancel();
-//                }
 
                 break;
-            case R.id.rb_discover:
-                mVP_main.setCurrentItem(2, false);
-                EventBus.getDefault().post(new MyEvent("车知乎"));
-//                AppUtils.dissList(MainActivity.this);
-//                if (cdt != null) {
-//                    cdt.cancel();
-//                }
-                break;
             case R.id.rb_my:
-                mVP_main.setCurrentItem(3, false);
+                mVP_main.setCurrentItem(2, false);
                 EventBus.getDefault().post(new MyEvent("我的"));
-//                AppUtils.dissList(MainActivity.this);
-//                if (cdt != null) {
-//                    cdt.cancel();
-//                }
                 break;
         }
 
@@ -429,9 +408,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             rb_car.setChecked(true);
         }else if (position == 0) {
             rb_home.setChecked(true);
-        } else if (position == 2) {
-            rb_discover.setChecked(true);
-        } else if (position == 3) {
+        }else if (position == 2) {
             rb_my.setChecked(true);
         }
     }

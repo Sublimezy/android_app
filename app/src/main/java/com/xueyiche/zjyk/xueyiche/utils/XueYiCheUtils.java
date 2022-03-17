@@ -40,9 +40,9 @@ import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.discover.bean.SuccessDisCoverBackBean;
-import com.xueyiche.zjyk.xueyiche.carlife.dialog.MapSelectDialogDP;
+import com.xueyiche.zjyk.xueyiche.custom.MapSelectDialogDP;
 import com.xueyiche.zjyk.xueyiche.homepage.view.XYCSwipeRefreshLayout;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 

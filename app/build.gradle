@@ -52,10 +52,7 @@ android {
                            'src/main/split-res/main',
                            'src/main/split-res/splash',
                            'src/main/split-res/indent',
-                           'src/main/split-res/usedcar',
                            'src/main/split-res/daijia',
-                           'src/main/split-res/carlife',
-                           'src/main/split-res/newdriverschool',
                            'src/main/split-res/mine']
             debug.setRoot('build-types/debug')
             release.setRoot('build-types/release')
@@ -213,8 +210,6 @@ dependencies {
     compile project(':refresh-header')
     compile project(':refresh-layout')
     //shipinbofang
-    //工商银行的SDK
-    compile files('libs/ICBCPaySDK-V2.0-proguard.jar')
     compile files('libs/sardar.jar')
     implementation 'com.yinglan.scrolllayout:scrolllayout:1.0.2'
 

@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/test_color"
         android:textSize="@dimen/text_fourteensp" />
-    <com.xueyiche.zjyk.xueyiche.homepage.activities.carquery.pinggu.MaxRecyclerView
+    <com.xueyiche.zjyk.xueyiche.custom.MaxRecyclerView
         android:id="@+id/rv_carlife"
         android:layout_width="match_parent"
         android:background="@color/color_white"

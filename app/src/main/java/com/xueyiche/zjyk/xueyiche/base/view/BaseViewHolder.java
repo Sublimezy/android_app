@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.constants.App;
-import com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView;
+import com.xueyiche.zjyk.xueyiche.custom.RoundImageView;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 
 /**

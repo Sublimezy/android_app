@@ -22,11 +22,10 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.discover.bean.SuccessDisCoverBackBean;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.StringUtils;
 import com.xueyiche.zjyk.xueyiche.homepage.view.AdListView;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderPracticeBean;
-import com.xueyiche.zjyk.xueyiche.usedcar.activity.zhengxin.TestScanActivity;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
@@ -280,9 +279,9 @@ public class OrderTrainerActivity extends BaseActivity implements View.OnClickLi
                 openActivity(OrderRecordActivity.class);
                 break;
             case R.id.tv_saomao:
-                Intent intent1 = new Intent(this, TestScanActivity.class);
-                intent1.putExtra("style", "2");
-                startActivityForResult(intent1, 200);
+//                Intent intent1 = new Intent(this, TestScanActivity.class);
+//                intent1.putExtra("style", "2");
+//                startActivityForResult(intent1, 200);
                 break;
             default:
 

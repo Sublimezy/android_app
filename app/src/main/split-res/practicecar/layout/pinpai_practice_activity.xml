@@ -16,11 +16,11 @@
         android:layout_below="@+id/title"
         android:layout_height="match_parent">
 
-        <com.xueyiche.zjyk.xueyiche.usedcar.view.MyDrawerLayout
+        <com.xueyiche.zjyk.xueyiche.custom.MyDrawerLayout
             android:id="@+id/drawerlayout"
-            android:layout_above="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/title"
 
             android:clickable="false">
             <!--主布局-->
@@ -79,9 +79,9 @@
                     android:id="@+id/tv_car_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/slide_top_and_left"
                     android:layout_marginLeft="@dimen/ershi"
                     android:layout_marginTop="@dimen/ershiwu"
+                    android:layout_marginBottom="@dimen/slide_top_and_left"
                     android:textColor="@color/test_color"
                     android:textSize="@dimen/text_fifteensp" />
 
@@ -91,7 +91,7 @@
                     android:layout_height="match_parent" />
 
             </LinearLayout>
-        </com.xueyiche.zjyk.xueyiche.usedcar.view.MyDrawerLayout>
+        </com.xueyiche.zjyk.xueyiche.custom.MyDrawerLayout>
     </RelativeLayout>
 
 </RelativeLayout>

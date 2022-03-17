@@ -25,15 +25,10 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.ChangYongMuDiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.ChangYongListBean;
-import com.xueyiche.zjyk.xueyiche.daijia.bean.OrderInfoBean;
-import com.xueyiche.zjyk.xueyiche.discover.bean.SuccessDisCoverBackBean;
-import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.POIDressActivity;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-import com.xueyiche.zjyk.xueyiche.utils.ToastUtil;
-import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 

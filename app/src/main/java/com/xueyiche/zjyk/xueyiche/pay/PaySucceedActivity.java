@@ -19,10 +19,6 @@ import com.xueyiche.zjyk.xueyiche.submit.PracticeCarSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.xueyiche.zjyk.xueyiche.xycindent.activities.IndentActivity;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.CarLiveDetails;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.IndentDetailsOrderPractice;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.IndentDriverSchoolDetails;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.UsedCarIndentDetails;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -110,22 +106,10 @@ public class PaySucceedActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.tv_succeed_chakan:
                 if (!TextUtils.isEmpty(pay_style)) {
-                    if ("driver_school".equals(pay_style)||"tuan".equals(pay_style)) {
-                        Intent intent = new Intent(this, IndentDriverSchoolDetails.class);
-                        intent.putExtra("order_number", order_number);
-                        startActivity(intent);
-                    } else if ("car_life".equals(pay_style)) {
-                        Intent intent = new Intent(this, CarLiveDetails.class);
-                        intent.putExtra("order_number", order_number);
-                        startActivity(intent);
-                    } else if ("practice".equals(pay_style)) {
+                  if ("practice".equals(pay_style)) {
                         Intent intent = new Intent(this, PracticeCarSubmitIndent.class);
                         intent.putExtra("order_number", order_number);
                         intent.putExtra("type", "indent");
-                        startActivity(intent);
-                    } else if ("usedcar".equals(pay_style)) {
-                        Intent intent = new Intent(this, UsedCarIndentDetails.class);
-                        intent.putExtra("order_number", order_number);
                         startActivity(intent);
                     }else if ("train".equals(pay_style)) {
                         Intent intent = new Intent(this, IndentActivity.class);

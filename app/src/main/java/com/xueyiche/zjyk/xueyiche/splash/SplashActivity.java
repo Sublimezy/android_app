@@ -1,17 +1,13 @@
 package com.xueyiche.zjyk.xueyiche.splash;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -49,7 +45,6 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.bean.GuangGaoBean;
-import com.xueyiche.zjyk.xueyiche.homepage.activities.location.LocationActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.db.MyGuangGaoDB;
 import com.xueyiche.zjyk.xueyiche.homepage.view.Couterdown;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;

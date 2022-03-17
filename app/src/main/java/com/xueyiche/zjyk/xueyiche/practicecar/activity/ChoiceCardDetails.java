@@ -21,7 +21,7 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
 import com.xueyiche.zjyk.xueyiche.constants.bean.DriverDetails;
-import com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView;
+import com.xueyiche.zjyk.xueyiche.custom.RoundImageView;
 import com.xueyiche.zjyk.xueyiche.homepage.view.AdListView;
 import com.xueyiche.zjyk.xueyiche.homepage.view.ObservableScrollView;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;

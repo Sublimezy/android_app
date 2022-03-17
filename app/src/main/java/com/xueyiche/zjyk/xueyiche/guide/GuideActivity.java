@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
-import com.xueyiche.zjyk.xueyiche.homepage.activities.location.LocationActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.location.LocationActivity;
 import com.xueyiche.zjyk.xueyiche.splash.SplashActivity;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;

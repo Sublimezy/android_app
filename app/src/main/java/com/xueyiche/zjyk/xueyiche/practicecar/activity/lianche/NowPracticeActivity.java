@@ -373,21 +373,27 @@ public class NowPracticeActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Bundle extras = data.getExtras();
         switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
             case 111:
                 jie_latitude = extras.getString("latitude");
                 jie_longitude = extras.getString("longitude");
                 name_jie = extras.getString("name");
-                tv_jie_location.setText(name_jie);
-                tv_jie_location.setTextColor(getResources().getColor(R.color._3333));
+                if (!TextUtils.isEmpty(name_jie)) {
+                    tv_jie_location.setText(name_jie);
+                    tv_jie_location.setTextColor(getResources().getColor(R.color._3333));
+                }
                 break;
             case 333:
                 song_latitude = extras.getString("latitude");
                 song_longitude = extras.getString("longitude");
                 name_song = extras.getString("name");
-                tv_song_location.setText(name_song);
-                tv_song_location.setTextColor(getResources().getColor(R.color._3333));
+                if (!TextUtils.isEmpty(name_song)) {
+                    tv_song_location.setText(name_song);
+                    tv_song_location.setTextColor(getResources().getColor(R.color._3333));
+                }
+
                 break;
         }
     }
@@ -421,29 +427,6 @@ public class NowPracticeActivity extends BaseActivity implements View.OnClickLis
                 public Object parseNetworkResponse(Response response) throws IOException {
                     String string = response.body().string();
                     if (!TextUtils.isEmpty(string)) {
-//                        PriceAndTypeBean kaiTongCityBean = JsonUtil.parseJsonToBean(string, PriceAndTypeBean.class);
-//                        if (kaiTongCityBean != null) {
-//                            int code = kaiTongCityBean.getCode();
-//                            if (200 == code) {
-//                                List<PriceAndTypeBean.ContentBean> content = kaiTongCityBean.getContent();
-//                                for (int i = 0; i < content.size(); i++) {
-//                                    String type_name = content.get(i).getType_name();
-//                                    firstList.add(type_name);
-//                                    List<PriceAndTypeBean.ContentBean.CarSortDataBean> carSortData = content.get(i).getCarSortData();
-//                                    for (int i1 = 0; i1 < carSortData.size(); i1++) {
-//                                        String sort_name = carSortData.get(i1).getSort_name();
-//                                        secondListItem_jintian.add(sort_name);
-//                                        secondList.add(secondListItem_jintian);
-//                                        List<PriceAndTypeBean.ContentBean.CarSortDataBean.HourPriceDataBean> hourPriceData = carSortData.get(i1).getHourPriceData();
-//                                        for (int i2 = 0; i2 < hourPriceData.size(); i2++) {
-//                                            int hour_price = hourPriceData.get(i2).getHour_price();
-//                                            thirdListItem_jintian.add("" + hour_price);
-//                                            thirdList.add(thirdListItem_jintian);
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
                         CarlevelBean carlevelBean = JsonUtil.parseJsonToBean(string, CarlevelBean.class);
                         if (carlevelBean!=null) {
                             int code = carlevelBean.getCode();

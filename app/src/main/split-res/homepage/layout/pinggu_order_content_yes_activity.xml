@@ -121,7 +121,7 @@
             android:layout_marginBottom="15dp"
             android:textSize="14sp"
             android:layout_height="wrap_content" />
-        <com.xueyiche.zjyk.xueyiche.homepage.activities.carquery.pinggu.MaxRecyclerView
+        <com.xueyiche.zjyk.xueyiche.custom.MaxRecyclerView
             android:id="@+id/lv_list"
             android:divider="@null"
             android:scrollbars="none"

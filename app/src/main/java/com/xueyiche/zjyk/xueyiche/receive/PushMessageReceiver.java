@@ -10,7 +10,7 @@ import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
@@ -128,7 +128,7 @@ public class PushMessageReceiver extends JPushMessageReceiver {
                                                 intent.putExtra("order_number",order_number);
                                                 context.startActivity(intent);
                                             } else {
-                                                Intent intent = new Intent(App.context, DaiJiaActivity.class);
+                                                Intent intent = new Intent(App.context, DaiJiaFragment.class);
                                                 context.startActivity(intent);
                                             }
                                         }

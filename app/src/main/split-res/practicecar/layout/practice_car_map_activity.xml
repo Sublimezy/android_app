@@ -4,6 +4,7 @@
     android:background="@color/color_white"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <include
         android:id="@+id/rl_title"
         layout="@layout/new_top_include"

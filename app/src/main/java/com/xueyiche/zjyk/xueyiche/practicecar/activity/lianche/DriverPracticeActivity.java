@@ -38,11 +38,10 @@ import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
 import com.xueyiche.zjyk.xueyiche.constants.bean.JiaoLianInfo;
 import com.xueyiche.zjyk.xueyiche.constants.bean.ListShaiXuanBean;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.homepage.activities.location.bean.KaiTongCityBean;
+import com.xueyiche.zjyk.xueyiche.daijia.location.bean.KaiTongCityBean;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.YiJiCaiDanAdapter;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.ChoiceCardDetails;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.POIDressActivity;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.newactivity.PracticeCarMapActivity;
+import com.xueyiche.zjyk.xueyiche.practicecar.activity.newactivity.PracticeCarMapFragment;
 import com.xueyiche.zjyk.xueyiche.receive.NetBroadcastReceiver;
 import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
@@ -514,8 +513,6 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.tv_top_right_button_map:
-                Intent intent = new Intent(App.context, PracticeCarMapActivity.class);
-                startActivity(intent);
                 finish();
                 break;
             case R.id.ll_choice_shaixuan:

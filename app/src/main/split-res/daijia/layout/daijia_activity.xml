@@ -25,13 +25,6 @@
             android:src="@mipmap/dingwei" />
     </RelativeLayout>
 
-    <include
-        android:id="@+id/title"
-        layout="@layout/new_top_include"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true" />
 
 
     <LinearLayout

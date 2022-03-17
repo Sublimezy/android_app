@@ -17,7 +17,7 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bean.CouponBean;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
@@ -215,7 +215,7 @@ public class YouHuiQuan extends BaseActivity implements View.OnClickListener {
                 viewHolderYouHui.tv_use.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(App.context, DaiJiaActivity.class);
+                        Intent intent = new Intent(App.context, DaiJiaFragment.class);
                         App.context.startActivity(intent);
                     }
                 });

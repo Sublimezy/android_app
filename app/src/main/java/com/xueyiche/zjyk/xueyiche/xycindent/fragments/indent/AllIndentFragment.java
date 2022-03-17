@@ -42,9 +42,9 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.LiYouActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitYuYueActivity;
-import com.xueyiche.zjyk.xueyiche.discover.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.homepage.view.MapSelectDialog;
 import com.xueyiche.zjyk.xueyiche.pay.AppPay;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.receive.NetBroadcastReceiver;
 import com.xueyiche.zjyk.xueyiche.submit.PracticeCarSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.submit.bean.DeleteIndentBean;
@@ -59,14 +59,10 @@ import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.xueyiche.zjyk.xueyiche.xycindent.bean.DingDanBean;
 import com.xueyiche.zjyk.xueyiche.xycindent.bean.PracticeWeiYueBean;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.CarLiveDetails;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.DriverSchoolTrainerListActivity;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.IndentDetailsOrderPractice;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.IndentDriverSchoolDetails;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.PingJia;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.PingJiaDriverSchool;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.PutStudentCardActivity;
-import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.UsedCarIndentDetails;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent_content.WZIndentDetailsOrderPractice;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -864,15 +860,6 @@ public class AllIndentFragment extends BaseFragment implements NetBroadcastRecei
                         } else {
                             intent = new Intent(context, IndentDetailsOrderPractice.class);
                         }
-                    } else if ("1".equals(order_type)) {
-                        //2车生活
-                        intent = new Intent(context, CarLiveDetails.class);
-                    } else if ("2".equals(order_type)) {
-                        //3驾校订单
-                        intent = new Intent(context, IndentDriverSchoolDetails.class);
-                    } else if ("4".equals(order_type)) {
-                        //4二手车租车订单
-                        intent = new Intent(context, UsedCarIndentDetails.class);
                     } else if ("6".equals(order_type)) {
                         //6无证练车
                         intent = new Intent(context, WZIndentDetailsOrderPractice.class);
@@ -944,12 +931,6 @@ public class AllIndentFragment extends BaseFragment implements NetBroadcastRecei
                     EventBus.getDefault().post(new MyEvent("刷新代付款订单"));
                     EventBus.getDefault().post(new MyEvent("刷新已完成订单"));
                     EventBus.getDefault().post(new MyEvent("全部订单"));
-                    Intent intent = new Intent();
-                    intent.setClass(App.context, DriverSchoolTrainerListActivity.class);
-                    intent.putExtra("order_number", order_number);
-                    intent.putExtra("style", "1");
-                    intent.putExtra("id", "");
-                    startActivity(intent);
                     dialog01.dismiss();
 
                 }

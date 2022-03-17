@@ -42,23 +42,16 @@
             android:drawableTop="@drawable/my_menu1_selector"
             android:text="@string/tv_home"
             android:textColor="@drawable/main_rb_back_text"
-            android:textSize="@dimen/side_letter_bar_letter_size" />
+            android:textSize="@dimen/text_shiyisp" />
 
         <RadioButton
             android:id="@+id/rb_car"
             style="@style/MenuTabB"
             android:drawableTop="@drawable/my_menu2_selector"
-            android:text="车生活"
+            android:text="练车"
             android:textColor="@drawable/main_rb_back_text"
-            android:textSize="@dimen/side_letter_bar_letter_size" />
+            android:textSize="@dimen/text_shiyisp" />
 
-        <RadioButton
-            android:id="@+id/rb_discover"
-            style="@style/MenuTabB"
-            android:drawableTop="@drawable/my_menu3_selector"
-            android:text="车知乎"
-            android:textColor="@drawable/main_rb_back_text"
-            android:textSize="@dimen/side_letter_bar_letter_size" />
 
 
         <RadioButton
@@ -67,7 +60,7 @@
             android:drawableTop="@drawable/my_menu5_selector"
             android:text="@string/tv_mine"
             android:textColor="@drawable/main_rb_back_text"
-            android:textSize="@dimen/side_letter_bar_letter_size" />
+            android:textSize="@dimen/text_shiyisp" />
     </RadioGroup>
 
 </LinearLayout>

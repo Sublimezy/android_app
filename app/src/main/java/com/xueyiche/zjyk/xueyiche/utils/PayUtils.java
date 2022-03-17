@@ -15,13 +15,12 @@ import com.alipay.sdk.app.PayTask;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.tencent.mm.sdk.modelpay.PayReq;
-import com.unionpay.UPPayAssistEx;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.bean.WXZhiFuBean;
 import com.xueyiche.zjyk.xueyiche.constants.bean.YLZhiFuBean;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
@@ -31,10 +30,7 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.GoDaiJiaBean;
 import com.xueyiche.zjyk.xueyiche.pay.PaySucceedActivity;
 import com.xueyiche.zjyk.xueyiche.pay.bean.ZhiFuBaoBean;
-import com.xueyiche.zjyk.xueyiche.submit.CarLiveSubmitIndent;
-import com.xueyiche.zjyk.xueyiche.submit.DriverSchoolSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.submit.PracticeCarSubmitIndent;
-import com.xueyiche.zjyk.xueyiche.submit.UsedCarSubmitIndent;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -186,13 +182,10 @@ public class PayUtils {
                                     activity.finish();
                                     if (!TextUtils.isEmpty(pay_style)) {
                                         if ("driver_school".equals(pay_style)) {
-                                            DriverSchoolSubmitIndent.instance.finish();
                                         } else if ("car_life".equals(pay_style)) {
-                                            CarLiveSubmitIndent.instance.finish();
                                         } else if ("practice".equals(pay_style)) {
                                             PracticeCarSubmitIndent.instance.finish();
                                         } else if ("usedcar".equals(pay_style)) {
-                                            UsedCarSubmitIndent.instance.finish();
                                         }
                                     }
                                 }
@@ -276,7 +269,7 @@ public class PayUtils {
                                             intent.putExtra("order_number",order_number);
                                             activity.startActivity(intent);
                                         } else {
-                                            Intent intent = new Intent(App.context, DaiJiaActivity.class);
+                                            Intent intent = new Intent(App.context, DaiJiaFragment.class);
                                             activity.startActivity(intent);
                                         }
                                         activity.finish();
@@ -299,66 +292,5 @@ public class PayUtils {
 
             }
         });
-    }
-    /**
-     * 银联支付
-     *
-     * @param context      ：上下文
-     * @param order_number ：订单号
-     * @param money        ：支付的金额
-     */
-    public static void UnionPay(final Context context, String order_number, String money) {
-        if (XueYiCheUtils.IsHaveInternet(App.context)) {
-            OkHttpUtils.post().url(AppUrl.ZFYL)
-                    .addParams("order_number", order_number)
-                    .addParams("paytype", "yl")
-                    .addParams("pay_money", money)
-                    .build().execute(new Callback() {
-                @Override
-                public Object parseNetworkResponse(Response response) throws IOException {
-                    String string = response.body().string();
-                    if (!TextUtils.isEmpty(string)) {
-                        YLZhiFuBean wxZhiFuBean = JsonUtil.parseJsonToBean(string, YLZhiFuBean.class);
-                        if (wxZhiFuBean != null) {
-                            YLZhiFuBean.ContentBean contentYL = wxZhiFuBean.getContent();
-                            if (contentYL != null) {
-                                final String tn = contentYL.getTn();
-                                App.handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (!TextUtils.isEmpty(tn)) {
-                                            UPPayAssistEx.startPay(context, null, null, tn, "00");
-                                        } else {
-                                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
-                                            builder.setTitle("错误提示");
-                                            builder.setMessage("网络连接失败,请重试!");
-                                            builder.setNegativeButton("确定",
-                                                    new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            dialog.dismiss();
-                                                        }
-                                                    });
-                                            builder.create().show();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    }
-                    return string;
-                }
-
-                @Override
-                public void onError(Request request, Exception e) {
-
-                }
-
-                @Override
-                public void onResponse(Object response) {
-
-                }
-            });
-        }
     }
 }

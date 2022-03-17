@@ -33,15 +33,19 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 一般权限 -->
@@ -79,21 +83,6 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
-        <activity android:name=".newdriverschool.coach.student.StudentTrainTimeActivity"></activity>
-        <activity android:name=".newdriverschool.coach.student.BuyKeShiDateActivity" />
-        <activity android:name=".newdriverschool.coach.student.YuYueKaoShiActivity" />
-        <activity android:name=".newdriverschool.coach.student.YuYueLiancheDateActivity" />
-        <activity android:name=".newdriverschool.coach.student.BuyTrainTimeStudentActivity" />
-        <activity android:name=".newdriverschool.coach.student.CoachListActivity" />
-        <activity android:name=".newdriverschool.coach.activity.TrainingDateManageActivity" />
-        <activity android:name=".newdriverschool.coach.activity.TrainingTimeCoachActivity" />
-        <activity android:name=".newdriverschool.coach.activity.TrainingDetailsActivity" />
-        <activity android:name=".newdriverschool.coach.activity.WaitPingJiaTrainingDetailActivity" />
-        <activity android:name=".newdriverschool.coach.activity.YuYueTrainingActivity" />
-        <activity android:name=".newdriverschool.coach.activity.StartTrainActivity" />
-        <activity android:name=".newdriverschool.coach.activity.YuYueDetailsActivity" />
-        <activity android:name=".newdriverschool.coach.activity.TrainingRecordActivity" />
-
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
@@ -150,9 +139,6 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" /> <!-- 有证练车的地图页面 -->
-        <activity
-            android:name=".practicecar.activity.newactivity.PracticeCarMapActivity"
-            android:screenOrientation="portrait" /> <!-- 引导页 -->
         <provider
             android:name=".utils.BuglyFileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -172,61 +158,16 @@
         <activity
             android:name=".guide.GuideActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".carlife.CarLifeContentActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".mine.activities.ConstantlyAddressActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsOrderBuyActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.TiJianActivity"
-            android:screenOrientation="portrait" /> <!-- 我的订单车生活订单详情 -->
-        <activity
-            android:name=".xycindent.fragments.indent_content.CarLiveDetails"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.MiJiActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.MiJiContentActivityTwo"
-            android:hardwareAccelerated="true"
-            android:theme="@style/AppTheme"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.zhengxin.TestScanActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.BanCheActivity"
-            android:screenOrientation="portrait" /> <!-- 社区详情 -->
-        <activity
-            android:name=".discover.activity.SheQuContent"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 视频详情 -->
-        <activity
-            android:name=".discover.activity.TeachVideoContent"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".discover.fragment.activitys.SheQuListActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".discover.fragment.activitys.VideoListActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".discover.fragment.activitys.WenDaListActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 代驾目的地输入 -->
         <activity
             android:name=".daijia.activity.MuDiActivity"
             android:screenOrientation="portrait"
@@ -243,10 +184,6 @@
             android:name=".daijia.activity.CityActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 代驾 -->
-        <activity
-            android:name=".daijia.DaiJiaActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 选择长用地址 -->
         <activity
             android:name=".daijia.activity.ChangYongMuDiActivity"
             android:screenOrientation="portrait"
@@ -317,104 +254,39 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 车辆估价订单驳回详情 -->
         <activity
-            android:name=".homepage.activities.carquery.pinggu.OrderContentNoActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 车辆违章记录查询 -->
-        <activity
-            android:name=".homepage.activities.carquery.CarQueryActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 车辆违章查询历史记录 -->
-        <activity
-            android:name=".homepage.activities.carquery.CarHistoryActivity"
-            android:screenOrientation="portrait" /> <!-- 车辆估价订单已完成详情 -->
-        <activity
-            android:name=".homepage.activities.carquery.pinggu.OrderContentYesActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 车辆估价订单列表 -->
-        <activity
-            android:name=".homepage.activities.carquery.pinggu.PingGuHistoryActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 问答详情 -->
-        <activity
-            android:name=".discover.activity.WenDaContent"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 二手车web详情 -->
-        <!-- 预约订单发布成功 -->
-        <activity
             android:name=".practicecar.activity.OrderFaBuOkActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".pay.bean.AppPayChaXun"
             android:screenOrientation="portrait" /> <!-- 答题赢现金问题详情 -->
-        <activity
-            android:name=".examtext.AnswerWithCashQuestion"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".discover.activity.FaBuQuestionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.BanCheContentActivity"
-            android:screenOrientation="portrait" /> <!-- 答题赢现金活动 -->
-        <!-- 全部回答 -->
-        <!-- 预约练车的确认页面 -->
+
         <activity
             android:name=".submit.PracticeCarSubmitIndent"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".homepage.view.video.VideoInputActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".examtext.TestDriverBookActivity"
-            android:screenOrientation="portrait" /> <!-- 提交学生证 -->
+
         <activity
             android:name=".xycindent.fragments.indent_content.PutStudentCardActivity"
             android:screenOrientation="portrait" /> <!-- 培训机构报名页面 -->
-        <activity
-            android:name=".homepage.activities.TrainBaoMingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.JiaoLianPJActivity"
-            android:screenOrientation="portrait" /> <!-- 二手车详情页 -->
-        <activity
-            android:name=".usedcar.activity.UsedCarContentActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mine.activities.MyCarActivity"
-            android:screenOrientation="portrait" /> <!-- 拼团支付 -->
-        <!-- 拼团支付成功 -->
-        <!-- 提交学生证 -->
-        <activity
-            android:name=".usedcar.activity.UsedCarScanActivity"
-            android:screenOrientation="portrait" /> <!-- 评价驾校的教练 -->
+
         <activity
             android:name=".xycindent.fragments.indent_content.PingJiaDriverSchool"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".xycindent.fragments.indent_content.DriverSchoolTrainerListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.TrainerListActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".driverschool.driverschool.BaoMingActivity" />
-        <activity
-            android:name=".driverschool.view.ImageShower"
-            android:theme="@style/ImageScale" /> <!-- 练车项目 -->
         <!-- 第一步登录 -->
         <activity android:name=".main.activities.login.LoginFirstStepActivity" /> <!-- 第二部登录 -->
         <activity android:name=".main.activities.login.LoginSecondStepActivity" /> <!-- 进入练车 -->
         <activity android:name=".xycindent.fragments.indent_content.PracticeIndentContent" /> <!-- 二手车订单详情 -->
-        <activity android:name=".xycindent.fragments.indent_content.UsedCarIndentDetails" /> <!-- 最新活动 -->
+        <!-- 最新活动 -->
         <activity android:name=".mine.activities.message.NewPlayActivity" /> <!-- 引导页 -->
         <!-- 驾校投票报名页 -->
         <!-- 车生活提交订单 -->
-        <activity android:name=".submit.CarLiveSubmitIndent" /> <!-- 车生活详情 -->
+        <!-- 车生活详情 -->
         <!-- 订单 -->
         <activity
             android:name=".xycindent.activities.IndentActivity"
             android:screenOrientation="portrait" /> <!-- 更改头像 -->
         <activity android:name=".mine.activities.bianji.ChangeHeadActivity" /> <!-- 车保险的车型 -->
-        <activity android:name=".carlife.carbaoxian.CarStyle" /> <!-- 公共搜索页 -->
-        <activity android:name=".homepage.activities.carquery.pinggu.XYCPingGuActivity" /> <!-- 主页 -->
+
+        <!-- 主页 -->
         <activity
             android:name=".main.activities.main.MainActivity"
             android:launchMode="singleTask"
@@ -422,256 +294,50 @@
         <!-- 银行卡的页面 -->
         <!-- 超级会员 -->
         <!-- 客服中心 -->
-        <service android:name=".newdriverschool.coach.service.UpLocationService"></service>
-        <receiver android:name=".newdriverschool.coach.service.AlarmssReceiver" />
-        <activity
-            android:name=".mine.activities.message.KeFuActivity"
-            android:screenOrientation="portrait" /> <!-- 在线客服 -->
-        <activity
-            android:name=".mine.activities.message.ZaiXianKeFuActivity"
-            android:screenOrientation="portrait" /> <!-- 车生活搜索结果页 -->
-        <activity
-            android:name=".carlife.CarLifeSearchResultActivity"
-            android:screenOrientation="portrait" /> <!-- 常见问题详情 -->
-        <activity
-            android:name=".mine.activities.message.KeFuQuesContentActivity"
-            android:screenOrientation="portrait" /> <!-- 常见问题详情 -->
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsBaoMingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsSelfTestActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsIndentContentActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsStudyRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsOrderOneTestActivity"
-            android:screenOrientation="portrait" /> <!-- 常见问题详情 -->
-        <activity
-            android:name=".carlife.CarLifeSearchActivity"
-            android:screenOrientation="portrait" /> <!-- 消息我的资产 -->
+        <service android:name=".receive.UpLocationService"></service>
+        <receiver android:name=".receive.AlarmssReceiver" />
         <!-- 首页点击进入的活动页 -->
         <!-- 洗车支付2页 -->
         <activity
             android:name=".xycindent.fragments.indent_content.PingJia"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".carlife.carbaoxian.CarBaoXianNew"
-            android:screenOrientation="portrait" /> <!-- 保险信息提交 -->
-        <activity
-            android:name=".carlife.carbaoxian.CarBaoXianIndent"
-            android:screenOrientation="portrait" /> <!-- 保险兑换礼品页 -->
-        <activity
-            android:name=".carlife.carbaoxian.CarBaoXianDuiHuan"
-            android:screenOrientation="portrait" /> <!-- 广告页 -->
-        <activity
             android:name=".splash.GuangGaoActivity"
             android:screenOrientation="portrait" /> <!-- 我的易币 -->
-        <activity
-            android:name=".mine.activities.MyYiBiActivity"
-            android:screenOrientation="portrait" /> <!-- 赢现金活动页 -->
-        <!-- 首页优惠的页面 -->
-        <!-- 品牌进入教练列表界面 -->
-        <!-- 赢现金活动说明 -->
-        <!-- 4S的内容 -->
-        <!-- 轮胎的支付 -->
-        <!-- 轮胎 -->
+        <!-- 赢现金活动页 -->
+
         <meta-data
             android:name="android.webkit.WebView.EnableSafeBrowsing"
             android:value="true" /> <!-- 打开相册 -->
-        <!-- 维修改装的支付页 -->
-        <!-- 微信支付 -->
-        <!-- 截取照片 -->
-        <!-- 驾校教练的详情 -->
-        <!-- 驾校教练的详情 -->
-        <!-- y有证练车的订单详情 -->
-        <!-- 打开相册 -->
-        <!-- 维修改装的支付页 -->
-        <!-- 微信支付 -->
-        <!-- 截取照片 -->
-        <!-- 驾校教练的详情 -->
-        <!-- 驾校教练的详情 -->
-        <!-- y有证练车的订单详情 -->
         <activity
             android:name=".xycindent.fragments.indent_content.IndentDetailsOrderPractice"
             android:screenOrientation="portrait" /> <!-- 易币商城 -->
         <activity
-            android:name=".homepage.activities.yibi_shop.YiBiShop"
-            android:screenOrientation="portrait" /> <!-- 易币商城商品详情 -->
-        <activity
-            android:name=".homepage.activities.yibi_shop.YiBiShopContent"
-            android:screenOrientation="portrait" /> <!-- 易币商城订单 -->
-        <activity
-            android:name=".homepage.activities.yibi_shop.YiBiIndent"
-            android:screenOrientation="portrait" /> <!-- 易币商城物流 -->
-        <activity
-            android:name=".homepage.activities.yibi_shop.IndentWuLiu"
-            android:screenOrientation="portrait" /> <!-- 易币商城xiadan -->
-        <activity
-            android:name=".homepage.activities.yibi_shop.QueRen"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".xycindent.fragments.indent_content.PingJiaOrderDriver"
             android:screenOrientation="portrait" /> <!-- 车辆风采照片展示 -->
-        <!-- 驾校风采照片展示 -->
-        <!-- 店铺照片展示 -->
-        <!-- 单选相册 -->
-        <!-- 更换手机号 -->
-        <!-- 随机练习D -->
-        <activity
-            android:name=".examtext.kemud.RandomTestD"
-            android:screenOrientation="portrait" /> <!-- 随机练习A -->
-        <activity
-            android:name=".examtext.kemua.RandomTestA"
-            android:screenOrientation="portrait" /> <!-- 我的错题D -->
-        <activity
-            android:name=".examtext.kemud.CuoTiD"
-            android:screenOrientation="portrait" /> <!-- 选择照片 -->
         <!-- 选车型 -->
         <!-- 教练评价页面 -->
         <!-- 新闻列表 -->
         <!-- 新闻详情 -->
         <!-- 新闻点击图片 -->
         <!-- 我的错题A -->
-        <activity
-            android:name=".examtext.kemua.CuoTiA"
-            android:screenOrientation="portrait" /> <!-- 我的代理 -->
-        <!-- 排行榜A -->
-        <activity
-            android:name=".examtext.PaiHangBang"
-            android:screenOrientation="portrait" /> <!-- 我的奖金 -->
-        <activity
-            android:name=".examtext.MyJiangJin"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsOrderRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsIndentContentBaoMingSuccessActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsStudyContentActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newdriverschool.students.activity.StudentsOrderContentActivity"
-            android:screenOrientation="portrait" /> <!-- 订单超时页 -->
         <!-- 我的奖金 -->
         <activity
             android:name=".homepage.activities.IcbcWebContent"
-            android:screenOrientation="portrait" /> <!-- 考驾照 -->
-        <activity
-            android:name=".examtext.ExamActivity"
             android:screenOrientation="portrait" /> <!-- 考驾照 -->
         <!-- 答题界面 -->
         <!-- 赢现金页面 -->
         <!-- 科目一答题页面 -->
         <!-- 科目一答题页面 -->
-        <activity
-            android:name=".examtext.kemud.SubjectDQuestion"
-            android:screenOrientation="portrait" /> <!-- 科目四收藏页面 -->
-        <activity
-            android:name=".examtext.kemud.CollectionD"
-            android:screenOrientation="portrait" /> <!-- 科目一收藏页面 -->
-        <activity
-            android:name=".examtext.kemua.CollectionA"
-            android:screenOrientation="portrait" /> <!-- 科目一模拟考试 -->
-        <activity
-            android:name=".examtext.kemua.PracticeTestOne"
-            android:screenOrientation="portrait" /> <!-- 科目四模拟考试 -->
-        <activity
-            android:name=".examtext.kemud.PracticeTestFour"
-            android:screenOrientation="portrait" /> <!-- 科目一专项训练 -->
-        <activity
-            android:name=".examtext.kemua.ZhuanXiangA"
-            android:screenOrientation="portrait" /> <!-- 科目一专项训练 时间 -->
-        <activity
-            android:name=".examtext.kemua.ZhuanXiangContent"
-            android:screenOrientation="portrait" /> <!-- 查看用户评价 -->
-        <!-- 科目四模拟考试 -->
-        <activity
-            android:name=".examtext.kemud.ZhuanXiangD"
-            android:screenOrientation="portrait" /> <!-- 科目四专项训练 时间 -->
-        <activity
-            android:name=".examtext.kemud.ZhuangXiangDContent"
-            android:screenOrientation="portrait" /> <!-- 首页的定位地点页面 -->
-        <activity
-            android:name=".homepage.activities.location.LocationActivity"
-            android:screenOrientation="portrait" /> <!-- android:windowSoftInputMode="stateHidden|adjustPan" -->
-        <!-- 考驾照页面 -->
-        <!-- 科目一模拟考试的进入页 -->
-        <activity
-            android:name=".examtext.MoNiTestPage"
-            android:screenOrientation="portrait" /> <!-- 科目四模拟考试的进入页 -->
-        <!-- 科目四专项练习的进入页 -->
-        <!-- 科目一顺序练习 -->
-        <activity
-            android:name=".examtext.kemua.SubjectAQuestion"
-            android:screenOrientation="portrait" /> <!-- 科目一模拟考试开始考试 -->
-        <activity
-            android:name=".examtext.kemua.AchievementOneActivity"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait" /> <!-- 科目四模拟考试成绩 -->
-        <activity
-            android:name=".examtext.kemud.AchievementFourActivity"
-            android:screenOrientation="portrait" /> <!-- 积分明细 -->
-        <activity
-            android:name=".mine.activities.myjifen.JiFenMingXiActivity"
-            android:screenOrientation="portrait" /> <!-- 二手车首页 -->
-        <!-- 买车 -->
-        <activity
-            android:name=".usedcar.activity.BuyCarActivity"
-            android:screenOrientation="portrait" /> <!-- 买车 -->
-        <activity
-            android:name=".usedcar.activity.SellCarActivity"
-            android:screenOrientation="portrait" /> <!-- 租车 -->
-        <activity
-            android:name=".usedcar.activity.RentCarActivity"
-            android:screenOrientation="portrait" /> <!-- 卖车补全信息 -->
-        <activity
-            android:name=".usedcar.activity.SellCompleteInforActivity"
-            android:screenOrientation="portrait" /> <!-- 卖车不全信息 -->
         <!-- 科目四我的成绩 -->
         <!-- 科目一我的成绩 -->
-        <activity
-            android:name=".examtext.MyResult"
-            android:screenOrientation="portrait" /> <!-- 科目三的视频 -->
-        <activity
-            android:name=".examtext.kemuc.KeMuSanVideo"
-            android:screenOrientation="portrait" /> <!-- 科目二web页 -->
-        <activity
-            android:name=".examtext.kemub.SubjectbWeb"
-            android:screenOrientation="portrait" /> <!-- 答题赢现金的结果页面 -->
-        <!-- 车生活页面 -->
-        <!-- 编辑页面 -->
         <activity
             android:name=".mine.activities.bianji.SettingActivity"
             android:screenOrientation="portrait" /> <!-- 昵称 -->
         <activity
             android:name=".mine.activities.bianji.InformationChangeActivity"
             android:screenOrientation="portrait" /> <!-- 性别 -->
-        <!-- 上传身份证信息 -->
-        <!-- 上传驾驶证信息 -->
-        <!-- 地址 -->
-        <!-- 手机号码 -->
-        <!-- 我的收藏 -->
-        <!-- 我的收藏 -->
-        <activity
-            android:name=".mine.activities.collection.MyCollection"
-            android:screenOrientation="portrait" /> <!-- 我的积分 -->
-        <activity
-            android:name=".mine.activities.myjifen.MyJiFenActivity"
-            android:screenOrientation="portrait" /> <!-- 积分明细 -->
-        <!-- 我的钱包 -->
-        <activity
-            android:name=".mine.activities.my_wallet.MyWalletActivity"
-            android:screenOrientation="portrait" /> <!-- 意见反馈 -->
-        <activity
-            android:name=".mine.activities.FeedBackActivity"
-            android:screenOrientation="portrait" /> <!-- 使用帮助 -->
+        <!-- 使用帮助 -->
         <!-- 关于学易车 -->
         <activity
             android:name=".mine.activities.AboutXueYiChe"
@@ -679,83 +345,23 @@
         <activity
             android:name=".practicecar.activity.ChoiceCardDetails"
             android:screenOrientation="portrait">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.VIEW" /> -->
-            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
-            <!-- <data android:scheme="http" -->
-            <!-- android:host="222.171.205.11:8080" -->
-            <!-- android:pathPrefix="/xyc/one/openApp/app"/> -->
-            <!-- </intent-filter> -->
         </activity> <!-- 提交订单后的订单详情 -->
-        <activity
-            android:name=".xycindent.fragments.indent_content.IndentDriverSchoolDetails"
-            android:screenOrientation="portrait" /> <!-- 余额提现页面 -->
-        <activity
-            android:name=".mine.activities.my_wallet.CashActivity"
-            android:screenOrientation="portrait" /> <!-- 充值页面 -->
         <activity
             android:name=".pay.RechargeActivity"
             android:screenOrientation="portrait" /> <!-- 添加银行卡页面 -->
-        <activity
-            android:name=".mine.activities.my_wallet.BankCardActivity"
-            android:screenOrientation="portrait" /> <!-- 有证练车 -->
         <!-- POI检索界面 -->
         <activity
             android:name=".practicecar.activity.POIDressActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".usedcar.activity.UsedCarLocationActivity"
-            android:screenOrientation="portrait" /> <!-- 账户明细页面 -->
-        <activity
-            android:name=".mine.activities.my_wallet.ZhangHaoMingXi"
-            android:screenOrientation="portrait" /> <!-- 积分充值 -->
-        <activity
             android:name=".pay.JiFenChongZhi"
             android:screenOrientation="portrait" /> <!-- 驾校详情页面 -->
-        <activity
-            android:name=".driverschool.driverschool.DriverSchoolContent"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mine.activities.MyQuestionActivity"
-            android:screenOrientation="portrait" /> <!-- 驾校支付页面 -->
-        <activity
-            android:name=".submit.DriverSchoolSubmitIndent"
-            android:screenOrientation="portrait" /> <!-- 美食支付页面 -->
-        <!-- 提现详情 -->
-        <activity
-            android:name=".mine.activities.my_wallet.CashContent"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".examtext.AnswerwithcashFinish"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".examtext.Answerwithcash"
-            android:screenOrientation="portrait" /> <!-- //baiduditu -->
-        <!-- 服务内容 -->
-        <!-- 周边商店 -->
-        <activity
-            android:name=".usedcar.activity.ChooseStoreActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.RentCarCityActivity"
-            android:screenOrientation="portrait" /> <!-- 公共的url -->
         <activity
             android:name=".constants.UrlActivity"
             android:screenOrientation="portrait" /> <!-- 公共的url -->
         <activity
-            android:name=".examtext.CommonWebView"
+            android:name=".base.CommonWebView"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".homepage.activities.KuaiBaoListActivity"
-            android:screenOrientation="portrait" /> <!-- 二手车 -->
-        <activity
-            android:name=".usedcar.activity.LoanStagingSecondActivity"
-            android:screenOrientation="portrait" /> <!-- 二手车 -->
-        <activity
-            android:name=".usedcar.activity.UsedCarSearchActivity"
-            android:screenOrientation="portrait" /> <!-- 支付页 -->
         <service
             android:name=".receive.LocationService"
             android:enabled="true"
@@ -763,24 +369,6 @@
 
         <activity
             android:name=".pay.AppPay"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.GaoJiShaiXuanActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".submit.DirectDriverSchoolSubmitIndent"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.DirectDriverSchoolContent"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".submit.UsedCarSubmitIndent"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.UsedCarActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.LoanStagingFirstActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.activity.lianche.SubmitZhiJiePractice"
@@ -791,16 +379,9 @@
         <activity
             android:name=".pay.PaySucceedActivity"
             android:screenOrientation="portrait" /> <!-- 车辆估价 不予评估 -->
-        <!-- 支付成功 -->
-        <activity
-            android:name=".usedcar.activity.ShenFenQueRen"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.activity.OrderTrainerActivity"
             android:screenOrientation="portrait" /> <!-- 无证的activity -->
-        <activity
-            android:name=".practicecar.activity.nobook.activity.NoBookChoiceCardDetails"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.activity.nobook.activity.NoBookShowPingJia"
             android:screenOrientation="portrait" />
@@ -816,34 +397,11 @@
         <activity
             android:name=".mine.activities.youhuiquan.YouHuiQuan"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.FeiYongMingXiActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driverschool.driverschool.fenqi.FenQiTestDriverBookActivity"
-            android:screenOrientation="portrait" /> <!-- 优惠券 -->
-        <activity
-            android:name=".usedcar.activity.ChooseCarActivity"
-            android:screenOrientation="portrait" /> <!-- 优惠券 -->
+
         <activity
             android:name=".xycindent.fragments.indent_content.WZIndentDetailsOrderPractice"
             android:screenOrientation="portrait" /> <!-- 优惠券 -->
-        <activity
-            android:name=".usedcar.activity.PinPaiActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.CheckShenFenActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.zhengxin.ZhengXinHistoryActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.zhengxin.ZhengXinPay"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".usedcar.activity.zhengxin.WriteInfomationActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" /> <!-- 相机 -->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.zz.fileprovider"
@@ -870,34 +428,6 @@
             android:name="org.simalliance.openmobileapi"
             android:required="false" />
 
-        <activity
-            android:name="com.unionpay.uppay.PayActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:excludeFromRecents="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.unionpay.UPPayWapActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" /> <!-- 工行线上pos支付 -->
-        <activity android:name=".utils.PayResultHandler">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="com.icbc.pay.PayResultHandler.SHOW_ACTIVITY" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.icbc.paysdk.webview.PayWebView"
-            android:alwaysRetainTaskState="true"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:imeOptions="actionSend|flagNoEnterAction"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" /> <!-- 微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

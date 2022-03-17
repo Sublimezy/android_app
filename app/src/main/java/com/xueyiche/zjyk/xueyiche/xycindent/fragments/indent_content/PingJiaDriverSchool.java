@@ -548,7 +548,6 @@ public class PingJiaDriverSchool extends BaseActivity implements View.OnClickLis
                                                 showToastShort("评价成功");
                                                 finish();
                                                 if ("0".equals(evaluate_type)) {
-                                                    DriverSchoolTrainerListActivity.instance.finish();
                                                 }
                                                 EventBus.getDefault().post(new MyEvent("刷新全部订单"));
                                                 EventBus.getDefault().post(new MyEvent("刷新已完成订单"));

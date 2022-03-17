@@ -65,7 +65,7 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.GoDaiJiaBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.LiJIBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.YuGuBean;
@@ -465,8 +465,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
         Intent intent6 = new Intent(XingChengActivity.this, ChooseDaiJiaoActivity.class);
         switch (v.getId()) {
             case R.id.iv_login_back:
-                Intent intent2 = new Intent(App.context, DaiJiaActivity.class);
-                startActivity(intent2);
                 finish();
                 break;
             case R.id.iv_anquan:
@@ -683,8 +681,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent2 = new Intent(App.context, DaiJiaActivity.class);
-            startActivity(intent2);
             finish();
         }
         return super.onKeyDown(keyCode, event);

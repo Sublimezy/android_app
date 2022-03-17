@@ -24,7 +24,7 @@ public class MyBasePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return FragmentFactory.COUNT;
+        return FragmentFactory.COUNTThree;
     }
 
     @Override
