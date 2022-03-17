@@ -42,4 +42,4 @@
         android:textSize="11sp"
         android:visibility="gone"
         tools:visibility="visible" />
-</>
+</RelativeLayout>
