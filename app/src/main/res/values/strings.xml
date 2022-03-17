@@ -493,5 +493,5 @@
     <string name="jg_channel_name_p_low">LOW</string>
     <string name="jg_channel_name_p_default">NORMAL</string>
     <string name="jg_channel_name_p_high">HIGH</string>
-      <string name="splash_loading">广告加载中...</string>
+    <string name="splash_loading">广告加载中...</string>
 </resources>

@@ -33,18 +33,22 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -74,15 +78,17 @@
     <application
         android:name=".constants.App"
         android:allowBackup="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/logo_user"
         android:label="@string/app_name"
-        android:hardwareAccelerated="true"
         android:persistent="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
+        <activity android:name=".daijia.RegistSiJiActivity"></activity>
+
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
@@ -158,11 +164,9 @@
         <activity
             android:name=".guide.GuideActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".mine.activities.ConstantlyAddressActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -259,19 +263,15 @@
         <activity
             android:name=".pay.bean.AppPayChaXun"
             android:screenOrientation="portrait" /> <!-- 答题赢现金问题详情 -->
-
         <activity
             android:name=".submit.PracticeCarSubmitIndent"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".xycindent.fragments.indent_content.PutStudentCardActivity"
             android:screenOrientation="portrait" /> <!-- 培训机构报名页面 -->
-
         <activity
             android:name=".xycindent.fragments.indent_content.PingJiaDriverSchool"
-            android:screenOrientation="portrait" />
-        <!-- 第一步登录 -->
+            android:screenOrientation="portrait" /> <!-- 第一步登录 -->
         <activity android:name=".main.activities.login.LoginFirstStepActivity" /> <!-- 第二部登录 -->
         <activity android:name=".main.activities.login.LoginSecondStepActivity" /> <!-- 进入练车 -->
         <activity android:name=".xycindent.fragments.indent_content.PracticeIndentContent" /> <!-- 二手车订单详情 -->
@@ -285,7 +285,6 @@
             android:name=".xycindent.activities.IndentActivity"
             android:screenOrientation="portrait" /> <!-- 更改头像 -->
         <activity android:name=".mine.activities.bianji.ChangeHeadActivity" /> <!-- 车保险的车型 -->
-
         <!-- 主页 -->
         <activity
             android:name=".main.activities.main.MainActivity"
@@ -294,9 +293,9 @@
         <!-- 银行卡的页面 -->
         <!-- 超级会员 -->
         <!-- 客服中心 -->
-        <service android:name=".receive.UpLocationService"></service>
-        <receiver android:name=".receive.AlarmssReceiver" />
-        <!-- 首页点击进入的活动页 -->
+        <service android:name=".receive.UpLocationService" />
+
+        <receiver android:name=".receive.AlarmssReceiver" /> <!-- 首页点击进入的活动页 -->
         <!-- 洗车支付2页 -->
         <activity
             android:name=".xycindent.fragments.indent_content.PingJia"
@@ -305,7 +304,6 @@
             android:name=".splash.GuangGaoActivity"
             android:screenOrientation="portrait" /> <!-- 我的易币 -->
         <!-- 赢现金活动页 -->
-
         <meta-data
             android:name="android.webkit.WebView.EnableSafeBrowsing"
             android:value="true" /> <!-- 打开相册 -->
@@ -344,8 +342,7 @@
             android:screenOrientation="portrait" /> <!-- 教练详情页面 -->
         <activity
             android:name=".practicecar.activity.ChoiceCardDetails"
-            android:screenOrientation="portrait">
-        </activity> <!-- 提交订单后的订单详情 -->
+            android:screenOrientation="portrait"></activity> <!-- 提交订单后的订单详情 -->
         <activity
             android:name=".pay.RechargeActivity"
             android:screenOrientation="portrait" /> <!-- 添加银行卡页面 -->
@@ -362,6 +359,7 @@
         <activity
             android:name=".base.CommonWebView"
             android:screenOrientation="portrait" />
+
         <service
             android:name=".receive.LocationService"
             android:enabled="true"
@@ -397,11 +395,9 @@
         <activity
             android:name=".mine.activities.youhuiquan.YouHuiQuan"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".xycindent.fragments.indent_content.WZIndentDetailsOrderPractice"
             android:screenOrientation="portrait" /> <!-- 优惠券 -->
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.zz.fileprovider"
@@ -599,14 +595,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/gdt_file_path" />
         </provider>
+
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
-        <!-- 声明SDK所需要的组件 -->
+            android:required="false" /> <!-- 声明SDK所需要的组件 -->
         <service
             android:name="com.qq.e.comm.DownloadService"
             android:exported="false" />
-
     </application>
 
 </manifest>
