@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class GridImageAdapter extends
         RecyclerView.Adapter<GridImageAdapter.ViewHolder> {
-    public static final String TAG = "PictureSelector";
+    public static final String TAG = "张斯佳_PictureSelector";
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
@@ -64,6 +64,7 @@ public class GridImageAdapter extends
         this.mInflater = LayoutInflater.from(context);
         this.mOnAddPicClickListener = mOnAddPicClickListener;
     }
+
     public GridImageAdapter(Context context, onAddPicClickListener mOnAddPicClickListener, int addPicRes) {
         this.mInflater = LayoutInflater.from(context);
         this.mOnAddPicClickListener = mOnAddPicClickListener;
@@ -186,12 +187,12 @@ public class GridImageAdapter extends
                 Log.i(TAG, "压缩地址::" + media.getCompressPath());
                 Log.i(TAG, "压缩后文件大小::" + new File(media.getCompressPath()).length() / 1024 + "k");
             }
-                Glide.with(viewHolder.itemView.getContext())
-                        .load(media.getPath())
-                        .centerCrop()
-                        .placeholder(R.color.app_color_f6)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(viewHolder.mImg);
+            Glide.with(viewHolder.itemView.getContext())
+                    .load(media.getPath())
+                    .centerCrop()
+                    .placeholder(R.color.app_color_f6)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(viewHolder.mImg);
 
             //itemView 的点击事件
             if (mItemClickListener != null) {

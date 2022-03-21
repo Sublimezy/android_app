@@ -7,9 +7,10 @@
     android:orientation="vertical"
     tools:context=".daijia.RegistSiJiActivity">
 
-    <include layout="@layout/new_title_bar"
+    <include
         android:id="@+id/title"
-        />
+        layout="@layout/new_title_bar" />
+
 
     <androidx.core.widget.NestedScrollView
 
@@ -282,6 +283,7 @@
                 android:background="@color/divider" />
 
             <LinearLayout
+                android:id="@+id/ll_has_car"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:gravity="center_vertical"
@@ -298,6 +300,7 @@
                     android:textSize="14dp" />
 
                 <CheckBox
+                    android:id="@+id/cb_has_car"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -329,11 +332,12 @@
                     android:src="@drawable/mianguan_zhaopian" />
 
                 <androidx.recyclerview.widget.RecyclerView
-
+                    android:overScrollMode="never"
                     android:id="@+id/recycler_mianguan"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:scrollbars="none" />
 
             </RelativeLayout>
 
@@ -357,11 +361,13 @@
                     android:layout_height="100dp"
                     android:src="@drawable/shenfenzheng_zhengmian" />
 
-                <ImageView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sfj_zheng"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/upload" />
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
 
             </RelativeLayout>
 
@@ -377,11 +383,14 @@
                     android:layout_height="100dp"
                     android:src="@drawable/shenfenzheng_fan" />
 
-                <ImageView
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:overScrollMode="never"
+                    android:id="@+id/recycler_sfj_fan"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/upload" />
+                    android:scrollbars="none" />
 
             </RelativeLayout>
 
@@ -405,12 +414,14 @@
                     android:layout_height="100dp"
                     android:src="@drawable/jiashizheng_zheng" />
 
-                <ImageView
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:overScrollMode="never"
+                    android:id="@+id/recycler_jsz_zheng"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/upload" />
-
+                    android:scrollbars="none" />
             </RelativeLayout>
 
 
@@ -425,22 +436,110 @@
                     android:layout_height="100dp"
                     android:src="@drawable/jiashizheng_fan" />
 
-                <ImageView
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:overScrollMode="never"
+                    android:id="@+id/recycler_jsz_fan"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/upload" />
+                    android:scrollbars="none" />
 
             </RelativeLayout>
+
+            <View
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/transparent" />
 
             <!--      加一个是否有车      -->
 
             <LinearLayout
-                android:layout_marginBottom="40dp"
+                android:id="@+id/ll_has_car_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
                 android:orientation="vertical">
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:text="车辆信息"
+                    android:textColor="#101010"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="品牌车型"
+                        android:textColor="#101010"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_car_pinpai"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="right|center_vertical"
+                        android:text="选择品牌"
+                        android:textColor="#6F6D6D"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/arrow_right" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="品牌车系"
+                        android:textColor="#101010"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_car_chexi"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="right|center_vertical"
+                        android:text="选择车系"
+                        android:textColor="#6F6D6D"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/arrow_right" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -462,11 +561,14 @@
                         android:layout_height="100dp"
                         android:src="@drawable/xingshizheng_zheng" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:overScrollMode="never"
+                        android:id="@+id/recycler_xsz_zheng"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/upload" />
+                        android:scrollbars="none" />
 
                 </RelativeLayout>
 
@@ -482,11 +584,14 @@
                         android:layout_height="100dp"
                         android:src="@drawable/xingshizheng_fan" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:overScrollMode="never"
+                        android:id="@+id/recycler_xsz_fan"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/upload" />
+                        android:scrollbars="none" />
 
                 </RelativeLayout>
 
@@ -510,11 +615,14 @@
                         android:layout_height="100dp"
                         android:src="@drawable/car_photo_1" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:overScrollMode="never"
+                        android:id="@+id/recycler_car1"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/upload" />
+                        android:scrollbars="none" />
 
                 </RelativeLayout>
 
@@ -538,11 +646,14 @@
                         android:layout_height="100dp"
                         android:src="@drawable/car_photo_2" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:overScrollMode="never"
+                        android:id="@+id/recycler_car2"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/upload" />
+                        android:scrollbars="none" />
 
                 </RelativeLayout>
 
@@ -566,11 +677,14 @@
                         android:layout_height="100dp"
                         android:src="@drawable/car_photo_3" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:overScrollMode="never"
+                        android:id="@+id/recycler_car3"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/upload" />
+                        android:scrollbars="none" />
 
                 </RelativeLayout>
 
@@ -594,15 +708,32 @@
                         android:layout_height="100dp"
                         android:src="@drawable/car_photo_4" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:overScrollMode="never"
+                        android:id="@+id/recycler_car4"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/upload" />
+                        android:scrollbars="none" />
 
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/btn_submit"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/orange_btn_fill"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 </RelativeLayout>

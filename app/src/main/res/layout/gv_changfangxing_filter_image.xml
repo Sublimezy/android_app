@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/fiv"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         tools:src="@color/app_color_f6" />
 
     <ImageView

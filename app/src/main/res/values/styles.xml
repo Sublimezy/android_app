@@ -121,7 +121,35 @@
         <item name="android:maxHeight">38dp</item>
         <item name="android:isIndicator">false</item>
     </style>
+    <!--动画:向上动画-->
+    <style name="AnimUp" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/set_up_in</item>
+        <item name="android:windowExitAnimation">@anim/set_up_out</item>
+    </style>
 
+    <style name="MyDialog2" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>  <!-- 没有标题-->
+        <item name="android:windowBackground">@android:color/transparent</item>   <!-- 背景颜色 -->
+        <item name="android:windowFrame">@null</item>   <!-- 没有边框 -->
+        <item name="android:windowIsFloating">true</item>   <!-- 窗口浮动 -->
+        <item name="android:windowContentOverlay">@null</item>  <!-- 没有阴影 -->
+    </style>
+    <!-- dialog底部弹出动画 -->
+    <style name="bottom_menu_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_menu_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_menu_exit</item>
+    </style>
+    <style name="tab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:text">请选择</item>
+        <item name="android:textColor">@color/selector_text_color_tab</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
     <style name="MyRatingBarNowSmall" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/star_now_small</item>
         <item name="android:minHeight">15dp</item>
@@ -425,6 +453,18 @@
         <item name="@android:windowExitAnimation">@null</item>
     </style>
 
+    <style name="bottom_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/Animation_Bottom_Dialog</item>
+    </style>
+    <style name="Animation_Bottom_Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_dialog_exit</item>
+    </style>
     <style name="Comment_Dialog" parent="@style/AppTheme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

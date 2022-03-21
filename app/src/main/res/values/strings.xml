@@ -8,6 +8,10 @@
     <string-array name="npv_lunar_day_with_measure_hint">
         <item>初一</item>
     </string-array>
+
+    <string name="cancel_text">取消</string>
+    <string name="title">这是标题</string>
+    <string name="normal_sure_text">确定</string>
     <string name="permission_storage_refused">您拒绝了文件读写的权限，请到设置中修改</string>
     <string name="permission_camera_refused">您拒绝了使用摄像头的权限，请到设置中修改</string>
     <string name="permission_record_audio_refused">您拒绝了使用麦克风的权限，请到设置中修改</string>
