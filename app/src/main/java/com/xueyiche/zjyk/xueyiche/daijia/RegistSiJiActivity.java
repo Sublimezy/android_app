@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,8 +32,14 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.PermissionChecker;
 import com.luck.picture.lib.style.PictureParameterStyle;
 import com.luck.picture.lib.tools.PictureFileUtils;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
+import com.xueyiche.zjyk.xueyiche.constants.bean.TokenBean;
 import com.xueyiche.zjyk.xueyiche.daijia.SpeedDialog.dialog.SpeedDialog;
 import com.xueyiche.zjyk.xueyiche.daijia.SpeedDialog.listener.OnInputDialogButtonClickListener;
 import com.xueyiche.zjyk.xueyiche.daijia.addressdialog.BottomSelectorDialog;
@@ -54,8 +60,13 @@ import com.xueyiche.zjyk.xueyiche.daijia.wheelpicker.PickerScrollView;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -127,6 +138,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     @BindView(R.id.bottom)
     View bottom;
 
+    private UploadManager uploadManager; //七牛云上传
 
     /**
      * 初始化监听器
@@ -135,7 +147,23 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     protected void initListener() {
 
     }
-
+    /**
+     * 初始化View，执行findViewById操作
+     */
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
+    }
+    /**
+     * 初始化contentView
+     *
+     * @return 返回contentView的layout id
+     */
+    @Override
+    protected int initContentView() {
+        return R.layout.activity_regist_si_ji;
+    }
     /**
      * 初始化数据
      */
@@ -608,6 +636,8 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     }
 
 
+    HashMap<Integer, LocalMedia> selectedPhotos = new HashMap<>();
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -617,8 +647,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListMianGuan = PictureSelector.obtainMultipleResult(data);
-                Log.i("张斯佳","选择的图片个数"+selectListMianGuan.size());
-
+                if (selectListMianGuan.size() > 0) {
+                    selectedPhotos.put(0, selectListMianGuan.get(0));
+                }
                 mAdapterMianGuan.setList(selectListMianGuan);
                 mAdapterMianGuan.notifyDataSetChanged();
                 break;
@@ -626,6 +657,10 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListSfjZheng = PictureSelector.obtainMultipleResult(data);
+
+                if (selectListSfjZheng.size() > 0) {
+                    selectedPhotos.put(1, selectListSfjZheng.get(0));
+                }
                 mAdapterSfjZheng.setList(selectListSfjZheng);
                 mAdapterSfjZheng.notifyDataSetChanged();
                 break;
@@ -633,6 +668,10 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListSfzFan = PictureSelector.obtainMultipleResult(data);
+
+                if (selectListSfzFan.size() > 0) {
+                    selectedPhotos.put(2, selectListSfzFan.get(0));
+                }
                 mAdapterSfzFan.setList(selectListSfzFan);
                 mAdapterSfzFan.notifyDataSetChanged();
                 break;
@@ -640,6 +679,10 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListJszZheng = PictureSelector.obtainMultipleResult(data);
+
+                if (selectListJszZheng.size() > 0) {
+                    selectedPhotos.put(3, selectListJszZheng.get(0));
+                }
                 mAdapterJszZheng.setList(selectListJszZheng);
                 mAdapterJszZheng.notifyDataSetChanged();
                 break;
@@ -647,6 +690,10 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListJszFan = PictureSelector.obtainMultipleResult(data);
+
+                if (selectListJszFan.size() > 0) {
+                    selectedPhotos.put(4, selectListJszFan.get(0));
+                }
                 mAdapterJszFan.setList(selectListJszFan);
                 mAdapterJszFan.notifyDataSetChanged();
                 break;
@@ -654,6 +701,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListXszZheng = PictureSelector.obtainMultipleResult(data);
+                if (selectListXszZheng.size() > 0) {
+                    selectedPhotos.put(5, selectListXszZheng.get(0));
+                }
                 mAdapterXszZheng.setList(selectListXszZheng);
                 mAdapterXszZheng.notifyDataSetChanged();
                 break;
@@ -661,6 +711,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListXszFan = PictureSelector.obtainMultipleResult(data);
+                if (selectListXszFan.size() > 0) {
+                    selectedPhotos.put(6, selectListXszFan.get(0));
+                }
                 mAdapterXszFan.setList(selectListXszFan);
                 mAdapterXszFan.notifyDataSetChanged();
                 break;
@@ -668,6 +721,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListCar1 = PictureSelector.obtainMultipleResult(data);
+                if (selectListCar1.size() > 0) {
+                    selectedPhotos.put(7, selectListCar1.get(0));
+                }
                 mAdapterCar1.setList(selectListCar1);
                 mAdapterCar1.notifyDataSetChanged();
                 break;
@@ -675,6 +731,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListCar2 = PictureSelector.obtainMultipleResult(data);
+                if (selectListCar2.size() > 0) {
+                    selectedPhotos.put(8, selectListCar2.get(0));
+                }
                 mAdapterCar2.setList(selectListCar2);
                 mAdapterCar2.notifyDataSetChanged();
                 break;
@@ -682,6 +741,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListCar3 = PictureSelector.obtainMultipleResult(data);
+                if (selectListCar3.size() > 0) {
+                    selectedPhotos.put(9, selectListCar3.get(0));
+                }
                 mAdapterCar3.setList(selectListCar3);
                 mAdapterCar3.notifyDataSetChanged();
                 break;
@@ -689,6 +751,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 // 图片选择结果回调
                 //     selectList = mAdapter.getData();
                 selectListCar4 = PictureSelector.obtainMultipleResult(data);
+                if (selectListCar4.size() > 0) {
+                    selectedPhotos.put(10, selectListCar4.get(0));
+                }
                 mAdapterCar4.setList(selectListCar4);
                 mAdapterCar4.notifyDataSetChanged();
                 break;
@@ -700,15 +765,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     }
 
 
-    /**
-     * 初始化contentView
-     *
-     * @return 返回contentView的layout id
-     */
-    @Override
-    protected int initContentView() {
-        return R.layout.activity_regist_si_ji;
-    }
+
 
     private PictureSelectionModel getPictureSelectionModel() {
         return PictureSelector.create(RegistSiJiActivity.this)
@@ -721,14 +778,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 .compressQuality(80);
     }
 
-    /**
-     * 初始化View，执行findViewById操作
-     */
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
-    }
+
 
     public Context getContext() {
         return this;
@@ -980,9 +1030,185 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 break;
             case R.id.btn_submit:
                 //提交
+                if (TextUtils.isEmpty(name)) {
+                    showToastShort("请输入名字");
+                    return;
+                }
+                if (TextUtils.isEmpty(sex)) {
+                    showToastShort("请选择性别");
+                    return;
+                }
+                if (TextUtils.isEmpty(jialing)) {
+                    showToastShort("请填写驾龄");
+                    return;
+                }
+                if (TextUtils.isEmpty(phone)) {
+                    showToastShort("请填写联系电话");
+                    return;
+                }
+                if (TextUtils.isEmpty(jiashizhenghao)) {
+                    showToastShort("请填写驾驶证号");
+                    return;
+                }
+                if (TextUtils.isEmpty(shengshiqu)) {
+                    showToastShort("请选择联系地址");
+                    return;
+                }
+
+                if (selectListMianGuan == null || selectListMianGuan.size() == 0) {
+                    showToastShort("请选择本人正面免冠照片");
+                    return;
+                }
+                if (selectListSfjZheng == null || selectListSfjZheng.size() == 0) {
+                    showToastShort("请选择身份证反面照片");
+                    return;
+                }
+                if (selectListSfzFan == null || selectListSfzFan.size() == 0) {
+                    showToastShort("请选择身份证正面照片");
+                    return;
+                }
+                if (selectListJszZheng == null || selectListJszZheng.size() == 0) {
+                    showToastShort("请选择驾驶证照片");
+                    return;
+                }
+                if (selectListJszFan == null || selectListJszFan.size() == 0) {
+                    showToastShort("请选择驾驶证副页照片");
+                    return;
+                }
+
+
+                if ("1".equals(type_car)) {
+                    //有车   判断有车内容是否为空
+                    if (TextUtils.isEmpty(carPinPaiId) || TextUtils.isEmpty(carPinPaiName)) {
+                        showToastShort("请选择车辆品牌");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(carCheXiId) || TextUtils.isEmpty(carCheXiName)) {
+                        showToastShort("请选择车辆型号");
+                        return;
+                    }
+                    if (selectListJszZheng == null || selectListJszZheng.size() == 0) {
+                        showToastShort("请选择行驶证照片");
+                        return;
+                    }
+                    if (selectListJszFan == null || selectListJszFan.size() == 0) {
+                        showToastShort("请选择行驶证副页照片");
+                        return;
+                    }
+                    if (selectListCar1 == null || selectListCar1.size() == 0) {
+                        showToastShort("请选择车辆正面45度照片");
+                        return;
+                    }
+                    if (selectListCar2 == null || selectListCar2.size() == 0) {
+                        showToastShort("请选择车辆侧面照片");
+                        return;
+                    }
+                    if (selectListCar3 == null || selectListCar3.size() == 0) {
+                        showToastShort("请选择车辆后面照片");
+                        return;
+                    }
+                    if (selectListCar4 == null || selectListCar4.size() == 0) {
+                        showToastShort("请选择车辆驾驶室照片");
+                        return;
+                    }
+
+
+                }
+                uploadManager = new UploadManager();
+//                showProgressDialog(false, "正在上传图片...");
+                pictureMap = new HashMap<>();
+                for (Map.Entry<Integer, LocalMedia> entry : selectedPhotos.entrySet()) {
+                    Integer key = entry.getKey();
+                    if ("1".equals(type_car)) {
+                        //有车
+                        Calendar calendar = Calendar.getInstance();
+                        long timeInMillis = calendar.getTimeInMillis();
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        UpLoadToQiNiu("fx_tuwen" + timeInMillis + ".jpg", key, 11, entry.getValue());
+
+                    } else {
+//                        无车
+                        if (key > 4) {
+
+                        } else {
+
+                            Calendar calendar = Calendar.getInstance();
+                            long timeInMillis = calendar.getTimeInMillis();
+                            try {
+                                Thread.sleep(1);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            UpLoadToQiNiu("fx_tuwen" + timeInMillis + ".jpg", key, 5, entry.getValue());
+                        }
+                    }
+
+                }
+
+
                 break;
         }
     }
+
+    Map<Integer, String> pictureMap = new HashMap<>();  //图片上传的顺序
+
+    private void UpLoadToQiNiu(final String key, final int position, int total, LocalMedia media) {
+        Map<String, String> params = new HashMap<>();
+        params.put("key", key);
+        MyHttpUtils.postHttpMessage(AppUrl.TOUXIANG, params, TokenBean.class, new RequestCallBack<TokenBean>() {
+            @Override
+            public void requestSuccess(TokenBean json) {
+                if (json.getCode() == 200) {
+                    String token = json.getContent().getToken();
+                    if (!TextUtils.isEmpty(token)) {
+                        File fileCropUri;
+                        if (TextUtils.isEmpty(media.getCompressPath())) {
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                                fileCropUri = new File(media.getAndroidQToPath());
+                            } else {
+                                fileCropUri = new File(media.getPath());
+                            }
+                        } else {
+                            fileCropUri = new File(media.getCompressPath());
+                        }
+
+                        uploadManager.put(fileCropUri, key, token, new UpCompletionHandler() {
+                            @Override
+                            public void complete(String key, ResponseInfo info, JSONObject response) {
+                                if (info.isOK()) {
+                                    pictureMap.put(position, StringConstants.QiNiu + key);
+
+                                    if (total == pictureMap.size()) {
+                                        //全部上传成功
+                                        stopProgressDialog();
+                                        Iterator<Integer> iterator = pictureMap.keySet().iterator();
+                                        while (iterator.hasNext()) {
+                                            Log.i("张斯佳司机报名_", pictureMap.get(iterator.next()));
+                                        }
+                                    }
+                                } else {
+                                    stopProgressDialog();
+                                    showToastShort("上传失败,请重新尝试!");
+                                }
+
+
+                            }
+                        }, null);
+                    }
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+                showToastShort("连接服务器失败");
+            }
+        });
+    }
+
 
     private BottomSelectorDialog dialog_select_car;
     private String carPinPaiId = "";
@@ -1086,13 +1312,19 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
 
     }
 
+    String shengshiqu = "";
+    String sheng_id = "";
+    String sheng_name = "";
+    String shi_id = "";
+    String shi_name = "";
+
     @Override
     public void onAddressSelected(Province province, City city, County county, Street street) {
-        String shengshiqu = (province == null ? "" : province.name) + (city == null ? "" : city.name);
-        String sheng_id = province == null ? "" : "" + province.id;
-        String sheng_name = province == null ? "" : province.name;
-        String shi_id = city == null ? "" : "" + city.id;
-        String shi_name = city == null ? "" : city.name;
+        shengshiqu = (province == null ? "" : province.name) + (city == null ? "" : city.name);
+        sheng_id = province == null ? "" : "" + province.id;
+        sheng_name = province == null ? "" : province.name;
+        shi_id = city == null ? "" : "" + city.id;
+        shi_name = city == null ? "" : city.name;
         dialog_select_diqu.dismiss();
         tvAddress.setText(shengshiqu);
     }

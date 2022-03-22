@@ -9,4 +9,6 @@ public interface StringConstants {
     String MEIYOUSHUJU = "没有更多数据啦！";
     String SHARED_TITLE = "学易车-";
     String SHARED_TEXT = "陪伴您的汽车人生，改变是为了更好的陪伴";
+
+    String QiNiu = "http://xychead.xueyiche.vip/";
 }
