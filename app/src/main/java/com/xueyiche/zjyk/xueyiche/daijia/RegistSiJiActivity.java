@@ -153,6 +153,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        tvTitle.setText("司机报名");
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
     }
     /**
