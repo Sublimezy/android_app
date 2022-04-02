@@ -23,40 +23,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.geocode.GeoCodeResult;
-import com.baidu.mapapi.search.geocode.GeoCoder;
-import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
-import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
-import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
-import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaiJiaoActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.MuDiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.ConstantsBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.DaiJiaDriverLoactionBean;
@@ -84,16 +64,8 @@ import java.util.List;
  * Created by Administrator on 2019/9/11.
  */
 public class DaiJiaFragment extends BaseFragment implements View.OnClickListener {
-    private MapView mMapView;
-    private BaiduMap mBaiduMap;
     private String user_id;
-    private LocationClient mLocClient;
-    public MyLocationListenner myListener = new MyLocationListenner();
-    private int mCurrentDirection = 0;
-    private double mCurrentLat = 0.0;
-    private double mCurrentLon = 0.0;
     // UI相关
-    boolean isFirstLoc = true; // 是否首次定位
     private ImageView iv_anquan;
     private TextView tv_qidian, tv_mudi;
     private RadioButton rb_richang, rb_yuyue, rb_daijiao;
@@ -120,7 +92,6 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
     private String area_id;
     private String appointed_time = "";
     private String yc_yy = "0";
-    private static final String CUSTOM_FILE_NAME_WHITE = "custom_map_config_white.json";
     private String dj_xy;
     private View daijiao_line;
     private String daijiao_phone="";
@@ -128,10 +99,6 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
 
 
     private void initView(View view) {
-        mMapView = (MapView) view.findViewById(R.id.map_car);
-        String customStyleFilePath = getCustomStyleFilePath(getActivity(), CUSTOM_FILE_NAME_WHITE);
-        mMapView.setMapCustomStylePath(customStyleFilePath);
-        mMapView.setMapCustomStyleEnable(true);
         iv_anquan = (ImageView) view.findViewById(R.id.iv_anquan);
         iv_user = (ImageView) view.findViewById(R.id.iv_user);
         rb_richang = view.findViewById(R.id.rb_richang);
@@ -182,80 +149,12 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
         tv_money.setOnClickListener(this);
     }
 
-    private String getCustomStyleFilePath(Context context, String customStyleFileName) {
-        FileOutputStream outputStream = null;
-        InputStream inputStream = null;
-        String parentPath = null;
 
-        try {
-            inputStream = context.getAssets().open("customConfigdir/" + customStyleFileName);
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-
-            parentPath = context.getFilesDir().getAbsolutePath();
-            File customStyleFile = new File(parentPath + "/" + customStyleFileName);
-            if (customStyleFile.exists()) {
-                customStyleFile.delete();
-            }
-            customStyleFile.createNewFile();
-
-            outputStream = new FileOutputStream(customStyleFile);
-            outputStream.write(buffer);
-        } catch (IOException e) {
-            Log.e("CustomMapDemo", "Copy custom style file failed", e);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            } catch (IOException e) {
-                Log.e("CustomMapDemo", "Close stream failed", e);
-                return null;
-            }
-        }
-
-        return parentPath + "/" + customStyleFileName;
-    }
-
-    private void initGeoCoder(final LatLng latLng) {
-        GeoCoder geoCoder = GeoCoder.newInstance();
-        geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
-            @Override
-            public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
-
-            }
-
-            @Override
-            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
-                List<PoiInfo> poiList = reverseGeoCodeResult.getPoiList();
-                if (poiList != null && poiList.size() > 0) {
-                    PoiInfo poiInfo = poiList.get(0);
-                    if (poiInfo != null) {
-                        if (!"天安门".equals(poiInfo.name)) {
-                            jie_address = poiInfo.address;
-                            jie_name = poiInfo.name;
-                            LatLng location = poiInfo.getLocation();
-                            jie_latitude = location.latitude + "";
-                            jie_longitude = location.longitude + "";
-                            tv_qidian_yuyue.setText(jie_name);
-                            tv_qidian.setText(jie_name);
-                            tv_qidian_daijiao.setText(jie_name);
-                        }
-                    }
-                }
-            }
-        });
-        geoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(latLng).pageNum(0).pageSize(100));
-    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         //选择地址
-        Intent intent1 = new Intent(App.context, MuDiActivity.class);
         Intent intent2 = new Intent(App.context, DaiJiaoActivity.class);
         String mudi = tv_mudi.getText().toString();
         switch (v.getId()) {
@@ -317,39 +216,35 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
                 ll_daijiao.setVisibility(View.VISIBLE);
                 break;
             case R.id.iv_user:
-                //回到自己得位置
-                LatLng latLng = new LatLng(mCurrentLat, mCurrentLon);
-                MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-                mBaiduMap.animateMapStatus(mapStatusUpdate, 1000);
                 break;
             case R.id.tv_qidian:
                 //起点位置
-                intent1.putExtra("type", "qi");
-                startActivityForResult(intent1, 111);
+//                intent1.putExtra("type", "qi");
+//                startActivityForResult(intent1, 111);
                 break;
             case R.id.tv_qidian_yuyue:
                 //起点位置
-                intent1.putExtra("type", "qi");
-                startActivityForResult(intent1, 111);
+//                intent1.putExtra("type", "qi");
+//                startActivityForResult(intent1, 111);
                 break;
             case R.id.tv_qidian_daijiao:
                 //起点位置
-                intent1.putExtra("type", "qi");
-                startActivityForResult(intent1, 111);
+//                intent1.putExtra("type", "qi");
+//                startActivityForResult(intent1, 111);
                 break;
             case R.id.tv_mudi:
                 //目的地位置
-                intent1.putExtra("type", "zhong");
-                startActivityForResult(intent1, 222);
+//                intent1.putExtra("type", "zhong");
+//                startActivityForResult(intent1, 222);
                 break;
             case R.id.tv_mudi_daijiao:
                 //目的地位置
-                intent1.putExtra("type", "zhong");
-                startActivityForResult(intent1, 222);
+//                intent1.putExtra("type", "zhong");
+//                startActivityForResult(intent1, 222);
                 break;
             case R.id.tv_mudi_yuyue:
-                intent1.putExtra("type", "zhong");
-                startActivityForResult(intent1, 222);
+//                intent1.putExtra("type", "zhong");
+//                startActivityForResult(intent1, 222);
                 break;
         }
     }
@@ -494,8 +389,6 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
                         tv_qidian.setText(jie_name);
                         tv_qidian_yuyue.setText(jie_name);
                         LatLng latLng = new LatLng(Double.parseDouble(jie_latitude), Double.parseDouble(jie_longitude));
-                        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-                        mBaiduMap.animateMapStatus(mapStatusUpdate, 1000);
                     }
 
                     break;
@@ -569,64 +462,11 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
     private void initData() {
         area_id = PrefUtils.getString(getActivity(), "area_id", "");
         getPingTaiConstants();
-        // 地图初始化
-        mBaiduMap = mMapView.getMap();
-        //地图上比例尺
-        mMapView.showScaleControl(false);
-        // 隐藏缩放控件
-        mMapView.showZoomControls(false);
-        //隐藏百度logo
-        mMapView.removeViewAt(1);
         user_id = PrefUtils.getString(App.context, "user_id", "");
         dj_xy = PrefUtils.getString(App.context, "dj_xy", "0");
         if ("0".equals(dj_xy)) {
             showXY();
         }
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(14.0f));
-        MapStatus.Builder builder1 = new MapStatus.Builder();
-        builder1.zoom(14.0f);
-        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
-        // 修改为自定义marker
-        //    mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.qi_pic);
-
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocClient = new LocationClient(getActivity());
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
-        addMarker();
-        UiSettings settings = mBaiduMap.getUiSettings();
-        settings.setOverlookingGesturesEnabled(false);//屏蔽双指下拉时变成3D地图
-        settings.setRotateGesturesEnabled(false);   //屏蔽旋转
-        mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
-            //地图状态开始改变。
-            public void onMapStatusChangeStart(MapStatus status) {
-
-            }
-
-            @Override
-            public void onMapStatusChangeStart(MapStatus mapStatus, int i) {
-
-            }
-
-            //地图状态改变结束
-            public void onMapStatusChangeFinish(MapStatus status) {
-                //改变结束之后，获取地图可视范围的中心点坐标
-                LatLng latLng = status.target;
-                //拿到经纬度之后，就可以反地理编码获取地址信息了
-                initGeoCoder(latLng);
-            }
-
-            //地图状态变化中
-            public void onMapStatusChange(MapStatus status) {
-            }
-        });
     }
 
     private void showXY() {
@@ -676,60 +516,6 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
         dialog01.show();
     }
 
-    private void addMarker() {
-        OkHttpUtils.post().url(AppUrl.DaiJia_location)
-                .addParams("device_id", LoginUtils.getId(getActivity()))
-                .addParams("user_id", user_id)
-                .addParams("area_id", area_id)
-                .build().execute(new Callback() {
-            @Override
-            public Object parseNetworkResponse(Response response) throws IOException {
-                String string = response.body().string();
-                if (!TextUtils.isEmpty(string)) {
-                    DaiJiaDriverLoactionBean daiJiaDriverLoactionBean = JsonUtil.parseJsonToBean(string, DaiJiaDriverLoactionBean.class);
-                    if (daiJiaDriverLoactionBean != null) {
-                        int code = daiJiaDriverLoactionBean.getCode();
-                        if (200 == code) {
-                            List<DaiJiaDriverLoactionBean.ContentBean> content = daiJiaDriverLoactionBean.getContent();
-                            mBaiduMap.clear();//先清除一下图层
-                            LatLng latLng = null;
-                            Marker marker = null;
-                            OverlayOptions options = null;
-                            if (content != null & content.size() > 0)
-                                for (DaiJiaDriverLoactionBean.ContentBean contentBean : content) {
-                                    String latitude = contentBean.getLatitude();
-                                    String longitude = contentBean.getLongitude();
-                                    if (!TextUtils.isEmpty(latitude) && !TextUtils.isEmpty(longitude)) {
-                                        double la = Double.parseDouble(latitude);
-                                        double lo = Double.parseDouble(longitude);
-                                        latLng = new LatLng(la, lo);
-                                        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.daijia_pic);
-                                        options = new MarkerOptions().position(latLng).icon(bitmap).zIndex(14);
-                                        marker = (Marker) mBaiduMap.addOverlay(options);//将覆盖物添加到地图上
-                                        Bundle bundle = new Bundle();//创建一个Bundle对象将每个mark具体信息传过去，当点击该覆盖物图标的时候就会显示该覆盖物的详细信息
-                                        bundle.putSerializable("baidumapjson", contentBean);
-                                        marker.setExtraInfo(bundle);
-                                    }
-                                }
-                            MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);//通过这个经纬度对象，地图就可以定位到该点
-                            mBaiduMap.animateMapStatus(msu);
-                        }
-                    }
-                }
-                return string;
-            }
-
-            @Override
-            public void onError(Request request, Exception e) {
-
-            }
-
-            @Override
-            public void onResponse(Object response) {
-
-            }
-        });
-    }
 
 
     public void showAnQuan() {
@@ -854,35 +640,4 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
     }
 
 
-    /**
-     * 定位SDK监听函数
-     */
-    public class MyLocationListenner implements BDLocationListener {
-
-        private MyLocationData locData;
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            // map view 销毁后不在处理新接收的位置
-            if (location == null || mMapView == null) {
-                return;
-            }
-            mCurrentLat = location.getLatitude();
-            mCurrentLon = location.getLongitude();
-            locData = new MyLocationData.Builder()
-                    .accuracy(0)
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(mCurrentDirection).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            mBaiduMap.setMyLocationData(locData);
-            if (isFirstLoc) {
-                isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(),
-                        location.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(15.0f);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            }
-        }
-    }
 }

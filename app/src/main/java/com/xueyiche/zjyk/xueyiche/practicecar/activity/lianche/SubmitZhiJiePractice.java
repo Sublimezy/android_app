@@ -24,7 +24,6 @@ import com.xueyiche.zjyk.xueyiche.homepage.view.LinkagePicker;
 import com.xueyiche.zjyk.xueyiche.homepage.view.OptionPicker;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.MClearEditText;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.POIDressActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.CarlevelBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.JinJiPhoneBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderPostBean;
@@ -34,7 +33,6 @@ import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.GregorianLunarCalendarView;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
-import com.xueyiche.zjyk.xueyiche.utils.LogUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
@@ -229,17 +227,17 @@ public class SubmitZhiJiePractice extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.tv_jie_location:
                 //接送地址
-                Intent intent2 = new Intent(App.context, POIDressActivity.class);
-                intent2.putExtra("jiesong_type", "1");
-                intent2.putExtra("cartype", "1");
-                startActivityForResult(intent2, 1);
+//                Intent intent2 = new Intent(App.context, POIDressActivity.class);
+//                intent2.putExtra("jiesong_type", "1");
+//                intent2.putExtra("cartype", "1");
+//                startActivityForResult(intent2, 1);
                 break;
             case R.id.tv_song_location:
                 //接送地址
-                Intent intent3 = new Intent(App.context, POIDressActivity.class);
-                intent3.putExtra("jiesong_type", "2");
-                intent3.putExtra("cartype", "1");
-                startActivityForResult(intent3, 3);
+//                Intent intent3 = new Intent(App.context, POIDressActivity.class);
+//                intent3.putExtra("jiesong_type", "2");
+//                intent3.putExtra("cartype", "1");
+//                startActivityForResult(intent3, 3);
                 break;
             case R.id.rl_getcard_time:
                 //下证日期

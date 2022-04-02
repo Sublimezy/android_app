@@ -5,37 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:srlEnableAutoLoadMore="false"
-        app:srlPrimaryColor="@color/color_white">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="@color/colorOrange"
-            app:srlDrawableProgress="@drawable/animation_loading_frame"
-            app:srlPrimaryColor="@color/color_white" />
+            android:layout_height="wrap_content" />
 
-        <ListView
-            android:id="@+id/lv_shequ"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:divider="#00000000"
-            android:layout_marginRight="@dimen/all_16dp"
-            android:layout_marginLeft="@dimen/all_16dp"
-            android:listSelector="@android:color/transparent"
+            android:overScrollMode="never"
             android:scrollbars="none" />
 
-
-        <com.scwang.smartrefresh.header.StoreHouseHeader
+        <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:shhEnableFadeAnimation="true"
-            app:shhText="XueYiChe" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </LinearLayout>

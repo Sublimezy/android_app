@@ -20,26 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.Overlay;
-import com.baidu.mapapi.map.TextureMapView;
-import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.LatLng;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
@@ -53,7 +35,6 @@ import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderPracticeOkBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.submit.bean.DeleteIndentBean;
 import com.xueyiche.zjyk.xueyiche.utils.AES;
-import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
@@ -84,23 +65,17 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
     private TextView tv_login_back, tv_date, tv_drivers_name, tv_drivers_type, tv_cartype;
     private LinearLayout ll_toushu, ll_type,ll_bottom;
     private ScrollLayout mScrollLayout;
-    private static final String CUSTOM_FILE_NAME_WHITE = "custom_map_config_white.json";
-    // 定位相关
-    LocationClient mLocClient;
-    public MyLocationListenner myListener = new MyLocationListenner();
-    private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
     private SensorManager mSensorManager;
     private Double lastX = 0.0;
-    private MyLocationData locData;
+
     private int mCurrentDirection = 0;
     private double mCurrentLat = 0.0;
     private double mCurrentLon = 0.0;
     // UI相关
     boolean isFirstLoc = true; // 是否首次定位
 
-    TextureMapView mMapView;
-    BaiduMap mBaiduMap;
+
     //开始时间
     private TextView tv_start_time;
     //共几小时
@@ -176,35 +151,7 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
         return R.layout.indent_details_order_practice;
     }
 
-    /**
-     * 定位SDK监听函数
-     */
-    public class MyLocationListenner implements BDLocationListener {
 
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            // map view 销毁后不在处理新接收的位置
-            if (location == null || mMapView == null) {
-                return;
-            }
-            mCurrentLat = location.getLatitude();
-            mCurrentLon = location.getLongitude();
-            locData = new MyLocationData.Builder()
-                    .accuracy(0)
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(mCurrentDirection).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            mBaiduMap.setMyLocationData(locData);
-            if (isFirstLoc) {
-                isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(),
-                        location.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(14.0f);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            }
-        }
-    }
 
     @Override
     protected void initView() {
@@ -214,7 +161,7 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
         ll_toushu = view.findViewById(R.id.indent_details_include).findViewById(R.id.ll_toushu);
         mScrollLayout = view.findViewById(R.id.scroll_down_layout);
         ll_type = view.findViewById(R.id.ll_type);
-        mMapView = view.findViewById(R.id.map_car);
+
         tv_start_time = (TextView) view.findViewById(R.id.tv_start_time);
         tv_total_time = (TextView) view.findViewById(R.id.tv_total_time);
         tv_date = (TextView) view.findViewById(R.id.tv_date);
@@ -314,11 +261,6 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
                                                 final String hand_auto = content.getHand_auto();
                                                 String latitude_driver = content.getLatitude_driver();
                                                 String longitude_driver = content.getLongitude_driver();
-                                                LatLng qi_latLng = new LatLng(Double.parseDouble(latitude_driver), Double.parseDouble(longitude_driver));
-                                                Overlay overlay1 = mBaiduMap.addOverlay(new MarkerOptions().position(qi_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.iv_practice_driver_logo)));
-                                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                                                builder.include(((Marker) overlay1).getPosition());
-                                                mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
                                                 driver_phone = content.getDriver_phone();
                                                 //1：教练点击开始；2：结束，默认：0
                                                 track_status = content.getTrack_status();
@@ -568,12 +510,6 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
         double x = sensorEvent.values[SensorManager.DATA_X];
         if (Math.abs(x - lastX) > 1.0) {
             mCurrentDirection = (int) x;
-            locData = new MyLocationData.Builder()
-                    .accuracy(0)
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(mCurrentDirection).latitude(mCurrentLat)
-                    .longitude(mCurrentLon).build();
-            mBaiduMap.setMyLocationData(locData);
         }
         lastX = x;
     }
@@ -592,25 +528,12 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
 
     @Override
     public void onPause() {
-        mMapView.onPause();
-        // 退出时销毁定位
-        mLocClient.stop();
-        // 关闭定位图层
-        MapView.setMapCustomEnable(false);
-        mBaiduMap.setMyLocationEnabled(false);
         super.onPause();
     }
 
 
     @Override
     public void onDestroy() {
-        // 退出时销毁定位
-        mLocClient.stop();
-        // 关闭定位图层
-        MapView.setMapCustomEnable(false);
-        mBaiduMap.setMyLocationEnabled(false);
-        mMapView.onDestroy();
-        super.onDestroy();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
@@ -656,46 +579,8 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
 
     @Override
     protected void initData() {
-        String customStyleFilePath = getCustomStyleFilePath(this, CUSTOM_FILE_NAME_WHITE);
-        mMapView.setMapCustomStylePath(customStyleFilePath);
-        mMapView.setMapCustomStyleEnable(true);
-        // 地图初始化
-        mBaiduMap = mMapView.getMap();
-        //地图上比例尺
-        mMapView.showScaleControl(false);
-        // 隐藏缩放控件
-        mMapView.showZoomControls(false);
-        //隐藏百度logo
-        mMapView.removeViewAt(1);
-        UiSettings settings = mBaiduMap.getUiSettings();
-        settings.setOverlookingGesturesEnabled(false);//屏蔽双指下拉时变成3D地图
-        settings.setRotateGesturesEnabled(false);   //屏蔽旋转
         tv_login_back.setText("订单详情");
         ll_toushu.setVisibility(View.VISIBLE);
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
-        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                mCurrentMode, true, mCurrentMarker));
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(14.0f));
-        MapStatus.Builder builder1 = new MapStatus.Builder();
-        builder1.zoom(14.0f);
-        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker,
-                accuracyCircleFillColor, accuracyCircleStrokeColor));
-        // 开启定位图层
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
-        BaiduLocation baidu = new BaiduLocation();
-        baidu.baiduLocation();
         Intent intent = getIntent();
         order_number = intent.getStringExtra("order_number");
         timer1 = new Timer();
@@ -706,12 +591,6 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
     @Override
     protected void onResume() {
         super.onResume();
-        LatLng latLng = new LatLng(mCurrentLat, mCurrentLon);
-        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-        mBaiduMap.animateMapStatus(mapStatusUpdate, 1000);
-        //为系统的方向传感器注册监听器
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-                SensorManager.SENSOR_DELAY_UI);
 
     }
 
@@ -752,8 +631,6 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
         }
     }
     private void userEndPracticing() {
-        BaiduLocation baiduLocation = new BaiduLocation();
-        baiduLocation.baiduLocation();
         String x = PrefUtils.getString(App.context, "x", "");
         String y = PrefUtils.getString(App.context, "y", "");
         if (XueYiCheUtils.IsHaveInternet(App.context)) {

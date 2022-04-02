@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,36 +26,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.Overlay;
-import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.search.route.BikingRouteResult;
-import com.baidu.mapapi.search.route.DrivingRouteLine;
-import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
-import com.baidu.mapapi.search.route.DrivingRouteResult;
-import com.baidu.mapapi.search.route.IndoorRouteResult;
-import com.baidu.mapapi.search.route.MassTransitRouteResult;
-import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
-import com.baidu.mapapi.search.route.PlanNode;
-import com.baidu.mapapi.search.route.RoutePlanSearch;
-import com.baidu.mapapi.search.route.TransitRouteResult;
-import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -65,11 +34,9 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.GoDaiJiaBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.LiJIBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.YuGuBean;
-import com.xueyiche.zjyk.xueyiche.daijia.view.DrivingRouteOverlay;
 import com.xueyiche.zjyk.xueyiche.daijia.view.YuYueLinkagePicker;
 import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
 import com.xueyiche.zjyk.xueyiche.pay.bean.ZhiFuBaoBean;
@@ -88,10 +55,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -102,18 +67,9 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
 
     private TextView tv_login_back;
     private ImageView ll_exam_back;
-    private MapView mMapView;
-    private BaiduMap mBaiduMap;
     private String user_id;
     PopupWindow pop;
     LinearLayout ll_popup;
-    private SensorManager mSensorManager;
-    private MyLocationConfiguration.LocationMode mCurrentMode;
-    private BitmapDescriptor mCurrentMarker;
-    private LocationClient mLocClient;
-    public MyLocationListenner myListener = new MyLocationListenner();
-    private static final int accuracyCircleFillColor = 0xAAFFFF88;
-    private static final int accuracyCircleStrokeColor = 0xAA00FF00;
     private int mCurrentDirection = 0;
     private double mCurrentLat = 0.0;
     private double mCurrentLon = 0.0;
@@ -143,7 +99,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
     private TextView tv_money_yuyue;
     private TextView tv_money, tv_money_daijiao;
     private String area_id;
-    private RoutePlanSearch mSearch;
     private String order_distance = "";
     private String appointed_time = "";
     private String over_distance = "";
@@ -178,10 +133,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
         tv_login_back = (TextView) view.findViewById(R.id.title).findViewById(R.id.tv_title);
         tv_login_back.setText("代驾");
         ll_exam_back = view.findViewById(R.id.title).findViewById(R.id.iv_login_back);
-        mMapView = (MapView) view.findViewById(R.id.map_car);
-        String customStyleFilePath = getCustomStyleFilePath(this, CUSTOM_FILE_NAME_WHITE);
-        mMapView.setMapCustomStylePath(customStyleFilePath);
-        mMapView.setMapCustomStyleEnable(true);
         iv_anquan = (ImageView) view.findViewById(R.id.iv_anquan);
         iv_user = (ImageView) view.findViewById(R.id.iv_user);
         rb_richang = view.findViewById(R.id.rb_richang);
@@ -248,72 +199,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
         rl_beizhu.setOnClickListener(this);
         tv_money.setOnClickListener(this);
         tv_money_daijiao.setOnClickListener(this);
-        mSearch = RoutePlanSearch.newInstance();
-        OnGetRoutePlanResultListener listener = new OnGetRoutePlanResultListener() {
-            @Override
-            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
-
-            }
-
-            @Override
-            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
-
-            }
-
-            @Override
-            public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
-
-            }
-
-            @Override
-            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
-                //创建DrivingRouteOverlay实例
-                DrivingRouteOverlay overlay = new DrivingRouteOverlay(mBaiduMap);
-                if (drivingRouteResult != null) {
-                    List<DrivingRouteLine> routeLines = drivingRouteResult.getRouteLines();
-                    if (routeLines != null && routeLines.size() > 0) {
-                        //获取路径规划数据,(以返回的第一条路线为例）
-                        //为DrivingRouteOverlay实例设置数据
-                        DrivingRouteLine drivingRouteLine = routeLines.get(0);
-                        overlay.setData(drivingRouteLine);
-                        //在地图上绘制DrivingRouteOverlay
-                        //两点之间的公里数 单位 米
-                        String distance = drivingRouteLine.getDistance() + "";
-                        Log.e("distance", distance);
-                        if (!TextUtils.isEmpty(distance)) {
-                            BigDecimal bigDecimal1 = new BigDecimal(distance);
-                            BigDecimal bigDecimal2 = new BigDecimal("" + 1000);
-                            order_distance = bigDecimal1.divide(bigDecimal2).setScale(1, BigDecimal.ROUND_HALF_UP) + "";
-                        }
-                        //分钟
-                        int duration = drivingRouteLine.getDuration();
-                        int[] aa = new int[]{10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000, 2000000};
-                        int[] bb = new int[]{20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3};
-                        int level = 5;
-                        for (int i = 0; i < aa.length; i++) {
-                            if (drivingRouteLine.getDistance() > aa[i] && aa[i + 1] > drivingRouteLine.getDistance()) {
-                                level = i - 1;
-                            }
-                        }
-                        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(bb[level > 0 ? level : 0]).build()));
-                        overlay.addToMap();
-                        getMoney();
-                    }
-                }
-            }
-
-            @Override
-            public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
-
-            }
-
-            @Override
-            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
-
-            }
-        };
-        mSearch.setOnGetRoutePlanResultListener(listener);
-
     }
 
     @Override
@@ -585,10 +470,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
                 ll_richang.setVisibility(View.GONE);
                 break;
             case R.id.iv_user:
-                //回到自己得位置
-                LatLng latLng = new LatLng(mCurrentLat, mCurrentLon);
-                MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-                mBaiduMap.animateMapStatus(mapStatusUpdate, 1000);
                 break;
         }
     }
@@ -1155,37 +1036,6 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
         tv_mudi_yuyue.setText(song_name);
         tv_mudi_daijiao.setText(song_name);
 
-        // 地图初始化
-        mBaiduMap = mMapView.getMap();
-        UiSettings settings = mBaiduMap.getUiSettings();
-        settings.setOverlookingGesturesEnabled(false);//屏蔽双指下拉时变成3D地图
-        settings.setRotateGesturesEnabled(false);   //屏蔽旋转
-        //地图上比例尺
-        mMapView.showScaleControl(false);
-        // 隐藏缩放控件
-        mMapView.showZoomControls(false);
-        //隐藏百度logo
-        mMapView.removeViewAt(1);
-
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
-        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                mCurrentMode, true, mCurrentMarker));
-        MapStatus.Builder builder1 = new MapStatus.Builder();
-        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker, accuracyCircleFillColor, accuracyCircleStrokeColor));
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
-        setXingCheng();
     }
 
     public void showAnQuan() {
@@ -1332,49 +1182,5 @@ public class XingChengActivity extends BaseActivity implements View.OnClickListe
                 });
     }
 
-    public void setXingCheng() {
-        LatLng qi_latLng = new LatLng(Double.parseDouble(jie_latitude), Double.parseDouble(jie_longitude));
-        LatLng zhong_latLng = new LatLng(Double.parseDouble(song_latitude), Double.parseDouble(song_longitude));
-        Overlay overlay1 = mBaiduMap.addOverlay(new MarkerOptions().position(qi_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.qi_pic)));
-        Overlay overlay2 = mBaiduMap.addOverlay(new MarkerOptions().position(zhong_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.zhong_pic)));
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(((Marker) overlay1).getPosition());
-        builder.include(((Marker) overlay2).getPosition());
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
-        PlanNode stNode = PlanNode.withLocation(qi_latLng);
-        PlanNode enNode = PlanNode.withLocation(zhong_latLng);
-        mSearch.drivingSearch((new DrivingRoutePlanOption())
-                .from(stNode)
-                .to(enNode));
-    }
 
-
-    /**
-     * 定位SDK监听函数
-     */
-    public class MyLocationListenner implements BDLocationListener {
-
-        private MyLocationData locData;
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            // map view 销毁后不在处理新接收的位置
-            if (location == null || mMapView == null) {
-                return;
-            }
-            mCurrentLat = location.getLatitude();
-            mCurrentLon = location.getLongitude();
-            locData = new MyLocationData.Builder()
-                    .accuracy(0)
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(mCurrentDirection).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            mBaiduMap.setMyLocationData(locData);
-            if (isFirstLoc) {
-                isFirstLoc = false;
-                MapStatus.Builder builder = new MapStatus.Builder();
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            }
-        }
-    }
 }

@@ -1,12 +1,10 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,30 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.InfoWindow;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.Overlay;
-import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.search.route.BikingRouteResult;
-import com.baidu.mapapi.search.route.DrivingRouteLine;
-import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
-import com.baidu.mapapi.search.route.DrivingRouteResult;
-import com.baidu.mapapi.search.route.IndoorRouteResult;
-import com.baidu.mapapi.search.route.MassTransitRouteResult;
-import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
-import com.baidu.mapapi.search.route.PlanNode;
-import com.baidu.mapapi.search.route.RoutePlanSearch;
-import com.baidu.mapapi.search.route.TransitRouteResult;
-import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
@@ -52,12 +26,10 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.OrderInfoBean;
-import com.xueyiche.zjyk.xueyiche.daijia.view.DrivingRouteOverlay;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.JinjiPhoneActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.AES;
-import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
@@ -65,25 +37,19 @@ import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by Administrator on 2019/9/23.
  */
 public class EndActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_back, iv_anquan, iv_call, now_location;
-    private MapView mMapView;
-    private BaiduMap mBaiduMap;
     private TextView tv_name;
     private TextView tv_age;
     private TextView tv_gonghao;
     private CircleImageView ci_head;
     private TextView tv_pingjia;
     private RatingBar rb_star;
-    private RoutePlanSearch mSearch;
     private String user_id;
     private String order_number;
     private TextView tv_act_distance;
@@ -106,10 +72,6 @@ public class EndActivity extends BaseActivity implements View.OnClickListener {
     protected void initView() {
 
         iv_back = view.findViewById(R.id.iv_back);
-        mMapView = (MapView) view.findViewById(R.id.map_wait);
-        String customStyleFilePath = getCustomStyleFilePath(this, CUSTOM_FILE_NAME_WHITE);
-        mMapView.setMapCustomStylePath(customStyleFilePath);
-        mMapView.setMapCustomStyleEnable(true);
         //合计
         tv_all_money = (TextView) view.findViewById(R.id.tv_all_money);
         //超出等候费
@@ -134,43 +96,6 @@ public class EndActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    private String getCustomStyleFilePath(Context context, String customStyleFileName) {
-        FileOutputStream outputStream = null;
-        InputStream inputStream = null;
-        String parentPath = null;
-
-        try {
-            inputStream = context.getAssets().open("customConfigdir/" + customStyleFileName);
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-
-            parentPath = context.getFilesDir().getAbsolutePath();
-            File customStyleFile = new File(parentPath + "/" + customStyleFileName);
-            if (customStyleFile.exists()) {
-                customStyleFile.delete();
-            }
-            customStyleFile.createNewFile();
-
-            outputStream = new FileOutputStream(customStyleFile);
-            outputStream.write(buffer);
-        } catch (IOException e) {
-            Log.e("CustomMapDemo", "Copy custom style file failed", e);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            } catch (IOException e) {
-                Log.e("CustomMapDemo", "Close stream failed", e);
-                return null;
-            }
-        }
-
-        return parentPath + "/" + customStyleFileName;
-    }
 
     @Override
     protected void initListener() {
@@ -186,77 +111,8 @@ public class EndActivity extends BaseActivity implements View.OnClickListener {
         user_id = PrefUtils.getString(App.context, "user_id", "");
         order_number = getIntent().getStringExtra("order_number");
         getOrder();
-        // 地图初始化
-        mBaiduMap = mMapView.getMap();
-        //地图上比例尺
-        mMapView.showScaleControl(false);
-        // 隐藏缩放控件
-        mMapView.showZoomControls(false);
-        //隐藏百度logo
-        mMapView.removeViewAt(1);
-        UiSettings settings = mBaiduMap.getUiSettings();
-        settings.setOverlookingGesturesEnabled(false);//屏蔽双指下拉时变成3D地图
-        settings.setRotateGesturesEnabled(false);   //屏蔽旋转
-        mSearch = RoutePlanSearch.newInstance();
-
-        OnGetRoutePlanResultListener listener = new OnGetRoutePlanResultListener() {
-
-            @Override
-            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
-
-            }
-
-            @Override
-            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
-
-            }
-
-            @Override
-            public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
-
-            }
-
-            @Override
-            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
-                //创建DrivingRouteOverlay实例
-                DrivingRouteOverlay overlay = new DrivingRouteOverlay(mBaiduMap);
-                if (drivingRouteResult.getRouteLines().size() > 0) {
-                    //获取路径规划数据,(以返回的第一条路线为例）
-                    //为DrivingRouteOverlay实例设置数据
-                    DrivingRouteLine drivingRouteLine = drivingRouteResult.getRouteLines().get(0);
-                    overlay.setData(drivingRouteLine);
-                    //在地图上绘制DrivingRouteOverlay
-                    //两点之间的公里数 单位 米
-                    int distance = drivingRouteLine.getDistance();
-                    //时间
-                    int[] aa = new int[]{10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000, 2000000};
-                    int[] bb = new int[]{20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3};
-                    int level = 5;
-                    for (int i = 0; i < aa.length; i++) {
-                        if (distance > aa[i] && aa[i + 1] > distance) {
-                            level = i - 2;
-                        }
-                    }
-                    mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(bb[level > 0 ? level : 0]).build()));
-                    overlay.addToMap();
-                }
-            }
-
-            @Override
-            public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
-
-            }
-
-            @Override
-            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
-
-            }
-
-        };
-        mSearch.setOnGetRoutePlanResultListener(listener);
     }
 
-    private InfoWindow mInfoWindow;
 
     public void getOrder() {
         OkHttpUtils.post().url(AppUrl.Get_Order)
@@ -330,27 +186,6 @@ public class EndActivity extends BaseActivity implements View.OnClickListener {
 
                                         if (!TextUtils.isEmpty(down_latitude) && !TextUtils.isEmpty(down_longitude) && !TextUtils.isEmpty(on_latitude)
                                                 && !TextUtils.isEmpty(on_longitude)) {
-                                            LatLng qi_latLng = new LatLng(Double.parseDouble(on_latitude), Double.parseDouble(on_longitude));
-                                            LatLng zhong_latLng = new LatLng(Double.parseDouble(down_latitude), Double.parseDouble(down_longitude));
-                                            LatLng driver_latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                                            Overlay overlay1 = mBaiduMap.addOverlay(new MarkerOptions().position(qi_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.qi_pic)));
-                                            Overlay overlay2 = mBaiduMap.addOverlay(new MarkerOptions().position(zhong_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.zhong_pic)));
-                                            Overlay overlay3 = mBaiduMap.addOverlay(new MarkerOptions().position(driver_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.daijia_small_car)));
-                                            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                                            builder.include(((Marker) overlay1).getPosition());
-                                            builder.include(((Marker) overlay2).getPosition());
-                                            builder.include(((Marker) overlay3).getPosition());
-                                            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
-                                            PlanNode stNode = PlanNode.withLocation(qi_latLng);
-                                            PlanNode enNode = PlanNode.withLocation(zhong_latLng);
-                                            View viewTop = LayoutInflater.from(App.context).inflate(R.layout.jiedan_top_layout, null);
-                                            TextView tv_content = viewTop.findViewById(R.id.tv_content);
-                                            tv_content.setText("已到达目的地");
-                                            mInfoWindow = new InfoWindow(viewTop, driver_latLng, -50);
-                                            mBaiduMap.showInfoWindow(mInfoWindow);
-                                            mSearch.drivingSearch((new DrivingRoutePlanOption())
-                                                    .from(stNode)
-                                                    .to(enNode));
                                         }
                                     }
                                 });
@@ -380,13 +215,7 @@ public class EndActivity extends BaseActivity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.now_location:
-                 BaiduLocation baiduLocation = new BaiduLocation();
-                baiduLocation.baiduLocation();
-                String x = PrefUtils.getParameter("x");
-                String y = PrefUtils.getParameter("y");
-                LatLng latLng = new LatLng(Double.valueOf(y), Double.valueOf(x));
-                MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-                mBaiduMap.animateMapStatus(mapStatusUpdate, 1000);
+
                 break;
             case R.id.iv_call:
                 //打电话

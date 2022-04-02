@@ -5,22 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.os.Build;
-import androidx.appcompat.app.AlertDialog;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Request;
@@ -31,7 +22,6 @@ import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
-import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.bean.GuangGaoBean;
 import com.xueyiche.zjyk.xueyiche.constants.bean.GuangGaoHomeBean;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
@@ -44,7 +34,6 @@ import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.receive.LocationService;
 import com.xueyiche.zjyk.xueyiche.receive.UpLocationService;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
-import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
@@ -63,7 +52,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
-import me.jessyan.autosize.internal.CancelAdapt;
 
 /**
  * Created by Owner on 2016/9/13.
@@ -100,8 +88,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         int[] location = new int[2];
         mRG_menutab.getLocationOnScreen(location);
 
-        BaiduLocation baiduLocation = new BaiduLocation();
-        baiduLocation.baiduLocation();
         initData();
         getGuangGao();
         String szImei = App.szImei;
@@ -328,8 +314,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     private void updateLonLatUser() {
-        BaiduLocation baiduLocation = new BaiduLocation();
-        baiduLocation.baiduLocation();
         String latitude = PrefUtils.getParameter("y");
         String longitude = PrefUtils.getParameter("x");
         Map<String, String> params = new HashMap<>();

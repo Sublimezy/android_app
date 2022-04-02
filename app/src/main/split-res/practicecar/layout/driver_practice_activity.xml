@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:background="#F7F7F7"
         android:layout_height="match_parent">
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -103,7 +103,7 @@
             app:srlEnableAutoLoadMore="false"
             app:srlPrimaryColor="@color/color_white">
 
-            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            <com.scwang.smart.refresh.header.ClassicsHeader
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srlAccentColor="@color/colorOrange"
@@ -122,12 +122,11 @@
                 android:scrollbars="none" />
 
 
-            <com.scwang.smartrefresh.header.StoreHouseHeader
+            <com.scwang.smart.refresh.footer.ClassicsFooter
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:shhEnableFadeAnimation="true"
-                app:shhText="XueYiChe" />
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+              />
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
         <LinearLayout
             android:id="@+id/ll_youzheng_empty"

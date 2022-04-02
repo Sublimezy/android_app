@@ -25,9 +25,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -49,7 +49,6 @@ import com.xueyiche.zjyk.xueyiche.receive.NetBroadcastReceiver;
 import com.xueyiche.zjyk.xueyiche.submit.PracticeCarSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.submit.bean.DeleteIndentBean;
 import com.xueyiche.zjyk.xueyiche.utils.AES;
-import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LogUtil;
@@ -104,7 +103,6 @@ public class AllIndentFragment extends BaseFragment implements NetBroadcastRecei
     protected View setInitView() {
         View view = LayoutInflater.from(App.context).inflate(R.layout.all_indent, null);
         isPrepared = true;
-        lv_myindent = (ListView) view.findViewById(R.id.lv_myindent);
         ll_not_indent = (LinearLayout) view.findViewById(R.id.ll_not_indent);
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         notificationManager = (NotificationManager) App.context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -1321,8 +1319,7 @@ public class AllIndentFragment extends BaseFragment implements NetBroadcastRecei
 
     private void openMap(String latitude, String longitude, String shop_place_name) {
         if (XueYiCheUtils.IsHaveInternet(App.context)) {
-            BaiduLocation baidu = new BaiduLocation();
-            baidu.baiduLocation();
+
             String x = PrefUtils.getString(App.context, "x", "");
             String y = PrefUtils.getString(App.context, "y", "");
             showDialog(latitude, longitude, shop_place_name, x, y);

@@ -11,9 +11,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
@@ -62,7 +62,6 @@ public class NoBookShowPingJia extends BaseActivity implements View.OnClickListe
         tv_login_back = (TextView) view.findViewById(R.id.driver_pay_include).findViewById(R.id.tv_login_back);
         tv_login_back.setText("全部评价");
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
-        lv_pingjia_all = (ListView) view.findViewById(R.id.lv_pingjia_all);
     }
 
     @Override

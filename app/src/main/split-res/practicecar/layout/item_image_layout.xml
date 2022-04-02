@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView
+        android:id="@+id/ivCover"
+        android:layout_width="match_parent"
+        android:layout_height="208dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/lunbotu"
+        app:onlyDrawBorder="false"
+        android:layout_marginTop="@dimen/dp_15"
+        app:roundRadius="@dimen/dp_10"
+        app:shape="rectangle" />
+
+</LinearLayout>

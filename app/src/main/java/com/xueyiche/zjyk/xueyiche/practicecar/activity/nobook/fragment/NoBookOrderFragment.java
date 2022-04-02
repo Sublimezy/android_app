@@ -25,7 +25,6 @@ import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
 import com.xueyiche.zjyk.xueyiche.homepage.view.LinkagePicker;
 import com.xueyiche.zjyk.xueyiche.homepage.view.OptionPicker;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.POIDressActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.nobook.activity.NoBookPracticeCarYuYueSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.nobook.bean.WZTCBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.nobook.view.WZLinkagePicker;
@@ -270,17 +269,17 @@ public class NoBookOrderFragment extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.rl_jie_location:
                 //接送地址
-                Intent intent2 = new Intent(App.context, POIDressActivity.class);
-                intent2.putExtra("jiesong_type", "1");
-                intent2.putExtra("cartype", "1");
-                startActivityForResult(intent2, 1);
+//                Intent intent2 = new Intent(App.context, POIDressActivity.class);
+//                intent2.putExtra("jiesong_type", "1");
+//                intent2.putExtra("cartype", "1");
+//                startActivityForResult(intent2, 1);
                 break;
             case R.id.rl_song_location:
                 //接送地址
-                Intent intent3 = new Intent(App.context, POIDressActivity.class);
-                intent3.putExtra("jiesong_type", "2");
-                intent3.putExtra("cartype", "1");
-                startActivityForResult(intent3, 3);
+//                Intent intent3 = new Intent(App.context, POIDressActivity.class);
+//                intent3.putExtra("jiesong_type", "2");
+//                intent3.putExtra("cartype", "1");
+//                startActivityForResult(intent3, 3);
                 break;
             case R.id.rl_will_practice_content:
                 //意向练车内容

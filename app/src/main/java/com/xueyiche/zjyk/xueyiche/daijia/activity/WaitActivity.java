@@ -13,33 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.InfoWindow;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.Overlay;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.search.route.BikingRouteResult;
-import com.baidu.mapapi.search.route.DrivingRouteLine;
-import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
-import com.baidu.mapapi.search.route.DrivingRouteResult;
-import com.baidu.mapapi.search.route.IndoorRouteResult;
-import com.baidu.mapapi.search.route.MassTransitRouteResult;
-import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
-import com.baidu.mapapi.search.route.PlanNode;
-import com.baidu.mapapi.search.route.RoutePlanSearch;
-import com.baidu.mapapi.search.route.TransitRouteResult;
-import com.baidu.mapapi.search.route.WalkingRouteResult;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -48,10 +23,8 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.OrderInfoBean;
-import com.xueyiche.zjyk.xueyiche.daijia.view.DrivingRouteOverlay;
 import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
-import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LogUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
@@ -63,7 +36,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,9 +46,6 @@ import de.greenrobot.event.EventBus;
  */
 public class WaitActivity extends BaseActivity implements View.OnClickListener {
     private TextView tv_quxia;
-    private MapView mMapView;
-    private BaiduMap mBaiduMap;
-    private RoutePlanSearch mSearch;
     private String user_id;
     private String order_number;
     private long tiam_hm_c;
@@ -85,7 +54,6 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
     public static WaitActivity instance;
     private double mCurrentLat = 0.0;
     private double mCurrentLon = 0.0;
-    private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
     private ImageView iv_back;
     // UI相关
@@ -100,10 +68,7 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initView() {
         instance = this;
-        mMapView =view.findViewById(R.id.map_wait);
         String customStyleFilePath = getCustomStyleFilePath(this, CUSTOM_FILE_NAME_WHITE);
-        mMapView.setCustomMapStylePath(customStyleFilePath);
-        mMapView.setMapCustomEnable(true);
         tv_quxia = (TextView) view.findViewById(R.id.tv_quxia);
         iv_back = view.findViewById(R.id.iv_back);
     }
@@ -173,98 +138,20 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mMapView.onDestroy();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
 
     }
 
-    private InfoWindow mInfoWindow;
 
     @Override
     protected void initData() {
         user_id = PrefUtils.getString(App.context, "user_id", "");
         order_number = getIntent().getStringExtra("order_number");
 
-        // 地图初始化
-        mBaiduMap = mMapView.getMap();
-        UiSettings settings = mBaiduMap.getUiSettings();
-        settings.setOverlookingGesturesEnabled(false);//屏蔽双指下拉时变成3D地图
-        settings.setRotateGesturesEnabled(false);   //屏蔽旋转
-        //地图上比例尺
-        mMapView.showScaleControl(false);
-        // 隐藏缩放控件
-        mMapView.showZoomControls(false);
-
-        //隐藏百度logo
-        mMapView.removeViewAt(1);
-        mSearch = RoutePlanSearch.newInstance();
-        MapStatus.Builder builder1 = new MapStatus.Builder();
-        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
-        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                mCurrentMode, true, mCurrentMarker));
-
 
         getOrder();
-        OnGetRoutePlanResultListener listener = new OnGetRoutePlanResultListener() {
-            @Override
-            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
-
-            }
-
-            @Override
-            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
-
-            }
-
-            @Override
-            public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
-
-            }
-
-            @Override
-            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
-                //创建DrivingRouteOverlay实例
-                DrivingRouteOverlay overlay = new DrivingRouteOverlay(mBaiduMap);
-                List<DrivingRouteLine> routeLines = drivingRouteResult.getRouteLines();
-                if (routeLines != null) {
-                    if (routeLines.size() > 0) {
-                        //获取路径规划数据,(以返回的第一条路线为例）
-                        //为DrivingRouteOverlay实例设置数据
-                        overlay.setData(drivingRouteResult.getRouteLines().get(0));
-                        //在地图上绘制DrivingRouteOverlay
-                        //两点之间的公里数 单位 米
-                        int distance = drivingRouteResult.getRouteLines().get(0).getDistance();
-                        int[] aa = new int[]{10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000, 2000000};
-                        int[] bb = new int[]{20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3};
-                        int level = 5;
-                        for (int i = 0; i < aa.length; i++) {
-                            if (distance > aa[i] && aa[i + 1] > distance) {
-                                level = i-1;
-                            }
-                        }
-                        if (level>0) {
-                            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(bb[level > 0 ? level : 0]).build()));
-                        }
-                        overlay.addToMap();
-                    }
-                }
-            }
-
-            @Override
-            public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
-
-            }
-
-            @Override
-            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
-
-            }
-
-        };
-        mSearch.setOnGetRoutePlanResultListener(listener);
 
     }
 
@@ -283,11 +170,6 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onPause() {
-        mMapView.onPause();
-        // 退出时销毁定位
-        // 关闭定位图层
-        MapView.setMapCustomEnable(false);
-        mBaiduMap.setMyLocationEnabled(false);
         super.onPause();
     }
 
@@ -316,24 +198,14 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
                                         String on_latitude = content.getOn_latitude();
                                         String on_longitude = content.getOn_longitude();
                                         order_time1 = content.getOrder_time1();
-                                        LatLng latLng = null;
-                                        Marker marker = null;
-                                        OverlayOptions options = null;
-                                        BaiduLocation baidu = new BaiduLocation();
-                                        baidu.baiduLocation();
                                         String x = PrefUtils.getString(App.context, "x", "");
                                         String y = PrefUtils.getString(App.context, "y", "");
                                         double la = Double.parseDouble(y);
                                         double lo = Double.parseDouble(x);
-                                        latLng = new LatLng(la, lo);
                                         View inflate = LayoutInflater.from(App.context).inflate(R.layout.mark_view_layout, null);
                                         Bitmap bitmapFromView = getBitmapFromView(inflate);
                                         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmapFromView);
-                                        options = new MarkerOptions().position(latLng).icon(bitmapDescriptor);
-                                        marker = (Marker) mBaiduMap.addOverlay(options);//将覆盖物添加到地图上
-                                        LatLng latLng1 = marker.getPosition();
                                         View viewTop = LayoutInflater.from(App.context).inflate(R.layout.map_top_bg, null);
-                                        mInfoWindow = new InfoWindow(viewTop, latLng1, -200);
                                         // 显示 InfoWindow, 该接口会先隐藏其他已添加的InfoWindow, 再添加新的InfoWindow
 
                                         final TextView tv_time = (TextView) viewTop.findViewById(R.id.tv_time);
@@ -372,24 +244,7 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
                                             };
                                             mTimer2.schedule(mTask2, 0, 1000);
                                         }
-                                        mBaiduMap.showInfoWindow(mInfoWindow);
 
-                                        if (!TextUtils.isEmpty(down_longitude) && !TextUtils.isEmpty(down_latitude) && !TextUtils.isEmpty(on_latitude)
-                                                && !TextUtils.isEmpty(on_longitude)) {
-                                            LatLng qi_latLng = new LatLng(Double.parseDouble(on_latitude), Double.parseDouble(on_longitude));
-                                            LatLng zhong_latLng = new LatLng(Double.parseDouble(down_latitude), Double.parseDouble(down_longitude));
-                                            Overlay overlay1 = mBaiduMap.addOverlay(new MarkerOptions().position(qi_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.qi_pic)));
-                                            Overlay overlay2 = mBaiduMap.addOverlay(new MarkerOptions().position(zhong_latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.zhong_pic)));
-                                            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                                            builder.include(((Marker) overlay1).getPosition());
-                                            builder.include(((Marker) overlay2).getPosition());
-                                            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
-                                            PlanNode stNode = PlanNode.withLocation(qi_latLng);
-                                            PlanNode enNode = PlanNode.withLocation(zhong_latLng);
-                                            mSearch.drivingSearch((new DrivingRoutePlanOption())
-                                                    .from(stNode)
-                                                    .to(enNode));
-                                        }
                                     }
                                 });
                             }
@@ -423,10 +278,6 @@ public class WaitActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        mMapView.onResume();
-        LatLng latLng = new LatLng(mCurrentLat, mCurrentLon);
-        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-        mBaiduMap.animateMapStatus(mapStatusUpdate, 1000);
 
 
     }

@@ -8,22 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.Overlay;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
-import com.baidu.mapapi.search.route.PlanNode;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.ChangYongMuDiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.ChangYongListBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
@@ -33,9 +23,6 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by ZL on 2019/10/12.
@@ -184,15 +171,15 @@ public class ConstantlyAddressActivity extends BaseActivity implements View.OnCl
                 finish();
                 break;
             case R.id.ll_home:
-                Intent intent3 = new Intent(this, ChangYongMuDiActivity.class);
-                intent3.putExtra("type", "jia");
-                startActivityForResult(intent3, 333);
+//                Intent intent3 = new Intent(this, ChangYongMuDiActivity.class);
+//                intent3.putExtra("type", "jia");
+//                startActivityForResult(intent3, 333);
                 break;
             case R.id.ll_company:
                 //添加常用地址2
-                Intent intent4 = new Intent(this, ChangYongMuDiActivity.class);
-                intent4.putExtra("type", "gs");
-                startActivityForResult(intent4, 444);
+//                Intent intent4 = new Intent(this, ChangYongMuDiActivity.class);
+//                intent4.putExtra("type", "gs");
+//                startActivityForResult(intent4, 444);
                 break;
             case R.id.tv_wenxintishi:
                 if (!TextUtils.isEmpty(name_jia) &&!TextUtils.isEmpty(address_jia) && !TextUtils.isEmpty(latitude_jia)

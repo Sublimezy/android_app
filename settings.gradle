@@ -1,1 +1,1 @@
-include ':app', ':library', ':textlibrary', ':refresh-footer', ':refresh-layout', ':refresh-header',':ucrop', ':picture_library'
+include ':app', ':library', ':textlibrary'

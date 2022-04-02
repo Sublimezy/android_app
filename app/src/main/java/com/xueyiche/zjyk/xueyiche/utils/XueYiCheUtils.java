@@ -685,8 +685,7 @@ public class XueYiCheUtils {
     }
 
     private static void getLocation() {
-        BaiduLocation baidu = new BaiduLocation();
-        baidu.baiduLocation();
+
         String city = PrefUtils.getString(App.context, "city", "");
         PrefUtils.putString(App.context, "city", city);
     }
@@ -726,8 +725,7 @@ public class XueYiCheUtils {
         if (XueYiCheUtils.IsHaveInternet(App.context)) {
             PackageManager pm = App.context.getPackageManager();
             //有这个权限，做相应处理
-            BaiduLocation baidu = new BaiduLocation();
-            baidu.baiduLocation();
+
             String x = PrefUtils.getString(App.context, "x", "");
             String y = PrefUtils.getString(App.context, "y", "");
             showDialog(activity, latitude, longitude, shop_name, x, y, shop_place);

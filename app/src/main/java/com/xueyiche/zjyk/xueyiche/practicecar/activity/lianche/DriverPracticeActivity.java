@@ -19,13 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -41,9 +37,7 @@ import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.location.bean.KaiTongCityBean;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.YiJiCaiDanAdapter;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.ChoiceCardDetails;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.newactivity.PracticeCarMapFragment;
 import com.xueyiche.zjyk.xueyiche.receive.NetBroadcastReceiver;
-import com.xueyiche.zjyk.xueyiche.utils.BaiduLocation;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.NetUtil;
@@ -84,19 +78,9 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
     private String area_id;
     private RefreshLayout refreshLayout;
     private RadioGroup rg_practice;
-    LocationClient mLocClient;
-    public MyLocationListenner myListener = new MyLocationListenner();
     private double mCurrentLat;
     private double mCurrentLon;
 
-    public class MyLocationListenner implements BDLocationListener {
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            mCurrentLat = location.getLatitude();
-            mCurrentLon = location.getLongitude();
-        }
-    }
 
     @Override
     protected int initContentView() {
@@ -227,14 +211,6 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
         listShaiXuanBean.setCartype("0");
         listShaiXuanBean.setBiansutype("0");
         listShaiXuanBean.setPrice("0");
-        mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
         getCityFromNet();
         getDataFromNet();
     }
@@ -244,20 +220,17 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
     public void onDestroy() {
         super.onDestroy();
         //注销EventBus
-        mLocClient.stop();
         EventBus.getDefault().unregister(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mLocClient.stop();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mLocClient.stop();
     }
 
     public void onEvent(MyEvent event) {
@@ -537,8 +510,7 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
         String isFree = listShaiXuanBean.getIsFree();
         String handOrauto = listShaiXuanBean.getHandOrauto();
         String series_id = listShaiXuanBean.getSeries_id();
-        BaiduLocation baidu = new BaiduLocation();
-        baidu.baiduLocation();
+
         String x = PrefUtils.getString(App.context, "x", "");
         String y = PrefUtils.getString(App.context, "y", "");
         if (XueYiCheUtils.IsHaveInternet(this)) {
