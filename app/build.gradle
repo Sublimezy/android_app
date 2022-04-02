@@ -244,8 +244,6 @@ dependencies {
         exclude group: 'org.slf4j'
     }
     implementation 'com.qq.e.union:union:4.373.1243'
-    implementation project(':picture_library')
-
     implementation 'com.pnikosis:materialish-progress:1.7'
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
 }
