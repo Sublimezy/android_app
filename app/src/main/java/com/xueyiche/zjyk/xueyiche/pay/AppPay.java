@@ -159,11 +159,11 @@ public class AppPay extends BaseActivity implements View.OnClickListener {
                 finish();
                 return;
             } else if ("daijia2".equals(pay_style)) {
-                JieDanActivity.instance.finish();
-                Intent intent = new Intent(this, JinXingActivity.class);
-                intent.putExtra("order_number", order_number);
-                startActivity(intent);
-                finish();
+//                JieDanActivity.instance.finish();
+//                Intent intent = new Intent(this, JinXingActivity.class);
+//                intent.putExtra("order_number", order_number);
+//                startActivity(intent);
+//                finish();
                 return;
             } else if ("daijia3".equals(pay_style)) {
                 JinXingActivity.instance.finish();
@@ -173,7 +173,7 @@ public class AppPay extends BaseActivity implements View.OnClickListener {
                 finish();
                 return;
             } else if ("daijia_daifu".equals(pay_style)) {
-                JieDanActivity.instance.finish();
+//                JieDanActivity.instance.finish();
                 goDaiJia();
                 return;
             } else if ("driver_school".equals(pay_style) || "kaituan".equals(pay_style)) {

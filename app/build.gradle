@@ -238,6 +238,7 @@ dependencies {
     //定位功能
     implementation 'com.amap.api:location:latest.integration'
     //搜索功能
+    implementation 'com.github.getActivity:ToastUtils:10.3'
     implementation 'com.amap.api:search:latest.integration'
     implementation 'com.amap.api:navi-3dmap:latest.integration'
     implementation('com.github.tohodog:QSVideoPlayer:2.2.8') {

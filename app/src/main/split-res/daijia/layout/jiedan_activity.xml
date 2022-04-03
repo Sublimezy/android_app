@@ -1,134 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/map_wait"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title"
-        android:clickable="true" />
-
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/slide_top_and_left_two"
-        android:layout_marginTop="@dimen/sishi"
-        android:src="@mipmap/diajia_map_back" />
+    <include layout="@layout/new_top_include" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/ll_top"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/sishisi"
-            android:layout_marginBottom="@dimen/slide_top_and_left_two"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/caidan_bg"
-            android:clickable="true"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="@dimen/shiwu"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/jiu"
-                android:src="@mipmap/daijiao_notice" />
-            <TextView
-                android:id="@+id/tv_quxiao_rule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="司机正在火速赶来，12:10后取消需支付取消费用"
-                android:textColor="@color/test_color"
-                android:textSize="@dimen/text_threeteensp"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/caidan_bg"
             android:clickable="true"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_yuyue_time"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/shisi"
-                android:layout_marginTop="@dimen/shiba"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/yuyue_pic" />
-
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:text="12月30日  今天"
-                    android:textColor="@color/_4f4f4f"
-                    android:textSize="@dimen/text_fifteensp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_time_yuyue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/slide_top_and_left"
-                    android:layout_marginRight="@dimen/slide_top_and_left"
-                    android:text="15:00"
-                    android:textColor="@color/colorOrange"
-                    android:textSize="@dimen/text_fifteensp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="出发"
-                    android:textColor="@color/_4f4f4f"
-                    android:textSize="@dimen/text_fifteensp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="@dimen/shisi"
-                android:layout_marginRight="@dimen/all_16dp"
-                android:layout_marginTop="@dimen/slide_top_and_left_two"
-                android:background="#F0F0F0" />
-
-            <TextView
-                android:id="@+id/tv_yuyue_shuoming"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/shiwu"
-                android:layout_marginRight="@dimen/shiwu"
-                android:layout_marginTop="@dimen/shisan"
-                android:background="@drawable/daijiao_shuoming_shape"
-                android:lineSpacingExtra="@dimen/slide_top_and_left"
-                android:padding="@dimen/jiu"
-                android:text="出发前1小时可看到司机位置，您可以在13:20内免费取消， 超时取消需付费补偿司机。"
-                android:textColor="#000000"
-                android:textSize="12sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -161,19 +52,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="----"
-                            android:textColor="@color/_3333"
+                            android:textColor="@color/_000000"
                             android:textSize="@dimen/text_sixteensp" />
 
-                        <TextView
-                            android:id="@+id/tv_age"
-                            android:layout_width="@dimen/wushiwu"
-                            android:layout_height="@dimen/ershi"
-                            android:layout_marginLeft="@dimen/seven"
-                            android:background="@drawable/practice_details_driver_year_shape"
-                            android:gravity="center"
-                            android:text="----"
-                            android:textColor="#E2C0A6"
-                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -187,87 +68,47 @@
                         android:textSize="@dimen/text_fourteensp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/iv_call"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/all_16dp"
-                    android:src="@mipmap/daijia_callphone" />
+                    android:drawableTop="@mipmap/daijia_callphone"
+                    android:text="联系司机" />
             </RelativeLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="@dimen/shisi"
-                android:layout_marginRight="@dimen/all_16dp"
                 android:layout_marginTop="@dimen/slide_top_and_left_two"
+                android:layout_marginRight="@dimen/all_16dp"
                 android:background="#F0F0F0" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_bottom_money"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="您需要支付服务区域外等候费"
-                    android:textColor="@color/_9999"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_juli"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="共--分钟 区域外--分钟"
-                    android:textColor="@color/_666"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_pay"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="@dimen/shiwu"
-                    android:layout_marginRight="@dimen/shiwu"
-                    android:background="@drawable/yijian_bg"
-                    android:gravity="center"
-                    android:layout_marginBottom="@dimen/shiwu"
-                    android:text="等候费--元 去支付"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_fifteensp" />
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sishisi"
+            android:background="@drawable/caidan_bg"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_quxiao"
+                android:id="@+id/tv_quxiao_rule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/shiwu"
-                android:drawableLeft="@mipmap/quxiao"
-                android:drawablePadding="10dp"
-                android:text="取消代驾"
-                android:textColor="@color/_666"
-                android:textSize="@dimen/text_fifteensp" />
-
-            <TextView
-                android:id="@+id/tv_tishi_quxiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp"
-                android:text=""
-                android:visibility="gone"
-                android:textColor="@color/_666"
-                android:textSize="14sp" />
+                android:text="司机正在火速赶来，12:10后取消需支付取消费用"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/text_threeteensp" />
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

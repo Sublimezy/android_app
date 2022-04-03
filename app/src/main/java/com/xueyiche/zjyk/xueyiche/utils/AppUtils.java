@@ -31,6 +31,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
@@ -114,6 +116,33 @@ public class AppUtils {
             instance = new AppUtils();
         }
         return instance;
+    }
+    /**
+     * 根据2个坐标返回一个矩形Bounds
+     * 以此来智能缩放地图显示
+     */
+    public static LatLngBounds createBounds(Double latA, Double lngA, Double latB, Double lngB){
+        LatLng northeastLatLng;
+        LatLng southwestLatLng;
+        Double topLat,topLng;
+        Double bottomLat,bottomLng;
+        if(latA>=latB){
+            topLat=latA;
+            bottomLat=latB;
+        }else{
+            topLat=latB;
+            bottomLat=latA;
+        }
+        if(lngA>=lngB){
+            topLng=lngA;
+            bottomLng=lngB;
+        }else{
+            topLng=lngB;
+            bottomLng=lngA;
+        }
+        northeastLatLng=new LatLng(topLat,topLng);
+        southwestLatLng=new LatLng(bottomLat,bottomLng);
+        return new LatLngBounds(southwestLatLng, northeastLatLng);
     }
     //协议弹窗
     public static void showXY(Activity activity) {

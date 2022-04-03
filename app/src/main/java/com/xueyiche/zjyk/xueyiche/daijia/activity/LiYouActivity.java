@@ -153,7 +153,7 @@ public class LiYouActivity extends BaseActivity implements View.OnClickListener 
                                     if ("WaitYuYue".equals(type_activity)) {
                                         WaitYuYueActivity.instance.finish();
                                     } else if ("JieDan".equals(type_activity)) {
-                                        JieDanActivity.instance.finish();
+//                                        JieDanActivity.instance.finish();
                                     } else if ("DingDan".equals(type_activity)) {
                                         EventBus.getDefault().post(new MyEvent("刷新全部订单"));
                                         EventBus.getDefault().post(new MyEvent("刷新已完成订单"));

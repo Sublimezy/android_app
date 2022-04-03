@@ -17,15 +17,20 @@ import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RouteSearch;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 import com.xueyiche.zjyk.xueyiche.route.DrivingRouteOverLay;
 import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -176,6 +181,7 @@ public class DaiJiaNewFragment extends BaseMapFragment {
                     drivingRouteOverlay.addToMap();
                     drivingRouteOverlay.zoomToSpan();
                     int dis = (int) drivePath.getDistance();
+                    List<LatLonPoint> polyline = drivePath.getPolyline();
                     int dur = (int) drivePath.getDuration();
                     //35分钟（19公里）
                     String lenthGL = AMapUtil.getFriendlyLength(dis);
@@ -191,7 +197,9 @@ public class DaiJiaNewFragment extends BaseMapFragment {
         switch (view.getId()) {
             case R.id.iv_anquan:
 //                AppUtils.showAnQuan(getActivity());
-                WaitActivity.forward(getActivity());
+//                WaitActivity.forward(getActivity());
+//                JieDanActivity.forward(getActivity());
+                JinXingActivity.forward(getActivity());
                 break;
             case R.id.iv_user:
                 userLocation();

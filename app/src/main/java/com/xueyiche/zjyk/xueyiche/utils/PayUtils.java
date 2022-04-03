@@ -155,7 +155,7 @@ public class PayUtils {
                                     activity.startActivity(intent);
                                     return;
                                 }else if ("daijia2".equals(pay_style)) {
-                                    JieDanActivity.instance.finish();
+//                                    JieDanActivity.instance.finish();
                                     Intent intent = new Intent(activity, JinXingActivity.class);
                                     intent.putExtra("order_number", order_number);
                                     activity.startActivity(intent);
@@ -169,7 +169,7 @@ public class PayUtils {
                                     activity.finish();
                                     return;
                                 }else if ("daijia_daifu".equals(pay_style)) {
-                                    JieDanActivity.instance.finish();
+//                                    JieDanActivity.instance.finish();
                                     goDaiJia(activity);
                                     return;
                                 }else{
