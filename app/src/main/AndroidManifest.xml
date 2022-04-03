@@ -317,9 +317,6 @@
         <!-- 新闻点击图片 -->
         <!-- 我的错题A -->
         <!-- 我的奖金 -->
-        <activity
-            android:name=".homepage.activities.IcbcWebContent"
-            android:screenOrientation="portrait" /> <!-- 考驾照 -->
         <!-- 答题界面 -->
         <!-- 赢现金页面 -->
         <!-- 科目一答题页面 -->

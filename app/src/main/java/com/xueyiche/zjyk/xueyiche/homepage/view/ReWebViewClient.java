@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.xueyiche.homepage.activities;
+package com.xueyiche.zjyk.xueyiche.homepage.view;
 
 import android.graphics.Bitmap;
 import android.webkit.WebView;

@@ -46,7 +46,6 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.bean.GuangGaoBean;
-import com.xueyiche.zjyk.xueyiche.homepage.db.MyGuangGaoDB;
 import com.xueyiche.zjyk.xueyiche.homepage.view.Couterdown;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;
 import com.xueyiche.zjyk.xueyiche.splash.bean.CodeBean;
@@ -200,32 +199,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
             //展示广告
             initAD();
         }
-        final MyGuangGaoDB db = new MyGuangGaoDB(this);
-        final GuangGaoBean gg = db.findGg(start_date, start_time, area_id);
-        if (gg != null) {
-            String tupian = gg.getTupian();
-            if (!TextUtils.isEmpty(tupian)) {
-                Bitmap bitmap = XueYiCheUtils.stringtoBitmap(tupian);
-                mRl_splash.setImageBitmap(bitmap);
-            } else {
-                mRl_splash.setImageResource(R.mipmap.welcome_splash);
-            }
-        }
         mRl_splash.setScaleType(ImageView.ScaleType.FIT_XY);
-
-        mRl_splash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String image_url = gg.getImage_url();
-                Intent intent = new Intent(App.context, GuangGaoActivity.class);
-                if (!TextUtils.isEmpty(image_url)) {
-                    intent.putExtra("guanggao", image_url);
-                    startActivity(intent);
-                    start.cancel();
-                    finish();
-                }
-            }
-        });
         // 渐变动画
         alpha = new AlphaAnimation(0, 1);
         alpha.setDuration(0);

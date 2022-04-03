@@ -278,8 +278,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.ll_shared_app:
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.mine();
+
                 break;
             case R.id.ll_kefu:
                 XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");

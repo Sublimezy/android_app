@@ -35,7 +35,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
-import com.xueyiche.zjyk.xueyiche.homepage.activities.ReWebViewClient;
+import com.xueyiche.zjyk.xueyiche.homepage.view.ReWebViewClient;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;

@@ -27,7 +27,6 @@ import com.tencent.bugly.Bugly;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.xueyiche.zjyk.xueyiche.R;
-import com.xueyiche.zjyk.xueyiche.homepage.db.MyGuangGaoDB;
 import com.xueyiche.zjyk.xueyiche.utils.NetUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -48,7 +47,6 @@ public class App extends Application {
     public static int mNetWorkState;
     public static final String APP_ID = "wx3c3dcf4648234b46";
     public static IWXAPI wxapi;
-    public static MyGuangGaoDB myGuangGaoDB;
 //    public JCVideoPlayerStandard VideoPlaying;
 
     public static int screenWidth;
@@ -89,7 +87,6 @@ public class App extends Application {
         screenHeight = mDisplayMetrics.heightPixels;
         szImei = JPushInterface.getRegistrationID(this);
         mNetWorkState = NetUtil.getNetWorkState(this);
-        myGuangGaoDB = new MyGuangGaoDB(this);
         regToWx();
         initOkGo();
 //        AutoSizeConfig.getInstance().setCustomFragment(true);
