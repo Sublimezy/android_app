@@ -17,24 +17,42 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
+import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkRouteResult;
 import com.umeng.analytics.MobclickAgent;
+import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 
-import im.quar.autolayout.AutoLayoutActivity;
-
 
 /**
  * Activity的基类
  */
-public abstract class NewBaseActivity extends AppCompatActivity {
+public abstract class BaseMapActivity extends AppCompatActivity implements RouteSearch.OnRouteSearchListener, AMapLocationListener, LocationSource {
     protected View view;
     private BaseProgressDialog mProgressDialog = null;
     /**
@@ -44,7 +62,15 @@ public abstract class NewBaseActivity extends AppCompatActivity {
 
     private int netMobile;
     private InputMethodManager manager;
-
+    protected MapView mapView;
+    protected UiSettings mUiSettings;
+    protected AMap aMap;
+    protected RouteSearch mRouteSearch;
+    protected DriveRouteResult mDriveRouteResult;
+    protected AMapLocationClient mlocationClient;
+    private final int ROUTE_TYPE_DRIVE = 2;
+    protected OnLocationChangedListener mListener;
+    protected AMapLocationClientOption mLocationOption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +81,45 @@ public abstract class NewBaseActivity extends AppCompatActivity {
         setContentView(view);
         MapsInitializer.updatePrivacyShow(App.context, true, true);
         MapsInitializer.updatePrivacyAgree(App.context, true);
-        initView();
+        initView(savedInstanceState);
+        if (aMap == null) {
+            aMap = mapView.getMap();
+            mUiSettings = aMap.getUiSettings();
+            mUiSettings.setZoomControlsEnabled(false);
+            setUpMap();
+        } else {
+            aMap.clear();
+            aMap.setLocationSource(this);
+            aMap.setMyLocationEnabled(true);
+            aMap = mapView.getMap();
+            setUpMap();
+        }
+        try {
+            mlocationClient = new AMapLocationClient(this);
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位监听
+            mlocationClient.setLocationListener(this);
+            //设置为高精度定位模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置定位参数
+            mLocationOption.setOnceLocation(true);
+            mlocationClient.setLocationOption(mLocationOption);
+            mlocationClient.startLocation();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
+        try {
+            mRouteSearch = new RouteSearch(this);
+            aMap.setLocationSource(this);// 设置定位监听
+            aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
+            aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+            mRouteSearch.setRouteSearchListener(this);
+        } catch (AMapException e) {
+            e.printStackTrace();
+        }
         initListener();
         initData();
 //        // 添加Activity到堆栈
@@ -72,16 +136,129 @@ public abstract class NewBaseActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-
+    private static final int STROKE_COLOR = Color.argb(180, 3, 145, 255);
+    private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
+    /**
+     * 设置一些amap的属性
+     */
+    private void setUpMap() {
+        aMap.setLocationSource(this);// 设置定位监听
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
+        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        setupLocationStyle();
+    }
+    public  void setfromandtoMarker(AMap aMap, LatLonPoint mStartPoint, LatLonPoint mEndPoint) {
+        aMap.addMarker(new MarkerOptions()
+                .position(AMapUtil.convertToLatLng(mStartPoint))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.qi_pic)));
+        aMap.addMarker(new MarkerOptions()
+                .position(AMapUtil.convertToLatLng(mEndPoint))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.zhong_pic)));
+    }
+    private void setupLocationStyle() {
+        // 自定义系统定位蓝点
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        // 自定义定位蓝点图标
+        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.
+                fromResource(R.drawable.gps_point));
+        // 自定义精度范围的圆形边框颜色
+        myLocationStyle.strokeColor(STROKE_COLOR);
+        aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
+        //自定义精度范围的圆形边框宽度
+        myLocationStyle.strokeWidth(5);
+        // 设置圆形的填充颜色
+        myLocationStyle.radiusFillColor(FILL_COLOR);
+        // 将自定义的 myLocationStyle 对象添加到地图上
+        aMap.setMyLocationStyle(myLocationStyle);
+    }
     @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("BaseActivity"); // [统计页面(仅有Activity的应用中SDK自动调用,不需要单独写。参数为页面名称,可自定义)]
         MobclickAgent.onResume(this);// 友盟统计，所有Activity中添加，父类添加后子类不用重复添加
         //设置不自动弹出软键盘
+        mapView.onResume();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+    public void userLocation() {
+        mlocationClient.startLocation();
+    }
+    @Override
+    public void onBusRouteSearched(BusRouteResult busRouteResult, int i) {
 
+    }
+
+    /**
+     * 开始搜索路径规划方案
+     */
+    public void searchRouteResult(int routeType, int mode, LatLonPoint mStartPoint, LatLonPoint mEndPoint) {
+        if (mStartPoint == null) {
+            return;
+        }
+        if (mEndPoint == null) {
+        }
+        final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
+                mStartPoint, mEndPoint);
+        if (routeType == ROUTE_TYPE_DRIVE) {// 驾车路径规划
+            RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, mode, null,
+                    null, "");// 第一个参数表示路径规划的起点和终点，第二个参数表示驾车模式，第三个参数表示途经点，第四个参数表示避让区域，第五个参数表示避让道路
+            mRouteSearch.calculateDriveRouteAsyn(query);// 异步路径规划驾车模式查询
+        }
+    }
+    /**
+     * 方法必须重写
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        mListener = onLocationChangedListener;
+        if (mlocationClient == null) {
+            try {
+                mlocationClient = new AMapLocationClient(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位监听
+            mlocationClient.setLocationListener(this);
+            //设置为高精度定位模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置定位参数
+            mLocationOption.setOnceLocation(true);
+            mLocationOption.setInterval(Long.valueOf("10000"));
+            mlocationClient.setLocationOption(mLocationOption);
+            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
+            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
+            // 在定位结束后，在合适的生命周期调用onDestroy()方法
+            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+            mlocationClient.startLocation();
+        }
+    }
+
+    @Override
+    public void deactivate() {
+        mListener = null;
+        if (mlocationClient != null) {
+            mlocationClient.stopLocation();
+            mlocationClient.onDestroy();
+        }
+        mlocationClient = null;
+    }
+    @Override
+    public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
+
+    }
     //点击空白处软件盘消失
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -98,6 +275,12 @@ public abstract class NewBaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // 结束Activity&从堆栈中移除
+        if (mlocationClient != null) {
+            mlocationClient.stopLocation();
+            mlocationClient.onDestroy();
+        }
+        mlocationClient = null;
+        mapView.onDestroy();
         AppUtils.getAppManager().finishActivity(this);
     }
     @Override
@@ -114,6 +297,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mapView.onPause();
         MobclickAgent.onPageEnd("BaseActivity"); // [(仅有Activity的应用中SDK自动调用,不需要单独写)保证onPageEnd在onPause之前调用,因为onPause中会保存信息。参数页面名称,可自定义]
         MobclickAgent.onPause(this);// 友盟统计，所有Activity中添加，父类添加后子类不用重复添加
     }
@@ -172,7 +356,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
     /**
      * 初始化View，执行findViewById操作
      */
-    protected abstract void initView();
+    protected abstract void initView(Bundle savedInstanceState);
 
     /**
      * 初始化监听器
@@ -274,7 +458,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
     }
 
     // 保存MyTouchListener接口的列表
-    private ArrayList<MyTouchListener> myTouchListeners = new ArrayList<NewBaseActivity.MyTouchListener>();
+    private ArrayList<MyTouchListener> myTouchListeners = new ArrayList<BaseMapActivity.MyTouchListener>();
 
     /**
      * 提供给Fragment通过getActivity()方法来注册自己的触摸事件的方法

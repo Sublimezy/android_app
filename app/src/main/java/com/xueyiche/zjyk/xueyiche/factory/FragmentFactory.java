@@ -1,9 +1,9 @@
 package com.xueyiche.zjyk.xueyiche.factory;
 import androidx.fragment.app.Fragment;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
+
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaNewFragment;
 import com.xueyiche.zjyk.xueyiche.mine.fragments.MineFragment;
 import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarFragment;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.newactivity.PracticeCarMapFragment;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent.AllIndentFragment;
 
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class FragmentFactory {
         if (fragment == null) {
             switch (position) {
                 case 0:
-                    fragment = new DaiJiaFragment();
+                    fragment = new DaiJiaNewFragment();
                     break;
                 case 1:
                     fragment = new PracticeCarFragment();

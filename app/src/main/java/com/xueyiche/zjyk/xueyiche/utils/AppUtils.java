@@ -3,10 +3,12 @@ package com.xueyiche.zjyk.xueyiche.utils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -19,10 +21,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +36,9 @@ import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
+import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.JinjiPhoneActivity;
 import com.xueyiche.zjyk.xueyiche.submit.bean.DeleteIndentBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -108,9 +115,100 @@ public class AppUtils {
         }
         return instance;
     }
+    //协议弹窗
+    public static void showXY(Activity activity) {
+        //请您先同意学易车APP平台《法律条款》《平台规则》《用户使用协议》     同意  |  查看
+        View view = LayoutInflater.from(App.context).inflate(R.layout.quxiao_indent_dialog, null);
+        TextView tv_quxiao = (TextView) view.findViewById(R.id.tv_quxiao);
+        TextView tv_queren = (TextView) view.findViewById(R.id.tv_queren);
+        TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
+        TextView tv_tishi_content = (TextView) view.findViewById(R.id.tv_tishi_content);
+        tv_title.setVisibility(View.INVISIBLE);
+        tv_queren.setTextColor(Color.parseColor("#ffb10c"));
+        tv_queren.setText("查看");
+        tv_quxiao.setText("同意");
+        tv_tishi_content.setText("请您先同意学易车APP平台《法律条款》《平台规则》《用户使用协议》");
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.Dialog).setView(view);
+        final AlertDialog dialog01 = builder.show();
+        //设置弹窗的宽度，高度
+        DisplayMetrics dm = new DisplayMetrics();
+        //获取屏幕信息
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int screenWidth = dm.widthPixels;
+        int screenHeigh = dm.heightPixels;
+        WindowManager.LayoutParams params =
+                dialog01.getWindow().getAttributes();//获取dialog信息
+        params.width = screenWidth - 400;
+        params.height = screenHeigh / 2;
+        dialog01.getWindow().setAttributes(params);//设置大小
+        tv_quxiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrefUtils.putString(App.context, "dj_xy", "1");
+                dialog01.dismiss();
 
+            }
+        });
+        tv_queren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UrlActivity.forward(activity,"http://xueyiche.cn/xyc/instructions/index.html","2");
+            }
+        });
+        //点击空白处弹框不消失
+        dialog01.setCancelable(false);
+        dialog01.show();
+    }
+//代驾安全弹窗
+    public static void showAnQuan(Activity activity) {
+        final Dialog dialog = new Dialog(activity, R.style.ActionSheetDialogStyle);
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(activity).inflate(R.layout.dialog_anqun_layout, null);
+        //初始化控件
+        LinearLayout ll_jinji = (LinearLayout) inflate.findViewById(R.id.ll_jinji);
+        LinearLayout ll_baojing = (LinearLayout) inflate.findViewById(R.id.ll_baojing);
+        RelativeLayout rl_xuzhi = (RelativeLayout) inflate.findViewById(R.id.rl_xuzhi);
+        ImageView iv_close_anquan = (ImageView) inflate.findViewById(R.id.iv_close_anquan);
+        //将布局设置给Dialog
+        dialog.setContentView(inflate);
+        //获取当前Activity所在的窗体
+        Window dialogWindow = dialog.getWindow();
+        //设置Dialog从窗体底部弹出
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        //获得窗体的属性
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.y = 20;//设置Dialog距离底部的距离
+        // 将属性设置给窗体
+        dialogWindow.setAttributes(lp);
+        dialog.show();//显示对话框
+        iv_close_anquan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        ll_jinji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JinjiPhoneActivity.forward(activity);
+                dialog.dismiss();
+            }
+        });
+        ll_baojing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XueYiCheUtils.CallPhone(activity, "拨打报警电话", "110");
+            }
+        });
+        rl_xuzhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //web页
+                UrlActivity.forward(activity,"http://xueyiche.cn/xyc/instructions/instructions.html","2");
+            }
+        });
 
-
+    }
     public static void gengXin(Context context, Activity activity) {
         if (isAvilible(context, "com.tencent.android.qqdownloader")) {
             // 市场存在

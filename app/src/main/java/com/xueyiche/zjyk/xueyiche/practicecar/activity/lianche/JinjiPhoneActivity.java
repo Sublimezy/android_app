@@ -1,5 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -36,6 +38,10 @@ public class JinjiPhoneActivity extends BaseActivity implements View.OnClickList
     @Override
     protected int initContentView() {
         return R.layout.jinji_phone_activity;
+    }
+    public static void forward(Context context) {
+        Intent intent = new Intent(context, JinjiPhoneActivity.class);
+        context.startActivity(intent);
     }
 
     @Override

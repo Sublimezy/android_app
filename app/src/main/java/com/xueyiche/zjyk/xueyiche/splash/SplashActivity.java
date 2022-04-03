@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.splash;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -305,7 +306,8 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
                                             startActivity(new Intent(SplashActivity.this, MainActivity.class));
                                             finish();
                                         } else {
-                                            startActivity(new Intent(SplashActivity.this, LocationActivity.class));
+                                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                                            startActivity(new Intent(SplashActivity.this, LocationActivity.class));
                                             finish();
                                         }
 
@@ -345,7 +347,8 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
 
     private void res() {
         AndPermission.with(SplashActivity.this)
-                .permission(Permission.CAMERA, Permission.ACCESS_FINE_LOCATION,Permission.READ_PHONE_STATE)
+                .permission( Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,Permission.CAMERA, Permission.ACCESS_FINE_LOCATION,Permission.ACCESS_COARSE_LOCATION,Permission.READ_PHONE_STATE)
                 .onGranted(new Action() {
                     @Override
                     public void onAction(List<String> permissions) {

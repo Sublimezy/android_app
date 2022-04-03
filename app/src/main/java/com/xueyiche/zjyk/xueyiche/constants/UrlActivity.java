@@ -88,7 +88,12 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
         tv_wenxintishi = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_wenxintishi);
         pass_web_view = (WebView) view.findViewById(R.id.pass_web_view);
     }
-
+    public static void forward(Context context,String url,String type) {
+        Intent intent = new Intent(context, UrlActivity.class);
+        intent.putExtra("url", ""+url);
+        intent.putExtra("type", ""+type);
+        context.startActivity(intent);
+    }
     @Override
     protected void initListener() {
         tv_wenxintishi.setOnClickListener(this);

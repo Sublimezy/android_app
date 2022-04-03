@@ -1,19 +1,16 @@
 package com.xueyiche.zjyk.xueyiche.daijia;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -21,28 +18,44 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DrivePath;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkRouteResult;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
-import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.DaiJiaoActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.ConstantsBean;
-import com.xueyiche.zjyk.xueyiche.daijia.bean.DaiJiaDriverLoactionBean;
 import com.xueyiche.zjyk.xueyiche.daijia.view.YuYueLinkagePicker;
 import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.JinjiPhoneActivity;
+import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
+import com.xueyiche.zjyk.xueyiche.route.DrivingRouteOverLay;
+import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
+import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
@@ -50,205 +63,595 @@ import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-//import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitYuYueActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-/**
- * Created by Administrator on 2019/9/11.
- */
-public class DaiJiaFragment extends BaseFragment implements View.OnClickListener {
-    private String user_id;
-    // UI相关
-    private ImageView iv_anquan;
-    private TextView tv_qidian, tv_mudi;
-    private RadioButton rb_richang, rb_yuyue, rb_daijiao;
-    private String jie_latitude;
-    private String jie_longitude;
-    private String jie_name;
-    private String song_latitude;
-    private String song_longitude;
-    private String song_name;
-    private ImageView iv_user;
-    private String song_address;
-    private String jie_address;
-    private LinearLayout ll_richang, ll_yuyue,ll_daijiao;
-    private TextView tv_qidian_yuyue,tv_choose_people;
-    private TextView tv_mudi_yuyue;
-    private TextView tv_xiadan_yuyue;
-    private TextView tv_qidian_daijiao;
-    private TextView tv_mudi_daijiao;
-    private LinearLayout ll_yuyue_time;
-    private RelativeLayout rl_beizhu;
-    private TextView tv_yuyue_time,tv_choose_time;
-    private TextView tv_money_yuyue;
-    private TextView tv_money;
-    private String area_id;
-    private String appointed_time = "";
-    private String yc_yy = "0";
-    private String dj_xy;
-    private View daijiao_line;
-    private String daijiao_phone="";
+public class DaiJiaFragment extends Fragment implements RouteSearch.OnRouteSearchListener, AMapLocationListener, LocationSource {
+    @BindView(R.id.map_view)
+    MapView mapView;
+    @BindView(R.id.rb_richang)
+    RadioButton rbRichang;
+    @BindView(R.id.rb_yuyue)
+    RadioButton rbYuyue;
+    @BindView(R.id.rb_daijiao)
+    RadioButton rbDaijiao;
+    @BindView(R.id.iv_daijia_banner)
+    ImageView ivDaijiaBanner;
+    @BindView(R.id.tv_qidian)
+    TextView tvQidian;
+    @BindView(R.id.tv_mudi)
+    TextView tvMudi;
+    @BindView(R.id.tv_money)
+    TextView tvMoney;
+    @BindView(R.id.ll_richang)
+    LinearLayout llRichang;
+    @BindView(R.id.tv_yuyue_time)
+    TextView tvYuyueTime;
+    @BindView(R.id.ll_yuyue_time)
+    LinearLayout llYuyueTime;
+    @BindView(R.id.iv_daijia_banner_yuyue)
+    CustomShapeImageView ivDaijiaBannerYuyue;
+    @BindView(R.id.tv_qidian_yuyue)
+    TextView tvQidianYuyue;
+    @BindView(R.id.tv_mudi_yuyue)
+    TextView tvMudiYuyue;
+    @BindView(R.id.tv_beizhu)
+    TextView tvBeizhu;
+    @BindView(R.id.rl_beizhu)
+    RelativeLayout rlBeizhu;
+    @BindView(R.id.tv_money_yuyue)
+    TextView tvMoneyYuyue;
+    @BindView(R.id.tv_xiadan_yuyue)
+    TextView tvXiadanYuyue;
+    @BindView(R.id.ll_yuyue)
+    LinearLayout llYuyue;
+    @BindView(R.id.iv_daijia_banner_daijiao)
+    ImageView ivDaijiaBannerDaijiao;
+    @BindView(R.id.tv_choose_time)
+    TextView tvChooseTime;
+    @BindView(R.id.daijiao_line)
+    View daijiaoLine;
+    @BindView(R.id.tv_choose_people)
+    TextView tvChoosePeople;
+    @BindView(R.id.tv_qidian_daijiao)
+    TextView tvQidianDaijiao;
+    @BindView(R.id.tv_mudi_daijiao)
+    TextView tvMudiDaijiao;
+    @BindView(R.id.ll_daijiao)
+    LinearLayout llDaijiao;
+    private UiSettings mUiSettings;
+    private AMap aMap;
+    private RouteSearch mRouteSearch;
+    private DriveRouteResult mDriveRouteResult;
+    private AMapLocationClient mlocationClient;
+    private final int ROUTE_TYPE_DRIVE = 2;
+    private OnLocationChangedListener mListener;
+    private AMapLocationClientOption mLocationOption;
+    private static final int STROKE_COLOR = Color.argb(180, 3, 145, 255);
+    private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//    @Override
+//    public void onClick(View v) {
+//        //选择地址
+//        Intent intent2 = new Intent(App.context, DaiJiaoActivity.class);
+//        String mudi = tv_mudi.getText().toString();
+//        switch (v.getId()) {
+//            case R.id.iv_login_back:
+//
+//                break;
+//            case R.id.tv_choose_people:
+//                startActivityForResult(intent2, 333);
+//                break;
+//            case R.id.tv_top_right_button:
+//                Intent intent = new Intent(getActivity(), UrlActivity.class);
+//                intent.putExtra("url", "http://xueyiche.cn/xyc/daijia/index.html");
+//                intent.putExtra("type", "10");
+//                startActivity(intent);
+//                break;
+//            case R.id.iv_anquan:
+//                //打开安全中心
+//                showAnQuan();
+//                break;
+//            case R.id.ll_yuyue_time:
+//                //选择预约时间
+//                startTimePicker();
+//                break;
+//            case R.id.tv_choose_time:
+//                //选择预约时间
+//                startTimePicker();
+//                break;
+//            case R.id.rb_richang:
+//                yc_yy = "0";
+//                ll_richang.setVisibility(View.VISIBLE);
+//                ll_yuyue.setVisibility(View.GONE);
+//                ll_daijiao.setVisibility(View.GONE);
+//                break;
+//            case R.id.rb_yuyue:
+//                yc_yy = "1";
+//                ll_richang.setVisibility(View.GONE);
+//                ll_daijiao.setVisibility(View.GONE);
+//                ll_yuyue.setVisibility(View.VISIBLE);
+//                break;
+//            case R.id.rb_daijiao:
+//                yc_yy = "2";
+//                ll_richang.setVisibility(View.GONE);
+//                ll_yuyue.setVisibility(View.GONE);
+//                ll_daijiao.setVisibility(View.VISIBLE);
+//                break;
+//            case R.id.iv_user:
+//                break;
+//            case R.id.tv_qidian:
+//                //起点位置
+////                intent1.putExtra("type", "qi");
+////                startActivityForResult(intent1, 111);
+//                break;
+//            case R.id.tv_qidian_yuyue:
+//                //起点位置
+////                intent1.putExtra("type", "qi");
+////                startActivityForResult(intent1, 111);
+//                break;
+//            case R.id.tv_qidian_daijiao:
+//                //起点位置
+////                intent1.putExtra("type", "qi");
+////                startActivityForResult(intent1, 111);
+//                break;
+//            case R.id.tv_mudi:
+//                //目的地位置
+////                intent1.putExtra("type", "zhong");
+////                startActivityForResult(intent1, 222);
+//                break;
+//            case R.id.tv_mudi_daijiao:
+//                //目的地位置
+////                intent1.putExtra("type", "zhong");
+////                startActivityForResult(intent1, 222);
+//                break;
+//            case R.id.tv_mudi_yuyue:
+////                intent1.putExtra("type", "zhong");
+////                startActivityForResult(intent1, 222);
+//                break;
+//        }
+//    }
 
 
-
-    private void initView(View view) {
-        iv_anquan = (ImageView) view.findViewById(R.id.iv_anquan);
-        iv_user = (ImageView) view.findViewById(R.id.iv_user);
-        rb_richang = view.findViewById(R.id.rb_richang);
-        rb_yuyue =view.findViewById(R.id.rb_yuyue);
-        daijiao_line =view.findViewById(R.id.daijiao_line);
-        tv_choose_time =view.findViewById(R.id.tv_choose_time);
-        rb_daijiao =view.findViewById(R.id.rb_daijiao);
-        tv_mudi = (TextView) view.findViewById(R.id.tv_mudi);
-        tv_qidian = (TextView) view.findViewById(R.id.tv_qidian);
-        tv_qidian_daijiao = (TextView) view.findViewById(R.id.tv_qidian_daijiao);
-        tv_mudi_daijiao = (TextView) view.findViewById(R.id.tv_mudi_daijiao);
-        tv_qidian_yuyue = (TextView) view.findViewById(R.id.tv_qidian_yuyue);
-        ll_richang = (LinearLayout) view.findViewById(R.id.ll_richang);
-        ll_yuyue = (LinearLayout) view.findViewById(R.id.ll_yuyue);
-        ll_daijiao = (LinearLayout) view.findViewById(R.id.ll_daijiao);
-        ll_yuyue_time = (LinearLayout) view.findViewById(R.id.ll_yuyue_time);
-        tv_mudi_yuyue = (TextView) view.findViewById(R.id.tv_mudi_yuyue);
-        tv_qidian_yuyue = (TextView) view.findViewById(R.id.tv_qidian_yuyue);
-        tv_xiadan_yuyue = (TextView) view.findViewById(R.id.tv_xiadan_yuyue);
-        tv_yuyue_time = (TextView) view.findViewById(R.id.tv_yuyue_time);
-        tv_money_yuyue = (TextView) view.findViewById(R.id.tv_money_yuyue);
-        tv_money = (TextView) view.findViewById(R.id.tv_money);
-        tv_choose_people = (TextView) view.findViewById(R.id.tv_choose_people);
-        rl_beizhu = (RelativeLayout) view.findViewById(R.id.rl_beizhu);
-    }
-
-
-    private void initListener() {
-        tv_choose_time.setOnClickListener(this);
-        iv_anquan.setOnClickListener(this);
-        tv_choose_people.setOnClickListener(this);
-        iv_user.setOnClickListener(this);
-        rb_richang.setOnClickListener(this);
-        rb_daijiao.setOnClickListener(this);
-        rb_yuyue.setOnClickListener(this);
-        tv_qidian.setOnClickListener(this);
-        tv_qidian_daijiao.setOnClickListener(this);
-        tv_mudi_daijiao.setOnClickListener(this);
-        tv_money_yuyue.setOnClickListener(this);
-        tv_money.setOnClickListener(this);
-        tv_qidian.setOnClickListener(this);
-        tv_mudi.setOnClickListener(this);
-        tv_mudi_yuyue.setOnClickListener(this);
-        tv_qidian_yuyue.setOnClickListener(this);
-        ll_yuyue_time.setOnClickListener(this);
-        tv_xiadan_yuyue.setOnClickListener(this);
-        rl_beizhu.setOnClickListener(this);
-        tv_money.setOnClickListener(this);
-    }
-
-
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onClick(View v) {
-        //选择地址
-        Intent intent2 = new Intent(App.context, DaiJiaoActivity.class);
-        String mudi = tv_mudi.getText().toString();
-        switch (v.getId()) {
-            case R.id.iv_login_back:
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Bundle extras = data.getExtras();
+            switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+                case 111:
+                    String latitude1 = extras.getString("latitude");
+                    String longitude1 = extras.getString("longitude");
+                    String address1 = extras.getString("address");
+                    String name1 = extras.getString("name");
+//                    if (jie_name.equals(song_name)) {
+//                        Toast.makeText(getActivity(), "起点与终点不能相同", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//
+//                    if (!TextUtils.isEmpty(latitude1)) {
+//                        jie_latitude = latitude1;
+//                    }
+//                    if (!TextUtils.isEmpty(longitude1)) {
+//                        jie_longitude = longitude1;
+//                    }
+//                    if (!TextUtils.isEmpty(address1)) {
+//                        jie_address = address1;
+//                    }
+//                    if (!TextUtils.isEmpty(name1)) {
+//                        jie_name = name1;
+//                    }
+//                    if (!TextUtils.isEmpty(jie_name)) {
+//                        tv_qidian.setText(jie_name);
+//                        tv_qidian_yuyue.setText(jie_name);
+//                        LatLng latLng = new LatLng(Double.parseDouble(jie_latitude), Double.parseDouble(jie_longitude));
+//                    }
 
-                break;
-            case R.id.tv_choose_people:
-                startActivityForResult(intent2, 333);
-                break;
-            case R.id.tv_top_right_button:
-                Intent intent = new Intent(getActivity(), UrlActivity.class);
-                intent.putExtra("url", "http://xueyiche.cn/xyc/daijia/index.html");
-                intent.putExtra("type", "10");
-                startActivity(intent);
-                break;
+                    break;
+                case 222:
+//                    String latitude = extras.getString("latitude");
+//                    if (!TextUtils.isEmpty(latitude)) {
+//                        song_latitude = latitude;
+//                    }else {
+//                        song_latitude = "";
+//                    }
+//                    String longitude = extras.getString("longitude");
+//                    if (!TextUtils.isEmpty(longitude)) {
+//                        song_longitude = longitude;
+//                    }else {
+//                        song_longitude = "";
+//
+//                    }
+//                    String address = extras.getString("address");
+//                    if (!TextUtils.isEmpty(address)) {
+//                        song_address = address;
+//                    }else {
+//                        song_address = "";
+//                    }
+//                    String name = extras.getString("name");
+//                    if (!TextUtils.isEmpty(name)) {
+//                        if (!jie_name.equals(name)) {
+//                            song_name = name;
+//                        } else {
+//                            showToastShort("起点与目的地不可相同");
+//                        }
+//                    }
+//                    if (!TextUtils.isEmpty(jie_name) && !TextUtils.isEmpty(song_name) &&
+//                            !TextUtils.isEmpty(song_longitude) && !TextUtils.isEmpty(song_latitude) &&
+//                            !TextUtils.isEmpty(jie_longitude) && !TextUtils.isEmpty(jie_latitude) &&
+//                            !TextUtils.isEmpty(jie_address) && !TextUtils.isEmpty(song_address)) {
+//                        Intent intent = new Intent(getActivity(), XingChengActivity.class);
+//                        intent.putExtra("song_name", song_name);
+//                        intent.putExtra("song_address", song_address);
+//                        intent.putExtra("song_longitude", song_longitude);
+//                        intent.putExtra("song_latitude", song_latitude);
+//                        intent.putExtra("jie_name", jie_name);
+//                        intent.putExtra("jie_address", jie_address);
+//                        intent.putExtra("jie_longitude", jie_longitude);
+//                        intent.putExtra("jie_latitude", jie_latitude);
+//                        String trim = tv_yuyue_time.getText().toString().trim();
+//                        String trim_daijiao = tv_choose_time.getText().toString().trim();
+//                        intent.putExtra("appointed_time", appointed_time);
+//                        intent.putExtra("yuyue_time", trim);
+//                        intent.putExtra("daijiao_time", trim_daijiao);
+//                        intent.putExtra("daijiao_phone", daijiao_phone);
+//                        intent.putExtra("yc_yy", yc_yy);
+//                        startActivity(intent);
+//                    }
+                    break;
+                case 444:
+//                    daijiao_phone = extras.getString("daijiao_phone");
+//                    String daijiao_name = extras.getString("daijiao_name");
+//                    if (!TextUtils.isEmpty(daijiao_phone)) {
+//                        tv_choose_people.setText(daijiao_phone +"  ");
+//                        daijiao_line.setVisibility(View.VISIBLE);
+//                        tv_choose_time.setVisibility(View.VISIBLE);
+//                    }else {
+//                        tv_choose_people.setText("选择乘车人  ");
+//                    }
+                    break;
+            }
+        }
+
+    }
+
+    private void initData() {
+        try {
+            mlocationClient = new AMapLocationClient(getActivity());
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位监听
+            mlocationClient.setLocationListener(this);
+            //设置为高精度定位模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置定位参数
+            mLocationOption.setOnceLocation(true);
+            mlocationClient.setLocationOption(mLocationOption);
+            mlocationClient.startLocation();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
+        try {
+            mRouteSearch = new RouteSearch(getActivity());
+            aMap.setLocationSource(this);// 设置定位监听
+            aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
+            aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+            mRouteSearch.setRouteSearchListener(this);
+        } catch (AMapException e) {
+            e.printStackTrace();
+        }
+
+
+//        area_id = PrefUtils.getString(getActivity(), "area_id", "");
+//        getPingTaiConstants();
+//        dj_xy = PrefUtils.getString(App.context, "dj_xy", "0");
+//        if ("0".equals(dj_xy)) {
+//            showXY();
+//        }
+    }
+
+
+
+
+
+
+
+    public void getPingTaiConstants() {
+
+        OkHttpUtils.post()
+                .url(AppUrl.PingTai_Constants)
+//                .addParams("area_id", area_id)
+                .addParams("device_id", LoginUtils.getId(getActivity()))
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response) throws IOException {
+                        String string = response.body().string();
+                        if (!TextUtils.isEmpty(string)) {
+                            final ConstantsBean constantsBean = JsonUtil.parseJsonToBean(string, ConstantsBean.class);
+                            if (constantsBean != null) {
+                                int code = constantsBean.getCode();
+                                if (!TextUtils.isEmpty("" + code)) {
+                                    if (200 == code) {
+                                        final ConstantsBean.ContentBean content = constantsBean.getContent();
+                                        if (content != null) {
+                                            App.handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    ////免费可取消最大分钟数
+                                                    String default_time = content.getDefault_time();
+                                                    PrefUtils.putString(getActivity(), "default_time", default_time);
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        return string;
+                    }
+
+                    @Override
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Object response) {
+
+                    }
+                });
+    }
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = LayoutInflater.from(App.context).inflate(R.layout.daijia_activity, null);
+        ButterKnife.bind(this, view);
+        mapView.onCreate(savedInstanceState);
+        if (aMap == null) {
+            aMap = mapView.getMap();
+            mUiSettings = aMap.getUiSettings();
+            mUiSettings.setZoomControlsEnabled(false);
+            setUpMap();
+        } else {
+            aMap.clear();
+            aMap.setLocationSource(this);
+            aMap.setMyLocationEnabled(true);
+            aMap = mapView.getMap();
+            setUpMap();
+        }
+        initData();
+        LatLonPoint mStartPoint = new LatLonPoint(39.942295, 116.335891);//起点，116.335891,39.942295
+        LatLonPoint mEndPoint = new LatLonPoint(39.995576, 116.481288);//终点，116.481288,39.995576
+        setfromandtoMarker(mStartPoint, mEndPoint);
+        searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault, mStartPoint, mEndPoint);
+        return view;
+    }
+
+    /**
+     * 设置一些amap的属性
+     */
+    private void setUpMap() {
+        aMap.setLocationSource(this);// 设置定位监听
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
+        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        setupLocationStyle();
+    }
+
+    private void setupLocationStyle() {
+        // 自定义系统定位蓝点
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        // 自定义定位蓝点图标
+        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.
+                fromResource(R.drawable.gps_point));
+        // 自定义精度范围的圆形边框颜色
+        myLocationStyle.strokeColor(STROKE_COLOR);
+        aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
+        //自定义精度范围的圆形边框宽度
+        myLocationStyle.strokeWidth(5);
+        // 设置圆形的填充颜色
+        myLocationStyle.radiusFillColor(FILL_COLOR);
+        // 将自定义的 myLocationStyle 对象添加到地图上
+        aMap.setMyLocationStyle(myLocationStyle);
+    }
+
+    private void setfromandtoMarker(LatLonPoint mStartPoint, LatLonPoint mEndPoint) {
+        aMap.addMarker(new MarkerOptions()
+                .position(AMapUtil.convertToLatLng(mStartPoint))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.qi_pic)));
+        aMap.addMarker(new MarkerOptions()
+                .position(AMapUtil.convertToLatLng(mEndPoint))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.zhong_pic)));
+    }
+
+    /**
+     * 开始搜索路径规划方案
+     */
+    public void searchRouteResult(int routeType, int mode, LatLonPoint mStartPoint, LatLonPoint mEndPoint) {
+        if (mStartPoint == null) {
+            return;
+        }
+        if (mEndPoint == null) {
+        }
+        final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
+                mStartPoint, mEndPoint);
+        if (routeType == ROUTE_TYPE_DRIVE) {// 驾车路径规划
+            RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, mode, null,
+                    null, "");// 第一个参数表示路径规划的起点和终点，第二个参数表示驾车模式，第三个参数表示途经点，第四个参数表示避让区域，第五个参数表示避让道路
+            mRouteSearch.calculateDriveRouteAsyn(query);// 异步路径规划驾车模式查询
+        }
+    }
+    @OnClick({R.id.iv_anquan, R.id.iv_daijia_banner, R.id.tv_qidian, R.id.tv_mudi, R.id.iv_user})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_anquan:
-                //打开安全中心
-                showAnQuan();
+                AppUtils.showAnQuan(getActivity());
                 break;
-            case R.id.ll_yuyue_time:
-                //选择预约时间
-                startTimePicker();
-                break;
-            case R.id.tv_choose_time:
-                //选择预约时间
-                startTimePicker();
-                break;
-            case R.id.rl_beizhu:
-                showToastShort("请选择目的地");
-                break;
-            case R.id.tv_daijiao:
-                //代叫服务
-                showToastShort("请选择目的地");
-                break;
-            case R.id.tv_xiadan:
-                //一键下单
-                showToastShort("请选择目的地");
-                break;
-            case R.id.tv_xiadan_yuyue:
-                //预约下单
-                showToastShort("请选择目的地");
-                break;
-            case R.id.rb_richang:
-                yc_yy = "0";
-                ll_richang.setVisibility(View.VISIBLE);
-                ll_yuyue.setVisibility(View.GONE);
-                ll_daijiao.setVisibility(View.GONE);
-                break;
-            case R.id.rb_yuyue:
-                yc_yy = "1";
-                ll_richang.setVisibility(View.GONE);
-                ll_daijiao.setVisibility(View.GONE);
-                ll_yuyue.setVisibility(View.VISIBLE);
-                break;
-            case R.id.rb_daijiao:
-                yc_yy = "2";
-                ll_richang.setVisibility(View.GONE);
-                ll_yuyue.setVisibility(View.GONE);
-                ll_daijiao.setVisibility(View.VISIBLE);
-                break;
-            case R.id.iv_user:
+            case R.id.iv_daijia_banner:
                 break;
             case R.id.tv_qidian:
-                //起点位置
-//                intent1.putExtra("type", "qi");
-//                startActivityForResult(intent1, 111);
-                break;
-            case R.id.tv_qidian_yuyue:
-                //起点位置
-//                intent1.putExtra("type", "qi");
-//                startActivityForResult(intent1, 111);
-                break;
-            case R.id.tv_qidian_daijiao:
-                //起点位置
-//                intent1.putExtra("type", "qi");
-//                startActivityForResult(intent1, 111);
                 break;
             case R.id.tv_mudi:
-                //目的地位置
-//                intent1.putExtra("type", "zhong");
-//                startActivityForResult(intent1, 222);
                 break;
-            case R.id.tv_mudi_daijiao:
-                //目的地位置
-//                intent1.putExtra("type", "zhong");
-//                startActivityForResult(intent1, 222);
-                break;
-            case R.id.tv_mudi_yuyue:
-//                intent1.putExtra("type", "zhong");
-//                startActivityForResult(intent1, 222);
+            case R.id.iv_user:
+                mlocationClient.startLocation();
                 break;
         }
     }
 
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if (aMapLocation != null) {
+            if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
+                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+                String city = aMapLocation.getCity();
+                String cityCode = aMapLocation.getCityCode();
+                double latitude = aMapLocation.getLatitude();
+                double longitude = aMapLocation.getLongitude();
+                tvQidian.setText(aMapLocation.getAddress());
+                Log.e("onLocationChanged", "" + city);
+                Log.e("onLocationChanged", "" + cityCode);
+
+            } else {
+                String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
+                Log.e("AmapErr", errText);
+            }
+        }
+    }
+
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        mListener = onLocationChangedListener;
+        if (mlocationClient == null) {
+            try {
+                mlocationClient = new AMapLocationClient(getActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位监听
+            mlocationClient.setLocationListener(this);
+            //设置为高精度定位模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置定位参数
+            mLocationOption.setOnceLocation(true);
+            mLocationOption.setInterval(Long.valueOf("10000"));
+            mlocationClient.setLocationOption(mLocationOption);
+            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
+            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
+            // 在定位结束后，在合适的生命周期调用onDestroy()方法
+            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+            mlocationClient.startLocation();
+        }
+    }
+
+    @Override
+    public void deactivate() {
+        mListener = null;
+        if (mlocationClient != null) {
+            mlocationClient.stopLocation();
+            mlocationClient.onDestroy();
+        }
+        mlocationClient = null;
+    }
+
+    @Override
+    public void onBusRouteSearched(BusRouteResult busRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onDriveRouteSearched(DriveRouteResult driveRouteResult, int i) {
+        aMap.clear();// 清理地图上的所有覆盖物
+        if (i == AMapException.CODE_AMAP_SUCCESS) {
+            if (driveRouteResult != null && driveRouteResult.getPaths() != null) {
+                if (driveRouteResult.getPaths().size() > 0) {
+                    mDriveRouteResult = driveRouteResult;
+                    final DrivePath drivePath = mDriveRouteResult.getPaths()
+                            .get(0);
+                    DrivingRouteOverLay drivingRouteOverlay = new DrivingRouteOverLay(
+                            App.context, aMap, drivePath,
+                            mDriveRouteResult.getStartPos(),
+                            mDriveRouteResult.getTargetPos(), null);
+                    drivingRouteOverlay.setNodeIconVisibility(false);//设置节点marker是否显示
+                    drivingRouteOverlay.setIsColorfulline(true);//是否用颜色展示交通拥堵情况，默认true
+                    drivingRouteOverlay.removeFromMap();
+                    drivingRouteOverlay.addToMap();
+                    drivingRouteOverlay.zoomToSpan();
+                    int dis = (int) drivePath.getDistance();
+                    int dur = (int) drivePath.getDuration();
+                    //35分钟（19公里）
+                    String lenthGL = AMapUtil.getFriendlyLength(dis);
+                    String des = AMapUtil.getFriendlyTime(dur) + "(" + AMapUtil.getFriendlyLength(dis) + ")";
+                    int taxiCost = (int) mDriveRouteResult.getTaxiCost();
+                } else if (driveRouteResult != null && driveRouteResult.getPaths() == null) {
+                }
+
+            } else {
+            }
+        } else {
+        }
+
+    }
+
+    @Override
+    public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
+
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mlocationClient != null) {
+            mlocationClient.stopLocation();
+            mlocationClient.onDestroy();
+        }
+        mlocationClient = null;
+        mapView.onDestroy();
+    }
 
     public void startTimePicker() {
         ArrayList<String> firstList = new ArrayList<String>();
@@ -335,8 +738,8 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
             public void onPicked(String first, String second, String third) {
                 //时间格式:2016-11-08 08:00:00
 
-                tv_yuyue_time.setText(first + second + ":" + third);
-                tv_choose_time.setText(first + second + ":" + third);
+//                tv_yuyue_time.setText(first + second + ":" + third);
+//                tv_choose_time.setText(first + second + ":" + third);
                 picker.setSelectedItem(first, second, third);
                 String date;
                 if (first.contains("今天")) {
@@ -351,293 +754,10 @@ public class DaiJiaFragment extends BaseFragment implements View.OnClickListener
                 String s = year + "年" + date + second + ":" + third + ":00";
                 String s1 = s.replace("年", "-");
                 String s2 = s1.replace("月", "-");
-                appointed_time = s2.replace("日", " ");
+//                appointed_time = s2.replace("日", " ");
                 picker.dismiss();
             }
         });
         picker.show();
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data!=null) {
-            Bundle extras = data.getExtras();
-            switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
-                case 111:
-                    String latitude1 = extras.getString("latitude");
-                    String longitude1 = extras.getString("longitude");
-                    String address1 = extras.getString("address");
-                    String name1 = extras.getString("name");
-                    if (jie_name.equals(song_name)) {
-                        Toast.makeText(getActivity(), "起点与终点不能相同", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    if (!TextUtils.isEmpty(latitude1)) {
-                        jie_latitude = latitude1;
-                    }
-                    if (!TextUtils.isEmpty(longitude1)) {
-                        jie_longitude = longitude1;
-                    }
-                    if (!TextUtils.isEmpty(address1)) {
-                        jie_address = address1;
-                    }
-                    if (!TextUtils.isEmpty(name1)) {
-                        jie_name = name1;
-                    }
-                    if (!TextUtils.isEmpty(jie_name)) {
-                        tv_qidian.setText(jie_name);
-                        tv_qidian_yuyue.setText(jie_name);
-                        LatLng latLng = new LatLng(Double.parseDouble(jie_latitude), Double.parseDouble(jie_longitude));
-                    }
-
-                    break;
-                case 222:
-                    String latitude = extras.getString("latitude");
-                    if (!TextUtils.isEmpty(latitude)) {
-                        song_latitude = latitude;
-                    }else {
-                        song_latitude = "";
-                    }
-                    String longitude = extras.getString("longitude");
-                    if (!TextUtils.isEmpty(longitude)) {
-                        song_longitude = longitude;
-                    }else {
-                        song_longitude = "";
-
-                    }
-                    String address = extras.getString("address");
-                    if (!TextUtils.isEmpty(address)) {
-                        song_address = address;
-                    }else {
-                        song_address = "";
-                    }
-                    String name = extras.getString("name");
-                    if (!TextUtils.isEmpty(name)) {
-                        if (!jie_name.equals(name)) {
-                            song_name = name;
-                        } else {
-                            showToastShort("起点与目的地不可相同");
-                        }
-                    }
-                    if (!TextUtils.isEmpty(jie_name) && !TextUtils.isEmpty(song_name) &&
-                            !TextUtils.isEmpty(song_longitude) && !TextUtils.isEmpty(song_latitude) &&
-                            !TextUtils.isEmpty(jie_longitude) && !TextUtils.isEmpty(jie_latitude) &&
-                            !TextUtils.isEmpty(jie_address) && !TextUtils.isEmpty(song_address)) {
-                        Intent intent = new Intent(getActivity(), XingChengActivity.class);
-                        intent.putExtra("song_name", song_name);
-                        intent.putExtra("song_address", song_address);
-                        intent.putExtra("song_longitude", song_longitude);
-                        intent.putExtra("song_latitude", song_latitude);
-                        intent.putExtra("jie_name", jie_name);
-                        intent.putExtra("jie_address", jie_address);
-                        intent.putExtra("jie_longitude", jie_longitude);
-                        intent.putExtra("jie_latitude", jie_latitude);
-                        String trim = tv_yuyue_time.getText().toString().trim();
-                        String trim_daijiao = tv_choose_time.getText().toString().trim();
-                        intent.putExtra("appointed_time", appointed_time);
-                        intent.putExtra("yuyue_time", trim);
-                        intent.putExtra("daijiao_time", trim_daijiao);
-                        intent.putExtra("daijiao_phone", daijiao_phone);
-                        intent.putExtra("yc_yy", yc_yy);
-                        startActivity(intent);
-                    }
-                    break;
-                case 444:
-                    daijiao_phone = extras.getString("daijiao_phone");
-                    String daijiao_name = extras.getString("daijiao_name");
-                    if (!TextUtils.isEmpty(daijiao_phone)) {
-                        tv_choose_people.setText(daijiao_phone +"  ");
-                        daijiao_line.setVisibility(View.VISIBLE);
-                        tv_choose_time.setVisibility(View.VISIBLE);
-                    }else {
-                        tv_choose_people.setText("选择乘车人  ");
-                    }
-                    break;
-            }
-        }
-
-    }
-
-    private void initData() {
-        area_id = PrefUtils.getString(getActivity(), "area_id", "");
-        getPingTaiConstants();
-        user_id = PrefUtils.getString(App.context, "user_id", "");
-        dj_xy = PrefUtils.getString(App.context, "dj_xy", "0");
-        if ("0".equals(dj_xy)) {
-            showXY();
-        }
-    }
-
-    private void showXY() {
-        //请您先同意学易车APP平台《法律条款》《平台规则》《用户使用协议》     同意  |  查看
-        View view = LayoutInflater.from(App.context).inflate(R.layout.quxiao_indent_dialog, null);
-        TextView tv_quxiao = (TextView) view.findViewById(R.id.tv_quxiao);
-        TextView tv_queren = (TextView) view.findViewById(R.id.tv_queren);
-        TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
-        TextView tv_tishi_content = (TextView) view.findViewById(R.id.tv_tishi_content);
-        tv_title.setVisibility(View.INVISIBLE);
-        tv_queren.setTextColor(Color.parseColor("#ffb10c"));
-        tv_queren.setText("查看");
-        tv_quxiao.setText("同意");
-        tv_tishi_content.setText("请您先同意学易车APP平台《法律条款》《平台规则》《用户使用协议》");
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Dialog).setView(view);
-        final AlertDialog dialog01 = builder.show();
-        //设置弹窗的宽度，高度
-        DisplayMetrics dm = new DisplayMetrics();
-        //获取屏幕信息
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int screenWidth = dm.widthPixels;
-        int screenHeigh = dm.heightPixels;
-        WindowManager.LayoutParams params =
-                dialog01.getWindow().getAttributes();//获取dialog信息
-        params.width = screenWidth - 400;
-        params.height = screenHeigh / 2;
-        dialog01.getWindow().setAttributes(params);//设置大小
-        tv_quxiao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PrefUtils.putString(App.context, "dj_xy", "1");
-                dialog01.dismiss();
-
-            }
-        });
-        tv_queren.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),UrlActivity.class);
-                intent.putExtra("url", "http://xueyiche.cn/xyc/instructions/index.html");
-                intent.putExtra("type", "2");
-                startActivity(intent);
-            }
-        });
-        //点击空白处弹框不消失
-        dialog01.setCancelable(false);
-        dialog01.show();
-    }
-
-
-
-    public void showAnQuan() {
-        final Dialog dialog = new Dialog(getActivity(), R.style.ActionSheetDialogStyle);
-        //填充对话框的布局
-        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_anqun_layout, null);
-        //初始化控件
-        LinearLayout ll_jinji = (LinearLayout) inflate.findViewById(R.id.ll_jinji);
-        LinearLayout ll_baojing = (LinearLayout) inflate.findViewById(R.id.ll_baojing);
-        RelativeLayout rl_xuzhi = (RelativeLayout) inflate.findViewById(R.id.rl_xuzhi);
-        ImageView iv_close_anquan = (ImageView) inflate.findViewById(R.id.iv_close_anquan);
-        //将布局设置给Dialog
-        dialog.setContentView(inflate);
-        //获取当前Activity所在的窗体
-        Window dialogWindow = dialog.getWindow();
-        //设置Dialog从窗体底部弹出
-        dialogWindow.setGravity(Gravity.BOTTOM);
-        //获得窗体的属性
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.y = 20;//设置Dialog距离底部的距离
-        // 将属性设置给窗体
-        dialogWindow.setAttributes(lp);
-        dialog.show();//显示对话框
-        iv_close_anquan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        ll_jinji.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), JinjiPhoneActivity.class);
-                startActivity(intent);
-                dialog.dismiss();
-            }
-        });
-        ll_baojing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                XueYiCheUtils.CallPhone(getActivity(), "拨打报警电话", "110");
-            }
-        });
-        rl_xuzhi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //web页
-                Intent intent = new Intent(getActivity(), UrlActivity.class);
-                intent.putExtra("url", "http://xueyiche.cn/xyc/instructions/instructions.html");
-                intent.putExtra("type", "2");
-                startActivity(intent);
-            }
-        });
-
-    }
-
-
-    public void getPingTaiConstants() {
-        showProgressDialog(getActivity(),false);
-        OkHttpUtils.post()
-                .url(AppUrl.PingTai_Constants)
-                .addParams("area_id", area_id)
-                .addParams("device_id", LoginUtils.getId(getActivity()))
-                .build()
-                .execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response) throws IOException {
-                        String string = response.body().string();
-                        if (!TextUtils.isEmpty(string)) {
-                            final ConstantsBean constantsBean = JsonUtil.parseJsonToBean(string, ConstantsBean.class);
-                            if (constantsBean != null) {
-                                int code = constantsBean.getCode();
-                                if (!TextUtils.isEmpty("" + code)) {
-                                    if (200 == code) {
-                                        final ConstantsBean.ContentBean content = constantsBean.getContent();
-                                        if (content != null) {
-                                            App.handler.post(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    ////免费可取消最大分钟数
-                                                    String default_time = content.getDefault_time();
-                                                    PrefUtils.putString(getActivity(), "default_time", default_time);
-                                                }
-                                            });
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        return string;
-                    }
-
-                    @Override
-                    public void onError(Request request, Exception e) {
-                        stopProgressDialog();
-                    }
-
-                    @Override
-                    public void onResponse(Object response) {
-                        stopProgressDialog();
-                    }
-                });
-    }
-
-    @Override
-    protected void lazyLoad() {
-
-    }
-
-    @Override
-    protected View setInitView() {
-        View view = LayoutInflater.from(App.context).inflate(R.layout.daijia_activity,null);
-        initView(view);
-        initListener();
-        initData();
-        return view;
-    }
-
-    @Override
-    protected Object setLoadDate() {
-        return "daijia";
-    }
-
-
 }
