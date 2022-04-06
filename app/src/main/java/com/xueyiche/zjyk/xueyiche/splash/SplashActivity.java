@@ -199,7 +199,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
             //展示广告
             initAD();
         }
-        mRl_splash.setScaleType(ImageView.ScaleType.FIT_XY);
+//        mRl_splash.setScaleType(ImageView.ScaleType.FIT_XY);
         // 渐变动画
         alpha = new AlphaAnimation(0, 1);
         alpha.setDuration(0);
