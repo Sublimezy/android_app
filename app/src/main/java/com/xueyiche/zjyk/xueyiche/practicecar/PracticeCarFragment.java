@@ -19,6 +19,7 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 //import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.PracticeCarContentActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.adapter.PracticeCarAdapter;
 
@@ -185,8 +186,8 @@ public class PracticeCarFragment extends BaseFragment{
 
                 break;
             case R.id.tv_top_right_button:
-//                Intent intent = new Intent(App.context, RegistSiJiActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(App.context, RegistSiJiActivity.class);
+                startActivity(intent);
                 break;
         }
     }

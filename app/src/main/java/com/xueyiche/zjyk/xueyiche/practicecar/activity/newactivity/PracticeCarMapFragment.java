@@ -34,6 +34,7 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 //import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.DriverPracticeActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.JinjiPhoneActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.lianche.NowPracticeActivity;
@@ -247,8 +248,8 @@ public class PracticeCarMapFragment extends BaseFragment implements SensorEventL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rb_driverbaoming:
-//                Intent intent = new Intent(App.context, RegistSiJiActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(App.context, RegistSiJiActivity.class);
+                startActivity(intent);
                 break;
             case R.id.iv_user:
                 //回到自己得位置
