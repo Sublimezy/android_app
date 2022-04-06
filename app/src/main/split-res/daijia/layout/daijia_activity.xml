@@ -3,8 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <include
+        android:id="@+id/top"
+        layout="@layout/new_top_include" />
     <com.amap.api.maps.MapView
         android:id="@+id/map_view"
+        android:layout_below="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <LinearLayout

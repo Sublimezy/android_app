@@ -25,7 +25,6 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
-import com.xueyiche.zjyk.xueyiche.base.adapter.BaseCommonAdapter;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseViewHolder;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -73,7 +72,7 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
     private int pager = 1;
     private List<JiaoLianInfo.ContentBean> content;
     private List<JiaoLianInfo.ContentBean> list = new ArrayList<>();
-    private ChoiceJiaoLianAdapter choiceJiaoLianAdapter;
+//    private ChoiceJiaoLianAdapter choiceJiaoLianAdapter;
     private KaiTongCityBean kaiTongCityBean;
     private String area_id;
     private RefreshLayout refreshLayout;
@@ -92,7 +91,7 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
         tv_login_back = (TextView) view.findViewById(R.id.title).findViewById(R.id.tv_title);
         iv_login_back = (ImageView) view.findViewById(R.id.title).findViewById(R.id.iv_login_back);
         tv_top_right_button_map = view.findViewById(R.id.title).findViewById(R.id.tv_top_right_button_map);
-        choiceJiaoLianAdapter = new ChoiceJiaoLianAdapter(list, App.context, R.layout.practice_item);
+//        choiceJiaoLianAdapter = new ChoiceJiaoLianAdapter(list, App.context, R.layout.practice_item);
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         ll_choice_area = (RadioButton) view.findViewById(R.id.ll_choice_area);
         ll_choice_shaixuan = (RadioButton) view.findViewById(R.id.ll_choice_shaixuan);
@@ -438,10 +437,10 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
                         if (contentBeen != null && contentBeen.size() != 0) {
                             list.addAll(contentBeen);
                             ll_youzheng_empty.setVisibility(View.GONE);
-                            lv_choice_jiaolian.setAdapter(choiceJiaoLianAdapter);
-                            choiceJiaoLianAdapter.notifyDataSetChanged();
+//                            lv_choice_jiaolian.setAdapter(choiceJiaoLianAdapter);
+//                            choiceJiaoLianAdapter.notifyDataSetChanged();
                         } else {
-                            choiceJiaoLianAdapter.notifyDataSetChanged();
+//                            choiceJiaoLianAdapter.notifyDataSetChanged();
                             ll_youzheng_empty.setVisibility(View.VISIBLE);
                         }
                     } else {
@@ -449,7 +448,7 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
                         content = jiaoLianInfo.getContent();
                         if (content != null) {
                             list.addAll(content);//追加更多数据
-                            choiceJiaoLianAdapter.notifyDataSetChanged();
+//                            choiceJiaoLianAdapter.notifyDataSetChanged();
                         }
 
                     }
@@ -460,16 +459,17 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Bundle extras = data.getExtras();
-        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+        switch (resultCode) {
             case 333:
                 String seriesname = extras.getString("seriesname");
                 String series_id = extras.getString("series_id");
                 String name = extras.getString("name");
-                if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(seriesname)) {
-                    ll_choice_carstyle.setText(name+seriesname);
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(seriesname)) {
+                    ll_choice_carstyle.setText(name + seriesname);
                     ll_choice_carstyle.setChecked(true);
-                }else {
+                } else {
                     ll_choice_carstyle.setText("车辆品牌");
                     ll_choice_carstyle.setChecked(false);
                 }
@@ -645,47 +645,47 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
 
     }
 
-
-    public class ChoiceJiaoLianAdapter extends BaseCommonAdapter {
-        public ChoiceJiaoLianAdapter(List<JiaoLianInfo.ContentBean> mDatas, Context context, int layoutId) {
-            super(mDatas, context, layoutId);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder viewHolder, Object item) {
-            JiaoLianInfo.ContentBean contentBean = (JiaoLianInfo.ContentBean) item;
-            String driver_name = contentBean.getDriver_name();
-            String hour_price = contentBean.getHour_price();
-            String driving_year = contentBean.getDriving_year();
-            String car_url = contentBean.getCar_url();
-            String head_img = contentBean.getHead_img();
-            String seriesname = contentBean.getSeriesname();
-            String hand_auto = contentBean.getHand_auto();
-            String from_user = contentBean.getFrom_user();
-            String brand_name = contentBean.getBrand_name();
-            //教练名字
-            if (!TextUtils.isEmpty(driver_name)) {
-                viewHolder.setText(R.id.tv_drivers_name, driver_name);
-            }
-            //车辆描述
-            if (!TextUtils.isEmpty(brand_name) && !TextUtils.isEmpty(seriesname) && !TextUtils.isEmpty(hand_auto) && !TextUtils.isEmpty(driving_year)) {
-                viewHolder.setText(R.id.tv_drivers_situation, brand_name + seriesname + "  " + hand_auto + "  " + driving_year);
-            }
-            //教练的钱
-            if (!TextUtils.isEmpty(hour_price)) {
-                viewHolder.setText(R.id.tv_drivers_money, hour_price + "/小时");
-            }
-            //头像
-            if (!TextUtils.isEmpty(head_img)) {
-                viewHolder.setPicHead(R.id.iv_drivers_head, head_img);
-            }
-            //车
-            if (!TextUtils.isEmpty(car_url)) {
-                viewHolder.setPic(R.id.iv_drivers_car_photo, car_url);
-            }
-            if (!TextUtils.isEmpty(from_user)) {
-                viewHolder.setText(R.id.tv_drivers_distance, from_user);
-            }
-        }
-    }
+//
+//    public class ChoiceJiaoLianAdapter extends BaseCommonAdapter {
+//        public ChoiceJiaoLianAdapter(List<JiaoLianInfo.ContentBean> mDatas, Context context, int layoutId) {
+//            super(mDatas, context, layoutId);
+//        }
+//
+//        @Override
+//        protected void convert(BaseViewHolder viewHolder, Object item) {
+//            JiaoLianInfo.ContentBean contentBean = (JiaoLianInfo.ContentBean) item;
+//            String driver_name = contentBean.getDriver_name();
+//            String hour_price = contentBean.getHour_price();
+//            String driving_year = contentBean.getDriving_year();
+//            String car_url = contentBean.getCar_url();
+//            String head_img = contentBean.getHead_img();
+//            String seriesname = contentBean.getSeriesname();
+//            String hand_auto = contentBean.getHand_auto();
+//            String from_user = contentBean.getFrom_user();
+//            String brand_name = contentBean.getBrand_name();
+//            //教练名字
+//            if (!TextUtils.isEmpty(driver_name)) {
+//                viewHolder.setText(R.id.tv_drivers_name, driver_name);
+//            }
+//            //车辆描述
+//            if (!TextUtils.isEmpty(brand_name) && !TextUtils.isEmpty(seriesname) && !TextUtils.isEmpty(hand_auto) && !TextUtils.isEmpty(driving_year)) {
+//                viewHolder.setText(R.id.tv_drivers_situation, brand_name + seriesname + "  " + hand_auto + "  " + driving_year);
+//            }
+//            //教练的钱
+//            if (!TextUtils.isEmpty(hour_price)) {
+//                viewHolder.setText(R.id.tv_drivers_money, hour_price + "/小时");
+//            }
+//            //头像
+//            if (!TextUtils.isEmpty(head_img)) {
+//                viewHolder.setPicHead(R.id.iv_drivers_head, head_img);
+//            }
+//            //车
+//            if (!TextUtils.isEmpty(car_url)) {
+//                viewHolder.setPic(R.id.iv_drivers_car_photo, car_url);
+//            }
+//            if (!TextUtils.isEmpty(from_user)) {
+//                viewHolder.setText(R.id.tv_drivers_distance, from_user);
+//            }
+//        }
+//    }
 }

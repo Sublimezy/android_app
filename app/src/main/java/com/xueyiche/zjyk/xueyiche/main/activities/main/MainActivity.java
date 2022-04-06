@@ -3,7 +3,6 @@ package com.xueyiche.zjyk.xueyiche.main.activities.main;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.community.CommunityFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.homepage.HomeFragment;
+import com.xueyiche.zjyk.xueyiche.homepage.fragments.HomeFragment;
 import com.xueyiche.zjyk.xueyiche.mine.fragments.MineFragment;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
@@ -31,7 +30,6 @@ import com.xueyiche.zjyk.xueyiche.welfare.WelfareFragment;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
