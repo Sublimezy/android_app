@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.mine.fragments;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+import com.xueyiche.zjyk.xueyiche.homepage.HomeFragment;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.AboutXueYiChe;
@@ -70,7 +72,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     //电话号  id 的字段
     private String user_phone, user_id;
     private LinearLayout  ll_shared_app, ll_kefu, ll_about ;
-
+    public static MineFragment newInstance(String tag) {
+        Bundle bundle = new Bundle();
+        MineFragment fragment = new MineFragment();
+        bundle.putString("mine", tag);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
     @Override
     protected void lazyLoad() {
         if (!isPrepared || !isVisible) {

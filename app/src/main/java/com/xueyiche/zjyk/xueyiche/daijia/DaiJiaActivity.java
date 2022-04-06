@@ -1,5 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.daijia;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RouteSearch;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
@@ -63,7 +66,7 @@ import butterknife.OnClick;
  * #            com.xueyiche.zjyk.xueyiche
  * #            xueyiche5.0
  */
-public class DaiJiaNewFragment extends BaseMapFragment {
+public class DaiJiaActivity extends BaseMapActivity {
     @BindView(R.id.iv_anquan)
     ImageView ivAnquan;
     @BindView(R.id.rb_richang)
@@ -117,29 +120,31 @@ public class DaiJiaNewFragment extends BaseMapFragment {
     @BindView(R.id.ll_daijiao)
     LinearLayout llDaijiao;
 
-    @Override
-    protected void lazyLoad() {
 
+    @Override
+    protected int initContentView() {
+        return R.layout.daijia_activity;
     }
-
-    @Nullable
+    public static void forward(Context context) {
+        Intent intent = new Intent(context, DaiJiaActivity.class);
+        context.startActivity(intent);
+    }
     @Override
-    protected View setInitView(Bundle bundle) {
-        View view = LayoutInflater.from(App.context).inflate(R.layout.daijia_activity, null);
+    protected void initView(Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
         mapView = view.findViewById(R.id.map_view);
-        mapView.onCreate(bundle);
+        mapView.onCreate(savedInstanceState);
         initData();
-        return view;
     }
 
-    private void initData() {
+    @Override
+    protected void initListener() {
 
     }
 
     @Override
-    protected Object setLoadDate() {
-        return "xyc";
+    protected void initData() {
+
     }
 
     @Override
@@ -199,7 +204,7 @@ public class DaiJiaNewFragment extends BaseMapFragment {
 //                AppUtils.showAnQuan(getActivity());
 //                WaitActivity.forward(getActivity());
 //                JieDanActivity.forward(getActivity());
-                JinXingActivity.forward(getActivity());
+                JinXingActivity.forward(this);
                 break;
             case R.id.iv_user:
                 userLocation();

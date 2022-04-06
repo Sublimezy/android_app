@@ -32,7 +32,6 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.GoDaiJiaBean;
 import com.xueyiche.zjyk.xueyiche.pay.bean.ZhiFuBaoBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.OrderFaBuOkActivity;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.nobook.activity.NoBookPracticeCarYuYueSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.submit.PracticeCarSubmitIndent;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
@@ -180,7 +179,7 @@ public class AppPay extends BaseActivity implements View.OnClickListener {
             } else if ("car_life".equals(pay_style)) {
             }else if ("usedcar".equals(pay_style)) {
             } else if ("practice_wz".equals(pay_style)) {
-                NoBookPracticeCarYuYueSubmitIndent.instance.finish();
+
             }else if ("zhitongche".equals(pay_style)) {
             }else if ("practice".equals(pay_style)) {
                 PracticeCarSubmitIndent.instance.finish();

@@ -175,10 +175,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
         <activity
-            android:name=".guide.GuideActivity"
+            android:name=".mine.activities.ConstantlyAddressActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".mine.activities.ConstantlyAddressActivity"
+            android:name=".daijia.DaiJiaActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.activity.PracticeCarContentActivity"
@@ -384,18 +384,7 @@
         <activity
             android:name=".practicecar.activity.OrderTrainerActivity"
             android:screenOrientation="portrait" /> <!-- 无证的activity -->
-        <activity
-            android:name=".practicecar.activity.nobook.activity.NoBookShowPingJia"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".practicecar.activity.nobook.activity.NoBookPracticeCarYuYueSubmitIndent"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".practicecar.activity.nobook.activity.NoBookSubmitZhiJiePractice"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".practicecar.activity.OrderRecordActivity"
-            android:screenOrientation="portrait" /> <!-- 优惠券 -->
+        <!-- 优惠券 -->
         <activity
             android:name=".mine.activities.youhuiquan.YouHuiQuan"
             android:screenOrientation="portrait" />

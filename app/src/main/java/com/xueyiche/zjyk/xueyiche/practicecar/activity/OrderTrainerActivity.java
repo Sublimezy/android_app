@@ -276,7 +276,7 @@ public class OrderTrainerActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.tv_wenxintishi:
-                openActivity(OrderRecordActivity.class);
+
                 break;
             case R.id.tv_saomao:
 //                Intent intent1 = new Intent(this, TestScanActivity.class);

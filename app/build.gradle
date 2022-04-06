@@ -53,6 +53,8 @@ android {
                            'src/main/split-res/splash',
                            'src/main/split-res/indent',
                            'src/main/split-res/daijia',
+                           'src/main/split-res/community',
+                           'src/main/split-res/welfare',
                            'src/main/split-res/mine']
             debug.setRoot('build-types/debug')
             release.setRoot('build-types/release')
@@ -243,6 +245,7 @@ dependencies {
     implementation('com.github.tohodog:QSVideoPlayer:2.2.8') {
         exclude group: 'org.slf4j'
     }
+    implementation 'com.github.zhpanvip:BannerViewPager:3.5.0'
     implementation 'com.qq.e.union:union:4.373.1243'
     implementation 'com.pnikosis:materialish-progress:1.7'
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'

@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:windowTranslucentNavigation="false">
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/navigation_content"
@@ -34,10 +33,17 @@
             android:textSize="@dimen/text_shiyisp" />
 
         <RadioButton
-            android:id="@+id/rb_car"
+            android:id="@+id/rb_community"
             style="@style/MenuTabB"
             android:drawableTop="@drawable/my_menu2_selector"
-            android:text="练车"
+            android:text="社区"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/text_shiyisp" />
+        <RadioButton
+            android:id="@+id/rb_welfare"
+            style="@style/MenuTabB"
+            android:drawableTop="@drawable/my_menu2_selector"
+            android:text="福利"
             android:textColor="@drawable/main_rb_back_text"
             android:textSize="@dimen/text_shiyisp" />
 
