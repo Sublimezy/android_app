@@ -75,20 +75,7 @@
     <uses-feature android:name="android.hardware.nfc.hce" />
 
     <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
-    <!--适配Android R包可见性 开始-->
-<!--    <queries package="${applicationId}">-->
-<!--        <intent>-->
-<!--            <action android:name="android.media.action.IMAGE_CAPTURE">-->
 
-<!--            </action>-->
-<!--        </intent>-->
-<!--        <intent>-->
-<!--            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE">-->
-
-<!--            </action>-->
-<!--        </intent>-->
-<!--    </queries>-->
-    <!--适配Android R包可见性 结束-->
     <application
         android:name=".constants.App"
         android:allowBackup="false"
@@ -101,7 +88,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
-        <activity android:name=".daijia.RegistSiJiActivity"></activity>
+        <activity
+            android:name=".daijia.activity.CancelOrderActivity"
+            android:exported="false" />
+        <activity android:name=".daijia.RegistSiJiActivity" />
 
         <meta-data
             android:name="android.max_aspect"
@@ -166,10 +156,12 @@
                 android:resource="@xml/provider_paths"
                 tools:replace="name,resource" />
         </provider>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="b67d5cd9c68fcffee16604ab1f642e12" /> <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
+
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
@@ -187,8 +179,7 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <!-- 代驾行程 -->
+            android:screenOrientation="portrait" /> <!-- 代驾行程 -->
         <activity
             android:name=".daijia.activity.XingChengActivity"
             android:screenOrientation="portrait"
@@ -349,7 +340,7 @@
             android:screenOrientation="portrait" /> <!-- 教练详情页面 -->
         <activity
             android:name=".practicecar.activity.ChoiceCardDetails"
-            android:screenOrientation="portrait"></activity> <!-- 提交订单后的订单详情 -->
+            android:screenOrientation="portrait" /> <!-- 提交订单后的订单详情 -->
         <activity
             android:name=".pay.RechargeActivity"
             android:screenOrientation="portrait" /> <!-- 添加银行卡页面 -->
@@ -556,7 +547,6 @@
             android:value="eb33a1f8367fc8257d0115b0" /> <!-- </>值来自开发者平台取得的AppKey -->
         <!-- Required  . Enable it you can get statistics data with channel -->
         <!-- 高德地图定位 -->
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="589c161f45297d50eb000751" />
