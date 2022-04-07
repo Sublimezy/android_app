@@ -89,6 +89,9 @@
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".daijia.activity.DaShangActivity"
+            android:exported="false" />
+        <activity
             android:name=".daijia.activity.CancelOrderActivity"
             android:exported="false" />
         <activity android:name=".daijia.RegistSiJiActivity" />
