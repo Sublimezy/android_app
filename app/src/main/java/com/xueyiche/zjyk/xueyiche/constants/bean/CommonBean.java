@@ -29,6 +29,15 @@ package com.xueyiche.zjyk.xueyiche.constants.bean;
  */
 public class CommonBean {
     private String type = "";
+    private String city = "";
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getType() {
         return type;

@@ -117,7 +117,7 @@ public class NowPracticeActivity extends BaseActivity implements View.OnClickLis
     protected void initView() {
         tv_login_back = (TextView) view.findViewById(R.id.title).findViewById(R.id.tv_title);
         iv_login_back = (ImageView) view.findViewById(R.id.title).findViewById(R.id.iv_login_back);
-        ll_choose_type = (LinearLayout) view.findViewById(R.id.title).findViewById(R.id.ll_choose_type);
+//        ll_choose_type = (LinearLayout) view.findViewById(R.id.title).findViewById(R.id.ll_choose_type);
         //紧急联系人电话
         tv_urgency_phone = (MClearEditText) view.findViewById(R.id.tv_urgency_phone);
         tv_jie_location = (TextView) view.findViewById(R.id.tv_jie_location);

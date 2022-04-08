@@ -172,6 +172,7 @@ dependencies {
     //eventbus
     compile files('libs/eventbus-2.4.0.jar')
     //下拉刷新上拉加载
+    implementation project(':lib_YZxing-lib')
     implementation 'com.xw.repo:PullToRefresh:2.1@aar'
     //极光推送
     compile files('libs/jpush-android-3.3.6.jar')

@@ -90,6 +90,7 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
         } else {
             aMap.clear();
             aMap.setLocationSource(this);
+
             aMap.setMyLocationEnabled(true);
             aMap = mapView.getMap();
             setUpMap();

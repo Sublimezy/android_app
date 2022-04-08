@@ -184,6 +184,9 @@
             android:name=".practicecar.activity.PracticeCarContentActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".daijia.activity.LocationSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
@@ -402,7 +405,7 @@
 
         <meta-data
             android:name="design_width"
-            android:value="720" />
+            android:value="768" />
         <meta-data
             android:name="design_height"
             android:value="1280" /> <!-- 设置成410 才能跟autolayout一样 不知道为什么 -->

@@ -1,1 +1,2 @@
 include ':app', ':library', ':textlibrary'
+include ':lib_YZxing-lib'

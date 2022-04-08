@@ -8,7 +8,12 @@
     <string-array name="npv_lunar_day_with_measure_hint">
         <item>初一</item>
     </string-array>
-
+    <string name="life_circle">社交圈</string>
+    <string name="skin_qian_dou_green">浅豆绿</string>
+    <string name="skin_Qing_Shui_blue">清水蓝</string>
+    <string name="skin_Shan_Hu_Hong">珊瑚红</string>
+    <string name="skin_Liu_Xia_Fen">流霞粉</string>
+    <string name="skin_Dan_Gu_green">淡钴绿</string>
     <string name="cancel_text">取消</string>
     <string name="title">这是标题</string>
     <string name="normal_sure_text">确定</string>

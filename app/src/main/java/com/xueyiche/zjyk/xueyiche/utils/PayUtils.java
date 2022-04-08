@@ -143,13 +143,13 @@ public class PayUtils {
 
                                 } else if ("daijia_yuyue".equals(pay_style)) {
                                     PrefUtils.putString(App.context,"hongbao_show","1");
-                                    XingChengActivity.instance.finish();
+//                                    XingChengActivity.instance.finish();
                                     Intent intent = new Intent(activity, WaitYuYueActivity.class);
                                     intent.putExtra("order_number", order_number);
                                     activity.startActivity(intent);
                                 }else if ("daijia_liji".equals(pay_style)) {
                                     PrefUtils.putString(App.context,"hongbao_show","1");
-                                    XingChengActivity.instance.finish();
+//                                    XingChengActivity.instance.finish();
                                     Intent intent = new Intent(activity, WaitActivity.class);
                                     intent.putExtra("order_number", order_number);
                                     activity.startActivity(intent);

@@ -41,7 +41,7 @@ import de.greenrobot.event.EventBus;
  * Created by Administrator on 2019/9/19.
  */
 public class JieDanActivity extends BaseMapActivity {
-    @BindView(R.id.cancel_order)
+    @BindView(R.id.tv_right_btn)
     TextView cancelOrder;
     private MarkerOptions markerOption;
 

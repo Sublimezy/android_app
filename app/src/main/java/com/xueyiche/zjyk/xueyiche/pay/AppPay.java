@@ -146,12 +146,12 @@ public class AppPay extends BaseActivity implements View.OnClickListener {
                 return;
             }  else if ("daijia_liji".equals(pay_style)) {
                 PrefUtils.putString(App.context,"hongbao_show","1");
-                XingChengActivity.instance.finish();
+//                XingChengActivity.instance.finish();
                 goDaiJia();
                 return;
             } else if ("daijia_yuyue".equals(pay_style)) {
                 PrefUtils.putString(App.context,"hongbao_show","1");
-                XingChengActivity.instance.finish();
+//                XingChengActivity.instance.finish();
                 Intent intent = new Intent(this, WaitYuYueActivity.class);
                 intent.putExtra("order_number", order_number);
                 startActivity(intent);

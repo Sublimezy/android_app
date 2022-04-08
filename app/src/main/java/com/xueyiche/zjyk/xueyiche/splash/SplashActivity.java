@@ -261,55 +261,13 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
     }
 
     private void goMainActivity() {
-        if (XueYiCheUtils.IsHaveInternet(this)) {
-            OkHttpUtils.post().url(AppUrl.App_Code)
-                    .addParams("user_id", "")
-                    .build().execute(new Callback() {
-                @Override
-                public Object parseNetworkResponse(Response response) throws IOException {
-                    String string = response.body().string();
-                    if (!TextUtils.isEmpty(string)) {
-                        CodeBean codeBean = JsonUtil.parseJsonToBean(string, CodeBean.class);
-                        if (codeBean != null) {
-                            final String content = codeBean.getContent();
-                            App.handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int code = Integer.parseInt(content);
-                                    int versionCode = AppUtils.getVersionCode();
-                                    if (code <= versionCode) {
-                                        if (choice_city) {
-                                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                                            finish();
-                                        } else {
-                                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//                                            startActivity(new Intent(SplashActivity.this, LocationActivity.class));
-                                            finish();
-                                        }
-
-                                    } else {
-                                        //提示更新
-                                        DialogUtils.showGengXin(SplashActivity.this);
-
-                                    }
-                                }
-                            });
-
-                        }
-                    }
-                    return string;
-                }
-
-                @Override
-                public void onError(Request request, Exception e) {
-                }
-
-                @Override
-                public void onResponse(Object response) {
-                }
-            });
+        if (choice_city) {
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
         } else {
-            Toast.makeText(this, "请检查网络", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                                            startActivity(new Intent(SplashActivity.this, LocationActivity.class));
+            finish();
         }
 
     }

@@ -94,8 +94,6 @@ public class DaiJiaFragment extends Fragment implements RouteSearch.OnRouteSearc
     TextView tvYuyueTime;
     @BindView(R.id.ll_yuyue_time)
     LinearLayout llYuyueTime;
-    @BindView(R.id.iv_daijia_banner_yuyue)
-    CustomShapeImageView ivDaijiaBannerYuyue;
     @BindView(R.id.tv_qidian_yuyue)
     TextView tvQidianYuyue;
     @BindView(R.id.tv_mudi_yuyue)
@@ -110,8 +108,6 @@ public class DaiJiaFragment extends Fragment implements RouteSearch.OnRouteSearc
     TextView tvXiadanYuyue;
     @BindView(R.id.ll_yuyue)
     LinearLayout llYuyue;
-    @BindView(R.id.iv_daijia_banner_daijiao)
-    ImageView ivDaijiaBannerDaijiao;
     @BindView(R.id.tv_choose_time)
     TextView tvChooseTime;
     @BindView(R.id.daijiao_line)

@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,130 +10,91 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.toast.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
-import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-import com.xueyiche.zjyk.xueyiche.utils.ProcessResultUtil;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
  * Created by Administrator on 2019/9/18.
  */
-public class DaiJiaoActivity extends AppCompatActivity implements View.OnClickListener {
+public class DaiJiaoActivity extends BaseActivity {
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.rl_title)
+    RelativeLayout rlTitle;
+    @BindView(R.id.et_phone)
+    EditText etPhone;
+    @BindView(R.id.et_Name)
+    EditText etName;
 
-    private TextView tv_title, tv_phone_book;
-    private ImageView ll_exam_back, iv_daijiao;
-    private EditText et_phone, et_Name;
-    private String phoneName;
-    private ProcessResultUtil mProcessResultUtil;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.daijiao_activity);
-        //透明状态栏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        initView();
-        initData();
-    }
-
-    private void initView() {
-        tv_title = findViewById(R.id.title).findViewById(R.id.tv_title);
-        ll_exam_back = findViewById(R.id.title).findViewById(R.id.iv_login_back);
-        et_phone = (EditText) findViewById(R.id.et_phone);
-        tv_phone_book = (TextView) findViewById(R.id.tv_phone_book);
-        iv_daijiao = (ImageView) findViewById(R.id.iv_daijiao);
-        et_Name = (EditText) findViewById(R.id.et_Name);
-        ll_exam_back.setOnClickListener(this);
-        tv_phone_book.setOnClickListener(this);
-        iv_daijiao.setOnClickListener(this);
-        mProcessResultUtil = new ProcessResultUtil(this);
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (v.getId()) {
-            case R.id.iv_login_back:
-                intent.putExtra("daijiao_phone", "");
-                intent.putExtra("daijiao_name", "");
-                setResult(333, intent);
-                finish();
-                break;
-            case R.id.tv_phone_book:
-                res();
-                break;
-            case R.id.iv_daijiao:
-                //保存电话号码
-                String phone = et_phone.getText().toString().trim();
-                String name = et_Name.getText().toString().trim();
-                if (TextUtils.isEmpty(phone)) {
-                    Toast.makeText(DaiJiaoActivity.this, "请输入手机号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (phone.length() != 11) {
-                    Toast.makeText(DaiJiaoActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                intent.putExtra("daijiao_phone", phone);
-                intent.putExtra("daijiao_name", !TextUtils.isEmpty(name) ? name : "");
-                setResult(444, intent);
-                finish();
-                break;
-        }
+    public static void forward(Activity activity, int code) {
+        Intent intent = new Intent(activity, DaiJiaoActivity.class);
+        activity.startActivityForResult(intent, code);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mProcessResultUtil != null) {
-            mProcessResultUtil.release();
-        }
+    protected void initListener() {
 
+    }
+
+    @Override
+    protected void initData() {
+        tvTitle.setText("乘车人信息");
+    }
+
+    @Override
+    protected int initContentView() {
+        return R.layout.daijiao_activity;
+    }
+
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
     }
 
     private void res() {
-        mProcessResultUtil.requestPermissions(new String[]{
-                Manifest.permission.READ_CONTACTS,
-        }, mStartLiveRunnable);
+        AndPermission.with(DaiJiaoActivity.this)
+                .permission(
+                        Manifest.permission.READ_CONTACTS)
+                .onGranted(new Action() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        Intent intent1 = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                        startActivityForResult(intent1, 1);
+                    }
+                })
+                .onDenied(new Action() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        Uri packageURI = Uri.parse("package:" + getPackageName());
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                }).start();
     }
 
-    private Runnable mStartLiveRunnable = new Runnable() {
-        @Override
-        public void run() {
-            Intent intent1 = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-            startActivityForResult(intent1, 1);
-        }
-    };
-    private Intent mIntent;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 2;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 用户成功授予权限
-                getContacts(mIntent);
-            } else {
-                Toast.makeText(this, "你拒绝了此应用对读取联系人权限的申请！", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -152,6 +114,7 @@ public class DaiJiaoActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("Range")
     private void getContacts(Intent data) {
         if (data == null) {
             return;
@@ -163,7 +126,6 @@ public class DaiJiaoActivity extends AppCompatActivity implements View.OnClickLi
         }
         String name = "";
         String phoneNumber = "";
-
         Uri contactUri = data.getData();
         Cursor cursor = getContentResolver().query(contactUri, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -194,9 +156,12 @@ public class DaiJiaoActivity extends AppCompatActivity implements View.OnClickLi
                 phones.close();
             }
             cursor.close();
+            etName.setText(name);
+            if (!TextUtils.isEmpty(phoneNumber)) {
+                String replace = phoneNumber.replace(" ", "");
+                etPhone.setText("" + replace);
+            }
 
-            et_Name.setText(name);
-            et_phone.setText("" + phoneNumber);
         }
     }
 
@@ -206,7 +171,7 @@ public class DaiJiaoActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent();
             intent.putExtra("daijiao_phone", "");
             intent.putExtra("daijiao_name", "");
-            setResult(444, intent);
+            setResult(333, intent);
             finish();
             return false;
         }
@@ -214,10 +179,37 @@ public class DaiJiaoActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private void initData() {
-        tv_title.setText("乘车人信息");
-        String daijiao_phone = PrefUtils.getString(DaiJiaoActivity.this, "daijiao_phone", "");
-        et_phone.setText(daijiao_phone);
-
+    @OnClick({R.id.ll_common_back, R.id.tv_phone_book, R.id.iv_daijiao})
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.ll_common_back:
+                intent.putExtra("daijiao_phone", "");
+                intent.putExtra("daijiao_name", "");
+                setResult(333, intent);
+                finish();
+                break;
+            case R.id.tv_phone_book:
+                res();
+                break;
+            case R.id.iv_daijiao:
+                //保存电话号码
+                String phone = etPhone.getText().toString().trim();
+                String name = etName.getText().toString().trim();
+                if (TextUtils.isEmpty(phone)) {
+                    com.luck.picture.lib.utils.ToastUtils.showToast(DaiJiaoActivity.this,"请输入手机号");
+                    return;
+                }
+                if (phone.length() != 11) {
+                    com.luck.picture.lib.utils.ToastUtils.showToast(DaiJiaoActivity.this,"请输入正确的手机号");
+                    return;
+                }
+                intent.putExtra("daijiao_phone", phone);
+                intent.putExtra("daijiao_name", !TextUtils.isEmpty(name) ? name : "");
+                setResult(333, intent);
+                finish();
+                break;
+        }
     }
 }
+

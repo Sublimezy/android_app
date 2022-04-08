@@ -90,7 +90,7 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
     protected void initView() {
         tv_login_back = (TextView) view.findViewById(R.id.title).findViewById(R.id.tv_title);
         iv_login_back = (ImageView) view.findViewById(R.id.title).findViewById(R.id.iv_login_back);
-        tv_top_right_button_map = view.findViewById(R.id.title).findViewById(R.id.tv_top_right_button_map);
+//        tv_top_right_button_map = view.findViewById(R.id.title).findViewById(R.id.tv_top_right_button_map);
 //        choiceJiaoLianAdapter = new ChoiceJiaoLianAdapter(list, App.context, R.layout.practice_item);
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         ll_choice_area = (RadioButton) view.findViewById(R.id.ll_choice_area);
@@ -485,9 +485,9 @@ public class DriverPracticeActivity extends BaseActivity implements View.OnClick
             case R.id.iv_login_back:
                 finish();
                 break;
-            case R.id.tv_top_right_button_map:
-                finish();
-                break;
+//            case R.id.tv_top_right_button_map:
+//                finish();
+//                break;
             case R.id.ll_choice_shaixuan:
                 changPopStateShaiXuan(ll_choice_shaixuan);
                 break;

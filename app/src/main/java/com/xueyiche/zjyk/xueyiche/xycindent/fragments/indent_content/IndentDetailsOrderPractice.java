@@ -158,7 +158,7 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
 
         ll_exam_back = view.findViewById(R.id.indent_details_include).findViewById(R.id.iv_login_back);
         tv_login_back = (TextView) view.findViewById(R.id.indent_details_include).findViewById(R.id.tv_title);
-        ll_toushu = view.findViewById(R.id.indent_details_include).findViewById(R.id.ll_toushu);
+//        ll_toushu = view.findViewById(R.id.indent_details_include).findViewById(R.id.ll_toushu);
         mScrollLayout = view.findViewById(R.id.scroll_down_layout);
         ll_type = view.findViewById(R.id.ll_type);
 
@@ -534,6 +534,7 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
@@ -600,9 +601,9 @@ public class IndentDetailsOrderPractice extends BaseActivity implements View.OnC
             case R.id.iv_login_back:
                 finish();
                 break;
-            case R.id.ll_toushu:
-                XueYiCheUtils.CallPhone(IndentDetailsOrderPractice.this, "是否拨打投诉电话？", "0451-51068980");
-                break;
+//            case R.id.ll_toushu:
+//                XueYiCheUtils.CallPhone(IndentDetailsOrderPractice.this, "是否拨打投诉电话？", "0451-51068980");
+//                break;
             case R.id.tv_drivers_phone:
                 if (!TextUtils.isEmpty(driver_phone)) {
                     int length = driver_phone.length();

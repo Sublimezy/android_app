@@ -84,7 +84,7 @@ public class PracticeCarMapFragment extends BaseFragment implements SensorEventL
         rb_now = (RadioButton) view.findViewById(R.id.rb_now);
         rb_yuyue = (RadioButton) view.findViewById(R.id.rb_yuyue);
         rb_driverbaoming = (RadioButton) view.findViewById(R.id.rb_driverbaoming);
-        ll_choose_type = (LinearLayout) view.findViewById(R.id.ll_choose_type);
+//        ll_choose_type = (LinearLayout) view.findViewById(R.id.ll_choose_type);
         tv_content = (TextView) view.findViewById(R.id.tv_content);
         iv_user = (ImageView) view.findViewById(R.id.iv_user);
         iv_login_back = (ImageView) view.findViewById(R.id.iv_login_back);
@@ -270,11 +270,11 @@ public class PracticeCarMapFragment extends BaseFragment implements SensorEventL
                 Intent intent2 = new Intent(App.context, YuYuePracticeActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.ll_choose_type:
-                //打开教练列表
-                Intent intent3 = new Intent(App.context, DriverPracticeActivity.class);
-                startActivity(intent3);
-                break;
+//            case R.id.ll_choose_type:
+//                //打开教练列表
+//                Intent intent3 = new Intent(App.context, DriverPracticeActivity.class);
+//                startActivity(intent3);
+//                break;
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
