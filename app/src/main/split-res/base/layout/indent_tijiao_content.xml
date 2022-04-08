@@ -1,62 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <RelativeLayout
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/rl_title"
-        android:background="@color/color_white"
-        android:layout_marginTop="@dimen/all_16dp"
-        android:layout_height="56dp">
-        <LinearLayout
-            android:id="@+id/ll_exam_back"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iv_login_back"
-                android:padding="10dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/new_driver_school_back_hei"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/color_white">
+
+            <LinearLayout
+                android:id="@+id/ll_exam_back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="56dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_login_back"
-            android:layout_centerVertical="true"
-            style="@style/shop_title_1"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
+                <ImageView
+                    android:id="@+id/iv_login_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:src="@mipmap/new_driver_school_back_hei" />
 
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_login_back"
+                style="@style/shop_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/title_one"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_wenxintishi"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/all_zouyou"
+                android:layout_toLeftOf="@+id/iv_caidan"
+                android:gravity="center_vertical"
+                android:text="@string/wenxinTishi"
+                android:textColor="@color/colorOrange"
+                android:textSize="@dimen/text_fifteensp"
+                android:visibility="gone" />
             />
-        <TextView
-            android:id="@+id/tv_wenxintishi"
-            android:layout_alignParentRight="true"
-            android:text="@string/wenxinTishi"
-            android:layout_marginRight="@dimen/all_zouyou"
-            android:textSize="@dimen/text_fifteensp"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:textColor="@color/colorOrange"
-            android:layout_toLeftOf="@+id/iv_caidan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        />
-        <ImageView
-            android:id="@+id/iv_caidan"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/czh_fx"
-            android:visibility="gone"
-            android:padding="17dp"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <View
-            android:layout_alignParentBottom="true"
-            style="@style/_cccline" />
-    </RelativeLayout>
 
-</RelativeLayout >
+            <ImageView
+                android:id="@+id/iv_caidan"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:padding="17dp"
+                android:src="@mipmap/czh_fx"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#E4E4E4" />
+    </LinearLayout>
+</LinearLayout>

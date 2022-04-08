@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
@@ -29,12 +30,15 @@ public class AboutXueYiChe extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initView() {
+
         llBack = (LinearLayout) view.findViewById(R.id.about_xue_include).findViewById(R.id.ll_exam_back);
         llBack.setOnClickListener(this);
         tvTitle = (TextView) view.findViewById(R.id.about_xue_include).findViewById(R.id.tv_login_back);
         tv_version = (TextView) view.findViewById(R.id.tv_version);
         tv_fuwu = (TextView) view.findViewById(R.id.tv_fuwu);
         tv_yinsi = (TextView) view.findViewById(R.id.tv_yinsi);
+
+        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
     }
 
     @Override

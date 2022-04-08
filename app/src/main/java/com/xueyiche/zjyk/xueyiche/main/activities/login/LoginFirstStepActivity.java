@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -30,6 +31,7 @@ public class LoginFirstStepActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
         etLoginPhone = (EditText) view.findViewById(R.id.etLoginPhone);
         btNextStep = (Button) view.findViewById(R.id.btNextStep);
         ll_exam_back = (LinearLayout) view.findViewById(R.id.shop_top_include).findViewById(R.id.ll_exam_back);

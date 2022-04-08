@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.umeng.analytics.MobclickAgent;
@@ -66,6 +67,7 @@ public class LoginSecondStepActivity extends BaseActivity implements View.OnClic
         input = (VerificationCodeInput) findViewById(R.id.verificationCodeInput);
         btLogin = (Button) view.findViewById(R.id.btLogin);
 
+        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
 
     }
 

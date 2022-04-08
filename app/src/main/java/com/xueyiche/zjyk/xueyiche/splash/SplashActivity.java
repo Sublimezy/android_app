@@ -236,24 +236,26 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
 
         } else {
             findViewById(R.id.splash_main).setVisibility(View.GONE);
-            start = new Couterdown(3000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    tv_jump.setText("" + ((millisUntilFinished / 1000) + 1));
-                }
-
-                @Override
-                public String toClock(long millis) {
-                    return super.toClock(millis);
-                }
-
-                @Override
-                public void onFinish() {
+            tv_jump.setVisibility(View.GONE);
+//            start = new Couterdown(3000, 1000) {
+//                @Override
+//                public void onTick(long millisUntilFinished) {
+//                    tv_jump.setText("" + ((millisUntilFinished / 1000) + 1));
+//                }
+//
+//                @Override
+//                public String toClock(long millis) {
+//                    return super.toClock(millis);
+//                }
+//
+//                @Override
+//                public void onFinish() {
+//                    res();
+//                }
+//
+//
+//            }.start();
                     res();
-                }
-
-
-            }.start();
         }
 
     }

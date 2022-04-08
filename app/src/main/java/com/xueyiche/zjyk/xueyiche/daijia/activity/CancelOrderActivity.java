@@ -72,12 +72,12 @@ public class CancelOrderActivity extends BaseActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycler.setAdapter(resonAdapter);
         List<ResonBean> data = new ArrayList<>();
-        data.add(new ResonBean("司机到位太慢了，等不及了",false));
-        data.add(new ResonBean("等待太久，不想等了",false));
-        data.add(new ResonBean("代驾收费太高了",false));
-        data.add(new ResonBean("司机要求取消订单",false));
-        data.add(new ResonBean("找到其他代驾",false));
-        data.add(new ResonBean("暂时不需要代驾了",false));
+        data.add(new ResonBean("司机到位太慢了，等不及了", false));
+        data.add(new ResonBean("等待太久，不想等了", false));
+        data.add(new ResonBean("代驾收费太高了", false));
+        data.add(new ResonBean("司机要求取消订单", false));
+        data.add(new ResonBean("找到其他代驾", false));
+        data.add(new ResonBean("暂时不需要代驾了", false));
 
         resonAdapter.setNewData(data);
         resonAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -85,10 +85,10 @@ public class CancelOrderActivity extends BaseActivity {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<ResonBean> data1 = resonAdapter.getData();
                 for (int i = 0; i < data1.size(); i++) {
-                    if(i == position){
-                            data1.get(i).setSelected(true);
-                    }else{
-                            data1.get(i).setSelected(false);
+                    if (i == position) {
+                        data1.get(i).setSelected(true);
+                    } else {
+                        data1.get(i).setSelected(false);
 
                     }
                 }

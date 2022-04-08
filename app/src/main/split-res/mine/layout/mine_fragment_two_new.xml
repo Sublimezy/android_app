@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f8f8f8"
+    android:background="#f7f7f7"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -84,12 +84,7 @@
                         android:layout_marginRight="0dp"
                         android:src="@mipmap/pic_mine_shezhi" />
 
-                    <ImageView
-                        android:id="@+id/iv_mine_message"
-                        android:layout_width="21dp"
-                        android:layout_height="21dp"
-                        android:src="@mipmap/pic_mine_xiaoxi"
-                        android:visibility="gone" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -125,6 +120,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll_my_order"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -158,6 +154,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_changyong_dizhi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="17dp"
@@ -198,6 +195,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_siji_baoming"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="17dp"
@@ -206,7 +204,6 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/ll_my_wallet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

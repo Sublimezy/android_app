@@ -220,10 +220,10 @@ dependencies {
     implementation 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.jakewharton:butterknife:10.0.0'
-    // 基础依赖包，必须要依赖
-    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
-// fragment快速实现（可选）
-    implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+// 基础依赖包，必须要依赖
+    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+// kotlin扩展（可选）
+    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
     implementation 'com.github.lihangleo2:ShadowLayout:3.0.1'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     //网络请求

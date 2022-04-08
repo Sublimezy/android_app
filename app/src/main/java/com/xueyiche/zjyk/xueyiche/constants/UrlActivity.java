@@ -31,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -87,6 +88,8 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
         tvTitle = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_login_back);
         tv_wenxintishi = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_wenxintishi);
         pass_web_view = (WebView) view.findViewById(R.id.pass_web_view);
+
+        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
     }
     public static void forward(Context context,String url,String type) {
         Intent intent = new Intent(context, UrlActivity.class);

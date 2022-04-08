@@ -82,12 +82,17 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/logo_user"
         android:label="@string/app_name"
+        android:maxAspectRatio="2.4"
         android:persistent="true"
+        android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
+        <activity
+            android:name=".daijia.activity.ChooseDaijiaYuanActivity"
+            android:exported="false" />
         <activity
             android:name=".daijia.activity.DaShangActivity"
             android:exported="false" />
