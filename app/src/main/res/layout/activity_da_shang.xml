@@ -67,6 +67,5 @@
         android:gravity="center"
         android:text="打赏"
         android:textColor="@color/white"
-        android:textSize="20dp"
-        app:sle_cornersRadius="23dp" />
+        android:textSize="20dp" />
 </LinearLayout>
