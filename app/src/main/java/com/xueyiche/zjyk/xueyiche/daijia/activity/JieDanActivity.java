@@ -8,70 +8,48 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DriveRouteResult;
-import com.amap.api.services.route.RouteSearch;
 import com.google.gson.Gson;
-import com.hjq.toast.ToastUtils;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.GDLocation;
-import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
-import com.xueyiche.zjyk.xueyiche.constants.App;
-import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.bean.NearbyBean;
-import com.xueyiche.zjyk.xueyiche.daijia.bean.OrderInfoBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
-import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
-import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
-import com.xueyiche.zjyk.xueyiche.pay.AppPay;
-import com.xueyiche.zjyk.xueyiche.utils.AES;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
-import com.xueyiche.zjyk.xueyiche.utils.DatePanDuanUtils;
-import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
-import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-import com.xueyiche.zjyk.xueyiche.utils.WaveMapUtils;
-import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by Administrator on 2019/9/19.
  */
 public class JieDanActivity extends BaseMapActivity {
+    @BindView(R.id.cancel_order)
+    TextView cancelOrder;
     private MarkerOptions markerOption;
+
     @Override
     protected int initContentView() {
         return R.layout.jiedan_activity;
     }
+
     @Override
     protected void initView(Bundle savedInstanceState) {
         mapView = view.findViewById(R.id.map_view);
@@ -102,8 +80,18 @@ public class JieDanActivity extends BaseMapActivity {
 
     @Override
     protected void initData() {
+        cancelOrder.setVisibility(View.VISIBLE);
+        cancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(JieDanActivity.this,CancelOrderActivity.class);
+                intent.putExtra("order_sn","order_sn");
+                startActivity(intent);
 
+            }
+        });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -111,6 +99,7 @@ public class JieDanActivity extends BaseMapActivity {
             EventBus.getDefault().unregister(this);
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -118,6 +107,7 @@ public class JieDanActivity extends BaseMapActivity {
             EventBus.getDefault().register(this);
         }
     }
+
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
@@ -129,13 +119,13 @@ public class JieDanActivity extends BaseMapActivity {
 
                 LatLonPoint mEndPoint = new LatLonPoint(39.995576, 116.481288);//终点，116.481288,39.995576
 //
-                getDataFromNet(""+latitude,""+longitude);
+                getDataFromNet("" + latitude, "" + longitude);
 
             }
         }
     }
 
-    private void getDataFromNet(String latitude,String longitude) {
+    private void getDataFromNet(String latitude, String longitude) {
         Map<String, String> params = new HashMap<>();
         params.put("user_lng", "" + latitude);
         params.put("user_lat", "" + longitude);
@@ -145,35 +135,35 @@ public class JieDanActivity extends BaseMapActivity {
         String lat = PrefUtils.getParameter("lat");
         String lon = PrefUtils.getParameter("lon");
         List<LatLng> list = new ArrayList<>();
-        LatLng latlng1 = new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
-        LatLng latlng = new LatLng(45.773342,126.670695);
+        LatLng latlng1 = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+        LatLng latlng = new LatLng(45.773342, 126.670695);
         list.add(latlng1);
         list.add(latlng);
-            for (int i = 0; i < list.size(); i++) {
-                LatLonPoint mStartPoint = new LatLonPoint(39.942295, 116.335891);//起点，116.335891,39.942295
-                View viewCat = LayoutInflater.from(JieDanActivity.this).inflate(R.layout.item_map_nearby_layout, null);
-                TextView tvName = viewCat.findViewById(R.id.tvName);
-                LinearLayout llTop = viewCat.findViewById(R.id.llTop);
-                CircleImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
-                if (i==0) {
-                    llTop.setVisibility(View.GONE);
-                    ivLogoType.setImageResource(R.mipmap.dingwei);
-                }else {
-                    llTop.setVisibility(View.VISIBLE);
-                    ivLogoType.setImageResource(R.mipmap.logo);
-                }
-                TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
-//                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
-                aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat),Double.parseDouble(lon),45.773342,126.670695),200));
-
-                Bitmap bitmap = convertViewToBitmap(viewCat);
-                markerOption = new MarkerOptions()
-                        .position(list.get(i))
-                        .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-                        .draggable(false);
-                Marker marker = aMap.addMarker(markerOption);
-//                marker.setObject(user_list.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            LatLonPoint mStartPoint = new LatLonPoint(39.942295, 116.335891);//起点，116.335891,39.942295
+            View viewCat = LayoutInflater.from(JieDanActivity.this).inflate(R.layout.item_map_nearby_layout, null);
+            TextView tvName = viewCat.findViewById(R.id.tvName);
+            LinearLayout llTop = viewCat.findViewById(R.id.llTop);
+            CircleImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
+            if (i == 0) {
+                llTop.setVisibility(View.GONE);
+                ivLogoType.setImageResource(R.mipmap.dingwei);
+            } else {
+                llTop.setVisibility(View.VISIBLE);
+                ivLogoType.setImageResource(R.mipmap.logo);
             }
+            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
+//                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
+            aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
+
+            Bitmap bitmap = convertViewToBitmap(viewCat);
+            markerOption = new MarkerOptions()
+                    .position(list.get(i))
+                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                    .draggable(false);
+            Marker marker = aMap.addMarker(markerOption);
+//                marker.setObject(user_list.get(i));
+        }
 
     }
 
@@ -189,6 +179,13 @@ public class JieDanActivity extends BaseMapActivity {
     @Override
     public void onDriveRouteSearched(DriveRouteResult driveRouteResult, int i) {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
 

@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,9 +17,16 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.CancelOrderBean;
+import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +57,8 @@ public class CancelOrderActivity extends BaseActivity {
     TextView tvCancel;
     @BindView(R.id.tv_giveup)
     TextView tvGiveup;
+    private ResonAdapter resonAdapter;
+    private String order_sn;
 
     @Override
     protected int initContentView() {
@@ -68,7 +78,8 @@ public class CancelOrderActivity extends BaseActivity {
     @Override
     protected void initData() {
         tvTitle.setText("取消原因");
-        ResonAdapter resonAdapter = new ResonAdapter(R.layout.item_cancel_reson);
+        order_sn = getIntent().getStringExtra("order_sn");
+        resonAdapter = new ResonAdapter(R.layout.item_cancel_reson);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycler.setAdapter(resonAdapter);
         List<ResonBean> data = new ArrayList<>();
@@ -107,6 +118,40 @@ public class CancelOrderActivity extends BaseActivity {
 
                 break;
             case R.id.tv_cancel:
+                String quxiao_reason="";
+                List<ResonBean> data = resonAdapter.getData();
+                for (int i = 0; i < data.size(); i++) {
+                    ResonBean resonBean = data.get(i);
+                    if(resonBean.isSelected()){
+                        quxiao_reason = resonBean.getReson();
+                    }
+                }
+                if(TextUtils.isEmpty(quxiao_reason)){
+                    showToastShort("请选择取消原因");
+                    return;
+                }
+                Map<String, String> params = new HashMap<>();
+                params.put("order_sn",order_sn);
+                params.put("quxiao_reason",quxiao_reason);
+                params.put("quxiao_remarks",etInfo.getText().toString().trim());
+
+                MyHttpUtils.postHttpMessage(AppUrl.cancelOrder, params, CancelOrderBean.class, new RequestCallBack<CancelOrderBean>() {
+                    @Override
+                    public void requestSuccess(CancelOrderBean json) {
+                        showToastShort(json.getMsg());
+                        if (json.getCode() == 1) {
+
+
+                            finish();
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void requestError(String errorMsg, int errorType) {
+
+                    }
+                });
 
                 break;
             case R.id.tv_giveup:

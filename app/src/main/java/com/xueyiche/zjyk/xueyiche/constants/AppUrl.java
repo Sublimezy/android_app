@@ -492,6 +492,7 @@ public interface AppUrl {
     String selectRegionsByAreaId2 = IPWAIWANG +"mg/area/selectRegionsByAreaId2.do";
     String selectRegionsByAreaIdStreet = IPWAIWANG +"mg/area/selectRegionsByAreaIdStreet.do";
     String drivingList = "http://guanli.xueyiche.vip:101/api/Userindex/drivingList";
+    String cancelOrder = "http://guanli.xueyiche.vip:101/api/Userindex/cancelOrder";
 
 }
 
