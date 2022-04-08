@@ -491,6 +491,7 @@ public interface AppUrl {
     //获取市和街道
     String selectRegionsByAreaId2 = IPWAIWANG +"mg/area/selectRegionsByAreaId2.do";
     String selectRegionsByAreaIdStreet = IPWAIWANG +"mg/area/selectRegionsByAreaIdStreet.do";
+    String drivingList = "http://guanli.xueyiche.vip:101/api/Userindex/drivingList";
 
 }
 
