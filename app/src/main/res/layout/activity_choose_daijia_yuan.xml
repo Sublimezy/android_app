@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorwhite"
     android:orientation="vertical"
-    
     tools:context=".daijia.activity.ChooseDaijiaYuanActivity">
 
     <include layout="@layout/new_title_bar" />
