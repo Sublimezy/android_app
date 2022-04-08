@@ -7,6 +7,9 @@ import android.os.Bundle;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 
+/**
+ * 打赏
+ */
 public class DaShangActivity extends BaseActivity {
 
 
