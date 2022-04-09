@@ -258,4 +258,7 @@ dependencies {
     implementation 'io.github.lucksiege:ucrop:v3.0.8'
 //     自定义相机 (按需引入)
     implementation 'io.github.lucksiege:camerax:v3.0.8'
+
+    implementation 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
+    implementation 'com.github.czy1121:loadinglayout:1.0.1'
 }
