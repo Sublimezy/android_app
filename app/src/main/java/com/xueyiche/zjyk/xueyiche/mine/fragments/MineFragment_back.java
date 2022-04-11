@@ -57,14 +57,15 @@ public class MineFragment_back extends BaseFragment implements View.OnClickListe
     //名字
     private TextView tv_mine_name;
     //我的积分
-    private LinearLayout  ll_my_wallet;
+    private LinearLayout ll_my_wallet;
     //查看全部订单
-    private TextView  tv_mine_title;
+    private TextView tv_mine_title;
     //头像   名字 的字段
     private String head_img, nickname;
     //电话号  id 的字段
     private String user_phone, user_id;
-    private LinearLayout  ll_shared_app, ll_kefu, ll_about ;
+    private LinearLayout ll_shared_app, ll_kefu, ll_about;
+
     public static MineFragment_back newInstance(String tag) {
         Bundle bundle = new Bundle();
         MineFragment_back fragment = new MineFragment_back();
@@ -72,6 +73,7 @@ public class MineFragment_back extends BaseFragment implements View.OnClickListe
         fragment.setArguments(bundle);
         return fragment;
     }
+
     @Override
     protected void lazyLoad() {
         if (!isPrepared || !isVisible) {

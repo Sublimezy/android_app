@@ -156,5 +156,7 @@ public interface AppUrl {
     String orderBudgetPrice = IPWAIWANG + "api/Userindex/orderBudgetPrice";
     String orderDetails = IPWAIWANG + "api/Userindex/orderDetails";
     String userOrderDetails = IPWAIWANG + "api/Userindex/userOrderDetails";
+
+    String orderList = IPWAIWANG + "api/Drivinguser/orderList";
 }
 

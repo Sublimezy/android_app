@@ -125,6 +125,8 @@
     <color name="divider_color">#f8f8f8</color>
     <color name="transparent">#00000000</color>
 
-
+    <color name="order_finish">#4278d7</color>
+    <color name="order_ing">#fd0f0f</color>
+    <color name="order_cancel">#6f6d6d</color>
 
 </resources>
