@@ -791,4 +791,8 @@ public class XueYiCheUtils {
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
+    public static boolean IsLogin() {
+        boolean islogin = PrefUtils.getBoolean(App.context, "ISLOGIN", false);
+        return islogin;
+    }
 }

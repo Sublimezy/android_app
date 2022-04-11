@@ -28,6 +28,7 @@ import com.amap.api.services.route.RouteSearch;
 import com.example.qrcode.Constant;
 import com.example.qrcode.ScannerActivity;
 import com.google.android.exoplayer2.upstream.HttpUtil;
+import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -43,9 +44,12 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.LocationSearchActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.YuGuFeiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.BuyOrderBean;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.YuSuanBean;
 import com.xueyiche.zjyk.xueyiche.daijia.view.YuYueLinkagePicker;
 import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
+import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
@@ -298,12 +302,33 @@ public class DaiJiaActivity extends BaseMapActivity {
             tv_xiadan.setVisibility(View.VISIBLE);
             tv_choose_daijia.setVisibility(View.VISIBLE);
             rl_money.setVisibility(View.VISIBLE);
-
+            getYuSuan();
             LatLonPoint mStartPoint = new LatLonPoint(Double.parseDouble(sLat), Double.parseDouble(sLon));//起点，116.335891,39.942295
             LatLonPoint mEndPoint = new LatLonPoint(Double.parseDouble(eLat), Double.parseDouble(eLon));//终点，116.481288,39.995576
             setfromandtoMarker(aMap, mStartPoint, mEndPoint);
             searchRouteResult(2, RouteSearch.DrivingDefault, mStartPoint, mEndPoint);
         }
+    }
+
+    private void getYuSuan() {
+        Map<String, String> map = new HashMap<>();
+        map.put("start_lng", "" + sLon);
+        map.put("start_lat", "" + sLat);
+        map.put("end_lng", "" + eLon);
+        map.put("end_lat", "" + eLat);
+        MyHttpUtils.postHttpMessage(AppUrl.orderBudgetPrice, map, YuSuanBean.class, new RequestCallBack<YuSuanBean>() {
+            @Override
+            public void requestSuccess(YuSuanBean json) {
+                if (1 == json.getCode()) {
+                    tv_money.setText("" + json.getData().getPrices());
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
     }
 
     @OnClick({R.id.iv_anquan, R.id.iv_user, R.id.tv_choose_daijia, R.id.tv_xiadan, R.id.tv_choose_people, R.id.tv_mudi, R.id.tv_yuyue_time, R.id.ll_common_back, R.id.rb_richang, R.id.rb_yuyue, R.id.rb_daijiao, R.id.tv_qidian})
@@ -342,6 +367,9 @@ public class DaiJiaActivity extends BaseMapActivity {
             case R.id.tv_mudi:
                 LocationSearchActivity.forward(DaiJiaActivity.this, 222, "end");
                 break;
+            case R.id.ll_money_liji:
+                YuGuFeiActivity.forward(DaiJiaActivity.this,sLon,sLat,eLon,eLat);
+                break;
             case R.id.tv_yuyue_time:
                 startTimePicker();
                 break;
@@ -353,7 +381,11 @@ public class DaiJiaActivity extends BaseMapActivity {
                 break;
             case R.id.tv_xiadan:
                 //下单
-                buy();
+                if (XueYiCheUtils.IsLogin()) {
+                    buy();
+                } else {
+                    LoginFirstStepActivity.forward(DaiJiaActivity.this);
+                }
                 break;
         }
     }
@@ -362,14 +394,14 @@ public class DaiJiaActivity extends BaseMapActivity {
         if (XueYiCheUtils.IsHaveInternet(App.context)) {
             if ("2".equals(order_type)) {
                 if (TextUtils.isEmpty(daijiao_phone)) {
-                    ToastUtils.showToast(DaiJiaActivity.this,"请选择乘车人！");
+                    ToastUtils.showToast(DaiJiaActivity.this, "请选择乘车人！");
                     return;
                 }
 
             }
             if ("1".equals(order_type)) {
                 if (TextUtils.isEmpty(choose_time)) {
-                    ToastUtils.showToast(DaiJiaActivity.this,"请选择预约时间！");
+                    ToastUtils.showToast(DaiJiaActivity.this, "请选择预约时间！");
                     return;
                 }
             }
@@ -390,6 +422,8 @@ public class DaiJiaActivity extends BaseMapActivity {
             if ("1".equals(order_type)) {
                 map.put("fixed_time", "" + choose_time);
             }
+            String s = new Gson().toJson(map);
+            Log.e("login_json", "" + s);
             MyHttpUtils.postHttpMessage(AppUrl.orderSave, map, BuyOrderBean.class, new RequestCallBack<BuyOrderBean>() {
                 @Override
                 public void requestSuccess(BuyOrderBean json) {

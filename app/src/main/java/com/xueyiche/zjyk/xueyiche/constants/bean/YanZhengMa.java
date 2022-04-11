@@ -5,24 +5,10 @@ package com.xueyiche.zjyk.xueyiche.constants.bean;
  */
 public class YanZhengMa {
 
-
-    /**
-     * msg : 操作成功！
-     * code : 200
-     * content : 验证码已发送,请耐心等待
-     */
-
-    private String msg;
     private int code;
-    private String content;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
+    private String msg;
+    private String time;
+    private Object data;
 
     public int getCode() {
         return code;
@@ -32,11 +18,27 @@ public class YanZhengMa {
         this.code = code;
     }
 
-    public String getContent() {
-        return content;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }

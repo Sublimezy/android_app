@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/title"
-        layout="@layout/indent_tijiao_content"
+        layout="@layout/new_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="true"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="45dp"
-        android:text="约39.00元"
+        android:text="约0元"
         android:id="@+id/tv_money"
         android:textColor="@color/colorOrange"
         android:textSize="25sp" />
@@ -46,11 +46,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginLeft="12dp"
-                android:text="起步价"
-                android:textColor="@color/_9999"
-                android:textSize="16sp" />
+                android:text="起步价(指定区域内)"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:id="@+id/tv_qibu"
@@ -58,66 +57,137 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
-                android:text="39元"
-                android:textColor="@color/_9999"
-                android:textSize="16sp" />
+                android:text="0元"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="@dimen/dp_10">
 
             <TextView
-                android:id="@+id/tv_distance"
+                android:id="@+id/tv_shichangfei_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:text="里程费（共14公里，区域外0公里）"
-                android:textColor="@color/_9999"
-                android:textSize="16sp" />
+                android:text="时长费（共0分钟）"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/tv_licheng"
+                android:id="@+id/tv_shichangfei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
                 android:text="0元"
-                android:textColor="@color/_9999"
-                android:textSize="16sp" />
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="@dimen/dp_10">
 
             <TextView
-                android:id="@+id/tv_denghou"
+                android:id="@+id/tv_lichengfei_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:text="等候费（00分00）"
-                android:textColor="@color/_9999"
-                android:textSize="16sp" />
+                android:text="里程费（共0公里）"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/tv_denghou_money"
+                android:id="@+id/tv_lichengfei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
                 android:text="0元"
-                android:textColor="@color/_9999"
-                android:textSize="16sp" />
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_lichengfei_title_nei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="区域内里程（共0公里）"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_lichengfei_nei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="12dp"
+                android:text="0元"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_lichengfei_title_wai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="区域外里程（共0公里）"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_lichengfei_wai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="12dp"
+                android:text="0元"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="优惠金额"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_youhui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="12dp"
+                android:text="0元"
+                android:textColor="@color/_3333"
+                android:textSize="@dimen/sp_14" />
         </RelativeLayout>
     </LinearLayout>
 
     <View
         style="@style/_cccline"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="30dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

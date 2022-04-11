@@ -1,14 +1,20 @@
 package com.xueyiche.zjyk.xueyiche.main.activities.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.luck.picture.lib.utils.ToastUtils;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.umeng.analytics.MobclickAgent;
@@ -21,7 +27,11 @@ import com.xueyiche.zjyk.xueyiche.constants.bean.UserInfo;
 import com.xueyiche.zjyk.xueyiche.constants.bean.YanZhengMa;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.homepage.view.VerificationCodeInput;
+import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;
+import com.xueyiche.zjyk.xueyiche.main.bean.LoginBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.CountDownTimerUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.AES;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
@@ -36,50 +46,43 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by ZL on 2018/2/6.
  */
-public class LoginSecondStepActivity extends BaseActivity implements View.OnClickListener {
-    private TextView tvGetPassWord;
-    private TextView tvPhone;
-    private TextView tv_user_xieyi;
+public class LoginSecondStepActivity extends BaseActivity {
+    @BindView(R.id.tvPhone)
+    TextView tvPhone;
+    @BindView(R.id.verificationCodeInput)
+    VerificationCodeInput verificationCodeInput;
+    @BindView(R.id.tvGetPassWord)
+    TextView tvGetPassWord;
     private CountDownTimerUtils countDownTimer;
-    private AES mAes;
     private String phone;
-    private Button btLogin;
-    private VerificationCodeInput input;
     private String yanzhengma;
-    private LinearLayout ll_exam_back;
-
     @Override
     protected int initContentView() {
         return R.layout.login_second_step;
     }
-
+    public static void forward(Context context,String phone) {
+        Intent intent = new Intent(context, LoginSecondStepActivity.class);
+        intent.putExtra("phone",phone);
+        context.startActivity(intent);
+    }
     @Override
     protected void initView() {
-        tvGetPassWord = (TextView) view.findViewById(R.id.tvGetPassWord);
-        tv_user_xieyi = (TextView) view.findViewById(R.id.tv_user_xieyi);
-        tvPhone = (TextView) view.findViewById(R.id.tvPhone);
-        ll_exam_back = (LinearLayout) view.findViewById(R.id.shop_top_include).findViewById(R.id.ll_exam_back);
-        input = (VerificationCodeInput) findViewById(R.id.verificationCodeInput);
-        btLogin = (Button) view.findViewById(R.id.btLogin);
-
+        ButterKnife.bind(this);
         ImmersionBar.with(this).titleBar(R.id.rl_title).init();
 
     }
-
     @Override
     protected void initListener() {
         countDownTimer = new CountDownTimerUtils(tvGetPassWord, 60000, 1000);
-        tvGetPassWord.setOnClickListener(this);
-        btLogin.setOnClickListener(this);
-        ll_exam_back.setOnClickListener(this);
-        tv_user_xieyi.setOnClickListener(this);
-
-        input.setOnCompleteListener(new VerificationCodeInput.Listener() {
+        verificationCodeInput.setOnCompleteListener(new VerificationCodeInput.Listener() {
             @Override
             public void onComplete(String content) {
                 yanzhengma = content;
@@ -87,174 +90,82 @@ public class LoginSecondStepActivity extends BaseActivity implements View.OnClic
         });
 
     }
-
     @Override
     protected void initData() {
         Intent intent = getIntent();
         phone = intent.getStringExtra("phone");
         tvPhone.setText(phone);
-        mAes = new AES();
         getPassWord();
-
     }
 
     //获取验证码
     private void getPassWord() {
         countDownTimer.start();
-        String enString = mAes.encrypt(phone);
-        if (!TextUtils.isEmpty(enString)) {
-            OkHttpUtils.post().url(AppUrl.YANZHENGMA)
-                    .addParams("user_phone", enString)
-                    .build().execute(new Callback() {
-                @Override
-                public Object parseNetworkResponse(Response response) throws IOException {
-                    String string = response.body().string();
-                    if (!TextUtils.isEmpty(string)) {
-                        YanZhengMa yanZhengMa = JsonUtil.parseJsonToBean(string, YanZhengMa.class);
-                        if (yanZhengMa != null) {
-                            final String content = yanZhengMa.getContent();
-                            final int code = yanZhengMa.getCode();
-                            App.handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (200 == code) {
-                                        Toast.makeText(App.context, content, Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+        Map<String, String> params = new HashMap<>();
+        params.put("mobile", phone);
+        params.put("event", "mobilelogin");
+        MyHttpUtils.postHttpMessage(AppUrl.sendSMS, params, YanZhengMa.class, new RequestCallBack<YanZhengMa>() {
+            @Override
+            public void requestSuccess(YanZhengMa json) {
+                if (json.getCode() == 1) {
+                    countDownTimer.start();
+                    tvGetPassWord.setClickable(false);
+                } else {
+                }
+                showToastShort(json.getMsg());
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
+    }
+    private void login() {
+        if (XueYiCheUtils.IsHaveInternet(App.context)) {
+            if (!TextUtils.isEmpty(yanzhengma)) {
+                Map<String, String> params = new HashMap<>();
+                params.put("mobile", phone);
+                params.put("captcha", yanzhengma);
+                params.put("type", "1");
+                MyHttpUtils.postHttpMessage(AppUrl.LOGIN, params, LoginBean.class, new RequestCallBack<LoginBean>() {
+                    @Override
+                    public void requestSuccess(LoginBean json) {
+                        if (json.getCode() == 1) {
+                            LoginBean.DataBean.UserinfoBean userinfo = json.getData().getUserinfo();
+                            PrefUtils.putBoolean(App.context,"ISLOGIN",true);
+                            PrefUtils.putParameter("token",userinfo.getToken());
+                            LoginFirstStepActivity.instance.finish();
+                            finish();
                         }
+                        showToastShort(json.getMsg());
                     }
 
-
-                    return string;
-                }
-
-                @Override
-                public void onError(Request request, Exception e) {
-
-                }
-
-
-                @Override
-                public void onResponse(Object response) {
-                    tvGetPassWord.setClickable(false);
-                }
-            });
+                    @Override
+                    public void requestError(String errorMsg, int errorType) {
+                        showToastShort("连接服务器失败");
+                    }
+                });
+            }
+        } else {
+            ToastUtils.showToast(LoginSecondStepActivity.this,"请检查网络连接");
         }
     }
-
-    @Override
+    @OnClick({R.id.ll_exam_back, R.id.tvGetPassWord, R.id.btLogin, R.id.tv_user_xieyi})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tvGetPassWord:
-                getPassWord();
-                break;
             case R.id.ll_exam_back:
                 finish();
                 break;
-            case R.id.tv_user_xieyi:
-                Intent intent = new Intent(App.context, CommonWebView.class);
-                intent.putExtra("weburl", "xieyi");
-                startActivity(intent);
+            case R.id.tvGetPassWord:
+                getPassWord();
                 break;
             case R.id.btLogin:
                 login();
                 break;
+            case R.id.tv_user_xieyi:
+                CommonWebView.forward(LoginSecondStepActivity.this,"xieyi");
+                break;
         }
     }
-
-    private void login() {
-        if (XueYiCheUtils.IsHaveInternet(App.context)) {
-            String enString = mAes.encrypt(phone);
-            String id = LoginUtils.getId(LoginSecondStepActivity.this);
-            if (!TextUtils.isEmpty(yanzhengma)) {
-                String phoneName = android.os.Build.MODEL;
-                OkHttpUtils.post().url(AppUrl.LOGIN)
-                        .addParams("user_phone", enString)
-                        .addParams("device_id", id)
-                        .addParams("code_message", yanzhengma)
-                        .addParams("device_name", phoneName)
-                        .addParams("user_type", "1")
-                        .build().execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response) throws IOException {
-                        String string = response.body().string();
-                        if (!TextUtils.isEmpty(string)) {
-                            final UserInfo userInfo = JsonUtil.parseJsonToBean(string, UserInfo.class);
-                            final int code = userInfo.getCode();
-                            final String msg = userInfo.getMsg();
-                            Map<String, String> map_value = new HashMap<String, String>();
-                            map_value.put(msg, msg);
-                            MobclickAgent.onEventValue(App.context, "loginmsg", map_value, 12000);
-                            App.handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (200 == code) {
-                                        MobclickAgent.onEvent(App.context, "login");
-                                        String nickname = userInfo.getContent().getNickname();
-                                        String head_img = userInfo.getContent().getHead_img();
-                                        String user_phone = userInfo.getContent().getUser_phone();
-                                        String user_id = userInfo.getContent().getUser_id();
-                                        String first_type = userInfo.getContent().getFirst_type();
-                                        String user_name = userInfo.getContent().getUser_name();
-                                        String sex = userInfo.getContent().getSex();
-                                        String driver_cards = userInfo.getContent().getDriver_cards();
-                                        String user_cards = userInfo.getContent().getUser_cards();
-                                        PrefUtils.putString(App.context, "user_id", user_id);
-                                        PrefUtils.putString(App.context, "user_phone", user_phone);
-                                        PrefUtils.putString(App.context, "user_name", user_name);
-                                        PrefUtils.putString(App.context, "user_cards", user_cards);
-                                        PrefUtils.putString(App.context, "driver_cards", driver_cards);
-                                        PrefUtils.putString(App.context, "nickname", nickname);
-                                        PrefUtils.putString(App.context, "sex", sex);
-                                        PrefUtils.putString(App.context, "head_img", head_img);
-                                        //获取系统时间
-                                        long time = new Date().getTime();
-                                        PrefUtils.putBoolean(App.context, "ISLOGIN", true);
-                                        PrefUtils.putString(App.context, "LOGINTIME", time + "");
-                                        MobclickAgent.onProfileSignIn(phone);
-                                        if (!TextUtils.isEmpty(first_type)) {
-                                            //0首次登录
-                                            if ("0".equals(first_type)) {
-                                                String integral_num = userInfo.getContent().getIntegral_num();
-                                                DialogUtils.isFirstLogin(LoginSecondStepActivity.this,integral_num);
-                                            }else {
-                                                LoginFirstStepActivity.instance.finish();
-                                                finish();
-                                            }
-                                        }
-
-                                    }
-                                    Toast.makeText(App.context, msg, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-
-                        return string;
-                    }
-
-                    @Override
-                    public void onError(Request request, Exception e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Object response) {
-                        EventBus.getDefault().post(new MyEvent("刷新FragmentLogin"));
-                        EventBus.getDefault().post(new MyEvent("刷新进行中订单"));
-                        EventBus.getDefault().post(new MyEvent("刷新已完成订单"));
-                        EventBus.getDefault().post(new MyEvent("刷新Fragment"));
-
-
-                    }
-                });
-            } else {
-                Toast.makeText(App.context, "验证码不完整", Toast.LENGTH_SHORT).show();
-            }
-
-        } else {
-            Toast.makeText(App.context, "请检查网络", Toast.LENGTH_SHORT).show();
-        }
-    }
-
 }

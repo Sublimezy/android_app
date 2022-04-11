@@ -1,11 +1,13 @@
 package com.xueyiche.zjyk.xueyiche.myhttp;
 
+import android.os.UserManager;
 import android.util.Log;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.model.Response;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 
 import java.util.Map;
 
@@ -37,8 +39,8 @@ public class MyHttpUtils {
 
         OkGo.<String>post(url)//
                 .tag(url)
-
                 .headers("Content-Type", "application/json")
+                .headers("token", PrefUtils.getParameter("token"))
                 .params(params)
                 .converter(new StringConvert())
                 .adapt(new ObservableResponse<String>())

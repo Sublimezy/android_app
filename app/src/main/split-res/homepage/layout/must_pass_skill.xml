@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <include
         android:id="@+id/must_pass_skill_include"
-        layout="@layout/indent_tijiao_content"
+        layout="@layout/new_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
         <RelativeLayout
@@ -14,7 +14,6 @@
             android:layout_height="match_parent">
             <WebView
                 android:id="@+id/pass_web_view"
-                android:layout_below="@+id/must_pass_skill_include"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <TextView

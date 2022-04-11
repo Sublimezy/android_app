@@ -1,6 +1,8 @@
 package com.xueyiche.zjyk.xueyiche.main.activities.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -9,47 +11,48 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
 import com.xueyiche.zjyk.xueyiche.utils.StringUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by ZL on 2018/2/6.
  */
-public class LoginFirstStepActivity extends BaseActivity implements View.OnClickListener {
-    private EditText etLoginPhone;
-    private Button btNextStep;
+public class LoginFirstStepActivity extends BaseActivity {
+    @BindView(R.id.etLoginPhone)
+    EditText etLoginPhone;
     public static LoginFirstStepActivity instance;
-    private LinearLayout ll_exam_back;
-
     @Override
     protected int initContentView() {
         return R.layout.login_first_step;
     }
-
+    public static void forward(Context context) {
+        Intent intent = new Intent(context, LoginFirstStepActivity.class);
+        context.startActivity(intent);
+    }
     @Override
     protected void initView() {
+        ButterKnife.bind(this);
         ImmersionBar.with(this).titleBar(R.id.rl_title).init();
-        etLoginPhone = (EditText) view.findViewById(R.id.etLoginPhone);
-        btNextStep = (Button) view.findViewById(R.id.btNextStep);
-        ll_exam_back = (LinearLayout) view.findViewById(R.id.shop_top_include).findViewById(R.id.ll_exam_back);
-        instance=this;
+        instance = this;
     }
-
     @Override
     protected void initListener() {
-        ll_exam_back.setOnClickListener(this);
-        btNextStep.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
 
     }
-
-    @Override
+    @OnClick({R.id.ll_exam_back, R.id.btNextStep})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_exam_back:
@@ -59,19 +62,17 @@ public class LoginFirstStepActivity extends BaseActivity implements View.OnClick
                 String phone = etLoginPhone.getText().toString().trim();
                 if (!TextUtils.isEmpty(phone)) {
                     if (!StringUtils.isMobileNumber(phone)) {
-                        Toast.makeText(App.context, "请填写正确的手机号", Toast.LENGTH_SHORT).show();
-                    }else {
+                        ToastUtils.showToast(LoginFirstStepActivity.this,"请填写正确的手机号");
+                    } else {
                         if (XueYiCheUtils.IsHaveInternet(App.context)) {
-                            Intent intent = new Intent(App.context,LoginSecondStepActivity.class);
-                            intent.putExtra("phone",phone);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(App.context, "请检查网络", Toast.LENGTH_SHORT).show();
+                           LoginSecondStepActivity.forward(LoginFirstStepActivity.this,phone);
+                        } else {
+                            ToastUtils.showToast(LoginFirstStepActivity.this,"请检查网络");
                         }
 
                     }
-                }else {
-                    Toast.makeText(App.context,"请填写手机号",Toast.LENGTH_SHORT).show();
+                } else {
+                    ToastUtils.showToast(LoginFirstStepActivity.this,"请填写手机号");
                 }
                 break;
         }
