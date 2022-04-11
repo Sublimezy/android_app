@@ -164,7 +164,7 @@ dependencies {
     implementation 'org.tinygroup:autolayout:0.0.12'
     implementation 'de.jodamob.android:android-autolayout:1.2.3'
     //点9图片
-    compile files('libs/nineoldandroids-2.4.0.jar')
+//    compile files('libs/nineoldandroids-2.4.0.jar')
     //谷歌混淆解决
     implementation 'com.google.android.gms:play-services-appindexing:8.1.0'
     //okhttps请求

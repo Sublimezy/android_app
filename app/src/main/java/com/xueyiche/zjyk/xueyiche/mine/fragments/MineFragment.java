@@ -57,7 +57,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-
+        showToastShort("我的");
     }
 
     @Override
@@ -87,6 +87,20 @@ public class MineFragment extends BaseFragment {
         if (DialogUtils.IsLogin()) {
 
         }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            //true  表示不可见
+
+        } else {
+            //为false  表示可见
+
+            showToastShort("我的" + hidden);
+        }
+
     }
 
 
