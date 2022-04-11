@@ -110,6 +110,7 @@ public class CancelOrderActivity extends BaseActivity {
                         data1.get(i).setSelected(false);
 
                     }
+                    resonAdapter.notifyDataSetChanged();
                 }
             }
         });
