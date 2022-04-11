@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AlertDialog;
 
@@ -49,6 +50,11 @@ import java.io.IOException;
  */
 public class EndActivity extends BaseMapActivity {
 
+    public static void forward(Context context, String order_sn) {
+        Intent intent = new Intent(context, EndActivity.class);
+        intent.putExtra("order_sn",order_sn);
+        context.startActivity(intent);
+    }
 
     @Override
     protected int initContentView() {

@@ -41,9 +41,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by Administrator on 2019/9/19.
  */
-public class JieDanActivity extends BaseMapActivity {
-    @BindView(R.id.tv_right_btn)
-    TextView cancelOrder;
+public class ArrivedActivity extends BaseMapActivity {
     private MarkerOptions markerOption;
 
     @Override
@@ -58,7 +56,7 @@ public class JieDanActivity extends BaseMapActivity {
     }
 
     public static void forward(Context context,String order_sn) {
-        Intent intent = new Intent(context, JieDanActivity.class);
+        Intent intent = new Intent(context, ArrivedActivity.class);
         intent.putExtra("order_sn",order_sn);
         context.startActivity(intent);
     }
@@ -82,16 +80,6 @@ public class JieDanActivity extends BaseMapActivity {
 
     @Override
     protected void initData() {
-        cancelOrder.setVisibility(View.VISIBLE);
-        cancelOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(JieDanActivity.this,CancelOrderActivity.class);
-                intent.putExtra("order_sn","order_sn");
-                startActivity(intent);
-
-            }
-        });
     }
 
     @Override
@@ -143,10 +131,14 @@ public class JieDanActivity extends BaseMapActivity {
         list.add(latlng);
         for (int i = 0; i < list.size(); i++) {
             LatLonPoint mStartPoint = new LatLonPoint(39.942295, 116.335891);//起点，116.335891,39.942295
-            View viewCat = LayoutInflater.from(JieDanActivity.this).inflate(R.layout.item_map_nearby_layout, null);
+            View viewCat = LayoutInflater.from(ArrivedActivity.this).inflate(R.layout.item_map_nearby_layout, null);
             TextView tvName = viewCat.findViewById(R.id.tvName);
             LinearLayout llTop = viewCat.findViewById(R.id.llTop);
             ImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
+
+            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
+            tvDistance.setVisibility(View.GONE);
+            tvName.setText("代驾员已到达");
             if (i == 0) {
                 llTop.setVisibility(View.GONE);
                 ivLogoType.setImageResource(R.mipmap.dingwei);
@@ -154,7 +146,6 @@ public class JieDanActivity extends BaseMapActivity {
                 llTop.setVisibility(View.VISIBLE);
                 ivLogoType.setImageResource(R.mipmap.logo);
             }
-            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
 //                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
             aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
 

@@ -57,6 +57,7 @@ import com.xueyiche.zjyk.xueyiche.route.DrivingRouteOverLay;
 import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.DensityUtils;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.ArrayList;
@@ -70,28 +71,19 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * * #                                                   #
- * #                       _oo0oo_                     #
- * #                      o8888888o                    #
- * #                      88" . "88                    #
- * #                      (| -_- |)                    #
- * #                      0\  =  /0                    #
- * #                    ___/`---'\___                  #
- * #                  .' \\|     |# '.                 #
- * #                 / \\|||  :  |||# \                #
- * #                / _||||| -:- |||||- \              #
- * #               |   | \\\  -  #/ |   |              #
- * #               | \_|  ''\---/''  |_/ |             #
- * #               \  .-\__  '-'  ___/-. /             #
- * #             ___'. .'  /--.--\  `. .'___           #
- * #          ."" '<  `.___\_<|>_/___.' >' "".         #
- * #         | | :  `- \`.;`\ _ /`;.`/ - ` : | |       #
- * #         \  \ `_.   \_ __\ /__ _/   .-` /  /       #
- * #     =====`-.____`.___ \_____/___.-`___.-'=====    #
- * #                       `=---='                     #
- * #     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   #
- * #                                                   #
- * #               佛祖保佑         永无BUG              #
+ * * #
+ **        孔孔孔孔孔孔孔孔孔  孔                               芯芯            芯芯                                                        蕊蕊      蕊蕊
+ *                     孔    孔                           芯芯芯芯芯芯芯芯芯芯芯芯芯芯芯芯                                              蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊
+ *                   孔      孔                                   芯         芯                                                             蕊     蕊
+ *                 孔  孔    孔                                     芯      芯                                                        蕊  蕊     蕊        蕊
+ *                 孔        孔                                                                                                     蕊    蕊     蕊    蕊   蕊
+ *              孔   孔      孔                        芯  芯         芯                                                                     蕊 蕊蕊蕊蕊蕊
+ *           孔       孔     孔                      芯    芯          芯                                                         蕊蕊     蕊蕊             蕊蕊      蕊蕊
+ *         孔         孔     孔                     芯      芯           芯             芯                                   蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊     蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊蕊
+ *                   孔      孔                             芯             芯      芯     芯                                       蕊     蕊                  蕊     蕊
+ *                  孔       孔                               芯                     芯     芯                               蕊  蕊     蕊       蕊      蕊  蕊     蕊       蕊
+ *              孔  孔       孔             孔                  芯                 芯         芯                             蕊    蕊     蕊   蕊  蕊    蕊    蕊     蕊   蕊  蕊
+ *                孔         孔孔孔孔孔孔孔孔孔                     芯芯芯芯芯芯芯芯芯                                                 蕊蕊蕊蕊蕊蕊蕊              蕊蕊蕊蕊蕊蕊蕊
  * #            Created by 張某人 on 2022/4/2/11:14 下午 .
  * #            com.xueyiche.zjyk.xueyiche
  * #            xueyiche5.0
@@ -331,7 +323,7 @@ public class DaiJiaActivity extends BaseMapActivity {
         });
     }
 
-    @OnClick({R.id.iv_anquan, R.id.iv_user, R.id.tv_choose_daijia, R.id.tv_xiadan, R.id.tv_choose_people, R.id.tv_mudi, R.id.tv_yuyue_time, R.id.ll_common_back, R.id.rb_richang, R.id.rb_yuyue, R.id.rb_daijiao, R.id.tv_qidian})
+    @OnClick({R.id.iv_anquan, R.id.ll_money_liji, R.id.iv_user, R.id.tv_choose_daijia, R.id.tv_xiadan, R.id.tv_choose_people, R.id.tv_mudi, R.id.tv_yuyue_time, R.id.ll_common_back, R.id.rb_richang, R.id.rb_yuyue, R.id.rb_daijiao, R.id.tv_qidian})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_anquan:
@@ -368,7 +360,7 @@ public class DaiJiaActivity extends BaseMapActivity {
                 LocationSearchActivity.forward(DaiJiaActivity.this, 222, "end");
                 break;
             case R.id.ll_money_liji:
-                YuGuFeiActivity.forward(DaiJiaActivity.this,sLon,sLat,eLon,eLat);
+                YuGuFeiActivity.forward(DaiJiaActivity.this, sLon, sLat, eLon, eLat);
                 break;
             case R.id.tv_yuyue_time:
                 startTimePicker();
@@ -424,11 +416,13 @@ public class DaiJiaActivity extends BaseMapActivity {
             }
             String s = new Gson().toJson(map);
             Log.e("login_json", "" + s);
+            Log.e("login_json", "" + PrefUtils.getParameter("token"));
             MyHttpUtils.postHttpMessage(AppUrl.orderSave, map, BuyOrderBean.class, new RequestCallBack<BuyOrderBean>() {
                 @Override
                 public void requestSuccess(BuyOrderBean json) {
                     if (1 == json.getCode()) {
-
+                        WaitActivity.forward(DaiJiaActivity.this,""+json.getData().getOrder_sn());
+                        finish();
                     }
                     ToastUtils.showToast(DaiJiaActivity.this, "" + json.getMsg());
                     stopProgressDialog();

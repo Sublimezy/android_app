@@ -99,6 +99,9 @@
         <activity
             android:name=".daijia.activity.CancelOrderActivity"
             android:exported="false" />
+        <activity
+            android:name=".daijia.activity.ArrivedActivity"
+            android:exported="false" />
         <activity android:name=".daijia.RegistSiJiActivity" />
 
         <meta-data

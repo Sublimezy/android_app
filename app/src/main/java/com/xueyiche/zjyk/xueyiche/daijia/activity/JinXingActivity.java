@@ -76,8 +76,9 @@ public class JinXingActivity extends BaseMapActivity {
     };
 
 
-    public static void forward(Context context) {
+    public static void forward(Context context,String order_sn) {
         Intent intent = new Intent(context, JinXingActivity.class);
+        intent.putExtra("order_sn",order_sn);
         context.startActivity(intent);
     }
 

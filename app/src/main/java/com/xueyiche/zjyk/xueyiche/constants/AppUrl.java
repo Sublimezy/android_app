@@ -154,5 +154,7 @@ public interface AppUrl {
     String sendSMS = IPWAIWANG +"index.php/api/Sms/send";
     String LOGIN = IPWAIWANG + "index.php/api/User/mobilelogin";
     String orderBudgetPrice = IPWAIWANG + "api/Userindex/orderBudgetPrice";
+    String orderDetails = IPWAIWANG + "api/Userindex/orderDetails";
+    String userOrderDetails = IPWAIWANG + "api/Userindex/userOrderDetails";
 }
 

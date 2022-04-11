@@ -1,5 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,8 +35,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CancelOrderActivity extends BaseActivity {
-
-
     @BindView(R.id.iv_common_back)
     ImageView ivCommonBack;
     @BindView(R.id.ll_common_back)
@@ -59,10 +59,17 @@ public class CancelOrderActivity extends BaseActivity {
     TextView tvGiveup;
     private ResonAdapter resonAdapter;
     private String order_sn;
+    private String type;
 
     @Override
     protected int initContentView() {
         return R.layout.activity_cancel_order;
+    }
+    public static void forward(Context context, String order_sn,String type) {
+        Intent intent = new Intent(context, CancelOrderActivity.class);
+        intent.putExtra("order_sn",""+order_sn);
+        intent.putExtra("type",""+type);
+        context.startActivity(intent);
     }
 
     @Override
@@ -79,6 +86,7 @@ public class CancelOrderActivity extends BaseActivity {
     protected void initData() {
         tvTitle.setText("取消原因");
         order_sn = getIntent().getStringExtra("order_sn");
+        type = getIntent().getStringExtra("type");
         resonAdapter = new ResonAdapter(R.layout.item_cancel_reson);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycler.setAdapter(resonAdapter);

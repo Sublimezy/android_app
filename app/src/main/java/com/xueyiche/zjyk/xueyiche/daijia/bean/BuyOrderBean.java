@@ -32,14 +32,18 @@ public class BuyOrderBean {
     /**
      * code : 1
      * msg : 下单成功
-     * time : 1648197951
-     * data : null
+     * time : 1649658435
+     * data : {"order_sn":"A2022041114271504539"}
      */
 
     private int code;
     private String msg;
     private String time;
-    private Object data;
+    /**
+     * order_sn : A2022041114271504539
+     */
+
+    private DataBean data;
 
     public int getCode() {
         return code;
@@ -65,11 +69,23 @@ public class BuyOrderBean {
         this.time = time;
     }
 
-    public Object getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(DataBean data) {
         this.data = data;
+    }
+
+    public static class DataBean {
+        private String order_sn;
+
+        public String getOrder_sn() {
+            return order_sn;
+        }
+
+        public void setOrder_sn(String order_sn) {
+            this.order_sn = order_sn;
+        }
     }
 }

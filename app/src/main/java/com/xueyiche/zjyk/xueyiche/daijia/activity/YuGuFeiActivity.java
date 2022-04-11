@@ -2,10 +2,7 @@ package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,7 +15,6 @@ import com.xueyiche.zjyk.xueyiche.daijia.bean.YuSuanBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +36,24 @@ public class YuGuFeiActivity extends BaseActivity {
     TextView tvMoney;
     @BindView(R.id.tv_qibu)
     TextView tvQibu;
+    @BindView(R.id.tv_shichangfei_title)
+    TextView tvShichangfeiTitle;
+    @BindView(R.id.tv_shichangfei)
+    TextView tvShichangfei;
+    @BindView(R.id.tv_lichengfei_title)
+    TextView tvLichengfeiTitle;
+    @BindView(R.id.tv_lichengfei)
+    TextView tvLichengfei;
+    @BindView(R.id.tv_lichengfei_title_nei)
+    TextView tvLichengfeiTitleNei;
+    @BindView(R.id.tv_lichengfei_nei)
+    TextView tvLichengfeiNei;
+    @BindView(R.id.tv_lichengfei_title_wai)
+    TextView tvLichengfeiTitleWai;
+    @BindView(R.id.tv_lichengfei_wai)
+    TextView tvLichengfeiWai;
+    @BindView(R.id.tv_youhui)
+    TextView tvYouhui;
 
 
     public static void forward(Context context, String start_lng, String start_lat, String end_lng, String end_lat) {
@@ -89,8 +103,18 @@ public class YuGuFeiActivity extends BaseActivity {
             public void requestSuccess(YuSuanBean json) {
                 if (1 == json.getCode()) {
                     YuSuanBean.DataBean data = json.getData();
+                    tvMoney.setText("约"+data.getPrices()+"元");
+                    tvQibu.setText(""+data.getPrices()+"元");
+                    tvShichangfeiTitle.setText("时长费（共"+data.getShichang_time()+"分钟）");
+                    tvShichangfei.setText(""+data.getShichang_price()+"元");
+                    tvLichengfeiTitle.setText("里程费（共"+data.getLicheng_km()+"公里）");
+                    tvLichengfei.setText(""+data.getLicheng_price()+"元");
+                    tvLichengfeiTitleNei.setText("区域内里程（共"+data.getNeiquyu_km()+"公里）");
+                    tvLichengfeiNei.setText(""+data.getLicheng_price()+"元");
+                    tvLichengfeiTitleWai.setText("区域外里程（共"+data.getWaiquyu_km()+"公里）");
+                    tvLichengfeiWai.setText(""+data.getWaiquyu_km_price()+"元");
+                    tvYouhui.setText(""+data.getYouhui_price()+"元");
 
-//                    tv_money.setText("" + json.getData().getPrices());
                 }
             }
 

@@ -38,9 +38,9 @@
             android:textSize="@dimen/sp_10" />
 
     </LinearLayout>
-    <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+    <ImageView
         android:id="@+id/ivLogoType"
-        android:layout_width="@dimen/dp_30"
+        android:layout_width="@dimen/dp_20"
         android:src="@mipmap/logo"
         android:gravity="center"
         android:layout_height="@dimen/dp_30"

@@ -12,9 +12,18 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.ArrivedActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.HomeListAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.UserOrderDetailsBean;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.bannerview.utils.BannerUtils;
@@ -22,7 +31,9 @@ import com.zhpan.indicator.enums.IndicatorSlideMode;
 import com.zhpan.indicator.enums.IndicatorStyle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +78,7 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.ll_search)
     LinearLayout llSearch;
     private HomeListAdapter homeListAdapter;
+
     public static HomeFragment newInstance(String tag) {
         Bundle bundle = new Bundle();
         HomeFragment fragment = new HomeFragment();
@@ -127,7 +139,7 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_one:
-                DaiJiaActivity.forward(getActivity());
+                goDaiJiao();
                 break;
             case R.id.ll_two:
                 break;
@@ -139,5 +151,48 @@ public class HomeFragment extends BaseFragment {
 
                 break;
         }
+    }
+
+    private void goDaiJiao() {
+        Map<String, String> map = new HashMap<>();
+        MyHttpUtils.postHttpMessage(AppUrl.userOrderDetails, map, UserOrderDetailsBean.class, new RequestCallBack<UserOrderDetailsBean>() {
+            @Override
+            public void requestSuccess(UserOrderDetailsBean json) {
+                if (1 == json.getCode()) {
+                    UserOrderDetailsBean.DataBean data = json.getData();
+                    if (data != null) {
+                        int order_status = data.getOrder_status();
+                        String order_sn = data.getOrder_sn();
+                        switch (order_status) {
+                            case 0:
+                                WaitActivity.forward(getActivity(), order_sn);
+                                break;
+                            case 1:
+                                JieDanActivity.forward(getActivity(), order_sn);
+                                break;
+                            case 2:
+                                ArrivedActivity.forward(getActivity(), order_sn);
+                                break;
+                            case 3:
+                                JinXingActivity.forward(getActivity(), order_sn);
+                                break;
+                            case 4:
+                                EndActivity.forward(getActivity(),order_sn);
+                                break;
+                            default:
+                                DaiJiaActivity.forward(getActivity());
+                                break;
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
     }
 }

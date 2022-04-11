@@ -84,9 +84,9 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
-        llBack = (LinearLayout) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.ll_exam_back);
-        tvTitle = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_login_back);
-        tv_wenxintishi = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_wenxintishi);
+        llBack = (LinearLayout) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.ll_common_back);
+        tvTitle = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_title);
+        tv_wenxintishi = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_right_btn);
         pass_web_view = (WebView) view.findViewById(R.id.pass_web_view);
 
         ImmersionBar.with(this).titleBar(R.id.rl_title).init();
@@ -424,7 +424,7 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_wenxintishi:
+            case R.id.tv_right_btn:
                 common_share();
 //                shared();
                 break;
