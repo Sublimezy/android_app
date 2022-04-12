@@ -19,11 +19,17 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.IndentContentBean;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.WaveMapUtils;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,11 +50,12 @@ public class WaitActivity extends BaseMapActivity {
     RelativeLayout rlTitle;
     private TimerTask timerTask;
     private Timer timer1;
+    public static WaitActivity instance;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-
+                    getDataFromNet();
                     break;
                 default:
                     break;
@@ -57,10 +64,49 @@ public class WaitActivity extends BaseMapActivity {
 
 
     };
-private String order_sn;
+    private String order_sn;
+
     @Override
     protected int initContentView() {
         return R.layout.wait_activity;
+    }
+
+    private void getDataFromNet() {
+        Map<String, String> params = new HashMap<>();
+        params.put("order_sn", "" + order_sn);
+        MyHttpUtils.postHttpMessage(AppUrl.orderDetails, params, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
+            @Override
+            public void requestSuccess(IndentContentBean json) {
+                if (1 == json.getCode()) {
+                    IndentContentBean.DataBean data = json.getData();
+                    int order_status = data.getOrder_status();
+                    switch (order_status) {
+                        case 1:
+                            JieDanActivity.forward(WaitActivity.this, order_sn);
+                            finish();
+                            break;
+                        case 2:
+                            ArrivedActivity.forward(WaitActivity.this, order_sn);
+                            finish();
+                            break;
+                        case 3:
+                            JinXingActivity.forward(WaitActivity.this, order_sn);
+                            finish();
+                            break;
+                        case 4:
+                            EndActivity.forward(WaitActivity.this, order_sn);
+                            finish();
+                            break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
     }
 
     @Override
@@ -69,6 +115,7 @@ private String order_sn;
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         ImmersionBar.with(this).titleBar(rlTitle).init();
+        instance = this;
     }
 
     @Override
@@ -115,7 +162,7 @@ private String order_sn;
     @Override
     protected void initData() {
         tvTitle.setText("等待应答");
-         order_sn = getIntent().getStringExtra("order_sn");
+        order_sn = getIntent().getStringExtra("order_sn");
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -154,7 +201,7 @@ private String order_sn;
                 finish();
                 break;
             case R.id.tv_quxia:
-                CancelOrderActivity.forward(WaitActivity.this,order_sn,"wait");
+                CancelOrderActivity.forward(WaitActivity.this, order_sn, "wait");
                 break;
             case R.id.iv_user:
                 userLocation();

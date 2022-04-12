@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/new_top_include" />
+    <include layout="@layout/new_title_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,6 +69,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvCallPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

@@ -43,6 +43,5 @@
         android:layout_width="@dimen/dp_20"
         android:src="@mipmap/logo"
         android:gravity="center"
-        android:layout_height="@dimen/dp_30"
-        app:tint="@color/colorOrange" />
+        android:layout_height="@dimen/dp_30"/>
 </LinearLayout>

@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -20,22 +23,34 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DriveRouteResult;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
+import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.IndentContentBean;
+import com.xueyiche.zjyk.xueyiche.mine.bean.OrderDetailBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -44,7 +59,35 @@ import de.greenrobot.event.EventBus;
 public class JieDanActivity extends BaseMapActivity {
     @BindView(R.id.tv_right_btn)
     TextView cancelOrder;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.rl_title)
+    RelativeLayout rlTitle;
+    @BindView(R.id.ci_head)
+    CircleImageView ciHead;
+    @BindView(R.id.tv_name)
+    TextView tvName;
+    @BindView(R.id.tv_gonghao)
+    TextView tvGonghao;
+    @BindView(R.id.tv_quxiao_rule)
+    TextView tvQuxiaoRule;
     private MarkerOptions markerOption;
+    String order_sn = "";
+    String user_mobile = "";
+    public static JieDanActivity instance;
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    getDataFromNet();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+    };
 
     @Override
     protected int initContentView() {
@@ -53,13 +96,16 @@ public class JieDanActivity extends BaseMapActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        ButterKnife.bind(this);
+        ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
+        instance = this;
     }
 
-    public static void forward(Context context,String order_sn) {
+    public static void forward(Context context, String order_sn) {
         Intent intent = new Intent(context, JieDanActivity.class);
-        intent.putExtra("order_sn",order_sn);
+        intent.putExtra("order_sn", order_sn);
         context.startActivity(intent);
     }
 
@@ -83,15 +129,19 @@ public class JieDanActivity extends BaseMapActivity {
     @Override
     protected void initData() {
         cancelOrder.setVisibility(View.VISIBLE);
-        cancelOrder.setOnClickListener(new View.OnClickListener() {
+        tvTitle.setText("司机正在赶来");
+        cancelOrder.setText("取消订单");
+        order_sn = getIntent().getStringExtra("order_sn");
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(JieDanActivity.this,CancelOrderActivity.class);
-                intent.putExtra("order_sn","order_sn");
-                startActivity(intent);
-
+            public void run() {
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
             }
-        });
+        }, 1000, 5000);
+        getDataFromNet();
     }
 
     @Override
@@ -121,16 +171,48 @@ public class JieDanActivity extends BaseMapActivity {
 
                 LatLonPoint mEndPoint = new LatLonPoint(39.995576, 116.481288);//终点，116.481288,39.995576
 //
-                getDataFromNet("" + latitude, "" + longitude);
+
 
             }
         }
     }
 
-    private void getDataFromNet(String latitude, String longitude) {
+    private void getDataFromNet() {
         Map<String, String> params = new HashMap<>();
-        params.put("user_lng", "" + latitude);
-        params.put("user_lat", "" + longitude);
+        params.put("order_sn", "" + order_sn);
+        MyHttpUtils.postHttpMessage(AppUrl.orderDetails, params, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
+            @Override
+            public void requestSuccess(IndentContentBean json) {
+                if (1 == json.getCode()) {
+                    IndentContentBean.DataBean data = json.getData();
+                    Glide.with(App.context).load(data.getHead_img()).error(R.mipmap.mine_head).placeholder(R.mipmap.mine_head).into(ciHead);
+                    tvName.setText("" + data.getUser_name());
+                    user_mobile = data.getUser_mobile();
+                    tvGonghao.setText("工号：" + data.getUser_number());
+                    tvQuxiaoRule.setText("" + data.getQuxiao_content());
+                    int order_status = data.getOrder_status();
+                    switch (order_status) {
+                        case 2:
+                            ArrivedActivity.forward(JieDanActivity.this, order_sn);
+                            finish();
+                            break;
+                        case 3:
+                            JinXingActivity.forward(JieDanActivity.this, order_sn);
+                            finish();
+                            break;
+                        case 4:
+                            EndActivity.forward(JieDanActivity.this, order_sn);
+                            finish();
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
         String s = new Gson().toJson(params);
         Log.e("nearbg_list", s);
         new GDLocation().startLocation();
@@ -183,11 +265,20 @@ public class JieDanActivity extends BaseMapActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+
+    @OnClick({R.id.ll_common_back, R.id.tv_right_btn, R.id.tvCallPhone})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_common_back:
+                finish();
+                break;
+            case R.id.tvCallPhone:
+                XueYiCheUtils.CallPhone(JieDanActivity.this, "拨打电话？", "" + user_mobile);
+                break;
+            case R.id.tv_right_btn:
+                CancelOrderActivity.forward(JieDanActivity.this, order_sn, "jiedan");
+                break;
+        }
     }
 
 

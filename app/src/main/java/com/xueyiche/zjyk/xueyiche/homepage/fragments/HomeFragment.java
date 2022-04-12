@@ -183,6 +183,8 @@ public class HomeFragment extends BaseFragment {
                                 DaiJiaActivity.forward(getActivity());
                                 break;
                         }
+                    }else {
+                        DaiJiaActivity.forward(getActivity());
                     }
 
 
@@ -191,7 +193,7 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void requestError(String errorMsg, int errorType) {
-
+                DaiJiaActivity.forward(getActivity());
             }
         });
     }
