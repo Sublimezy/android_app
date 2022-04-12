@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -21,21 +24,30 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DriveRouteResult;
 import com.google.gson.Gson;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.IndentContentBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -43,16 +55,42 @@ import de.greenrobot.event.EventBus;
  */
 public class ArrivedActivity extends BaseMapActivity {
     private MarkerOptions markerOption;
+    private String order_sn;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.rl_title)
+    RelativeLayout rlTitle;
+    @BindView(R.id.ci_head)
+    CircleImageView ciHead;
+    @BindView(R.id.tv_name)
+    TextView tvName;
+    @BindView(R.id.tv_gonghao)
+    TextView tvGonghao;
+    private String user_mobile;
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    getDataFromNet();
+                    break;
+                default:
+                    break;
+            }
+        }
 
+
+    };
     @Override
     protected int initContentView() {
-        return R.layout.jiedan_activity;
+        return R.layout.arrived_activity;
     }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        ButterKnife.bind(this);
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
+        ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
     }
 
     public static void forward(Context context,String order_sn) {
@@ -80,6 +118,17 @@ public class ArrivedActivity extends BaseMapActivity {
 
     @Override
     protected void initData() {
+        tvTitle.setText("司机已到达");
+        order_sn = getIntent().getStringExtra("order_sn");
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        }, 1000, 5000);
     }
 
     @Override
@@ -109,16 +158,41 @@ public class ArrivedActivity extends BaseMapActivity {
 
                 LatLonPoint mEndPoint = new LatLonPoint(39.995576, 116.481288);//终点，116.481288,39.995576
 //
-                getDataFromNet("" + latitude, "" + longitude);
 
             }
         }
     }
-
-    private void getDataFromNet(String latitude, String longitude) {
+    private void getDataFromNet() {
         Map<String, String> params = new HashMap<>();
-        params.put("user_lng", "" + latitude);
-        params.put("user_lat", "" + longitude);
+        params.put("order_sn", "" + order_sn);
+        MyHttpUtils.postHttpMessage(AppUrl.orderDetails, params, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
+            @Override
+            public void requestSuccess(IndentContentBean json) {
+                if (1 == json.getCode()) {
+                    IndentContentBean.DataBean data = json.getData();
+//                    Glide.with(App.context).load(data.)
+                    tvName.setText("" + data.getUser_number());
+                    user_mobile = data.getUser_mobile();
+                    tvGonghao.setText("工号："+data.getUser_number());
+                    int order_status = data.getOrder_status();
+                    switch (order_status) {
+                        case 3:
+                            JinXingActivity.forward(ArrivedActivity.this, order_sn);
+                            finish();
+                            break;
+                        case 4:
+                            EndActivity.forward(ArrivedActivity.this, order_sn);
+                            finish();
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
         String s = new Gson().toJson(params);
         Log.e("nearbg_list", s);
         new GDLocation().startLocation();
@@ -135,10 +209,6 @@ public class ArrivedActivity extends BaseMapActivity {
             TextView tvName = viewCat.findViewById(R.id.tvName);
             LinearLayout llTop = viewCat.findViewById(R.id.llTop);
             ImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
-
-            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
-            tvDistance.setVisibility(View.GONE);
-            tvName.setText("代驾员已到达");
             if (i == 0) {
                 llTop.setVisibility(View.GONE);
                 ivLogoType.setImageResource(R.mipmap.dingwei);
@@ -146,6 +216,7 @@ public class ArrivedActivity extends BaseMapActivity {
                 llTop.setVisibility(View.VISIBLE);
                 ivLogoType.setImageResource(R.mipmap.logo);
             }
+            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
 //                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
             aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
 
@@ -174,50 +245,15 @@ public class ArrivedActivity extends BaseMapActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick({R.id.ll_common_back, R.id.tv_right_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_common_back:
+                finish();
+                break;
+            case R.id.tvCallPhone:
+                XueYiCheUtils.CallPhone(ArrivedActivity.this,"拨打电话？",""+user_mobile);
+                break;
+        }
     }
-
-
-//        @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.iv_back:
-//                finish();
-//                break;
-//            case R.id.tv_pay:
-//                //支付等候费
-//                Intent intent = new Intent(App.context, AppPay.class);
-//                intent.putExtra("pay_style", "daijia2");
-//                intent.putExtra("order_number", order_number2);
-//                intent.putExtra("subscription", user_amount2 + "");
-//                intent.putExtra("jifen", "0");
-//                startActivity(intent);
-//                break;
-//            case R.id.iv_call:
-//                //打电话
-//                if (!TextUtils.isEmpty(driver_phone)) {
-//                    if (driver_phone.length() != 11) {
-//                        String decrypt = AES.decrypt(driver_phone);
-//                        XueYiCheUtils.CallPhone(this, "拨打代驾电话", decrypt);
-//                    } else {
-//                        XueYiCheUtils.CallPhone(this, "拨打代驾电话", driver_phone);
-//                    }
-//                } else {
-//                    Toast.makeText(JieDanActivity.this, "电话号码为空", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-//            case R.id.tv_quxiao:
-//                //取消订单
-//                Intent intent1 = new Intent(JieDanActivity.this, LiYouActivity.class);
-//                intent1.putExtra("order_number", order_number);
-//                intent1.putExtra("cancle_remark", cancle_remark);
-//                intent1.putExtra("type", "JieDan");
-//                startActivity(intent1);
-//                break;
-//        }
-//    }
 }

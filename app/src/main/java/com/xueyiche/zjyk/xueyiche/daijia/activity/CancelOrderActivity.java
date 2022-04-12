@@ -65,10 +65,11 @@ public class CancelOrderActivity extends BaseActivity {
     protected int initContentView() {
         return R.layout.activity_cancel_order;
     }
-    public static void forward(Context context, String order_sn,String type) {
+
+    public static void forward(Context context, String order_sn, String type) {
         Intent intent = new Intent(context, CancelOrderActivity.class);
-        intent.putExtra("order_sn",""+order_sn);
-        intent.putExtra("type",""+type);
+        intent.putExtra("order_sn", "" + order_sn);
+        intent.putExtra("type", "" + type);
         context.startActivity(intent);
     }
 
@@ -127,32 +128,34 @@ public class CancelOrderActivity extends BaseActivity {
 
                 break;
             case R.id.tv_cancel:
-                String quxiao_reason="";
+                String quxiao_reason = "";
                 List<ResonBean> data = resonAdapter.getData();
                 for (int i = 0; i < data.size(); i++) {
                     ResonBean resonBean = data.get(i);
-                    if(resonBean.isSelected()){
+                    if (resonBean.isSelected()) {
                         quxiao_reason = resonBean.getReson();
                     }
                 }
-                if(TextUtils.isEmpty(quxiao_reason)){
+                if (TextUtils.isEmpty(quxiao_reason)) {
                     showToastShort("请选择取消原因");
                     return;
                 }
                 Map<String, String> params = new HashMap<>();
-                params.put("order_sn",order_sn);
-                params.put("quxiao_reason",quxiao_reason);
-                params.put("quxiao_remarks",etInfo.getText().toString().trim());
+                params.put("order_sn", order_sn);
+                params.put("quxiao_reason", quxiao_reason);
+                params.put("quxiao_remarks", etInfo.getText().toString().trim());
 
                 MyHttpUtils.postHttpMessage(AppUrl.cancelOrder, params, CancelOrderBean.class, new RequestCallBack<CancelOrderBean>() {
                     @Override
                     public void requestSuccess(CancelOrderBean json) {
                         showToastShort(json.getMsg());
                         if (json.getCode() == 1) {
-
-
+                            if ("wait".equals(type)) {
+                                WaitActivity.instance.finish();
+                            }else if ("jiedan".equals(type)){
+                                JieDanActivity.instance.finish();
+                            }
                             finish();
-                        } else {
                         }
                     }
 
