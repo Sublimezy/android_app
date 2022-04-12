@@ -91,6 +91,15 @@
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".mine.activities.bianji.EditMySelfInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mine.activities.MyOrderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mine.activities.OrderDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".daijia.activity.ChooseDaijiaYuanActivity"
             android:exported="false" />
         <activity
@@ -350,7 +359,7 @@
         <!-- 使用帮助 -->
         <!-- 关于学易车 -->
         <activity
-            android:name=".mine.activities.AboutXueYiChe"
+            android:name=".mine.activities.AboutXueYiCheActivity"
             android:screenOrientation="portrait" /> <!-- 教练详情页面 -->
         <activity
             android:name=".practicecar.activity.ChoiceCardDetails"

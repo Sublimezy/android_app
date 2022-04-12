@@ -430,13 +430,13 @@ public class DialogUtils {
 
     public static boolean IsLogin() {
         boolean islogin = PrefUtils.getBoolean(App.context, "ISLOGIN", false);
-        String logintime = PrefUtils.getString(App.context, "LOGINTIME", "0");
-        long time = new Date().getTime();
-        BigDecimal b1 = new BigDecimal(logintime);
-        BigDecimal b2 = new BigDecimal(time);
-        BigDecimal b3 = new BigDecimal(604800000);
-        BigDecimal b4 = b2.subtract(b1);
-        if (b4.compareTo(b3) <= 0 && islogin) {
+//        String logintime = PrefUtils.getString(App.context, "LOGINTIME", "0");
+//        long time = new Date().getTime();
+//        BigDecimal b1 = new BigDecimal(logintime);
+//        BigDecimal b2 = new BigDecimal(time);
+//        BigDecimal b3 = new BigDecimal(604800000);
+//        BigDecimal b4 = b2.subtract(b1);
+        if (/*b4.compareTo(b3) <= 0 && */islogin) {
             return true;
         } else {
             return false;

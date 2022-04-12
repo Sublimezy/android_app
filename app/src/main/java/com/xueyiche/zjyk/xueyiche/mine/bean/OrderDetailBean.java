@@ -69,6 +69,24 @@ class OrderDetailBean {
         private String licheng_km;
         private String neiquyu_km;
         private String waiquyu_km;
+        private String user_number;
+        private String user_mobile;
+
+        public String getUser_mobile() {
+            return user_mobile;
+        }
+
+        public void setUser_mobile(String user_mobile) {
+            this.user_mobile = user_mobile;
+        }
+
+        public String getUser_number() {
+            return user_number;
+        }
+
+        public void setUser_number(String user_number) {
+            this.user_number = user_number;
+        }
 
         public String getShichang_time() {
             return shichang_time;

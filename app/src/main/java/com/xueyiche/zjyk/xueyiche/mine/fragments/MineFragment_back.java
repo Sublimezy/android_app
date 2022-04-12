@@ -20,7 +20,7 @@ import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
-import com.xueyiche.zjyk.xueyiche.mine.activities.AboutXueYiChe;
+import com.xueyiche.zjyk.xueyiche.mine.activities.AboutXueYiCheActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.ConstantlyAddressActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bean.GetMyCarBean;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bean.MineNumberInformationBean;
@@ -278,7 +278,7 @@ public class MineFragment_back extends BaseFragment implements View.OnClickListe
                 MobclickAgent.onEvent(getContext(), "kefu_phone");
                 break;
             case R.id.ll_about:
-                openActivity(AboutXueYiChe.class);
+                openActivity(AboutXueYiCheActivity.class);
                 break;
             case R.id.ll_mine_indent_tuikuan:
                 if (!DialogUtils.IsLogin()) {

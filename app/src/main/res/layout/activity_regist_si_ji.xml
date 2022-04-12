@@ -332,11 +332,11 @@
                     android:src="@drawable/mianguan_zhaopian" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:overScrollMode="never"
                     android:id="@+id/recycler_mianguan"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
+                    android:overScrollMode="never"
                     android:scrollbars="none" />
 
             </RelativeLayout>

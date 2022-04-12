@@ -17,6 +17,7 @@ import com.xueyiche.zjyk.xueyiche.mine.bean.OrderDetailBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,7 +93,7 @@ public class OrderDetailActivity extends BaseActivity {
     TextView tvQuyuwaiLichengPrice;
     private LoadingLayout loading;
     private String order_sn;
-
+    private String user_mobile;
 
 
     @Override
@@ -131,11 +132,12 @@ public class OrderDetailActivity extends BaseActivity {
             public void requestSuccess(OrderDetailBean json) {
                 if (json.getCode() == 1) {
                     OrderDetailBean.DataBean data = json.getData();
+                    user_mobile = data.getUser_mobile();
                     tvOrderNumber.setText("订单号:"+data.getOrder_sn());
-                    tvWeihao.setText("用户尾号: "+data.getMobile_yin());
+                    tvWeihao.setText("代驾编号: "+data.getUser_number());
                     tvOrderTime.setText("下单时间: "+data.getCreatetime());
                     tvStartTime.setText("开始时间: "+data.getStart_time());
-                    tvStartLocation.setText("起始位置: "+data.getStart_time());
+                    tvStartLocation.setText("起始位置: "+data.getStart_address());
                     tvEndLocation.setText("终点位置: "+data.getEnd_address());
                     tvEndTime.setText("结束时间: "+data.getEnd_time());
 
@@ -185,6 +187,7 @@ public class OrderDetailActivity extends BaseActivity {
             case R.id.tv_weihao:
                 break;
             case R.id.iv_call_phone:
+                XueYiCheUtils.CallPhone(OrderDetailActivity.this, "拨打代驾员电话", user_mobile);
                 break;
             case R.id.tv_drive_path:
                 break;
