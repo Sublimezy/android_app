@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:xyc="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".mine.activities.bianji.SetActivity">
+
+    <include layout="@layout/new_title_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_name"
+            style="@style/bianji_list"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            xyc:sLeftTextString="真实姓名"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_phone"
+            style="@style/bianji_list"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            android:visibility="gone"
+            xyc:sLeftTextString="手机号"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_bianji_card"
+            style="@style/bianji_list"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            xyc:sLeftTextString="@string/post_idcard"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_wechat"
+            style="@style/bianji_list"
+            android:visibility="gone"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            xyc:sLeftTextString="微信绑定"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp"
+            xyc:sRightTextString="去绑定" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_qq"
+            style="@style/bianji_list"
+            android:visibility="gone"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            xyc:sLeftTextString="QQ绑定"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp"
+            xyc:sRightTextString="去绑定" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_clean"
+            style="@style/bianji_list"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            xyc:sLeftTextString="清除缓存"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_exit"
+            style="@style/bianji_list"
+            xyc:sDividerLineColor="@color/_cccccc"
+            xyc:sLeftTextColor="@color/test_color"
+            xyc:sLeftTextSize="@dimen/text_ershisp"
+            xyc:sLeftTextString="退出账户"
+            xyc:sRightIconRes="@mipmap/jiantou"
+            xyc:sRightTextColor="@color/test_color"
+            xyc:sRightTextSize="@dimen/text_ershisp" />
+    </LinearLayout>
+
+</LinearLayout>
