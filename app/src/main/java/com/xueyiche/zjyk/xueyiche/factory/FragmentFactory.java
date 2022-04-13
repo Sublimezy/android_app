@@ -1,9 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.factory;
 import androidx.fragment.app.Fragment;
 
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
-import com.xueyiche.zjyk.xueyiche.mine.fragments.MineFragment;
-import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarFragment;
 import com.xueyiche.zjyk.xueyiche.xycindent.fragments.indent.AllIndentFragment;
 
 import java.util.HashMap;

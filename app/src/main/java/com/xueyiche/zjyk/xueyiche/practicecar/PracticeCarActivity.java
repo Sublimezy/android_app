@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 //import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.activity.PracticeCarContentActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.adapter.PracticeCarAdapter;
 
@@ -68,13 +71,7 @@ import butterknife.OnClick;
  * #            com.xueyiche.zjyk.xueyiche.practicecar
  * #            xueyiche5.0
  */
-public class PracticeCarFragment extends BaseFragment{
-    @BindView(R.id.tvCity)
-    TextView tvCity;
-    @BindView(R.id.ivJianTou)
-    ImageView ivJianTou;
-    @BindView(R.id.llCity)
-    LinearLayout llCity;
+public class PracticeCarActivity extends BaseActivity {
     @BindView(R.id.magic_indicator3)
     MagicIndicator magicIndicator;
     @BindView(R.id.tv_top_right_button)
@@ -90,20 +87,21 @@ public class PracticeCarFragment extends BaseFragment{
     private List<String> list = new ArrayList<>();
     private PracticeCarAdapter practiceCarAdapter;
 
-    @Override
-    protected void lazyLoad() {
 
+    public static void forward(Context context) {
+        Intent intent = new Intent(context, PracticeCarActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
-    protected View setInitView() {
-        View view = LayoutInflater.from(App.context).inflate(R.layout.fragment_practice_car, null);
+    protected int initContentView() {
+        return R.layout.fragment_practice_car;
+    }
+
+    @Override
+    protected void initView() {
         ButterKnife.bind(this, view);
-        initView();
-        return view;
-    }
-
-    private void initView() {
+        ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
         list.add("");
         list.add("");
         list.add("");
@@ -112,9 +110,9 @@ public class PracticeCarFragment extends BaseFragment{
         list.add("");
         practiceCarAdapter = new PracticeCarAdapter(R.layout.item_practice_car_layout);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         magicIndicator.setBackgroundResource(R.drawable.round_indicator_bg);
-        CommonNavigator commonNavigator = new CommonNavigator(getActivity());
+        CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
@@ -158,7 +156,7 @@ public class PracticeCarFragment extends BaseFragment{
         practiceCarAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.tvOrder:
 
                         break;
@@ -174,20 +172,27 @@ public class PracticeCarFragment extends BaseFragment{
         });
     }
 
+
     @Override
-    protected Object setLoadDate() {
-        return "xyc";
+    protected void initListener() {
+
     }
 
-    @OnClick({R.id.llCity, R.id.tv_top_right_button})
+    @Override
+    protected void initData() {
+
+    }
+
+
+    @OnClick({R.id.tv_top_right_button, R.id.ll_common_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.llCity:
-
-                break;
             case R.id.tv_top_right_button:
                 Intent intent = new Intent(App.context, RegistSiJiActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_common_back:
+                finish();
                 break;
         }
     }

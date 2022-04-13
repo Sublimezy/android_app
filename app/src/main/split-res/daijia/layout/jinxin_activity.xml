@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/top"
-        layout="@layout/new_top_include" />
+        layout="@layout/new_title_bar" />
 
     <LinearLayout
         android:id="@+id/llinfo"
@@ -72,6 +72,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvCallPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -90,23 +91,6 @@
                 android:background="#F0F0F0" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_top"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/sishisi"
-            android:background="@drawable/caidan_bg"
-            android:clickable="true"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_quxiao_rule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="司机正在火速赶来，12:10后取消需支付取消费用"
-                android:textColor="@color/_000000"
-                android:textSize="@dimen/text_threeteensp" />
-        </LinearLayout>
     </LinearLayout>
 
     <com.amap.api.maps.MapView

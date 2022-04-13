@@ -160,5 +160,7 @@ public interface AppUrl {
     String orderList = IPWAIWANG + "api/Drivinguser/orderList";
     String mine_center = IPWAIWANG + "api/Userindex/myuserinfo";
     String userInfoEdit = IPWAIWANG + "api/Userindex/userInfoEdit";
+    String updateOrderStatus = IPWAIWANG + "api/Drivingindex/updateOrderStatus";
+    String orderAssess = IPWAIWANG + "api/Userindex/orderAssess";
 }
 

@@ -3,6 +3,7 @@ package com.xueyiche.zjyk.xueyiche.daijia.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,17 +18,22 @@ import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DriveRouteResult;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
+import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.IndentContentBean;
@@ -71,7 +77,7 @@ public class ArrivedActivity extends BaseMapActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    getDataFromNet();
+                    getDataFromNetNext();
                     break;
                 default:
                     break;
@@ -115,12 +121,12 @@ public class ArrivedActivity extends BaseMapActivity {
     @Override
     protected void initListener() {
     }
-
+    Timer timer;
     @Override
     protected void initData() {
         tvTitle.setText("司机已到达");
         order_sn = getIntent().getStringExtra("order_sn");
-        Timer timer = new Timer();
+         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -129,6 +135,8 @@ public class ArrivedActivity extends BaseMapActivity {
                 handler.sendMessage(message);
             }
         }, 1000, 5000);
+        getDataFromNet();
+        getDataFromNetNext();
     }
 
     @Override
@@ -151,18 +159,11 @@ public class ArrivedActivity extends BaseMapActivity {
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
             if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
-//                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                double latitude = aMapLocation.getLatitude();
-                double longitude = aMapLocation.getLongitude();
-//                LatLng latLng = new LatLng(latitude, longitude);
-
-                LatLonPoint mEndPoint = new LatLonPoint(39.995576, 116.481288);//终点，116.481288,39.995576
-//
-
+                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
             }
         }
     }
-    private void getDataFromNet() {
+    private void getDataFromNetNext() {
         Map<String, String> params = new HashMap<>();
         params.put("order_sn", "" + order_sn);
         MyHttpUtils.postHttpMessage(AppUrl.orderDetails, params, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
@@ -170,17 +171,15 @@ public class ArrivedActivity extends BaseMapActivity {
             public void requestSuccess(IndentContentBean json) {
                 if (1 == json.getCode()) {
                     IndentContentBean.DataBean data = json.getData();
-//                    Glide.with(App.context).load(data.)
-                    tvName.setText("" + data.getUser_number());
-                    user_mobile = data.getUser_mobile();
-                    tvGonghao.setText("工号："+data.getUser_number());
                     int order_status = data.getOrder_status();
                     switch (order_status) {
                         case 3:
+                            timer.cancel();
                             JinXingActivity.forward(ArrivedActivity.this, order_sn);
                             finish();
                             break;
                         case 4:
+                            timer.cancel();
                             EndActivity.forward(ArrivedActivity.this, order_sn);
                             finish();
                             break;
@@ -193,41 +192,72 @@ public class ArrivedActivity extends BaseMapActivity {
 
             }
         });
-        String s = new Gson().toJson(params);
-        Log.e("nearbg_list", s);
-        new GDLocation().startLocation();
-        String lat = PrefUtils.getParameter("lat");
-        String lon = PrefUtils.getParameter("lon");
-        List<LatLng> list = new ArrayList<>();
-        LatLng latlng1 = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
-        LatLng latlng = new LatLng(45.773342, 126.670695);
-        list.add(latlng1);
-        list.add(latlng);
-        for (int i = 0; i < list.size(); i++) {
-            LatLonPoint mStartPoint = new LatLonPoint(39.942295, 116.335891);//起点，116.335891,39.942295
-            View viewCat = LayoutInflater.from(ArrivedActivity.this).inflate(R.layout.item_map_nearby_layout, null);
-            TextView tvName = viewCat.findViewById(R.id.tvName);
-            LinearLayout llTop = viewCat.findViewById(R.id.llTop);
-            ImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
-            if (i == 0) {
-                llTop.setVisibility(View.GONE);
-                ivLogoType.setImageResource(R.mipmap.dingwei);
-            } else {
-                llTop.setVisibility(View.VISIBLE);
-                ivLogoType.setImageResource(R.mipmap.logo);
-            }
-            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
-//                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
-            aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
+    }
+    private void getDataFromNet() {
+        showProgressDialog(false);
+        Map<String, String> params = new HashMap<>();
+        params.put("order_sn", "" + order_sn);
+        MyHttpUtils.postHttpMessage(AppUrl.orderDetails, params, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
+            @Override
+            public void requestSuccess(IndentContentBean json) {
+                if (1 == json.getCode()) {
+                    IndentContentBean.DataBean data = json.getData();
+                    Glide.with(App.context).load(data.getHead_img()).error(R.mipmap.mine_head).placeholder(R.mipmap.mine_head).into(ciHead);
+                    tvName.setText("" + data.getUser_name());
+                    user_mobile = data.getUser_mobile();
+                    tvGonghao.setText("工号：" + data.getUser_number());
+                    String user_lat = data.getUser_lat();
+                    String user_lng = data.getUser_lng();
+                    int order_status = data.getOrder_status();
+                    new GDLocation().startLocation();
+                    String lat = PrefUtils.getParameter("lat");
+                    String lon = PrefUtils.getParameter("lon");
+                    List<LatLng> list = new ArrayList<>();
+                    LatLng latlng1 = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+                    LatLng latlng = new LatLng(Double.parseDouble(user_lat), Double.parseDouble(user_lng));
+                    list.add(latlng1);
+                    list.add(latlng);
+                    aMap.clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        View viewCat = LayoutInflater.from(ArrivedActivity.this).inflate(R.layout.item_map_nearby_layout, null);
+                        TextView tvName = viewCat.findViewById(R.id.tvName);
+                        tvName.setText("司机已到达");
+                        TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
+                        tvDistance.setVisibility(View.GONE);
+                        LinearLayout llTop = viewCat.findViewById(R.id.llTop);
+                        ImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
+                        if (i == 0) {
+                            llTop.setVisibility(View.GONE);
+                            ivLogoType.setImageResource(R.mipmap.dingwei);
+                        } else {
+                            llTop.setVisibility(View.VISIBLE);
+                            int finalI = i;
+                            Glide.with(ArrivedActivity.this).load(data.getHead_img()).into(new SimpleTarget<Drawable>() {
+                                @Override
+                                public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                    ivLogoType.setImageDrawable(resource);
+                                    aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
+                                    Bitmap bitmap = convertViewToBitmap(viewCat);
+                                    markerOption = new MarkerOptions()
+                                            .position(list.get(finalI))
+                                            .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                                            .draggable(false);
+                                    Marker marker = aMap.addMarker(markerOption);
+                                }
+                            });
+                        }
 
-            Bitmap bitmap = convertViewToBitmap(viewCat);
-            markerOption = new MarkerOptions()
-                    .position(list.get(i))
-                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-                    .draggable(false);
-            Marker marker = aMap.addMarker(markerOption);
-//                marker.setObject(user_list.get(i));
-        }
+                    }
+                }
+                stopProgressDialog();
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+                stopProgressDialog();
+            }
+        });
+
 
     }
 
@@ -245,7 +275,7 @@ public class ArrivedActivity extends BaseMapActivity {
 
     }
 
-    @OnClick({R.id.ll_common_back, R.id.tv_right_btn})
+    @OnClick({R.id.ll_common_back, R.id.tv_right_btn,R.id.tvCallPhone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_common_back:

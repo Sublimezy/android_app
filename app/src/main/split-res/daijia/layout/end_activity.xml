@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/top"
-        layout="@layout/new_top_include" />
+        layout="@layout/new_title_bar" />
 
     <com.amap.api.maps.MapView
         android:id="@+id/map_view"
@@ -100,10 +100,11 @@
                             android:layout_marginTop="@dimen/six"
                             android:text="工号：-----"
                             android:textColor="@color/test_color"
-                            android:textSize="@dimen/text_fourteensp" />
+                            android:textSize="@dimen/sp_12" />
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tvCallPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -158,6 +159,7 @@
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/tv_qibu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -171,6 +173,7 @@
                     android:layout_marginTop="@dimen/slide_top_and_left_two">
 
                     <TextView
+                        android:id="@+id/tv_shichangfei_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="时长费（共0分钟）"
@@ -178,6 +181,7 @@
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/tv_shichangfei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -191,6 +195,7 @@
                     android:layout_marginTop="@dimen/slide_top_and_left_two">
 
                     <TextView
+                        android:id="@+id/tv_lichengfei_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="里程费（共0公里）"
@@ -198,6 +203,7 @@
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/tv_lichengfei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -211,6 +217,7 @@
                     android:layout_marginTop="@dimen/slide_top_and_left_two">
 
                     <TextView
+                        android:id="@+id/tv_lichengfei_title_nei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="区域内里程（共0公里）"
@@ -218,6 +225,7 @@
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/tv_lichengfei_nei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -231,6 +239,7 @@
                     android:layout_marginTop="@dimen/slide_top_and_left_two">
 
                     <TextView
+                        android:id="@+id/tv_lichengfei_title_wai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="区域外里程（共0公里）"
@@ -238,6 +247,7 @@
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/tv_lichengfei_wai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -258,6 +268,7 @@
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/tv_youhui"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -281,14 +292,14 @@
                     android:paddingVertical="@dimen/dp_10"
                     android:layout_marginBottom="@dimen/ershisi">
 
-                   <TextView
-                       android:id="@+id/tvEndPayMoney"
-                       android:layout_width="wrap_content"
-                       android:textSize="@dimen/sp_18"
-                       android:textColor="@color/white"
-                       android:text="实付金额：0元 立即支付"
-                       android:layout_centerHorizontal="true"
-                       android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tvEndPayMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="实付金额：0元 立即支付"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_18" />
 
                 </RelativeLayout>
                 <LinearLayout

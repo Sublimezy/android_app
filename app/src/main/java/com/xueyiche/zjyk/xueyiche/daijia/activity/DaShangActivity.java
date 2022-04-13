@@ -1,5 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.View;
@@ -51,6 +53,11 @@ public class DaShangActivity extends BaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
 
+    }
+    public static void forward(Context context, String order_sn) {
+        Intent intent = new Intent(context, DaShangActivity.class);
+        intent.putExtra("order_sn", order_sn);
+        context.startActivity(intent);
     }
 
     @Override

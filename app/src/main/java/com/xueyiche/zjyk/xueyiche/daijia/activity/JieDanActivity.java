@@ -75,6 +75,7 @@ public class JieDanActivity extends BaseMapActivity {
     String order_sn = "";
     String user_mobile = "";
     public static JieDanActivity instance;
+    Timer timer;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -132,7 +133,7 @@ public class JieDanActivity extends BaseMapActivity {
         tvTitle.setText("司机正在赶来");
         cancelOrder.setText("取消订单");
         order_sn = getIntent().getStringExtra("order_sn");
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -193,14 +194,17 @@ public class JieDanActivity extends BaseMapActivity {
                     int order_status = data.getOrder_status();
                     switch (order_status) {
                         case 2:
+                            timer.cancel();
                             ArrivedActivity.forward(JieDanActivity.this, order_sn);
                             finish();
                             break;
                         case 3:
+                            timer.cancel();
                             JinXingActivity.forward(JieDanActivity.this, order_sn);
                             finish();
                             break;
                         case 4:
+                            timer.cancel();
                             EndActivity.forward(JieDanActivity.this, order_sn);
                             finish();
                             break;
@@ -264,8 +268,6 @@ public class JieDanActivity extends BaseMapActivity {
     public void onDriveRouteSearched(DriveRouteResult driveRouteResult, int i) {
 
     }
-
-
     @OnClick({R.id.ll_common_back, R.id.tv_right_btn, R.id.tvCallPhone})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -280,44 +282,4 @@ public class JieDanActivity extends BaseMapActivity {
                 break;
         }
     }
-
-
-//        @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.iv_back:
-//                finish();
-//                break;
-//            case R.id.tv_pay:
-//                //支付等候费
-//                Intent intent = new Intent(App.context, AppPay.class);
-//                intent.putExtra("pay_style", "daijia2");
-//                intent.putExtra("order_number", order_number2);
-//                intent.putExtra("subscription", user_amount2 + "");
-//                intent.putExtra("jifen", "0");
-//                startActivity(intent);
-//                break;
-//            case R.id.iv_call:
-//                //打电话
-//                if (!TextUtils.isEmpty(driver_phone)) {
-//                    if (driver_phone.length() != 11) {
-//                        String decrypt = AES.decrypt(driver_phone);
-//                        XueYiCheUtils.CallPhone(this, "拨打代驾电话", decrypt);
-//                    } else {
-//                        XueYiCheUtils.CallPhone(this, "拨打代驾电话", driver_phone);
-//                    }
-//                } else {
-//                    Toast.makeText(JieDanActivity.this, "电话号码为空", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-//            case R.id.tv_quxiao:
-//                //取消订单
-//                Intent intent1 = new Intent(JieDanActivity.this, LiYouActivity.class);
-//                intent1.putExtra("order_number", order_number);
-//                intent1.putExtra("cancle_remark", cancle_remark);
-//                intent1.putExtra("type", "JieDan");
-//                startActivity(intent1);
-//                break;
-//        }
-//    }
 }

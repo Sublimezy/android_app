@@ -24,6 +24,7 @@ import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.UserOrderDetailsBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarActivity;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.bannerview.utils.BannerUtils;
@@ -142,6 +143,7 @@ public class HomeFragment extends BaseFragment {
                 goDaiJiao();
                 break;
             case R.id.ll_two:
+                PracticeCarActivity.forward(getActivity());
                 break;
             case R.id.ll_three:
                 break;
@@ -177,13 +179,13 @@ public class HomeFragment extends BaseFragment {
                                 JinXingActivity.forward(getActivity(), order_sn);
                                 break;
                             case 4:
-                                EndActivity.forward(getActivity(),order_sn);
+                                EndActivity.forward(getActivity(), order_sn);
                                 break;
                             default:
                                 DaiJiaActivity.forward(getActivity());
                                 break;
                         }
-                    }else {
+                    } else {
                         DaiJiaActivity.forward(getActivity());
                     }
 
