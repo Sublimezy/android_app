@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorwhite"
                 android:orientation="horizontal"
-                android:paddingTop="40dp">
+                android:paddingTop="70dp">
 
                 <LinearLayout
                     android:layout_width="0dp"

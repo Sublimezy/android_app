@@ -22,6 +22,7 @@ import com.xueyiche.zjyk.xueyiche.mine.activities.ConstantlyAddressActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.MyOrderListActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bean.MineCenterBean;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bianji.EditMySelfInfoActivity;
+import com.xueyiche.zjyk.xueyiche.mine.activities.bianji.SetActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bianji.SettingActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.myhttp.LogUtils;
@@ -208,7 +209,7 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.iv_mine_setting:
                 if (DialogUtils.IsLogin()) {
-                    openActivity(SettingActivity.class);
+                    openActivity(SetActivity.class);
                 } else {
                     openActivity(LoginFirstStepActivity.class);
                 }

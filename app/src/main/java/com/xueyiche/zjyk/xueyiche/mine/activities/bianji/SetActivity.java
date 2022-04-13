@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.allen.library.SuperTextView;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -64,6 +65,8 @@ public class SetActivity extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
+        tvTitle.setText("设置");
 
     }
 

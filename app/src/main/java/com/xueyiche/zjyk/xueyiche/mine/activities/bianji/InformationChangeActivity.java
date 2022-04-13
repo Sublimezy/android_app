@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -34,6 +35,7 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
     private TextView tv_ok;
     private TextView tvTitle;
     private AES mAes;
+    private LinearLayout ll_title;
     private String change_information, user_name, user_phone, user_cards, id_card;
 
 
@@ -49,10 +51,12 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
         tv_ok = (TextView) view.findViewById(R.id.bianji_title_include).findViewById(R.id.tv_wenxintishi);
         tvTitle = (TextView) view.findViewById(R.id.bianji_title_include).findViewById(R.id.tv_login_back);
         ed_information = (MClearEditText) view.findViewById(R.id.ed_name);
+        ll_title = view.findViewById(R.id.ll_title);
         llBack.setOnClickListener(this);
         tv_ok.setOnClickListener(this);
         tv_ok.setVisibility(View.VISIBLE);
         tv_ok.setTextColor(getResources().getColor(R.color.test_color));
+        ImmersionBar.with(this).titleBar(ll_title).statusBarDarkFont(true).init();
 
     }
 
