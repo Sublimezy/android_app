@@ -109,6 +109,9 @@
             android:name=".daijia.activity.DaShangActivity"
             android:exported="false" />
         <activity
+            android:name=".practicecar.PracticeCarActivity"
+            android:exported="false" />
+        <activity
             android:name=".daijia.activity.CancelOrderActivity"
             android:exported="false" />
         <activity

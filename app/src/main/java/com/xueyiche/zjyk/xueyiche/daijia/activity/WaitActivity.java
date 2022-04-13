@@ -1,11 +1,13 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -65,7 +67,7 @@ public class WaitActivity extends BaseMapActivity {
 
     };
     private String order_sn;
-
+   private Timer timer;
     @Override
     protected int initContentView() {
         return R.layout.wait_activity;
@@ -82,29 +84,38 @@ public class WaitActivity extends BaseMapActivity {
                     int order_status = data.getOrder_status();
                     switch (order_status) {
                         case 1:
+                            timer.cancel();
                             JieDanActivity.forward(WaitActivity.this, order_sn);
                             finish();
+                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                         case 2:
+                            timer.cancel();
                             ArrivedActivity.forward(WaitActivity.this, order_sn);
+
                             finish();
+                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                         case 3:
+                            timer.cancel();
                             JinXingActivity.forward(WaitActivity.this, order_sn);
                             finish();
+                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                         case 4:
+                            timer.cancel();
                             EndActivity.forward(WaitActivity.this, order_sn);
                             finish();
+                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                     }
 
                 }
+
             }
 
             @Override
             public void requestError(String errorMsg, int errorType) {
-
             }
         });
     }
@@ -155,7 +166,6 @@ public class WaitActivity extends BaseMapActivity {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
-
     }
 
 
@@ -163,7 +173,7 @@ public class WaitActivity extends BaseMapActivity {
     protected void initData() {
         tvTitle.setText("等待应答");
         order_sn = getIntent().getStringExtra("order_sn");
-        Timer timer = new Timer();
+         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -212,9 +222,9 @@ public class WaitActivity extends BaseMapActivity {
     private void startTime() {
         timer1 = new Timer();
         int start_time = PrefUtils.getInt(App.context, "start_time", 0);
+        Log.e("start_time",""+start_time);
         timerTask = new TimerTask() {
             int cnt = start_time;
-
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {

@@ -19,11 +19,13 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
+import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.CancelOrderBean;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -152,6 +154,7 @@ public class CancelOrderActivity extends BaseActivity {
                         if (json.getCode() == 1) {
                             if ("wait".equals(type)) {
                                 WaitActivity.instance.finish();
+                                PrefUtils.putInt(App.context, "start_time", 0);
                             }else if ("jiedan".equals(type)){
                                 JieDanActivity.instance.finish();
                             }

@@ -298,7 +298,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
                 @Override
                 public void onResponse(Object response) {
-                    PayUtils.zfb(string, RechargeActivity.this, RechargeActivity.this,"" ,"","","");
+//                    PayUtils.zfb(string, RechargeActivity.this, RechargeActivity.this,"" ,"","","");
                 }
             });
         }else {

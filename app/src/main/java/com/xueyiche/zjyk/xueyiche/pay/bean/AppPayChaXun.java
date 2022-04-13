@@ -125,7 +125,7 @@ public class AppPayChaXun extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.rl_wechat:
                 if (XueYiCheUtils.isWeixinAvilible(this)) {
-                    PayUtils.wx(AppPayChaXun.this, url, order_number, user_id);
+//                    PayUtils.wx(AppPayChaXun.this, url, order_number, user_id);
                 } else {
                     showToastShort("目前您的微信版本过低或未安装微信，需要安装微信才能使用");
                 }
@@ -160,7 +160,7 @@ public class AppPayChaXun extends BaseActivity implements View.OnClickListener {
                                 App.handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        PayUtils.zfb(string, AppPayChaXun.this, AppPayChaXun.this, jifen, subscription, order_number, pay_style);
+//                                        PayUtils.zfb(string, AppPayChaXun.this, AppPayChaXun.this, jifen, subscription, order_number, pay_style);
                                     }
                                 });
                             }

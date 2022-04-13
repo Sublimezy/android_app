@@ -4,51 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bashi"
-        android:paddingTop="33dp">
+        android:layout_height="45dp"
+        android:layout_centerInParent="true">
 
         <LinearLayout
-            android:id="@+id/llCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:id="@+id/ll_common_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_common_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@mipmap/back_black" />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator3"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true" />
 
             <TextView
-                android:id="@+id/tvCity"
+                android:id="@+id/tv_top_right_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:text="哈尔滨"
-                android:textColor="@color/_000000"
-                android:textSize="@dimen/dp_15" />
-            <ImageView
-                android:id="@+id/ivJianTou"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:src="@mipmap/black_jiantou" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:gravity="center"
+                android:text="报名加入"
+                android:textColor="@color/colorOrange"
+                android:textSize="15dp" />
+        </RelativeLayout>
 
-        <net.lucode.hackware.magicindicator.MagicIndicator
-            android:id="@+id/magic_indicator3"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal" />
 
-        <TextView
-            android:id="@+id/tv_top_right_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/all_16dp"
-            android:text="报名加入"
-            android:textColor="@color/colorOrange"
-            android:textSize="@dimen/text_fifteensp" />
+
     </RelativeLayout>
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
