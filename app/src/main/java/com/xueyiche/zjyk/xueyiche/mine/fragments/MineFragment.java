@@ -29,6 +29,7 @@ import com.xueyiche.zjyk.xueyiche.myhttp.LogUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.HashMap;
@@ -160,6 +161,8 @@ public class MineFragment extends BaseFragment {
                             nickname11 = json.getData().getNickname();
                             tvMineTitle.setText(json.getData().getNickname());
                             tvMineName.setText(json.getData().getMobile());
+                            PrefUtils.putParameter("name",json.getData().getName());
+                            PrefUtils.putParameter("card_num",json.getData().getCard_num());
                         } else {
                             showToastShort(json.getMsg());
                         }

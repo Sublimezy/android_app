@@ -50,6 +50,24 @@ public class MineCenterBean {
     private String nickname;
     private String mobile;
     private String avatar;
+    private String name;
+    private String card_num;
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getCard_num() {
+      return card_num;
+    }
+
+    public void setCard_num(String card_num) {
+      this.card_num = card_num;
+    }
 
     public String getNickname() {
       return nickname;

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -44,7 +45,7 @@ public class ConstantlyAddressActivity extends BaseActivity implements View.OnCl
     private String url = "";
     private int idHome;
     private int idGongsi;
-
+    private LinearLayout ll_title;
     @Override
     protected int initContentView() {
         return R.layout.constantly_address_activity;
@@ -55,12 +56,14 @@ public class ConstantlyAddressActivity extends BaseActivity implements View.OnCl
         llBack = view.findViewById(R.id.title_include).findViewById(R.id.ll_exam_back);
         tvTitle = view.findViewById(R.id.title_include).findViewById(R.id.tv_login_back);
         tvBaocun = view.findViewById(R.id.title_include).findViewById(R.id.tv_wenxintishi);
+        ll_title = view.findViewById(R.id.ll_title);
         ll_home = view.findViewById(R.id.ll_home);
         ll_company = view.findViewById(R.id.ll_company);
         tv_jia = view.findViewById(R.id.tv_jia);
         tv_jia_address = view.findViewById(R.id.tv_jia_address);
         tv_gongsi = view.findViewById(R.id.tv_gongsi);
         tv_gongsi_address = view.findViewById(R.id.tv_gongsi_address);
+        ImmersionBar.with(this).titleBar(ll_title).statusBarDarkFont(true).init();
         user_id = PrefUtils.getString(this, "user_id", "");
         getAddress();
     }

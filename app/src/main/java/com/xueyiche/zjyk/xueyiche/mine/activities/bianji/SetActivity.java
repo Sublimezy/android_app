@@ -87,6 +87,11 @@ public class SetActivity extends BaseActivity {
 //        PrefUtils.putString(App.context, "user_phone", user_phone);
 //        PrefUtils.putString(App.context, "user_name", user_name);
 //        PrefUtils.putString(App.context, "user_cards", user_cards);
+
+        String name = PrefUtils.getParameter("name");
+        String card_num = PrefUtils.getParameter("card_num");
+        stName.setRightString(name);
+        stPhone.setRightString(card_num);
     }
 
     @OnClick({R.id.ll_common_back, R.id.st_name, R.id.st_phone, R.id.st_bianji_card, R.id.st_wechat, R.id.st_qq, R.id.st_clean, R.id.st_exit})

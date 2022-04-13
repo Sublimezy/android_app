@@ -15,7 +15,10 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.mine.activities.bean.BaseResponseBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.MClearEditText;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.SuccessDisCoverBackBean;
 import com.xueyiche.zjyk.xueyiche.utils.AES;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
@@ -25,6 +28,8 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zhanglei on 2016/10/28.
@@ -67,11 +72,13 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
 
     @Override
     protected void initData() {
+        //name
+        //card_num
         Intent intent = getIntent();
         change_information = intent.getStringExtra("change_information");
         if (!TextUtils.isEmpty(change_information)) {
             if ("name".equals(change_information)) {
-                String nickname = PrefUtils.getString(App.context, "user_name", "");
+                String nickname = PrefUtils.getString(App.context, "name", "");
                 if (!TextUtils.isEmpty(nickname)) {
                     ed_information.setText(nickname);
                     ed_information.setSelection(nickname.length());
@@ -83,7 +90,7 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
                 tvTitle.setText("姓名");
             } else if ("id_card".equals(change_information)) {
                 tvTitle.setText("身份证");
-                String user_cards = PrefUtils.getString(App.context, "user_cards", "");
+                String user_cards = PrefUtils.getString(App.context, "card_num", "");
                 String decrypt_user_cards = mAes.decrypt(user_cards);
                 if (!TextUtils.isEmpty(user_cards)) {
                     ed_information.setText(decrypt_user_cards);
@@ -145,17 +152,17 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
                 if ("id_card".equals(change_information)) {
                     if (StringUtils.isIdCard(id_card)) {
                         sendMess();
-                    }else {
+                    } else {
                         Toast.makeText(InformationChangeActivity.this, "身份证格式不正确", Toast.LENGTH_SHORT).show();
                     }
-                }else if ("name".equals(change_information)){
+                } else if ("name".equals(change_information)) {
                     int length = user_name.length();
-                    if (length>5) {
+                    if (length > 5) {
                         Toast.makeText(InformationChangeActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         sendMess();
                     }
-                }else {
+                } else {
                     sendMess();
                 }
 
@@ -164,47 +171,31 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
     }
 
     private void sendMess() {
-        String user_id = PrefUtils.getString(App.context, "user_id", "");
-        OkHttpUtils.post().url(AppUrl.Setting_Change)
-                .addParams("user_id", user_id)
-                .addParams("user_name", user_name)
-                .addParams("user_phone", user_phone)
-                .addParams("user_cards", user_cards)
-                .build()
-                .execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response) throws IOException {
-                        String string = response.body().string();
-                        if (!TextUtils.isEmpty(string)) {
-                            SuccessDisCoverBackBean successDisCoverBackBean = JsonUtil.parseJsonToBean(string, SuccessDisCoverBackBean.class);
-                            if (successDisCoverBackBean != null) {
-                                int code = successDisCoverBackBean.getCode();
-                                final String msg = successDisCoverBackBean.getMsg();
-                                if (!TextUtils.isEmpty("" + code)) {
-                                    if (200 == code) {
-                                        App.handler.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Toast.makeText(InformationChangeActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-                        }
-                        return string;
-                    }
+        Map<String, String> params = new HashMap<>();
+        params.put("name", user_name);
+        params.put("card_num", user_cards);
+        MyHttpUtils.postHttpMessage(AppUrl.userInfoEditIdentity, params, BaseResponseBean.class, new RequestCallBack<BaseResponseBean>() {
+            @Override
+            public void requestSuccess(BaseResponseBean json) {
+                if (json.getCode() == 1) {
+                    if ("id_card".equals(change_information)) {
+                        PrefUtils.putParameter("card_num", user_cards);
 
-                    @Override
-                    public void onError(Request request, Exception e) {
+                    } else if ("name".equals(change_information)) {
+                        PrefUtils.putParameter("name", user_name);
 
                     }
+                } else {
 
-                    @Override
-                    public void onResponse(Object response) {
+                }
+                showToastShort(json.getMsg());
+            }
 
-                    }
-                });
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
+
     }
 }
