@@ -19,6 +19,7 @@ import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.mine.activities.DataCleanManager;
 import com.xueyiche.zjyk.xueyiche.utils.ACache;
+import com.xueyiche.zjyk.xueyiche.utils.AES;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 
 import butterknife.BindView;
@@ -83,6 +84,7 @@ public class SetActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        AES  mAes = new AES();
 //
 //        PrefUtils.putString(App.context, "user_phone", user_phone);
 //        PrefUtils.putString(App.context, "user_name", user_name);
@@ -91,7 +93,8 @@ public class SetActivity extends BaseActivity {
         String name = PrefUtils.getParameter("name");
         String card_num = PrefUtils.getParameter("card_num");
         stName.setRightString(name);
-        stPhone.setRightString(card_num);
+        String decrypt_user_cards = mAes.decrypt(card_num);
+        stBianjiCard.setRightString(decrypt_user_cards);
     }
 
     @OnClick({R.id.ll_common_back, R.id.st_name, R.id.st_phone, R.id.st_bianji_card, R.id.st_wechat, R.id.st_qq, R.id.st_clean, R.id.st_exit})

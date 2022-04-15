@@ -185,6 +185,7 @@ public class InformationChangeActivity extends BaseActivity implements View.OnCl
                         PrefUtils.putParameter("name", user_name);
 
                     }
+                    finish();
                 } else {
 
                 }

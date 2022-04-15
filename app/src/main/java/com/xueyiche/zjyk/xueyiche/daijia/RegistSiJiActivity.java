@@ -58,6 +58,8 @@ import com.xueyiche.zjyk.xueyiche.daijia.picture.GridImageAdapter;
 import com.xueyiche.zjyk.xueyiche.daijia.picture.OnItemClickListener;
 import com.xueyiche.zjyk.xueyiche.daijia.wheelpicker.BottomPopTools;
 import com.xueyiche.zjyk.xueyiche.daijia.wheelpicker.PickerScrollView;
+import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
+import com.xueyiche.zjyk.xueyiche.mine.bean.EntranceSaveBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.ImageCompressEngine;
@@ -149,6 +151,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     protected void initListener() {
 
     }
+
     /**
      * 初始化View，执行findViewById操作
      */
@@ -158,6 +161,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
         tvTitle.setText("司机报名");
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
     }
+
     /**
      * 初始化contentView
      *
@@ -167,6 +171,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     protected int initContentView() {
         return R.layout.activity_regist_si_ji;
     }
+
     /**
      * 初始化数据
      */
@@ -194,7 +199,8 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
         initRecycler11();
 
 
-        }
+    }
+
     private PictureSelectorStyle selectorStyle;
     private String ActionMianGuan = "MianGuan";
     private String ActionSfjZheng = "SfjZheng";
@@ -260,7 +266,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
             public void onItemClick(View v, int position) {
                 List<LocalMedia> selectList = mAdapterSfjZheng.getData();
                 if (selectList.size() > 0) {
-                    previewPicture(position,mAdapterSfjZheng );
+                    previewPicture(position, mAdapterSfjZheng);
 
                 }
             }
@@ -269,6 +275,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
 
     /**
      * 预览图片
+     *
      * @param position
      * @param mAdapter
      */
@@ -281,6 +288,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 .setExternalPreviewEventListener(new MyExternalPreviewEventListener(mAdapter))
                 .startActivityPreview(position, true, mAdapter.getData());
     }
+
     /**
      * 外部预览监听事件
      */
@@ -352,7 +360,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
             public void onItemClick(View v, int position) {
                 List<LocalMedia> selectList = mAdapterJszZheng.getData();
                 if (selectList.size() > 0) {
-                    previewPicture(position,mAdapterJszZheng);
+                    previewPicture(position, mAdapterJszZheng);
                 }
             }
         });
@@ -380,7 +388,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
             public void onItemClick(View v, int position) {
                 List<LocalMedia> selectList = mAdapterJszFan.getData();
                 if (selectList.size() > 0) {
-                    previewPicture(position,mAdapterJszFan);
+                    previewPicture(position, mAdapterJszFan);
                 }
             }
         });
@@ -464,7 +472,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
             public void onItemClick(View v, int position) {
                 List<LocalMedia> selectList = mAdapterCar1.getData();
                 if (selectList.size() > 0) {
-                    previewPicture(position,mAdapterCar1);
+                    previewPicture(position, mAdapterCar1);
                 }
             }
         });
@@ -548,13 +556,11 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
             public void onItemClick(View v, int position) {
                 List<LocalMedia> selectList = mAdapterCar4.getData();
                 if (selectList.size() > 0) {
-                    previewPicture(position,mAdapterCar4);
+                    previewPicture(position, mAdapterCar4);
                 }
             }
         });
     }
-
-
 
 
     HashMap<Integer, LocalMedia> selectedPhotos = new HashMap<>();
@@ -686,11 +692,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     }
 
 
-
-
     private PictureSelectionModel getPictureSelectionModel() {
 
-       return PictureSelector.create(RegistSiJiActivity.this)
+        return PictureSelector.create(RegistSiJiActivity.this)
                 .openGallery(SelectMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                 .setImageEngine(GlideEngine.createGlideEngine())
                 .setSelectorUIStyle(selectorStyle)// 动态自定义相册主题
@@ -704,14 +708,9 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     }
 
 
-
     public Context getContext() {
         return this;
     }
-
-
-
-
 
 
     String name = ""; // 姓名
@@ -719,7 +718,7 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
     String jialing = "";//驾龄
     String phone = ""; //电话号
     String jiashizhenghao = "";//驾驶证号码
-    String type_car = "0"; //是否有车
+    String type_car = "0"; //是否有车  是否有车 0无 1有
 
 
     @OnClick({R.id.ll_common_back, R.id.tv_name, R.id.btn_submit, R.id.tv_sex, R.id.tv_jialing, R.id.tv_phone, R.id.tv_jiashizheng_number, R.id.tv_address, R.id.ll_has_car, R.id.tv_car_pinpai, R.id.tv_car_chexi})
@@ -1008,6 +1007,53 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                                         while (iterator.hasNext()) {
                                             Log.i("张斯佳司机报名_", pictureMap.get(iterator.next()));
                                         }
+                                        Map<String, String> params1 = new HashMap<>();
+                                        params1.put("driver_name",name);      //姓名
+                                        params1.put("sex","男".equals(sex) ? "1" : "0");      //性别
+                                        params1.put("driving_year",jialing);     //驾龄
+                                        params1.put("phone",phone);        //联系电话
+                                        params1.put("driving_number",jiashizhenghao);       //驾驶证号
+                                        params1.put("province",sheng_name);     //省份
+                                        params1.put("city",shi_name);     //城市
+                                        params1.put("provinceid",sheng_id);       //省份id
+                                        params1.put("cityid",shi_id);       //城市id
+                                        params1.put("head_img",pictureMap.get(0));     //免冠照片
+                                        params1.put("id_front",pictureMap.get(2));     //身份证正面
+                                        params1.put("id_back",pictureMap.get(1));      //身份证反面
+                                        params1.put("driving_license_main",pictureMap.get(3));     //驾驶证正面
+                                        params1.put("driving_license_vice",pictureMap.get(4));     //驾驶证反面
+                                        params1.put("type_car",type_car);     //是否有车 0无 1有
+                                        params1.put("travel_permit_url",pictureMap.get(5));        //行驶证正面
+                                        params1.put("travel_permit_back",pictureMap.get(6));       //行驶证反面
+                                        params1.put("brand_id",carPinPaiId);     //品牌ID
+                                        params1.put("series_id",carCheXiId);        //系列ID
+                                        params1.put("grace_45",pictureMap.get(7));     //正面45
+                                        params1.put("grace_ce",pictureMap.get(8));     //侧面
+                                        params1.put("grace_hou",pictureMap.get(9));        //后面
+                                        params1.put("grace_jiashi ",pictureMap.get(10));        //驾驶室
+
+
+
+
+                                        MyHttpUtils.postHttpMessage(AppUrl.entranceSave, params1, EntranceSaveBean.class, new RequestCallBack<EntranceSaveBean>() {
+                                            @Override
+                                            public void requestSuccess(EntranceSaveBean json) {
+
+                                                if(json.getStatus() == 200){
+
+
+                                                    finish();
+                                                }
+                                                showToastShort(json.getMsg());
+                                            }
+
+                                            @Override
+                                            public void requestError(String errorMsg, int errorType) {
+                                                showToastShort("连接服务器失败");
+                                            }
+                                        });
+
+
                                     }
                                 } else {
                                     stopProgressDialog();
