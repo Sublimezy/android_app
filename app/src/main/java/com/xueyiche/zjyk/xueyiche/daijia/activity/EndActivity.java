@@ -364,6 +364,7 @@ public class EndActivity extends BaseMapActivity {
                 break;
             case R.id.tvEndPayMoney:
                 PayUtils.JiaPay(order_sn, "5");
+                PrefUtils.putInt(App.context, "start_time", 0);
 //               PayUtils.showPopupWindow(EndActivity.this,order_sn,"daijia");
                 break;
             case R.id.tvDaShang:

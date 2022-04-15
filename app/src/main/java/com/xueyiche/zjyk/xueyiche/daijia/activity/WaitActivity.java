@@ -82,31 +82,52 @@ public class WaitActivity extends BaseMapActivity {
                 if (1 == json.getCode()) {
                     IndentContentBean.DataBean data = json.getData();
                     int order_status = data.getOrder_status();
+
+                    long timecurrentTimeMillis = System.currentTimeMillis();
+                    String da =""+ timecurrentTimeMillis;
+                    String substring = da.substring(0, 10);
+                    String createtime = data.getCreatetime();
+                    Log.e("kongxinrui",""+createtime);
+                    Log.e("kongxinrui",""+substring);
+                    Log.e("timecurrentTimeMillis",""+createtime);
+                    long l = Long.parseLong(substring);
+                    long l1 = Long.parseLong(createtime);
+                    timer1 = new Timer();
+                    timerTask = new TimerTask() {
+                        int zuizhong = (int)(l-l1);
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tvTime.setText("已等待" + getStringTime(zuizhong++));
+                                }
+                            });
+                        }
+                    };
+                    timer1.schedule(timerTask, 0, 1000);
+
                     switch (order_status) {
                         case 1:
                             timer.cancel();
                             JieDanActivity.forward(WaitActivity.this, order_sn);
                             finish();
-                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                         case 2:
                             timer.cancel();
                             ArrivedActivity.forward(WaitActivity.this, order_sn);
 
                             finish();
-                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                         case 3:
                             timer.cancel();
                             JinXingActivity.forward(WaitActivity.this, order_sn);
                             finish();
-                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                         case 4:
                             timer.cancel();
                             EndActivity.forward(WaitActivity.this, order_sn);
                             finish();
-                            PrefUtils.putInt(App.context, "start_time", 0);
                             break;
                     }
 
@@ -173,6 +194,7 @@ public class WaitActivity extends BaseMapActivity {
     protected void initData() {
         tvTitle.setText("等待应答");
         order_sn = getIntent().getStringExtra("order_sn");
+
          timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -182,7 +204,7 @@ public class WaitActivity extends BaseMapActivity {
                 handler.sendMessage(message);
             }
         }, 1000, 5000);
-        startTime();
+      getDataFromNet();
     }
 
     @Override
@@ -219,25 +241,6 @@ public class WaitActivity extends BaseMapActivity {
         }
     }
 
-    private void startTime() {
-        timer1 = new Timer();
-        int start_time = PrefUtils.getInt(App.context, "start_time", 0);
-        Log.e("start_time",""+start_time);
-        timerTask = new TimerTask() {
-            int cnt = start_time;
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tvTime.setText("已等待" + getStringTime(cnt++));
-                        PrefUtils.putInt(App.context, "start_time", cnt);
-                    }
-                });
-            }
-        };
-        timer1.schedule(timerTask, 0, 1000);
-    }
 
     private String getStringTime(int cnt) {
         int hour = cnt / 3600;

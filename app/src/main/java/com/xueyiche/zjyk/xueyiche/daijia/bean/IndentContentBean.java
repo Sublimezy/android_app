@@ -130,6 +130,15 @@ public class IndentContentBean {
         private String user_lng;
         private String user_lat;
         private String head_img;
+        private String createtime;
+
+        public String getCreatetime() {
+            return createtime;
+        }
+
+        public void setCreatetime(String createtime) {
+            this.createtime = createtime;
+        }
 
         public String getHead_img() {
             return head_img;
