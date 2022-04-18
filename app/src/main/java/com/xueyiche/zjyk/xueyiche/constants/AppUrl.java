@@ -127,8 +127,7 @@ public interface AppUrl {
     String getSubstituteDriverInfoByJobNumber= IPWAIWANG + "substitute/getSubstituteDriverInfoByJobNumber.do";
     //获取订单信息
     String Get_Order= IPWAIWANG + "substitute/getSubstituteOrderDetail.do";
-    //第一次支付
-    String Pay_Order_One= IPWAIWANG + "substitute/paySubstituteOrder.do";
+    String Pay_Order_One= IPWAIWANG + "api/userindex/userPay";
     //获取司机经纬度
     String DaiJia_location= IPWAIWANG + "substitute/getSubstituteDriverJWD.do";
     //代叫电话

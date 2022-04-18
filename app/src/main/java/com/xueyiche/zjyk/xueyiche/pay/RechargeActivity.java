@@ -49,7 +49,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
     private String string;
     private String user_phone;
     private String user_name;
-    private WXZhiFuBean.ContentBean content;
+//    private WXZhiFuBean.ContentBean content;
     private Long multiply;
     private ImageView iv_yinlian;
     private View rl_indent_yinlian;
@@ -237,7 +237,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                     if (!TextUtils.isEmpty(string)) {
                         WXZhiFuBean wxZhiFuBean = JsonUtil.parseJsonToBean(string, WXZhiFuBean.class);
                         if (wxZhiFuBean != null) {
-                            content = wxZhiFuBean.getContent();
+//                            content = wxZhiFuBean.getContent();
                         }
                     }
                     return string;
@@ -250,24 +250,24 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
                 @Override
                 public void onResponse(Object response) {
-                    if (content != null) {
-                        String appid = content.getAppid();
-                        String partnerid = content.getPartnerid();
-                        String prepayid = content.getPrepayid();
-                        String noncestr = content.getNoncestr();
-                        String timestamp = content.getTimestamp();
-                        String packageValue = content.getPackageValue();
-                        String sign = content.getSign();
-                        PayReq req = new PayReq();
-                        req.appId = appid;
-                        req.partnerId = partnerid;
-                        req.prepayId = prepayid;
-                        req.nonceStr = noncestr;
-                        req.timeStamp = timestamp;
-                        req.packageValue = packageValue;
-                        req.sign = sign;
-                        App.wxapi.sendReq(req);
-                    }
+//                    if (content != null) {
+//                        String appid = content.getAppid();
+//                        String partnerid = content.getPartnerid();
+//                        String prepayid = content.getPrepayid();
+//                        String noncestr = content.getNoncestr();
+//                        String timestamp = content.getTimestamp();
+//                        String packageValue = content.getPackageValue();
+//                        String sign = content.getSign();
+//                        PayReq req = new PayReq();
+//                        req.appId = appid;
+//                        req.partnerId = partnerid;
+//                        req.prepayId = prepayid;
+//                        req.nonceStr = noncestr;
+//                        req.timeStamp = timestamp;
+//                        req.packageValue = packageValue;
+//                        req.sign = sign;
+//                        App.wxapi.sendReq(req);
+//                    }
                 }
             });
         } else {

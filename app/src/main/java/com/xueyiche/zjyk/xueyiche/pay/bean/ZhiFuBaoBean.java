@@ -7,22 +7,16 @@ public class ZhiFuBaoBean {
 
 
     /**
-     * content : alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2017032906454932&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%221dd88a20fb724275b889d910e1b28ca5%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22%E5%AD%A6%E6%98%93%E8%BD%A6%E8%AE%A2%E5%8D%95-E1525318332671%22%2C%22timeout_express%22%3A%2230m%22%2C%22total_amount%22%3A%220.01%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2Fxyc.frp2.chuantou.org%2Fmg%2Fpayment%2Falipay%2Fnotify.do&sign=ZMjjq08fcWbVRbQMwu3Qxr0BLmUQXjKTQM4Zo%2BZGtmHRY2zpT9HYdzCg%2FjgVBEYIubUICWFm4FFXvLr%2FiyJMZWk3vPoWbCa4gL%2BLweNeQ9eTFE1QKLNfsqW3Nrt4SYZ6%2FCq0YH2lqAsILyiACXEC%2FQw91aqdzLUszVdEFXFj97oV2k5SjSf9JuLYuYdhE7K0Ia%2BY0rVxZwPMcTAcQEgyEAFasng8rZO%2FPBwES9E5dkUCsx5N2xbzJwXB5uexWvXCQ%2F8dK%2FK96XAh5KJ1d993HdI8veLNi%2F1XM0nneaBxdpOZq1io21W%2FwM922jx%2FuoLbve7XK6ukxplGFnqzj1M%2B2Q%3D%3D&sign_type=RSA2&timestamp=2018-05-03+12%3A07%3A30&version=1.0&sign=ZMjjq08fcWbVRbQMwu3Qxr0BLmUQXjKTQM4Zo%2BZGtmHRY2zpT9HYdzCg%2FjgVBEYIubUICWFm4FFXvLr%2FiyJMZWk3vPoWbCa4gL%2BLweNeQ9eTFE1QKLNfsqW3Nrt4SYZ6%2FCq0YH2lqAsILyiACXEC%2FQw91aqdzLUszVdEFXFj97oV2k5SjSf9JuLYuYdhE7K0Ia%2BY0rVxZwPMcTAcQEgyEAFasng8rZO%2FPBwES9E5dkUCsx5N2xbzJwXB5uexWvXCQ%2F8dK%2FK96XAh5KJ1d993HdI8veLNi%2F1XM0nneaBxdpOZq1io21W%2FwM922jx%2FuoLbve7XK6ukxplGFnqzj1M%2B2Q%3D%3D
-     * code : 200
-     * msg : 操作成功
+     * code : 1
+     * msg : 请求成功
+     * time : 1650251383
+     * data : app_id=2017032906454932&format=JSON&charset=utf-8&sign_type=RSA2&version=1.0&notify_url=http%3A%2F%2Fguanli.xueyiche.vip%3A101%2Faddons%2Fepay%2Fapi%2Fnotifyx%2Ftype%2Falipay&timestamp=2022-04-18+11%3A09%3A43&biz_content=%7B%22out_trade_no%22%3A%22A2022041810353904400%22%2C%22total_amount%22%3A%221%22%2C%22subject%22%3A%22%5Cu5b66%5Cu6613%5Cu8f66-%5Cu4ee3%5Cu9a7e%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%7D&method=alipay.trade.app.pay&sign=e1%2FU%2F5ninlS9VzzDL3HKuSrbyqT1cQ1CciG28WI6z4z1UMyuI%2FVCVjWSw%2FcnVyGyEhwQ77a%2FBK%2F2CPDKn3ZUHL94QZOelaWoB73p%2BeSoJB9lk7Cv2jJGy8DNuxZThbgg%2FWPPXl4bU3KZITbg35NyCSzeU8i%2BttIVwtdjd3vI8A5OkITHWel6aE%2Bsq1VMLYYGbzYfM%2FHKQByptvH4zKD5rng41bDeY5GrhU1sj7EkvV5LpdwM31rSKu6IvOej0yHnpcK78ZRNRBUxYXnHVMWfhtkdMUyV31ZHd9rYq9yeUGOu%2FSEvV0SyKMaffJoTMgjveegxxJtoojS9LGBq4%2FvyLg%3D%3D
      */
 
-    private String content;
     private int code;
     private String msg;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+    private String time;
+    private String data;
 
     public int getCode() {
         return code;
@@ -38,5 +32,21 @@ public class ZhiFuBaoBean {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

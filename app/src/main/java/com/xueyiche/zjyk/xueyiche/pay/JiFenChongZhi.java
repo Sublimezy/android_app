@@ -342,58 +342,58 @@ public class JiFenChongZhi extends BaseActivity implements View.OnClickListener,
     }
 
     public void wx_jifen() {
-        if (XueYiCheUtils.IsHaveInternet(App.context)) {
-            final WXZhiFuBean.ContentBean[] content = new WXZhiFuBean.ContentBean[1];
-            if (!TextUtils.isEmpty(money)) {
-                OkHttpUtils.post().url(AppUrl.ChongZhi_JiFen)
-                        .addParams("device_id", LoginUtils.getId(this))
-                        .addParams("user_id", user_id)
-                        .addParams("face_value", money)
-                        .addParams("pay_type_id", "2")
-                        .build().execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response) throws IOException {
-                        String string = response.body().string();
-                        if (!TextUtils.isEmpty(string)) {
-                            WXZhiFuBean wxZhiFuBean = JsonUtil.parseJsonToBean(string, WXZhiFuBean.class);
-                            if (wxZhiFuBean != null) {
-                                content[0] = wxZhiFuBean.getContent();
-                            }
-                        }
-                        return string;
-                    }
-
-                    @Override
-                    public void onError(Request request, Exception e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Object response) {
-                        if (content[0] != null) {
-                            String appid = content[0].getAppid();
-                            String partnerid = content[0].getPartnerid();
-                            String prepayid = content[0].getPrepayid();
-                            String noncestr = content[0].getNoncestr();
-                            String timestamp = content[0].getTimestamp();
-                            String packageValue = content[0].getPackageValue();
-                            String sign = content[0].getSign();
-                            PayReq req = new PayReq();
-                            req.appId = appid;
-                            req.partnerId = partnerid;
-                            req.prepayId = prepayid;
-                            req.nonceStr = noncestr;
-                            req.timeStamp = timestamp;
-                            req.packageValue = packageValue;
-                            req.sign = sign;
-                            App.wxapi.sendReq(req);
-                        }
-                    }
-                });
-            }
-        } else {
-            Toast.makeText(App.context, "请检查网络", Toast.LENGTH_SHORT).show();
-        }
+//        if (XueYiCheUtils.IsHaveInternet(App.context)) {
+//            final WXZhiFuBean.ContentBean[] content = new WXZhiFuBean.ContentBean[1];
+//            if (!TextUtils.isEmpty(money)) {
+//                OkHttpUtils.post().url(AppUrl.ChongZhi_JiFen)
+//                        .addParams("device_id", LoginUtils.getId(this))
+//                        .addParams("user_id", user_id)
+//                        .addParams("face_value", money)
+//                        .addParams("pay_type_id", "2")
+//                        .build().execute(new Callback() {
+//                    @Override
+//                    public Object parseNetworkResponse(Response response) throws IOException {
+//                        String string = response.body().string();
+//                        if (!TextUtils.isEmpty(string)) {
+//                            WXZhiFuBean wxZhiFuBean = JsonUtil.parseJsonToBean(string, WXZhiFuBean.class);
+//                            if (wxZhiFuBean != null) {
+//                                content[0] = wxZhiFuBean.getContent();
+//                            }
+//                        }
+//                        return string;
+//                    }
+//
+//                    @Override
+//                    public void onError(Request request, Exception e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Object response) {
+//                        if (content[0] != null) {
+//                            String appid = content[0].getAppid();
+//                            String partnerid = content[0].getPartnerid();
+//                            String prepayid = content[0].getPrepayid();
+//                            String noncestr = content[0].getNoncestr();
+//                            String timestamp = content[0].getTimestamp();
+//                            String packageValue = content[0].getPackageValue();
+//                            String sign = content[0].getSign();
+//                            PayReq req = new PayReq();
+//                            req.appId = appid;
+//                            req.partnerId = partnerid;
+//                            req.prepayId = prepayid;
+//                            req.nonceStr = noncestr;
+//                            req.timeStamp = timestamp;
+//                            req.packageValue = packageValue;
+//                            req.sign = sign;
+//                            App.wxapi.sendReq(req);
+//                        }
+//                    }
+//                });
+//            }
+//        } else {
+//            Toast.makeText(App.context, "请检查网络", Toast.LENGTH_SHORT).show();
+//        }
 
 
     }
@@ -444,7 +444,7 @@ public class JiFenChongZhi extends BaseActivity implements View.OnClickListener,
                 if (!TextUtils.isEmpty(string)) {
                     ZhiFuBaoBean zhiFuBaoBean = JsonUtil.parseJsonToBean(string, ZhiFuBaoBean.class);
                     if (zhiFuBaoBean != null) {
-                        String content = zhiFuBaoBean.getContent();
+                        String content = zhiFuBaoBean.getData();
                         if (!TextUtils.isEmpty(content)) {
                             PayTask alipay = new PayTask(activity);
                             Map<String, String> result = alipay.payV2(content, true);

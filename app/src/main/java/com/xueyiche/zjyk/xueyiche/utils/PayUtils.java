@@ -101,7 +101,7 @@ public class PayUtils {
                 if (AppUtils.isFastClick()) {
                     iv_zhifubao_select.setImageResource(R.mipmap.daijia_pay_ok);
                     iv_wecaht_select.setImageResource(R.mipmap.daijia_pay_no);
-                    PayUtils.zfbPay("", activity, activity, order_number, pay_style);
+                    PayUtils.zfbPay(AppUrl.Pay_Order_One, activity, activity, order_number, pay_style);
                     pop.dismiss();
                     ll_popup.clearAnimation();
                 }
@@ -115,7 +115,7 @@ public class PayUtils {
                     iv_zhifubao_select.setImageResource(R.mipmap.daijia_pay_no);
                     iv_wecaht_select.setImageResource(R.mipmap.daijia_pay_ok);
                     if (XueYiCheUtils.isWeixinAvilible(activity)) {
-                        PayUtils.wx(activity, AppUrl.Pay_Order_One, order_number);
+                        PayUtils.wx(AppUrl.Pay_Order_One, order_number);
                     } else {
                         ToastUtils.showToast(activity, "目前您的微信版本过低或未安装微信，需要安装微信才能使用");
                     }
@@ -129,28 +129,27 @@ public class PayUtils {
                 activity, R.anim.activity_translate_in));
         pop.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
+
     /**
      * 微信支付
      */
-    public static void wx(Activity activity, String url, String order_number) {
+    public static void wx(String url, String order_number) {
         if (XueYiCheUtils.IsHaveInternet(App.context)) {
-            String id = LoginUtils.getId(activity);
-            final WXZhiFuBean.ContentBean[] content = new WXZhiFuBean.ContentBean[1];
             Map<String, String> map = new HashMap<>();
-            map.put("", "");
-            map.put("", order_number);
+            map.put("order_sn", order_number);
+            map.put("type", "wechat");
             MyHttpUtils.postHttpMessage(url, map, WXZhiFuBean.class, new RequestCallBack<WXZhiFuBean>() {
                 @Override
                 public void requestSuccess(WXZhiFuBean json) {
-                    content[0] = json.getContent();
-                    if (content[0] != null) {
-                        String appid = content[0].getAppid();
-                        String partnerid = content[0].getPartnerid();
-                        String prepayid = content[0].getPrepayid();
-                        String noncestr = content[0].getNoncestr();
-                        String timestamp = content[0].getTimestamp();
-                        String packageValue = content[0].getPackageValue();
-                        String sign = content[0].getSign();
+                    WXZhiFuBean.DataBean data = json.getData();
+                    if (data != null) {
+                        String appid = data.getAppid();
+                        String partnerid = data.getPartnerid();
+                        String prepayid = data.getPrepayid();
+                        String noncestr = data.getNoncestr();
+                        String timestamp = data.getTimestamp();
+                        String packageValue = data.getPackageX();
+                        String sign = data.getSign();
                         PayReq req = new PayReq();
                         req.appId = appid;
                         req.partnerId = partnerid;
@@ -172,6 +171,7 @@ public class PayUtils {
             Toast.makeText(App.context, "请检查网络", Toast.LENGTH_SHORT).show();
         }
     }
+
     /**
      * 假支付，修改订单状态
      */
@@ -184,7 +184,7 @@ public class PayUtils {
                 @Override
                 public void requestSuccess(SuccessBean json) {
                     EventBus.getDefault().post(new MyEvent("支付成功"));
-                    Log.e("假支付","requestSuccess");
+                    Log.e("假支付", "requestSuccess");
                 }
 
                 @Override
@@ -203,11 +203,14 @@ public class PayUtils {
     public static void zfbPay(String url, Context context, final Activity activity, String order_number, final String pay_style) {
         if (XueYiCheUtils.IsHaveInternet(activity)) {
             Map<String, String> map = new HashMap<>();
-            map.put("", "");
+            map.put("order_sn", "" + order_number);
+            map.put("type", "alipay");
             MyHttpUtils.postHttpMessage(url, map, ZhiFuBaoBean.class, new RequestCallBack<ZhiFuBaoBean>() {
                 @Override
                 public void requestSuccess(ZhiFuBaoBean json) {
-                    PayUtils.zfb(json.getContent(), context, activity, order_number, pay_style);
+                    if (1 == json.getCode()) {
+                        PayUtils.zfb(json.getData(), context, activity, order_number, pay_style);
+                    }
                 }
 
                 @Override
@@ -232,6 +235,7 @@ public class PayUtils {
                          */
                         String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                         String resultStatus = payResult.getResultStatus();
+                        Log.e("PayResult", "" + resultInfo + "`````" + resultStatus);
                         // 判断resultStatus 为9000则代表支付成功
                         if (TextUtils.equals(resultStatus, "9000")) {
                             // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
@@ -262,25 +266,18 @@ public class PayUtils {
             @Override
             public void run() {
                 if (!TextUtils.isEmpty(string)) {
-                    ZhiFuBaoBean zhiFuBaoBean = JsonUtil.parseJsonToBean(string, ZhiFuBaoBean.class);
-                    if (zhiFuBaoBean != null) {
-                        String content = zhiFuBaoBean.getContent();
-                        if (!TextUtils.isEmpty(content)) {
-                            PayTask alipay = new PayTask(activity);
-                            Map<String, String> result = alipay.payV2(content, true);
-                            Message msg = new Message();
-                            msg.what = SDK_PAY_FLAG;
-                            msg.obj = result;
-                            mHandler.sendMessage(msg);
-                        }
-                    }
+                    PayTask alipay = new PayTask(activity);
+                    Map<String, String> result = alipay.payV2(string, true);
+                    Message msg = new Message();
+                    msg.what = SDK_PAY_FLAG;
+                    msg.obj = result;
+                    mHandler.sendMessage(msg);
                 }
             }
         };
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
-
     public static void goDaiJia(final Activity activity) {
         String user_id = PrefUtils.getString(activity, "user_id", "");
         OkHttpUtils.post().url(AppUrl.Get_Number_UserId)

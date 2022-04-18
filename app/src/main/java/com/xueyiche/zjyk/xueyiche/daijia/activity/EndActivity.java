@@ -363,9 +363,9 @@ public class EndActivity extends BaseMapActivity {
                 XueYiCheUtils.CallPhone(EndActivity.this, "拨打电话？", "" + user_mobile);
                 break;
             case R.id.tvEndPayMoney:
-                PayUtils.JiaPay(order_sn, "5");
-                PrefUtils.putInt(App.context, "start_time", 0);
-//               PayUtils.showPopupWindow(EndActivity.this,order_sn,"daijia");
+//                PayUtils.JiaPay(order_sn, "5");
+//                PrefUtils.putInt(App.context, "start_time", 0);
+               PayUtils.showPopupWindow(EndActivity.this,order_sn,"daijia");
                 break;
             case R.id.tvDaShang:
                 DaShangActivity.forward(EndActivity.this, order_sn);
