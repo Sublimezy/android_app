@@ -27,6 +27,8 @@ import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
