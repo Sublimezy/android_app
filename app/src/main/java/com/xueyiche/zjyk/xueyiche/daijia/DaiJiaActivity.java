@@ -300,7 +300,7 @@ public class DaiJiaActivity extends BaseMapActivity {
             @Override
             public void requestSuccess(YuSuanBean json) {
                 if (1 == json.getCode()) {
-                    tv_money.setText("" + json.getData().getPrices());
+                    tv_money.setText("" + json.getData().getPrice());
                 }
             }
 

@@ -90,7 +90,7 @@ public class YuSuanBean implements Serializable {
     }
 
     public static class DataBean implements Serializable{
-        private String prices;
+        private String price;
         private String shichang_time;
         private String shichang_price;
         private String licheng_km;
@@ -102,12 +102,12 @@ public class YuSuanBean implements Serializable {
         private String youhui_price;
         private String total_price;
 
-        public String getPrices() {
-            return prices;
+        public String getPrice() {
+            return price;
         }
 
-        public void setPrices(String prices) {
-            this.prices = prices;
+        public void setPrices(String price) {
+            this.price = price;
         }
 
         public String getShichang_time() {

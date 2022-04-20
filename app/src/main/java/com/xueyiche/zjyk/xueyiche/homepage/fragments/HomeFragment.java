@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.homepage.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -22,9 +23,12 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.HomeListAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.UserOrderDetailsBean;
+import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarActivity;
+import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.bannerview.utils.BannerUtils;
@@ -140,7 +144,13 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_one:
-                goDaiJiao();
+                boolean b = XueYiCheUtils.IsLogin();
+                Log.e("IsLogin",""+b);
+                if (XueYiCheUtils.IsLogin()) {
+                    goDaiJiao();
+                }else {
+                    LoginFirstStepActivity.forward(getActivity());
+                }
                 break;
             case R.id.ll_two:
                 PracticeCarActivity.forward(getActivity());

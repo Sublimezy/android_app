@@ -103,8 +103,8 @@ public class YuGuFeiActivity extends BaseActivity {
             public void requestSuccess(YuSuanBean json) {
                 if (1 == json.getCode()) {
                     YuSuanBean.DataBean data = json.getData();
-                    tvMoney.setText("约"+data.getPrices()+"元");
-                    tvQibu.setText(""+data.getPrices()+"元");
+                    tvMoney.setText("约"+data.getPrice()+"元");
+                    tvQibu.setText(""+data.getPrice()+"元");
                     tvShichangfeiTitle.setText("时长费（共"+data.getShichang_time()+"分钟）");
                     tvShichangfei.setText(""+data.getShichang_price()+"元");
                     tvLichengfeiTitle.setText("里程费（共"+data.getLicheng_km()+"公里）");
