@@ -261,4 +261,7 @@ dependencies {
 
     implementation 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
     implementation 'com.github.czy1121:loadinglayout:1.0.1'
+
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.github.MZCretin:ExpandableTextView:v1.6.1-x'
 }

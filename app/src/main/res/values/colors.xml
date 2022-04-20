@@ -129,4 +129,6 @@
     <color name="order_ing">#fd0f0f</color>
     <color name="order_cancel">#6f6d6d</color>
 
+    <color name="ep_expand_color">#32c5f3</color>
+    <color name="ep_contract_color">#f60c0c</color>
 </resources>
