@@ -26,6 +26,7 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
+import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
@@ -185,12 +186,47 @@ public class JieDanActivity extends BaseMapActivity {
             @Override
             public void requestSuccess(IndentContentBean json) {
                 if (1 == json.getCode()) {
+                    aMap.clear();
                     IndentContentBean.DataBean data = json.getData();
                     Glide.with(App.context).load(data.getHead_img()).error(R.mipmap.mine_head).placeholder(R.mipmap.mine_head).into(ciHead);
                     tvName.setText("" + data.getUser_name());
                     user_mobile = data.getUser_mobile();
                     tvGonghao.setText("工号：" + data.getUser_number());
                     tvQuxiaoRule.setText("" + data.getQuxiao_content());
+                    String user_lat = data.getUser_lat();
+                    String user_lng = data.getUser_lng();
+                    String head_img = data.getHead_img();
+                    new GDLocation().startLocation();
+                    String lat = PrefUtils.getParameter("lat");
+                    String lon = PrefUtils.getParameter("lon");
+                    List<LatLng> list = new ArrayList<>();
+                    LatLng latlng1 = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+                    LatLng latlng = new LatLng(Double.parseDouble(user_lat), Double.parseDouble(user_lng));
+                    list.add(latlng1);
+                    list.add(latlng);
+                    for (int i = 0; i < list.size(); i++) {
+                        View viewCat = LayoutInflater.from(JieDanActivity.this).inflate(R.layout.item_map_nearby_layout, null);
+                        TextView tvName = viewCat.findViewById(R.id.tvName);
+                        tvName.setText("代驾员正在加速赶来");
+                        LinearLayout llTop = viewCat.findViewById(R.id.llTop);
+                        ImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
+                        if (i == 0) {
+                            llTop.setVisibility(View.GONE);
+                            ivLogoType.setImageResource(R.mipmap.dingwei);
+                        } else {
+                            llTop.setVisibility(View.VISIBLE);
+                            Picasso.with(JieDanActivity.this).load(head_img).into(ivLogoType);
+                        }
+                        TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
+                        tvDistance.setVisibility(View.GONE);
+                        aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
+                        Bitmap bitmap = convertViewToBitmap(viewCat);
+                        markerOption = new MarkerOptions()
+                                .position(list.get(i))
+                                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                                .draggable(false);
+                        aMap.addMarker(markerOption);
+                    }
                     int order_status = data.getOrder_status();
                     switch (order_status) {
                         case 2:
@@ -219,39 +255,7 @@ public class JieDanActivity extends BaseMapActivity {
         });
         String s = new Gson().toJson(params);
         Log.e("nearbg_list", s);
-        new GDLocation().startLocation();
-        String lat = PrefUtils.getParameter("lat");
-        String lon = PrefUtils.getParameter("lon");
-        List<LatLng> list = new ArrayList<>();
-        LatLng latlng1 = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
-        LatLng latlng = new LatLng(45.773342, 126.670695);
-        list.add(latlng1);
-        list.add(latlng);
-        for (int i = 0; i < list.size(); i++) {
-            LatLonPoint mStartPoint = new LatLonPoint(39.942295, 116.335891);//起点，116.335891,39.942295
-            View viewCat = LayoutInflater.from(JieDanActivity.this).inflate(R.layout.item_map_nearby_layout, null);
-            TextView tvName = viewCat.findViewById(R.id.tvName);
-            LinearLayout llTop = viewCat.findViewById(R.id.llTop);
-            ImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
-            if (i == 0) {
-                llTop.setVisibility(View.GONE);
-                ivLogoType.setImageResource(R.mipmap.dingwei);
-            } else {
-                llTop.setVisibility(View.VISIBLE);
-                ivLogoType.setImageResource(R.mipmap.logo);
-            }
-            TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
-//                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
-            aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(AppUtils.createBounds(Double.parseDouble(lat), Double.parseDouble(lon), 45.773342, 126.670695), 200));
 
-            Bitmap bitmap = convertViewToBitmap(viewCat);
-            markerOption = new MarkerOptions()
-                    .position(list.get(i))
-                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-                    .draggable(false);
-            Marker marker = aMap.addMarker(markerOption);
-//                marker.setObject(user_list.get(i));
-        }
 
     }
 

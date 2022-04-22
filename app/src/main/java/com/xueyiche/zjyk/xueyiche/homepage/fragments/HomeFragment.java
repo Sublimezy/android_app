@@ -166,6 +166,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void goDaiJiao() {
+        showProgressDialog(getActivity(),false);
         Map<String, String> map = new HashMap<>();
         MyHttpUtils.postHttpMessage(AppUrl.userOrderDetails, map, UserOrderDetailsBean.class, new RequestCallBack<UserOrderDetailsBean>() {
             @Override
@@ -201,11 +202,13 @@ public class HomeFragment extends BaseFragment {
 
 
                 }
+                stopProgressDialog();
             }
 
             @Override
             public void requestError(String errorMsg, int errorType) {
                 DaiJiaActivity.forward(getActivity());
+                stopProgressDialog();
             }
         });
     }
