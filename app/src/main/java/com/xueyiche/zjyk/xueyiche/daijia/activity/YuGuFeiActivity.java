@@ -132,7 +132,7 @@ public class YuGuFeiActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_right_btn:
-                UrlActivity.forward(YuGuFeiActivity.this, "http://xueyiche.cn/xyc/rule/index.html", "2");
+                UrlActivity.forward(YuGuFeiActivity.this, "http://tabankeji.com/djh5/jifeiguize.html", "2");
                 break;
         }
     }
