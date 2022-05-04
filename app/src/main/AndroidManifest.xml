@@ -94,6 +94,9 @@
             android:name=".mine.activities.bianji.SetActivity"
             android:exported="false" />
         <activity
+            android:name=".mine.activities.DriverPathActivity"
+            android:exported="false" />
+        <activity
             android:name=".mine.activities.bianji.EditMySelfInfoActivity"
             android:exported="false" />
         <activity

@@ -144,7 +144,7 @@ public class OrderDetailActivity extends BaseActivity {
                     tvQibujia.setText("起步价(指定区域内)");
                     tvQibujiaPrice.setText(data.getQibu_price()+"元");
 
-                    tvShichang.setText("时长费(共"+data.getShichang_time()+"分钟)");
+                    tvShichang.setText("时长费(共"+data.getShichang_time()+")");
                     tvShichangPrice.setText(data.getShichang_price()+"元");
 
                     tvLicheng.setText("里程费(共"+data.getLicheng_km()+"公里)");
@@ -190,6 +190,7 @@ public class OrderDetailActivity extends BaseActivity {
                 XueYiCheUtils.CallPhone(OrderDetailActivity.this, "拨打代驾员电话", user_mobile);
                 break;
             case R.id.tv_drive_path:
+                DriverPathActivity.forward(OrderDetailActivity.this,order_sn);
                 break;
         }
     }

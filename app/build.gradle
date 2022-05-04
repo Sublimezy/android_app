@@ -149,6 +149,7 @@ allprojects {
 
 dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation files('libs/AMapTrack_1.4.1_AMapLocation_6.1.0_20220402.jar')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     //考题的module
@@ -239,7 +240,7 @@ dependencies {
     implementation 'com.haibin:calendarview:3.7.0'
     implementation 'com.yanzhenjie:permission:2.0.0-rc4'
     //定位功能
-    implementation 'com.amap.api:location:latest.integration'
+//    implementation 'com.amap.api:location:latest.integration'
     //搜索功能
     implementation 'com.github.getActivity:ToastUtils:10.3'
     implementation 'com.amap.api:search:latest.integration'
