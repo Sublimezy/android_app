@@ -170,6 +170,7 @@ public class ChooseDaijiaYuanActivity extends BaseActivity implements OnRefreshL
     }
 
     public void getDataNet() {
+        new GDLocation().startLocation();
         Map<String, String> params = new HashMap<>();
         params.put("user_lng", PrefUtils.getParameter("lon"));
         params.put("user_lat", PrefUtils.getParameter("lat"));
