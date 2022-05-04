@@ -14,6 +14,7 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
@@ -237,6 +238,12 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_shared_app:
+                if (!DialogUtils.IsLogin()) {
+                    openActivity(LoginFirstStepActivity.class);
+                } else {
+                    XueYiCheUtils.showShareAppCommon(getContext(), getActivity(), "学易车-易动华夏", "http://xueyiche.cn/", StringConstants.SHARED_TEXT + "http://www.xueyiche.cn/", "http://xychead.xueyiche.vip/share.jpg", "http://xueyiche.cn/");
+
+                }
                 break;
             case R.id.ll_kefu:
                 XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");
