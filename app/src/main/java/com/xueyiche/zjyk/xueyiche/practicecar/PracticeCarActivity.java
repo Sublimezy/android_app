@@ -101,7 +101,7 @@ public class PracticeCarActivity extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this, view);
-        ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).keyboardEnable(true).init();
         list.add("");
         list.add("");
         list.add("");

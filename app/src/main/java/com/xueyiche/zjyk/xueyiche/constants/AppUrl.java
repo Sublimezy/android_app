@@ -163,5 +163,6 @@ public interface AppUrl {
     String updateOrderStatus = IPWAIWANG + "api/Drivingindex/updateOrderStatus";
     String orderAssess = IPWAIWANG + "api/Userindex/orderAssess";
     String entranceSave = IPWAIWANG + "api/tatapublic/entranceSave";
+
 }
 

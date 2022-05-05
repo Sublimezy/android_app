@@ -43,7 +43,7 @@ public class ShouYeBannerAdapter extends BaseBannerAdapter<String> {
         ImageView imageView = holder.findViewById(R.id.image);
 
 //            new RoundImageView(getContext());
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         Picasso.with(App.context)
                 .load(data)

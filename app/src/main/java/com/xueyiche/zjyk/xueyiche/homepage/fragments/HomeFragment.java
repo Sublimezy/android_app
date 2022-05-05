@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.homepage.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.HomeListAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.ShouYeBannerBean;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.UserOrderDetailsBean;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
@@ -107,9 +109,9 @@ public class HomeFragment extends BaseFragment {
 
     private void initData() {
         refreshLayout.setEnableLoadMore(false);
-        List<String> imageurls = new ArrayList<String>();
-        imageurls.add("https://img0.baidu.com/it/u=3821463873,4211379788&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500");
-        imageurls.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1115%2F0ZR1095111%2F210ZP95111-10-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651820583&t=30c6005ca94db6092b4151c884736e46");
+//        List<String> imageurls = new ArrayList<String>();
+//        imageurls.add("https://img0.baidu.com/it/u=3821463873,4211379788&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500");
+//        imageurls.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1115%2F0ZR1095111%2F210ZP95111-10-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651820583&t=30c6005ca94db6092b4151c884736e46");
         mViewPager.setIndicatorSliderGap(BannerUtils.dp2px(6));
         mViewPager.setScrollDuration(1500);
         mViewPager.setIndicatorStyle(IndicatorStyle.ROUND_RECT);
@@ -124,15 +126,48 @@ public class HomeFragment extends BaseFragment {
         mViewPager.setOnPageClickListener(new BannerViewPager.OnPageClickListener() {
             @Override
             public void onPageClick(View clickedView, int position) {
-
+                List<String> data = mViewPager.getData();
+//                showToastShort(data.get(position)+"");
             }
         });
         mViewPager.setAdapter(new ShouYeBannerAdapter());
-        mViewPager.create(imageurls);
+
         homeListAdapter = new HomeListAdapter(R.layout.item_home_5_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(homeListAdapter);
-        homeListAdapter.setNewData(imageurls);
+//        homeListAdapter.setNewData(imageurls);
+        getBanner();
+    }
+
+    public void getBanner() {
+        Map<String, String> params = new HashMap<>();
+        params.put("device_id", TextUtils.isEmpty(App.szImei) ? "123456" : App.szImei);
+        params.put("area_id", "1001191000");
+        params.put("version", "3.0.0");
+        MyHttpUtils.postHttpMessage("http://112.103.231.139:8082/" + "mg/home/selectHome.do", params, ShouYeBannerBean.class, new RequestCallBack<ShouYeBannerBean>() {
+            @Override
+            public void requestSuccess(ShouYeBannerBean json) {
+                ShouYeBannerBean.ContentBean content = json.getContent();
+                if (content != null) {
+                    List<ShouYeBannerBean.ContentBean.VolutionContentBean> volution_content = content.getVolution_content();
+                    List<String> imageurls = new ArrayList<String>();
+                    if (volution_content != null) {
+                        for (ShouYeBannerBean.ContentBean.VolutionContentBean volutionContentBean : volution_content) {
+                            String address = volutionContentBean.getAddress();
+                            if (!TextUtils.isEmpty(address)) {
+                                imageurls.add(address);
+                            }
+                        }
+                        mViewPager.create(imageurls);
+                    }
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
     }
 
     @Override
@@ -145,10 +180,10 @@ public class HomeFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.ll_one:
                 boolean b = XueYiCheUtils.IsLogin();
-                Log.e("IsLogin",""+b);
+                Log.e("IsLogin", "" + b);
                 if (XueYiCheUtils.IsLogin()) {
                     goDaiJiao();
-                }else {
+                } else {
                     LoginFirstStepActivity.forward(getActivity());
                 }
                 break;
@@ -166,7 +201,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void goDaiJiao() {
-        showProgressDialog(getActivity(),false);
+        showProgressDialog(getActivity(), false);
         Map<String, String> map = new HashMap<>();
         MyHttpUtils.postHttpMessage(AppUrl.userOrderDetails, map, UserOrderDetailsBean.class, new RequestCallBack<UserOrderDetailsBean>() {
             @Override
