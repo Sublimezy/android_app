@@ -95,6 +95,11 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
             aMap = mapView.getMap();
             setUpMap();
         }
+        aMap.setCustomMapStyle(
+                new com.amap.api.maps.model.CustomMapStyleOptions()
+                        .setEnable(true)
+                        .setStyleId("89ba86ad92d62dfc15d3ea5e362603d9")//官网控制台-自定义样式 获取
+        );
         try {
             mlocationClient = new AMapLocationClient(this);
             mLocationOption = new AMapLocationClientOption();

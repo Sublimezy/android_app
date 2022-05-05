@@ -36,6 +36,11 @@ android {
         // 导航SDK内部使用了annotationProcessor，需要添加下面代码，防止编译异常
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: "com.xueyiche.zjyk.xueyiche",
+                JPUSH_APPKEY : "eb33a1f8367fc8257d0115b0",//值来自开发者平台取得的AppKey
+                JPUSH_CHANNEL: "default_developer",
+        ]
     }
 
     sourceSets {
@@ -176,8 +181,6 @@ dependencies {
     //下拉刷新上拉加载
     implementation project(':lib_YZxing-lib')
     implementation 'com.xw.repo:PullToRefresh:2.1@aar'
-    //极光推送
-    compile files('libs/jpush-android-3.3.6.jar')
     //支付宝支付
     compile files('libs/alipaySdk-20161222.jar')
     compile files('libs/libammsdk.jar')
@@ -248,6 +251,10 @@ dependencies {
     implementation('com.github.tohodog:QSVideoPlayer:2.2.8') {
         exclude group: 'org.slf4j'
     }
+    // 此处以JCore 3.2.4 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:3.2.4'
+    // 此处以JPush 4.6.4 版本为例
+    implementation 'cn.jiguang.sdk:jpush:4.6.4'
     implementation 'com.github.zhpanvip:BannerViewPager:3.5.0'
     implementation 'com.qq.e.union:union:4.373.1243'
     implementation 'com.pnikosis:materialish-progress:1.7'

@@ -197,7 +197,7 @@ public class EndActivity extends BaseMapActivity {
                     user_mobile = data.getUser_mobile();
                     tvGonghao.setText("工号：" + data.getUser_number());
                     tvQibu.setText("" + data.getQibu_price() + "元");
-                    tvShichangfeiTitle.setText("时长费（共" + data.getShichang_time() + "分钟）");
+                    tvShichangfeiTitle.setText("时长费（共" + data.getShichang_time() + "）");
                     tvShichangfei.setText("" + data.getShichang_price() + "元");
                     tvLichengfeiTitle.setText("里程费（共" + data.getLicheng_km() + "公里）");
                     tvLichengfei.setText("" + data.getLicheng_price() + "元");

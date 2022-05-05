@@ -104,6 +104,7 @@ public class DriverPathActivity extends BaseMapActivity {
         ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
+
         aMapTrackClient = new AMapTrackClient(getApplicationContext());
     }
 
@@ -165,7 +166,7 @@ public class DriverPathActivity extends BaseMapActivity {
                                 5000,   // 距离补偿阈值，只有超过5km的点才启用距离补偿
                                 0,  // 由旧到新排序
                                 1,  // 返回第1页数据
-                                1000,    // 一页不超过1000条
+                                999,    // 一页不超过1000条
                                 ""  // 暂未实现，该参数无意义，请留空
                         );
                         aMapTrackClient.queryHistoryTrack(historyTrackRequest, new OnTrackListener() {
