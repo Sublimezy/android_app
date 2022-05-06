@@ -98,11 +98,34 @@
         app:ep_need_expand="true"
         app:ep_need_link="false"
         app:ep_need_mention="false" />
+    <RelativeLayout
+        android:layout_below="@id/tv_quan_title"
+        android:id="@+id/rl_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:orientation="horizontal">
 
+        <com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView
+            android:id="@+id/imageView_one"
+            android:layout_width="190dp"
+            android:layout_height="250dp"
+            android:layout_marginVertical="4dp"
+            android:scaleType="centerCrop"
+            app:leftBottomRadius="0dp"
+            app:leftTopRadius="0dp"
+            app:rightBottomRadius="0dp"
+            app:onlyDrawBorder="false"
+            app:rightTopRadius="0dp"
+            app:shape="rectangle"
+            android:src="@mipmap/xueyiche"
+            />
+
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_quan_title">
+        android:layout_below="@id/rl_video">
 
         <LinearLayout
             android:paddingVertical="10dp"

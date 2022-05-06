@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_info"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="7dp"
         android:lineSpacingExtra="2dp"
         android:textColor="#2D2D2D"
@@ -99,10 +99,18 @@
         app:ep_need_link="false"
         app:ep_need_mention="false" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/tv_quan_title"
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:layout_height="wrap_content"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_quan_title">
+        android:layout_below="@id/recycler">
 
         <LinearLayout
             android:paddingVertical="10dp"
