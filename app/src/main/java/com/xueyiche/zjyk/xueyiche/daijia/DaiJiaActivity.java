@@ -1,49 +1,32 @@
 package com.xueyiche.zjyk.xueyiche.daijia;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 
 import com.amap.api.location.AMapLocation;
-import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveRouteResult;
-import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RouteSearch;
 import com.example.qrcode.Constant;
-import com.example.qrcode.ScannerActivity;
-import com.google.android.exoplayer2.upstream.HttpUtil;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
-import com.xueyiche.zjyk.xueyiche.base.module.BaseMapFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.ChooseDaijiaYuanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaiJiaoActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.LocationSearchActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.XingChengActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.YuGuFeiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.BuyOrderBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.YuSuanBean;
@@ -56,14 +39,12 @@ import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 import com.xueyiche.zjyk.xueyiche.route.DrivingRouteOverLay;
 import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
-import com.xueyiche.zjyk.xueyiche.utils.DensityUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;

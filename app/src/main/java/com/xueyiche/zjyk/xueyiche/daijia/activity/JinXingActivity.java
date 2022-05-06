@@ -190,7 +190,6 @@ public class JinXingActivity extends BaseMapActivity {
                     user_mobile = data.getUser_mobile();
                     tvGonghao.setText("工号：" + data.getUser_number());
                     tvMoney.setText("¥" + data.getTotal_price());
-                    int order_status = data.getOrder_status();
                     new GDLocation().startLocation();
                     String lat = PrefUtils.getParameter("lat");
                     String lon = PrefUtils.getParameter("lon");
@@ -251,7 +250,15 @@ public class JinXingActivity extends BaseMapActivity {
     protected void initData() {
         tvTitle.setText("服务中");
         order_sn = getIntent().getStringExtra("order_sn");
-         timer = new Timer();
+        getDataFromNet();
+        getDataFromNetNext();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -260,11 +267,15 @@ public class JinXingActivity extends BaseMapActivity {
                 handler.sendMessage(message);
             }
         }, 1000, 5000);
-        getDataFromNet();
-        getDataFromNetNext();
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer!=null) {
+            timer.cancel();
+        }
+    }
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
@@ -272,11 +283,6 @@ public class JinXingActivity extends BaseMapActivity {
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 double latitude = aMapLocation.getLatitude();
                 double longitude = aMapLocation.getLongitude();
-
-
-//
-
-
             }
         }
     }

@@ -212,14 +212,8 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" /> <!-- 代驾行程 -->
-        <activity
-            android:name=".daijia.activity.XingChengActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 代驾待付款 -->
-        <activity
-            android:name=".daijia.activity.DaiFukuanActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 代驾目的选择城市 -->
+        <!-- 代驾待付款 -->
+        <!-- 代驾目的选择城市 -->
         <activity
             android:name=".daijia.activity.CityActivity"
             android:screenOrientation="portrait"
@@ -258,10 +252,7 @@
             android:name=".daijia.activity.DaiJiaoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 预约代驾备注 -->
-        <activity
-            android:name=".daijia.activity.LiuYanActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /> <!-- 代驾进行中订单 -->
+        <!-- 代驾进行中订单 -->
         <activity
             android:name=".daijia.activity.JinXingActivity"
             android:screenOrientation="portrait"

@@ -194,8 +194,13 @@ public class WaitActivity extends BaseMapActivity {
     protected void initData() {
         tvTitle.setText("等待应答");
         order_sn = getIntent().getStringExtra("order_sn");
+      getDataFromNet();
+    }
 
-         timer = new Timer();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -204,7 +209,14 @@ public class WaitActivity extends BaseMapActivity {
                 handler.sendMessage(message);
             }
         }, 1000, 5000);
-      getDataFromNet();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer!=null) {
+            timer.cancel();
+        }
     }
 
     @Override

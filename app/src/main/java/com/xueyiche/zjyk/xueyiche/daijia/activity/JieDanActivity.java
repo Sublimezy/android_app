@@ -134,6 +134,12 @@ public class JieDanActivity extends BaseMapActivity {
         tvTitle.setText("司机正在赶来");
         cancelOrder.setText("取消订单");
         order_sn = getIntent().getStringExtra("order_sn");
+
+        getDataFromNet();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -143,7 +149,14 @@ public class JieDanActivity extends BaseMapActivity {
                 handler.sendMessage(message);
             }
         }, 1000, 5000);
-        getDataFromNet();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer!=null) {
+            timer.cancel();
+        }
     }
 
     @Override

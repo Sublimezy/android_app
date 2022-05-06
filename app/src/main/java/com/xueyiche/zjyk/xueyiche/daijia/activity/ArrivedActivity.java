@@ -86,6 +86,7 @@ public class ArrivedActivity extends BaseMapActivity {
 
 
     };
+    Timer timer;
     @Override
     protected int initContentView() {
         return R.layout.arrived_activity;
@@ -121,20 +122,11 @@ public class ArrivedActivity extends BaseMapActivity {
     @Override
     protected void initListener() {
     }
-    Timer timer;
+
     @Override
     protected void initData() {
         tvTitle.setText("司机已到达");
         order_sn = getIntent().getStringExtra("order_sn");
-         timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Message message = new Message();
-                message.what = 1;
-                handler.sendMessage(message);
-            }
-        }, 1000, 5000);
         getDataFromNet();
         getDataFromNetNext();
     }
@@ -193,6 +185,29 @@ public class ArrivedActivity extends BaseMapActivity {
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer!=null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        }, 1000, 5000);
+    }
+
     private void getDataFromNet() {
         showProgressDialog(false);
         Map<String, String> params = new HashMap<>();
