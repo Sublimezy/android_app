@@ -165,6 +165,11 @@ public class JinXingActivity extends BaseMapActivity {
                             EndActivity.forward(JinXingActivity.this, order_sn);
                             finish();
                             break;
+                        case 5:
+                            timer.cancel();
+                            EndActivity.forward(JinXingActivity.this, order_sn);
+                            finish();
+                            break;
                     }
                 }
             }
@@ -245,7 +250,9 @@ public class JinXingActivity extends BaseMapActivity {
     protected void initListener() {
 
     }
+
     Timer timer;
+
     @Override
     protected void initData() {
         tvTitle.setText("服务中");
@@ -272,10 +279,11 @@ public class JinXingActivity extends BaseMapActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (timer!=null) {
+        if (timer != null) {
             timer.cancel();
         }
     }
+
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
@@ -311,7 +319,7 @@ public class JinXingActivity extends BaseMapActivity {
                     //35分钟（19公里）
                     String lenthGL = AMapUtil.getFriendlyLength(dis);
                     String des = AMapUtil.getFriendlyTime(dur) + "(" + AMapUtil.getFriendlyLength(dis) + ")";
-                    tvDistance.setText(AMapUtil.getFriendlyTime(dur)+"  "+AMapUtil.getFriendlyLength(dis));
+                    tvDistance.setText(AMapUtil.getFriendlyTime(dur) + "  " + AMapUtil.getFriendlyLength(dis));
                     int taxiCost = (int) mDriveRouteResult.getTaxiCost();
                 }
             }
