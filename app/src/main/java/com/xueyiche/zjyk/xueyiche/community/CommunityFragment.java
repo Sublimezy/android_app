@@ -78,7 +78,7 @@ public class CommunityFragment extends BaseFragment {
     protected View setInitView() {
         View view = LayoutInflater.from(App.context).inflate(R.layout.fragment_community, null);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         initData();
         return view;
     }
@@ -144,16 +144,16 @@ public class CommunityFragment extends BaseFragment {
                     setOnlyText(helper, item);
                     break;
                 case CommunityListBean.TEXT_ONE_PIC:
-                    helper.setText(R.id.tv_quan_title, "这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
+                    setOnlyText(helper, item);
                     break;
                 case CommunityListBean.TEXT_TWO_PIC:
-                    helper.setText(R.id.tv_quan_title, "这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
+                    setOnlyText(helper, item);
                     break;
                 case CommunityListBean.TEXT_PICS:
-                    helper.setText(R.id.tv_quan_title, "这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
+                    setOnlyText(helper, item);
                     break;
                 case CommunityListBean.TEXT_VIDEO:
-                    helper.setText(R.id.tv_quan_title, "这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
+                    setOnlyText(helper, item);
                     break;
 
                 default:
@@ -166,7 +166,8 @@ public class CommunityFragment extends BaseFragment {
 
         public void setOnlyText(BaseViewHolder helper, CommunityListBean item) {
             ExpandableTextView expandableTextView = helper.getView(R.id.tv_quan_title);
-            expandableTextView.setText("这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
+            expandableTextView.bind(item);
+            expandableTextView.setContent("这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
 
         }
 
