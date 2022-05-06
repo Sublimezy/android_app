@@ -1,18 +1,27 @@
 package com.xueyiche.zjyk.xueyiche.mine.activities;
 
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.widget.NestedScrollView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.lihang.ShadowLayout;
+import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
+import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.bean.SuccessBean;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
 import com.xueyiche.zjyk.xueyiche.mine.bean.OrderDetailBean;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
@@ -75,6 +84,8 @@ public class OrderDetailActivity extends BaseActivity {
     ShadowLayout mShadowLayout;
     @BindView(R.id.content)
     NestedScrollView content;
+    @BindView(R.id.llPingJia)
+    LinearLayout llPingJia;
     @BindView(R.id.tv_shichang)
     TextView tvShichang;
     @BindView(R.id.tv_shichang_price)
@@ -87,6 +98,10 @@ public class OrderDetailActivity extends BaseActivity {
     TextView tvQuyuneiLicheng;
     @BindView(R.id.tv_quyunei_licheng_price)
     TextView tvQuyuneiLichengPrice;
+    @BindView(R.id.tvPingJia)
+    TextView tvPingJia;
+    @BindView(R.id.rb_star)
+    RatingBar rb_star;
     @BindView(R.id.tv_quyuwai_licheng)
     TextView tvQuyuwaiLicheng;
     @BindView(R.id.tv_quyuwai_licheng_price)
@@ -125,6 +140,11 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         order_sn = getIntent().getStringExtra("order_sn");
+        getDataFromNet();
+
+    }
+
+    private void getDataFromNet() {
         Map<String, String> params = new HashMap<>();
         params.put("order_sn", order_sn);
         MyHttpUtils.postHttpMessage(AppUrl.orderDetails, params, OrderDetailBean.class, new RequestCallBack<OrderDetailBean>() {
@@ -132,33 +152,44 @@ public class OrderDetailActivity extends BaseActivity {
             public void requestSuccess(OrderDetailBean json) {
                 if (json.getCode() == 1) {
                     OrderDetailBean.DataBean data = json.getData();
+                    int order_status = data.getOrder_status();
+                    if (5==order_status) {
+                        rb_star.setVisibility(View.GONE);
+                        tvPingJia.setVisibility(View.VISIBLE);
+                    }else if (6==order_status){
+                        rb_star.setVisibility(View.VISIBLE);
+                        rb_star.setRating(Float.parseFloat(data.getPingjia_rank()));
+                        tvPingJia.setVisibility(View.GONE);
+                    }else {
+                        llPingJia.setVisibility(View.GONE);
+                    }
                     user_mobile = data.getUser_mobile();
-                    tvOrderNumber.setText("订单号:"+data.getOrder_sn());
-                    tvWeihao.setText("代驾编号: "+data.getUser_number());
-                    tvOrderTime.setText("下单时间: "+data.getCreatetime());
-                    tvStartTime.setText("开始时间: "+data.getStart_time());
-                    tvStartLocation.setText("起始位置: "+data.getStart_address());
-                    tvEndLocation.setText("终点位置: "+data.getEnd_address());
-                    tvEndTime.setText("结束时间: "+data.getEnd_time());
+                    tvOrderNumber.setText("订单号:" + data.getOrder_sn());
+                    tvWeihao.setText("代驾编号: " + data.getUser_number());
+                    tvOrderTime.setText("下单时间: " + data.getCreate_time());
+                    tvStartTime.setText("开始时间: " + data.getStart_time());
+                    tvStartLocation.setText("起始位置: " + data.getStart_address());
+                    tvEndLocation.setText("终点位置: " + data.getEnd_address());
+                    tvEndTime.setText("结束时间: " + data.getEnd_time());
 
                     tvQibujia.setText("起步价(指定区域内)");
-                    tvQibujiaPrice.setText(data.getQibu_price()+"元");
+                    tvQibujiaPrice.setText(data.getQibu_price() + "元");
 
-                    tvShichang.setText("时长费(共"+data.getShichang_time()+")");
-                    tvShichangPrice.setText(data.getShichang_price()+"元");
+                    tvShichang.setText("时长费(共" + data.getShichang_time() + ")");
+                    tvShichangPrice.setText(data.getShichang_price() + "元");
 
-                    tvLicheng.setText("里程费(共"+data.getLicheng_km()+"公里)");
-                    tvLichengPrice.setText(data.getLicheng_price()+"元");
+                    tvLicheng.setText("里程费(共" + data.getLicheng_km() + "公里)");
+                    tvLichengPrice.setText(data.getLicheng_price() + "元");
 
-                    tvQuyuneiLicheng.setText("区域内里程(共"+data.getNeiquyu_km()+"公里)");
-                    tvQuyuneiLichengPrice.setText(data.getNeiquyu_km_price()+"元");
+                    tvQuyuneiLicheng.setText("区域内里程(共" + data.getNeiquyu_km() + "公里)");
+                    tvQuyuneiLichengPrice.setText(data.getNeiquyu_km_price() + "元");
 
-                    tvQuyuwaiLicheng.setText("区域外里程(共"+data.getWaiquyu_km()+"公里)");
-                    tvQuyuwaiLichengPrice.setText(data.getWaiquyu_km_price()+"元");
+                    tvQuyuwaiLicheng.setText("区域外里程(共" + data.getWaiquyu_km() + "公里)");
+                    tvQuyuwaiLichengPrice.setText(data.getWaiquyu_km_price() + "元");
 
-                    tvYouhuiPrice.setText(data.getYouhui_price()+"元");
+                    tvYouhuiPrice.setText(data.getYouhui_price() + "元");
 
-                    tvTotalPrice.setText(data.getTotal_price()+"元");
+                    tvTotalPrice.setText(data.getTotal_price() + "元");
 
                     loading.showContent();
                 } else {
@@ -177,8 +208,7 @@ public class OrderDetailActivity extends BaseActivity {
         });
     }
 
-
-    @OnClick({R.id.ll_common_back, R.id.tv_weihao, R.id.iv_call_phone, R.id.tv_drive_path})
+    @OnClick({R.id.ll_common_back, R.id.tv_weihao, R.id.iv_call_phone, R.id.tv_drive_path, R.id.tvPingJia})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_common_back:
@@ -186,13 +216,72 @@ public class OrderDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_weihao:
                 break;
+            case R.id.tvPingJia:
+                showPingJia();
+                break;
             case R.id.iv_call_phone:
                 XueYiCheUtils.CallPhone(OrderDetailActivity.this, "拨打代驾员电话", user_mobile);
                 break;
             case R.id.tv_drive_path:
-                DriverPathActivity.forward(OrderDetailActivity.this,order_sn);
+                DriverPathActivity.forward(OrderDetailActivity.this, order_sn);
                 break;
         }
     }
 
+    private void showPingJia() {
+        View view = LayoutInflater.from(App.context).inflate(R.layout.pingjia_dialog, null);
+        TextView tv_quxiao = (TextView) view.findViewById(R.id.tv_quxiao);
+        TextView tv_queren = (TextView) view.findViewById(R.id.tv_queren);
+        final RatingBar rb_star = (RatingBar) view.findViewById(R.id.rb_star);
+        rb_star.setRating(5f);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Dialog).setView(view);
+        final AlertDialog dialog01 = builder.show();
+        //设置弹窗的宽度，高度
+        DisplayMetrics dm = new DisplayMetrics();
+        //获取屏幕信息
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int screenWidth = dm.widthPixels;
+
+        int screenHeigh = dm.heightPixels;
+        WindowManager.LayoutParams params =
+                dialog01.getWindow().getAttributes();//获取dialog信息
+        params.width = screenWidth - 400;
+        params.height = screenHeigh / 2;
+        dialog01.getWindow().setAttributes(params);//设置大小
+        tv_quxiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog01.dismiss();
+            }
+        });
+        tv_queren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int rating = (int) rb_star.getRating();
+                Map<String, String> map = new HashMap<>();
+                map.put("order_sn", "" + order_sn);
+                map.put("pingjia_rank", "" + rating);
+                MyHttpUtils.postHttpMessage(AppUrl.orderAssess, map, SuccessBean.class, new RequestCallBack<SuccessBean>() {
+                    @Override
+                    public void requestSuccess(SuccessBean json) {
+                        if (1 == json.getCode()) {
+                            dialog01.dismiss();
+                            getDataFromNet();
+                        }
+                        ToastUtils.showToast(OrderDetailActivity.this, "" + json.getMsg());
+                    }
+
+                    @Override
+                    public void requestError(String errorMsg, int errorType) {
+
+                    }
+                });
+
+            }
+        });
+        //点击空白处弹框不消失
+        dialog01.setCancelable(false);
+        dialog01.show();
+    }
 }

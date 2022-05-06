@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.toast.ToastUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
@@ -26,6 +27,12 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.ArrivedActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.IndentContentBean;
 import com.xueyiche.zjyk.xueyiche.mine.bean.OrderListBean;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
@@ -117,43 +124,54 @@ public class MyOrderListActivity extends BaseActivity {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 if ("进行中".equals(orderAdapter.getData().get(position).getOrder_status())) {
-//                    Map<String, String> map = new HashMap<>();
-//                    map.put("order_sn", orderAdapter.getData().get(position).getOrder_sn());
-//                    MyHttpUtils.postHttpMessage(AppUrl.orderDetails, map, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
-//                        @Override
-//                        public void requestSuccess(IndentContentBean json) {
-//                            if (json.getCode() == 1) {
-//                                String order_status = json.getData().getOrder_status() + "";
-//                                String order_sn = json.getData().getOrder_sn() + "";
-//                                //0待接单 1已接单 2已到达 3开始服务 4结束服务 5已完成 -1取消
-//                                if ("1".equals(order_status)) {
-//                                    if (!TextUtils.isEmpty(order_sn)) {
-//                                        GoCarOwnerActivity.forward(MyOrderListActivity.this, order_sn);
-//                                    }
-//                                } else if ("2".equals(order_status)) {
-//                                    if (!TextUtils.isEmpty(order_sn)) {
-//                                        ReadyGoActivity.forward(MyOrderListActivity.this, order_sn);
-//                                    }
-//                                } else if ("3".equals(order_status)) {
-//                                    if (!TextUtils.isEmpty(order_sn)) {
-//                                        ProgressActivity.forward(MyOrderListActivity.this, order_sn);
-//                                    }
-//
-//                                }
-//                            } else {
-//                                showToastShort(json.getMsg());
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void requestError(String errorMsg, int errorType) {
-//
-//                        }
-//                    });
+                    Map<String, String> map = new HashMap<>();
+                    map.put("order_sn", orderAdapter.getData().get(position).getOrder_sn());
+                    MyHttpUtils.postHttpMessage(AppUrl.orderDetails, map, IndentContentBean.class, new RequestCallBack<IndentContentBean>() {
+                        @Override
+                        public void requestSuccess(IndentContentBean json) {
+                            if (json.getCode() == 1) {
+                                String order_status = json.getData().getOrder_status() + "";
+                                String order_sn = json.getData().getOrder_sn() + "";
+                                //0待接单 1已接单 2已到达 3开始服务 4结束服务 5已完成 -1取消
+                                if ("0".equals(order_status)) {
+                                    if (!TextUtils.isEmpty(order_sn)) {
+                                        WaitActivity.forward(MyOrderListActivity.this, order_sn);
+                                    }
+                                } else if ("1".equals(order_status)) {
+                                    if (!TextUtils.isEmpty(order_sn)) {
+                                        JieDanActivity.forward(MyOrderListActivity.this, order_sn);
+                                    }
+                                } else if ("2".equals(order_status)) {
+                                    if (!TextUtils.isEmpty(order_sn)) {
+                                        ArrivedActivity.forward(MyOrderListActivity.this, order_sn);
+                                    }
 
+                                }else if ("2".equals(order_status)) {
+                                    if (!TextUtils.isEmpty(order_sn)) {
+                                        ArrivedActivity.forward(MyOrderListActivity.this, order_sn);
+                                    }
 
-                } else {
+                                }else if ("3".equals(order_status)) {
+                                    if (!TextUtils.isEmpty(order_sn)) {
+                                        JinXingActivity.forward(MyOrderListActivity.this, order_sn);
+                                    }
 
+                                }
+                            } else {
+                                showToastShort(json.getMsg());
+                            }
+                        }
+                        @Override
+                        public void requestError(String errorMsg, int errorType) {
+
+                        }
+                    });
+
+                } else if("待付款".equals(orderAdapter.getData().get(position).getOrder_status())){
+                    EndActivity.forward(MyOrderListActivity.this,orderAdapter.getData().get(position).getOrder_sn());
+                } else if("已取消".equals(orderAdapter.getData().get(position).getOrder_status())){
+                    com.luck.picture.lib.utils.ToastUtils.showToast(MyOrderListActivity.this,"无订单详情！");
+                }else {
                     Intent intent = new Intent(MyOrderListActivity.this, OrderDetailActivity.class);
                     intent.putExtra("order_sn", orderAdapter.getData().get(position).getOrder_sn());
                     startActivity(intent);
@@ -248,8 +266,10 @@ public class MyOrderListActivity extends BaseActivity {
             helper.setText(R.id.tv_end, "终：" + item.getEnd_address());
             helper.setText(R.id.tv_state, "" + item.getOrder_status());
             if ("已完成".equals(item.getOrder_status())) {
-
                 helper.setTextColor(R.id.tv_state, getResources().getColor(R.color.order_finish));
+            }
+            if ("已评价".equals(item.getOrder_status())) {
+                helper.setTextColor(R.id.tv_state, getResources().getColor(R.color.colorBlue));
             }
             if ("进行中".equals(item.getOrder_status())) {
 

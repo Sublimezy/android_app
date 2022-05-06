@@ -146,7 +146,7 @@ class OrderDetailBean {
         private String neiquyu_km;
         private String waiquyu_km;
         private String voice_url;
-        private Object pingjia_rank;
+        private String pingjia_rank;
         private String total_price;
         private String youhui_price;
         private String waiquyu_km_price;
@@ -438,11 +438,11 @@ class OrderDetailBean {
             this.voice_url = voice_url;
         }
 
-        public Object getPingjia_rank() {
+        public String getPingjia_rank() {
             return pingjia_rank;
         }
 
-        public void setPingjia_rank(Object pingjia_rank) {
+        public void setPingjia_rank(String pingjia_rank) {
             this.pingjia_rank = pingjia_rank;
         }
 

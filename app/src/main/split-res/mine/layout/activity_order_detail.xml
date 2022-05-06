@@ -151,6 +151,42 @@
                             android:textSize="14dp" />
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/llPingJia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="我的评价："
+                            android:textColor="@color/normal_text_color"
+                            android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/tvPingJia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未评价，点击评价"
+                            android:visibility="gone"
+                            android:textColor="@color/red"
+                            android:textSize="14dp" />
+                        <RatingBar
+                            android:id="@+id/rb_star"
+                            android:layout_width="wrap_content"
+                            android:stepSize="1"
+                            android:isIndicator="true"
+                            android:visibility="gone"
+                            style="@style/MyRatingBarNowSmall"
+                            android:layout_marginLeft="@dimen/slide_top_and_left"
+                            android:layout_gravity="center"
+                            android:layout_height="wrap_content"
+                            android:numStars="5" />
+
+
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
