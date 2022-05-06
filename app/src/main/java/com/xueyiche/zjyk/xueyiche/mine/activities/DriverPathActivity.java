@@ -162,8 +162,8 @@ public class DriverPathActivity extends BaseMapActivity {
                                 l,
                                 l1,
                                 Integer.parseInt(tr_id),      // 不绑路
-                                0,      // 不做距离补偿
-                                5000,   // 距离补偿阈值，只有超过5km的点才启用距离补偿
+                                1,      // 不做距离补偿
+                                3000,   // 距离补偿阈值，只有超过5km的点才启用距离补偿
                                 0,  // 由旧到新排序
                                 1,  // 返回第1页数据
                                 999,    // 一页不超过1000条
