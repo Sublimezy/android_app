@@ -117,6 +117,7 @@ public interface AppUrl {
     //
     String Order_SaoMa = IPWAIWANG + "yueche/saoma.do";
     String Order_PingJia = IPWAIWANG + "yueche/studentEvaDriver.do";
+    String equipment = IPWAIWANG + "api/Userindex/equipment";
 
 
     //代驾相关接口

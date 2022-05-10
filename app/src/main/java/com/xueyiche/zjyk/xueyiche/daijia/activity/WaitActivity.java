@@ -158,11 +158,11 @@ public class WaitActivity extends BaseMapActivity {
 
     public void onEvent(MyEvent event) {
         String msg = event.getMsg();
-        if (TextUtils.equals("刷新代驾", msg)) {
-//            JieDanActivity.instance.finish();
-            Intent intent = new Intent(this, JinXingActivity.class);
-            intent.putExtra("order_number", "order_number");
-            startActivity(intent);
+        if (TextUtils.equals("抢单成功", msg)) {
+            JieDanActivity.forward(WaitActivity.this, order_sn);
+            if (timer!=null) {
+                timer.cancel();
+            }
             finish();
         }
     }

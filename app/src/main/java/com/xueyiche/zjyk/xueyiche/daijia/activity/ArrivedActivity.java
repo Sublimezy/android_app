@@ -97,7 +97,7 @@ public class ArrivedActivity extends BaseMapActivity {
         ButterKnife.bind(this);
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
-        ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
     }
 
     public static void forward(Context context,String order_sn) {
@@ -108,12 +108,11 @@ public class ArrivedActivity extends BaseMapActivity {
 
     public void onEvent(MyEvent event) {
         String msg = event.getMsg();
-        if (TextUtils.equals("刷新代驾", msg)) {
-//            getOrder();
-        } else if (TextUtils.equals("开始行程", msg)) {
-            Intent intent = new Intent(this, JinXingActivity.class);
-            intent.putExtra("order_number", "order_number");
-            startActivity(intent);
+        if (TextUtils.equals("开始行程", msg)) {
+            JinXingActivity.forward(ArrivedActivity.this, order_sn);
+            if (timer!=null) {
+                timer.cancel();
+            }
             finish();
         }
 

@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.xueyiche.receive;
+package com.xueyiche.zjyk.xueyiche.daijia.bean;
 
 /**
  * Created by YJF on 2019/10/29.

@@ -219,12 +219,11 @@ public class JinXingActivity extends BaseMapActivity {
 
     public void onEvent(MyEvent event) {
         String msg = event.getMsg();
-        if (TextUtils.equals("刷新代驾", msg)) {
-
-        } else if (TextUtils.equals("代驾结束", msg)) {
-            Intent intent = new Intent(this, EndActivity.class);
-            intent.putExtra("order_number", "order_number");
-            startActivity(intent);
+        if (TextUtils.equals("结束行程", msg)) {
+            EndActivity.forward(JinXingActivity.this, order_sn);
+            if (timer != null) {
+                timer.cancel();
+            }
             finish();
         }
     }

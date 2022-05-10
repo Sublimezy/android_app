@@ -26,6 +26,7 @@ import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.bean.UserInfo;
 import com.xueyiche.zjyk.xueyiche.constants.bean.YanZhengMa;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
 import com.xueyiche.zjyk.xueyiche.homepage.view.VerificationCodeInput;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;
 import com.xueyiche.zjyk.xueyiche.main.bean.LoginBean;
@@ -49,6 +50,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -136,6 +138,7 @@ public class LoginSecondStepActivity extends BaseActivity {
                             PrefUtils.putBoolean(App.context,"ISLOGIN",true);
                             PrefUtils.putParameter("token",userinfo.getToken());
                             LoginFirstStepActivity.instance.finish();
+                            postequipment();
                             finish();
                         }
                         showToastShort(json.getMsg());
@@ -166,6 +169,27 @@ public class LoginSecondStepActivity extends BaseActivity {
             case R.id.tv_user_xieyi:
                 CommonWebView.forward(LoginSecondStepActivity.this,"xieyi");
                 break;
+        }
+    }
+    private void postequipment() {
+        String equipment = PrefUtils.getParameter("equipment");
+        if (TextUtils.isEmpty(equipment)) {
+            Map<String, String> map = new HashMap<>();
+            map.put("equipment_id", "" + JPushInterface.getRegistrationID(getApplicationContext()));
+            map.put("platform", "1");
+            MyHttpUtils.postHttpMessage(AppUrl.equipment, map, SuccessBackBean.class, new RequestCallBack<SuccessBackBean>() {
+                @Override
+                public void requestSuccess(SuccessBackBean json) {
+                    if (1 == json.getCode()) {
+                        PrefUtils.putParameter("", JPushInterface.getRegistrationID(getApplicationContext()));
+                    }
+                }
+
+                @Override
+                public void requestError(String errorMsg, int errorType) {
+
+                }
+            });
         }
     }
 }

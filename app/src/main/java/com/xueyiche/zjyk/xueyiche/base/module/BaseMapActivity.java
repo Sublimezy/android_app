@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,11 +43,20 @@ import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.StatusBarUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.jpush.android.api.JPushInterface;
 
 
 /**
@@ -161,6 +171,27 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
                 .position(AMapUtil.convertToLatLng(mEndPoint))
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.zhong_pic)));
     }
+    private void postequipment() {
+        String equipment = PrefUtils.getParameter("equipment");
+        if (TextUtils.isEmpty(equipment)) {
+            Map<String, String> map = new HashMap<>();
+            map.put("equipment_id", "" + JPushInterface.getRegistrationID(getApplicationContext()));
+            map.put("platform", "1");
+            MyHttpUtils.postHttpMessage(AppUrl.equipment, map, SuccessBackBean.class, new RequestCallBack<SuccessBackBean>() {
+                @Override
+                public void requestSuccess(SuccessBackBean json) {
+                    if (1 == json.getCode()) {
+                        PrefUtils.putParameter("", JPushInterface.getRegistrationID(getApplicationContext()));
+                    }
+                }
+
+                @Override
+                public void requestError(String errorMsg, int errorType) {
+
+                }
+            });
+        }
+    }
     private void setupLocationStyle() {
         // 自定义系统定位蓝点
         MyLocationStyle myLocationStyle = new MyLocationStyle();
@@ -180,6 +211,7 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
     @Override
     protected void onResume() {
         super.onResume();
+        postequipment();
         MobclickAgent.onPageStart("BaseActivity"); // [统计页面(仅有Activity的应用中SDK自动调用,不需要单独写。参数为页面名称,可自定义)]
         MobclickAgent.onResume(this);// 友盟统计，所有Activity中添加，父类添加后子类不用重复添加
         //设置不自动弹出软键盘

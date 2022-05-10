@@ -99,7 +99,7 @@ public class JieDanActivity extends BaseMapActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         ButterKnife.bind(this);
-        ImmersionBar.with(this).titleBar(rlTitle).keyboardEnable(true).init();
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         instance = this;
@@ -113,14 +113,14 @@ public class JieDanActivity extends BaseMapActivity {
 
     public void onEvent(MyEvent event) {
         String msg = event.getMsg();
-        if (TextUtils.equals("刷新代驾", msg)) {
-//            getOrder();
-        } else if (TextUtils.equals("开始行程", msg)) {
-            Intent intent = new Intent(this, JinXingActivity.class);
-            intent.putExtra("order_number", "order_number");
-            startActivity(intent);
+        if (TextUtils.equals("到达位置", msg)) {
+            ArrivedActivity.forward(JieDanActivity.this, order_sn);
+            if (timer!=null) {
+                timer.cancel();
+            }
             finish();
         }
+
 
     }
 
