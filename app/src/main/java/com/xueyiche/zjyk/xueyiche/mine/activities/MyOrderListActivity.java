@@ -263,7 +263,11 @@ public class MyOrderListActivity extends BaseActivity {
             helper.setText(R.id.tv_last_number, "尾号" + item.getMobile());
             helper.setText(R.id.tv_time, "" + item.getCreatetime());
             helper.setText(R.id.tv_start, "始：" + item.getStart_address());
-            helper.setText(R.id.tv_end, "终：" + item.getEnd_address());
+            if (TextUtils.isEmpty(item.getEnd_address())||item.getEnd_address().contains("null")) {
+                helper.setText(R.id.tv_end, "终：--");
+            } else {
+                helper.setText(R.id.tv_end, "终：" + item.getEnd_address());
+            }
             helper.setText(R.id.tv_state, "" + item.getOrder_status());
             if ("已完成".equals(item.getOrder_status())) {
                 helper.setTextColor(R.id.tv_state, getResources().getColor(R.color.order_finish));

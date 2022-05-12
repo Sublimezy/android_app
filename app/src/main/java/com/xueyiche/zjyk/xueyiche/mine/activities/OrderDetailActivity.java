@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.mine.activities;
 
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -169,7 +170,11 @@ public class OrderDetailActivity extends BaseActivity {
                     tvOrderTime.setText("下单时间: " + data.getCreate_time());
                     tvStartTime.setText("开始时间: " + data.getStart_time());
                     tvStartLocation.setText("起始位置: " + data.getStart_address());
-                    tvEndLocation.setText("终点位置: " + data.getEnd_address());
+                    if (TextUtils.isEmpty(data.getEnd_address())||data.getEnd_address().contains("null")) {
+                        tvEndLocation.setText("终点位置: --");
+                    } else {
+                        tvEndLocation.setText("终点位置: " + data.getEnd_address());
+                    }
                     tvEndTime.setText("结束时间: " + data.getEnd_time());
 
                     tvQibujia.setText("起步价(指定区域内)");
