@@ -91,6 +91,11 @@ public class OrderDetailActivity extends BaseActivity {
     TextView tvShichang;
     @BindView(R.id.tv_shichang_price)
     TextView tvShichangPrice;
+
+    @BindView(R.id.tv_dengshifei)
+    TextView tv_dengshifei;
+    @BindView(R.id.tv_dengshi_price)
+    TextView tv_dengshi_price;
     @BindView(R.id.tv_licheng)
     TextView tvLicheng;
     @BindView(R.id.tv_licheng_price)
@@ -182,6 +187,10 @@ public class OrderDetailActivity extends BaseActivity {
 
                     tvShichang.setText("时长费(共" + data.getShichang_time() + ")");
                     tvShichangPrice.setText(data.getShichang_price() + "元");
+
+
+                    tv_dengshifei.setText("等时费(共"+  data.getWait_time()    +")");
+                    tv_dengshi_price.setText(  data.getWait_price() +"元");
 
                     tvLicheng.setText("里程费(共" + data.getLicheng_km() + "公里)");
                     tvLichengPrice.setText(data.getLicheng_price() + "元");

@@ -166,6 +166,25 @@ class OrderDetailBean {
         private String user_number;
         private String quxiao_content;
 
+        private String wait_time;
+        private double wait_price;
+
+        public String getWait_time() {
+            return wait_time;
+        }
+
+        public void setWait_time(String wait_time) {
+            this.wait_time = wait_time;
+        }
+
+        public double getWait_price() {
+            return wait_price;
+        }
+
+        public void setWait_price(double wait_price) {
+            this.wait_price = wait_price;
+        }
+
         public int getId() {
             return id;
         }
