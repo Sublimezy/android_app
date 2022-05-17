@@ -91,11 +91,8 @@ public class OrderDetailActivity extends BaseActivity {
     TextView tvShichang;
     @BindView(R.id.tv_shichang_price)
     TextView tvShichangPrice;
-
-    @BindView(R.id.tv_dengshifei)
-    TextView tv_dengshifei;
-    @BindView(R.id.tv_dengshi_price)
-    TextView tv_dengshi_price;
+    @BindView(R.id.tv_waitfei)
+    TextView tv_waitfei;
     @BindView(R.id.tv_licheng)
     TextView tvLicheng;
     @BindView(R.id.tv_licheng_price)
@@ -110,6 +107,8 @@ public class OrderDetailActivity extends BaseActivity {
     RatingBar rb_star;
     @BindView(R.id.tv_quyuwai_licheng)
     TextView tvQuyuwaiLicheng;
+    @BindView(R.id.tv_wait_title)
+    TextView tv_wait_title;
     @BindView(R.id.tv_quyuwai_licheng_price)
     TextView tvQuyuwaiLichengPrice;
     private LoadingLayout loading;
@@ -159,14 +158,14 @@ public class OrderDetailActivity extends BaseActivity {
                 if (json.getCode() == 1) {
                     OrderDetailBean.DataBean data = json.getData();
                     int order_status = data.getOrder_status();
-                    if (5==order_status) {
+                    if (5 == order_status) {
                         rb_star.setVisibility(View.GONE);
                         tvPingJia.setVisibility(View.VISIBLE);
-                    }else if (6==order_status){
+                    } else if (6 == order_status) {
                         rb_star.setVisibility(View.VISIBLE);
                         rb_star.setRating(Float.parseFloat(data.getPingjia_rank()));
                         tvPingJia.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         llPingJia.setVisibility(View.GONE);
                     }
                     user_mobile = data.getUser_mobile();
@@ -175,7 +174,7 @@ public class OrderDetailActivity extends BaseActivity {
                     tvOrderTime.setText("下单时间: " + data.getCreate_time());
                     tvStartTime.setText("开始时间: " + data.getStart_time());
                     tvStartLocation.setText("起始位置: " + data.getStart_address());
-                    if (TextUtils.isEmpty(data.getEnd_address())||data.getEnd_address().contains("null")) {
+                    if (TextUtils.isEmpty(data.getEnd_address()) || data.getEnd_address().contains("null")) {
                         tvEndLocation.setText("终点位置: --");
                     } else {
                         tvEndLocation.setText("终点位置: " + data.getEnd_address());
@@ -185,13 +184,10 @@ public class OrderDetailActivity extends BaseActivity {
                     tvQibujia.setText("起步价(指定区域内)");
                     tvQibujiaPrice.setText(data.getQibu_price() + "元");
 
-                    tvShichang.setText("时长费(共" + data.getShichang_time() + ")");
                     tvShichangPrice.setText(data.getShichang_price() + "元");
-
-
-                    tv_dengshifei.setText("等时费(共"+  data.getWait_time()    +")");
-                    tv_dengshi_price.setText(  data.getWait_price() +"元");
-
+                    tvShichang.setText("超时费（共" + data.getChaoshi_time() + "分钟）");
+                    tv_wait_title.setText("等时费（共" + data.getWait_time() + "）");
+                    tv_waitfei.setText("" + data.getWait_price() + "元");
                     tvLicheng.setText("里程费(共" + data.getLicheng_km() + "公里)");
                     tvLichengPrice.setText(data.getLicheng_price() + "元");
 

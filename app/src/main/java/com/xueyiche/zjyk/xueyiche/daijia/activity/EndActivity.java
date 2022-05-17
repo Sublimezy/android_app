@@ -118,6 +118,10 @@ public class EndActivity extends BaseMapActivity {
     LinearLayout rlPay;
     @BindView(R.id.ll_bottom)
     LinearLayout llBottom;
+    @BindView(R.id.tv_wait_title)
+    TextView tv_wait_title;
+    @BindView(R.id.tv_waitfei)
+    TextView tv_waitfei;
     @BindView(R.id.ll_richang)
     LinearLayout llRichang;
     private String order_sn;
@@ -197,7 +201,9 @@ public class EndActivity extends BaseMapActivity {
                     user_mobile = data.getUser_mobile();
                     tvGonghao.setText("工号：" + data.getUser_number());
                     tvQibu.setText("" + data.getQibu_price() + "元");
-                    tvShichangfeiTitle.setText("时长费（共" + data.getShichang_time() + "）");
+                    tvShichangfeiTitle.setText("超时费（共" + data.getChaoshi_time() + "分钟）");
+                    tv_wait_title.setText("等时费（共" + data.getWait_time() + "）");
+                    tv_waitfei.setText("" + data.getWait_price() + "元");
                     tvShichangfei.setText("" + data.getShichang_price() + "元");
                     tvLichengfeiTitle.setText("里程费（共" + data.getLicheng_km() + "公里）");
                     tvLichengfei.setText("" + data.getLicheng_price() + "元");
