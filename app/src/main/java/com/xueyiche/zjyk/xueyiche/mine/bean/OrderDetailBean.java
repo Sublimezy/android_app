@@ -165,9 +165,19 @@ class OrderDetailBean {
         private String head_img;
         private String user_number;
         private String quxiao_content;
-
+        private String chaoshi_time;
         private String wait_time;
-        private double wait_price;
+        private String wait_price;
+
+        public String getChaoshi_time() {
+            return chaoshi_time;
+        }
+
+
+
+        public void setChaoshi_time(String chaoshi_time) {
+            this.chaoshi_time = chaoshi_time;
+        }
 
         public String getWait_time() {
             return wait_time;
@@ -177,14 +187,13 @@ class OrderDetailBean {
             this.wait_time = wait_time;
         }
 
-        public double getWait_price() {
+        public String getWait_price() {
             return wait_price;
         }
 
-        public void setWait_price(double wait_price) {
+        public void setWait_price(String wait_price) {
             this.wait_price = wait_price;
         }
-
         public int getId() {
             return id;
         }

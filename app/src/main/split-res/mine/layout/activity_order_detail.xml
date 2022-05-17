@@ -255,7 +255,7 @@
                         android:layout_marginTop="10dp">
 
                         <TextView
-                            android:id="@+id/tv_dengshifei"
+                            android:id="@+id/tv_wait_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="用户信息"
@@ -263,7 +263,7 @@
                             android:textSize="14dp" />
 
                         <TextView
-                            android:id="@+id/tv_dengshi_price"
+                            android:id="@+id/tv_waitfei"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"

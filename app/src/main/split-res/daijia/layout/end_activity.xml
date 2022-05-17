@@ -176,12 +176,34 @@
                         android:id="@+id/tv_shichangfei_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="时长费（共0分钟）"
+                        android:text="超时费（共0分钟）"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
                         android:id="@+id/tv_shichangfei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="0元"
+                        android:textColor="@color/_000000"
+                        android:textSize="@dimen/sp_12" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/slide_top_and_left_two">
+
+                    <TextView
+                        android:id="@+id/tv_wait_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="等时费（共0分钟）"
+                        android:textColor="@color/_000000"
+                        android:textSize="@dimen/sp_12" />
+
+                    <TextView
+                        android:id="@+id/tv_waitfei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
