@@ -100,13 +100,12 @@
         app:ep_need_mention="false" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/tv_quan_title"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never"
         android:layout_height="wrap_content"
-        />
+        android:layout_below="@id/tv_quan_title"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

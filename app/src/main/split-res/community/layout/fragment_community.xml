@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
+    <include layout="@layout/new_title_bar" />
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
@@ -14,10 +17,10 @@
             android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="20dp"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
             android:overScrollMode="never"
             android:scrollbars="none" />
 
@@ -27,4 +30,4 @@
 
             />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-</RelativeLayout>
+</LinearLayout>

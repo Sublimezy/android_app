@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.homepage.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -7,11 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
@@ -24,12 +31,13 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.HomeListAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.ShouYeBannerBean;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.ShouYeHotBean;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.UserOrderDetailsBean;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
+import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarActivity;
-import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
@@ -79,12 +87,13 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
+    SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.ll_address)
     LinearLayout llAddress;
     @BindView(R.id.ll_search)
     LinearLayout llSearch;
     private HomeListAdapter homeListAdapter;
+    private List<ShouYeBannerBean.DataBean> data;
 
     public static HomeFragment newInstance(String tag) {
         Bundle bundle = new Bundle();
@@ -108,7 +117,22 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initData() {
-        refreshLayout.setEnableLoadMore(false);
+
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                pager++;
+                getHot();
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mRefreshLayout.setEnableLoadMore(true);
+                pager = 1;
+                getHot();
+                getBanner();
+            }
+        });
 //        List<String> imageurls = new ArrayList<String>();
 //        imageurls.add("https://img0.baidu.com/it/u=3821463873,4211379788&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500");
 //        imageurls.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1115%2F0ZR1095111%2F210ZP95111-10-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651820583&t=30c6005ca94db6092b4151c884736e46");
@@ -126,41 +150,87 @@ public class HomeFragment extends BaseFragment {
         mViewPager.setOnPageClickListener(new BannerViewPager.OnPageClickListener() {
             @Override
             public void onPageClick(View clickedView, int position) {
-                List<String> data = mViewPager.getData();
+//                List<String> data = mViewPager.getData();
 //                showToastShort(data.get(position)+"");
+                ShouYeBannerBean.DataBean dataBean = data.get(position);
+                if ("1".equals(dataBean.getUrl_type())) {
+                    Intent intent = new Intent(getContext(), CommonWebView.class);
+                    intent.putExtra("weburl", "wangye");
+                    intent.putExtra("httpUrl", dataBean.getUrl());
+                    startActivity(intent);
+                }
             }
         });
         mViewPager.setAdapter(new ShouYeBannerAdapter());
 
+        GridItemDecoration gridItemDecoration = new GridItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        gridItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+        recyclerView.addItemDecoration(gridItemDecoration);
         homeListAdapter = new HomeListAdapter(R.layout.item_home_5_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(homeListAdapter);
 //        homeListAdapter.setNewData(imageurls);
         getBanner();
+        getHot();
     }
 
+    int pager = 1;
+
+    //首页热门信息
+    private void getHot() {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageNumber", pager + "");
+        MyHttpUtils.postHttpMessage(AppUrl.topswitch, params, ShouYeHotBean.class, new RequestCallBack<ShouYeHotBean>() {
+            @Override
+            public void requestSuccess(ShouYeHotBean json) {
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
+                List<ShouYeHotBean.DataBean.DataBeanX> data = json.getData().getData();
+                if (data == null || data.size() == 0) {
+
+                } else {
+                    if (pager == 1) {
+                        homeListAdapter.setNewData(data);
+                    } else {
+                        homeListAdapter.addData(data);
+                    }
+
+                    if (data.size() < 10) {
+                        mRefreshLayout.setEnableLoadMore(false);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
+            }
+        });
+    }
+
+    //首页轮播图
     public void getBanner() {
         Map<String, String> params = new HashMap<>();
-        params.put("device_id", TextUtils.isEmpty(App.szImei) ? "123456" : App.szImei);
-        params.put("area_id", "1001191000");
-        params.put("version", "3.0.0");
-        MyHttpUtils.postHttpMessage("http://112.103.231.139:8082/" + "mg/home/selectHome.do", params, ShouYeBannerBean.class, new RequestCallBack<ShouYeBannerBean>() {
+
+        MyHttpUtils.postHttpMessage(AppUrl.banner, params, ShouYeBannerBean.class, new RequestCallBack<ShouYeBannerBean>() {
             @Override
             public void requestSuccess(ShouYeBannerBean json) {
-                ShouYeBannerBean.ContentBean content = json.getContent();
-                if (content != null) {
-                    List<ShouYeBannerBean.ContentBean.VolutionContentBean> volution_content = content.getVolution_content();
-                    List<String> imageurls = new ArrayList<String>();
-                    if (volution_content != null) {
-                        for (ShouYeBannerBean.ContentBean.VolutionContentBean volutionContentBean : volution_content) {
-                            String address = volutionContentBean.getAddress();
-                            if (!TextUtils.isEmpty(address)) {
-                                imageurls.add(address);
-                            }
+                data = json.getData();
+
+                List<String> imageurls = new ArrayList<String>();
+                if (data != null) {
+                    for (ShouYeBannerBean.DataBean dataBean : data) {
+                        String address = dataBean.getMini_image();
+                        if (!TextUtils.isEmpty(address)) {
+                            imageurls.add(address);
                         }
-                        mViewPager.create(imageurls);
                     }
+                    mViewPager.create(imageurls);
                 }
+
             }
 
             @Override

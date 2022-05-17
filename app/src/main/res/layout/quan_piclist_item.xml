@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <!--    <com.example.yjf.tata.base.view.RoundImageView-->
+    <!--        android:id="@+id/imageView"-->
+    <!--        android:layout_width="104dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_marginVertical="4dp"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:src="@mipmap/tata" />-->
+
+    <com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView
+        android:id="@+id/imageView"
+        android:layout_width="104dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="4dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/icon_image_error"
+        app:leftBottomRadius="10dp"
+        app:leftTopRadius="10dp"
+        app:onlyDrawBorder="false"
+        app:rightBottomRadius="10dp"
+        app:rightTopRadius="10dp"
+        app:shape="rectangle" />
+</LinearLayout>

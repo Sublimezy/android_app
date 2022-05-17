@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * Created by ZL on 2017/1/10.
  */
 public class CommonWebView extends BaseActivity {
-    @BindView(R.id.tv_login_back)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.rl_title)
     RelativeLayout rlTitle;
@@ -56,6 +56,7 @@ public class CommonWebView extends BaseActivity {
     protected void initData() {
         Intent intent = getIntent();
         String weburl = intent.getStringExtra("weburl");
+        String httpUrl = intent.getStringExtra("httpUrl");
         String baoxianurl = intent.getStringExtra("baoxianurl");
         if (XueYiCheUtils.IsHaveInternet(this)) {
             if ("biguo".equals(weburl)) {
@@ -136,6 +137,18 @@ public class CommonWebView extends BaseActivity {
                 };
                 pass_web_view.setWebChromeClient(wvcc);
                 pass_web_view.loadUrl("http://xueyiche.cn/xyc/moudledriver/moudledriver.html");
+            }else if("wangye".equals(weburl)){
+
+                WebChromeClient wvcc = new WebChromeClient() {
+                    @Override
+                    public void onReceivedTitle(WebView view, String title) {
+                        super.onReceivedTitle(view, title);
+                        //title就是网页的title
+                        tvTitle.setText(title);
+                    }
+                };
+                pass_web_view.setWebChromeClient(wvcc);
+                pass_web_view.loadUrl(httpUrl);
             }
             pass_web_view.setWebViewClient(new WebViewClient());
             WebSettings webSettings = pass_web_view.getSettings();
@@ -174,7 +187,7 @@ public class CommonWebView extends BaseActivity {
     }
 
 
-    @OnClick(R.id.ll_exam_back)
+    @OnClick(R.id.ll_common_back)
     public void onClick() {
         finish();
     }

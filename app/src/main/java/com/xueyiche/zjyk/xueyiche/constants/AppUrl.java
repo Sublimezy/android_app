@@ -165,5 +165,9 @@ public interface AppUrl {
     String orderAssess = IPWAIWANG + "api/Userindex/orderAssess";
     String entranceSave = IPWAIWANG + "api/tatapublic/entranceSave";
 
+    String banner = IPWAIWANG+"api/Articlebanner/banner";
+    String topswitch = IPWAIWANG+"api/Articlebanner/topswitch";
+    String articlewelfare = IPWAIWANG+"api/Articlebanner/articlewelfare";
+    String articlecommunity = IPWAIWANG+"api/Articlebanner/articlecommunity";
 }
 
