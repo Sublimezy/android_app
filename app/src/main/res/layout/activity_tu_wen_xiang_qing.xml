@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".community.activity.TuWenXiangQingActivity">
+
+
+    <include layout="@layout/new_title_bar"/>
+
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:srlEnableAutoLoadMore="false"
+        app:srlPrimaryColor="@color/color_white">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/colorOrange"
+            app:srlDrawableProgress="@drawable/animation_loading_frame"
+            app:srlPrimaryColor="@color/color_white" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                        android:id="@+id/cv_head"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:src="@mipmap/logo" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="9dp"
+                        android:layout_toRightOf="@+id/cv_head"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+
+                                android:text="学易车"
+                                android:textColor="#313131"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/tv_release_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="----"
+                            android:textColor="#939393"
+                            android:textSize="@dimen/shisan" />
+                    </LinearLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/tv_browse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:text="---浏览"
+
+                        android:textColor="#8A8A8A"
+                        android:textSize="14dp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_quan_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="16dp"
+                    android:lineSpacingExtra="@dimen/dp_4"
+                    android:text="-------------"
+                    android:textColor="#090909"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="@dimen/all_zouyou"
+                        android:gravity="center"
+                        android:numColumns="3" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="@dimen/shiwu"
+                    android:drawableLeft="@mipmap/tuwenqiangqing_location"
+                    android:drawablePadding="5dp"
+                    android:text=""
+                    android:textColor="#1072E8"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/divider" />
+                <!-- BannerView的Container -->
+                <FrameLayout
+                    android:id="@+id/banner_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#D5D5D5" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_remark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:text="评论"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/shisi" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/tv_dianzan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/shiba"
+                            android:src="@mipmap/lushu_content_dianzan" />
+
+                        <ImageView
+                            android:id="@+id/tv_sc_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/lushu_content_collection"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/shisan"
+                    android:layout_marginTop="@dimen/shiwu"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                        android:id="@+id/mineHead"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/logo" />
+
+                    <TextView
+                        android:id="@+id/tv_gv_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/shiwu"
+                        android:layout_marginRight="@dimen/shiwu"
+                        android:layout_weight="1"
+                        android:background="@mipmap/ziji_lushu_search_bg"
+                        android:gravity="center_vertical"
+                        android:hint="对Ta说点什么吧…."
+                        android:paddingLeft="@dimen/ershisan"
+                        android:text="对Ta说点什么吧…."
+                        android:textColor="#B8B8B8"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <com.xueyiche.zjyk.xueyiche.homepage.view.AdListView
+                    android:id="@+id/lv_pl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#f2f3f4"
+                    android:layout_marginBottom="15dp"
+                    android:listSelector="@color/color_white"
+                    android:scrollbars="none" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+      />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+
+</LinearLayout>

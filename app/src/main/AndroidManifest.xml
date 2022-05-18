@@ -91,6 +91,12 @@
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".community.activity.ShiPinPlayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".community.activity.TuWenXiangQingActivity"
+            android:exported="false" />
+        <activity
             android:name=".mine.activities.bianji.SetActivity"
             android:exported="false" />
         <activity

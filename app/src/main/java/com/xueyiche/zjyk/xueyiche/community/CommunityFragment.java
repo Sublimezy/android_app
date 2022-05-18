@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.community;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,8 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
+import com.xueyiche.zjyk.xueyiche.community.activity.ShiPinPlayActivity;
+import com.xueyiche.zjyk.xueyiche.community.activity.TuWenXiangQingActivity;
 import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
@@ -265,6 +268,14 @@ public class CommunityFragment extends BaseFragment {
             Glide.with(App.context).load(item.getVideo_file())
                     .into(image);
             helper.setText(R.id.tv_fabu_time,item.getCreatetime());
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), ShiPinPlayActivity.class);
+                    intent.putExtra("id",item.getId()+"");
+                    startActivity(intent);
+                }
+            });
         }
 
         public void setOnlyText(BaseViewHolder helper, CommunityListBean.DataBean.DataBeanX item) {
@@ -362,6 +373,9 @@ public class CommunityFragment extends BaseFragment {
                 public void onClick(View view) {
                     //图文
 //                    panduanshanchu("type_id", content_id, TuWenXiangQingActivity.class);
+                    Intent intent = new Intent(getContext(), TuWenXiangQingActivity.class);
+                    intent.putExtra("id",content_id);
+                    startActivity(intent);
                 }
             });
         }

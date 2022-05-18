@@ -169,5 +169,6 @@ public interface AppUrl {
     String topswitch = IPWAIWANG+"api/Articlebanner/topswitch";
     String articlewelfare = IPWAIWANG+"api/Articlebanner/articlewelfare";
     String articlecommunity = IPWAIWANG+"api/Articlebanner/articlecommunity";
+    String articleinfo = IPWAIWANG + "api/Articlebanner/articleinfo";
 }
 
