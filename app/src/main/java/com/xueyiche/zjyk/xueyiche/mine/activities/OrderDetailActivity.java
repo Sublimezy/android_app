@@ -185,7 +185,7 @@ public class OrderDetailActivity extends BaseActivity {
                     tvQibujiaPrice.setText(data.getQibu_price() + "元");
 
                     tvShichangPrice.setText(data.getShichang_price() + "元");
-                    tvShichang.setText("时长费（共" + data.getShichang_time() + "分钟）");
+                    tvShichang.setText("时长费（共" + data.getShichang_time() + "）");
                     tv_wait_title.setText("等时费（共" + data.getWait_time() + "）");
                     tv_waitfei.setText("" + data.getWait_price() + "元");
                     tvLicheng.setText("里程费(共" + data.getLicheng_km() + "公里)");
