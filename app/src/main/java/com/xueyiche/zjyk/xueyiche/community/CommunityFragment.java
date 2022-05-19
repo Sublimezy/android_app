@@ -299,7 +299,6 @@ public class CommunityFragment extends BaseFragment {
             expandableTextView.bind(item);
             expandableTextView.setContent(item.getContent());
             helper.setText(R.id.tv_fabu_time,item.getCreatetime());
-
             recycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
             QuanPicAdapter quanPicAdapter = new QuanPicAdapter(item.getImages(), "" + item.getId());
             recycler.setAdapter(quanPicAdapter);
@@ -345,18 +344,13 @@ public class CommunityFragment extends BaseFragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, final int position) {
             String str = strs.get(position);
-//            Glide.with(App.context).load(str).into(holder.imageView);
-            //根据图片的个数和位置设置朋友圈图片的圆角
-//            SetQuanPictureRadius.setRadiusByPosition(holder.imageView,position,strs.length);
             Glide.with(App.context).load(str).addListener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-
                             Glide.with(App.context).load(R.mipmap.icon_image_error).into(holder.imageView);
-
                             holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
                     });
@@ -373,11 +367,9 @@ public class CommunityFragment extends BaseFragment {
                 @Override
                 public void onClick(View view) {
                     //图文
-//                    panduanshanchu("type_id", content_id, TuWenXiangQingActivity.class);
                     Intent intent = new Intent(getContext(), TuWenXiangQingActivity.class);
                     intent.putExtra("id",content_id);
                     startActivity(intent);
-//                    startActivity(new Intent(getContext(), DaShangActivity.class));
                 }
             });
         }

@@ -89,7 +89,7 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
         tv_wenxintishi = (TextView) view.findViewById(R.id.must_pass_skill_include).findViewById(R.id.tv_right_btn);
         pass_web_view = (WebView) view.findViewById(R.id.pass_web_view);
 
-        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
+        ImmersionBar.with(this).titleBar(R.id.rl_title).statusBarDarkFont(true).init();
     }
     public static void forward(Context context,String url,String type) {
         Intent intent = new Intent(context, UrlActivity.class);
@@ -303,6 +303,12 @@ public class UrlActivity extends BaseActivity implements View.OnClickListener {
             }
             if ("102".equals(type)) {
                 tvTitle.setText("维保查询");
+            }
+
+            if ("103".equals(type)) {
+                //计费规则
+                        tvTitle.setText("计费规则");
+                open(url);
             }
         }
         if (!TextUtils.isEmpty(url)) {

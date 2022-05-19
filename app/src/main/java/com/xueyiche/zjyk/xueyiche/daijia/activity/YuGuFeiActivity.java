@@ -73,7 +73,7 @@ public class YuGuFeiActivity extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this, view);
-        ImmersionBar.with(this).titleBar(rlTitle).init();
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
     }
 
     @Override
@@ -83,7 +83,7 @@ public class YuGuFeiActivity extends BaseActivity {
     @Override
     protected void initData() {
         tv_title.setText("预估费");
-        tv_wenxintishi.setText("计费规则");
+//        tv_wenxintishi.setText("计费规则");
         getYuSuan();
     }
 
@@ -125,14 +125,14 @@ public class YuGuFeiActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.ll_common_back, R.id.tv_right_btn})
+    @OnClick({R.id.ll_common_back, R.id.jifei_rule})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_common_back:
                 finish();
                 break;
-            case R.id.tv_right_btn:
-                UrlActivity.forward(YuGuFeiActivity.this, "http://tabankeji.com/djh5/jifeiguize.html", "2");
+            case R.id.jifei_rule:
+                UrlActivity.forward(YuGuFeiActivity.this, "http://tabankeji.com/djh5/jifeiguize.html", "103");
                 break;
         }
     }
