@@ -71,7 +71,6 @@ public class ShiPinPlayActivity extends BaseActivity {
         addData(null);
 
 
-
 //        refreshLayout.setEnableAutoLoadMore(true);
 //        refreshLayout.setEnableFooterTranslationContent(false);
 //        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -92,7 +91,8 @@ public class ShiPinPlayActivity extends BaseActivity {
                 if (playState == VideoView.STATE_PLAYBACK_COMPLETED) {
                     Log.i("播放完成", "onPlayStateChanged: ");
                     //播放完成  自动播放下一个
-                    mViewPager.setCurrentItem(mCurPos + 1, true);
+                    mViewPager.setCurrentItem(mCurPos, true);
+//                    mViewPager.setCurrentItem(mCurPos + 1, true);
                 }
             }
         });
@@ -100,7 +100,7 @@ public class ShiPinPlayActivity extends BaseActivity {
 
     private void initVideoView() {
         mVideoView = new VideoView(this);
-//        mVideoView.setLooping(true);
+        mVideoView.setLooping(true);
 
         //以下只能二选一，看你的需求
         mVideoView.setRenderViewFactory(TikTokRenderViewFactory.create());
@@ -137,7 +137,12 @@ public class ShiPinPlayActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 if (position == mCurPos) return;
-                startPlay(position);
+                mViewPager.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        startPlay(position);
+                    }
+                });
             }
 
             @Override
@@ -174,7 +179,7 @@ public class ShiPinPlayActivity extends BaseActivity {
 
                 TiktokBean tiktokBean = mVideoList.get(position);
                 String playUrl = mPreloadManager.getPlayUrl(tiktokBean.videoDownloadUrl);
-                Log.i("播放","startPlay: " + "position: " + position + "  url: " + playUrl);
+                Log.i("播放", "startPlay: " + "position: " + position + "  url: " + playUrl);
                 mVideoView.setUrl(playUrl);
                 mController.addControlComponent(viewHolder.mTikTokView, true);
                 viewHolder.mPlayerContainer.addView(mVideoView, 0);
