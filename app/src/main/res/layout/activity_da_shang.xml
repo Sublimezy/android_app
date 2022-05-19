@@ -42,7 +42,8 @@
             android:layout_marginLeft="11dp"
             android:background="@color/transparent"
             android:hint="输入金额"
-            android:inputType="number"
+
+            android:inputType="numberDecimal"
             android:textColor="@color/normal_text_color"
             android:textSize="20dp" />
 

@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.ChooseDaijiaYuanActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.DaShangActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaiJiaoActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.LocationSearchActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
@@ -111,6 +114,7 @@ public class DaiJiaActivity extends BaseMapActivity {
         mapView.onCreate(savedInstanceState);
         ImmersionBar.with(this).titleBar(rl_title).statusBarDarkFont(true).init();
         initData();
+
     }
 
     @Override

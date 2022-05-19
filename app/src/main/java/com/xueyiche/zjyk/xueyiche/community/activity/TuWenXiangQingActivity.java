@@ -1,10 +1,14 @@
 package com.xueyiche.zjyk.xueyiche.community.activity;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +24,8 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.community.bean.TuWenDetailBean;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.daijia.AlertPopWindow;
+import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.view.AdListView;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
@@ -111,6 +117,7 @@ public class TuWenXiangQingActivity extends BaseActivity {
         quanPicAdapter = new QuanPicAdapter(R.layout.quan_piclist_item_xiangqing);
         recyclerview.setAdapter(quanPicAdapter);
         getDataFromNet();
+
     }
 
     private void getDataFromNet() {
@@ -128,6 +135,9 @@ public class TuWenXiangQingActivity extends BaseActivity {
                     wrap.showError();
                     showToastShort(json.getMsg());
                 }
+
+
+
             }
 
             @Override
@@ -136,6 +146,8 @@ public class TuWenXiangQingActivity extends BaseActivity {
             }
         });
     }
+
+
 
     @Override
     protected void initListener() {

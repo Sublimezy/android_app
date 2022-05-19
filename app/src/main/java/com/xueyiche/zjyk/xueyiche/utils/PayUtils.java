@@ -49,7 +49,7 @@ public class PayUtils {
      * @param order_number
      * @param pay_style
      */
-    public static void showPopupWindow(Activity activity, final String order_number, final String pay_style) {
+    public static void showPopupWindow(String url,Activity activity, final String order_number, final String pay_style) {
         PopupWindow pop = new PopupWindow(activity);
         View view = activity.getLayoutInflater().inflate(R.layout.pop_pay_void_layout, null);
         LinearLayout ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
@@ -83,7 +83,7 @@ public class PayUtils {
                 if (AppUtils.isFastClick()) {
                     iv_zhifubao_select.setImageResource(R.mipmap.daijia_pay_ok);
                     iv_wecaht_select.setImageResource(R.mipmap.daijia_pay_no);
-                    PayUtils.zfbPay(AppUrl.Pay_Order_One, activity, activity, order_number, pay_style);
+                    PayUtils.zfbPay(url, activity, activity, order_number, pay_style, "");
                     pop.dismiss();
                     ll_popup.clearAnimation();
                 }
@@ -97,7 +97,75 @@ public class PayUtils {
                     iv_zhifubao_select.setImageResource(R.mipmap.daijia_pay_no);
                     iv_wecaht_select.setImageResource(R.mipmap.daijia_pay_ok);
                     if (XueYiCheUtils.isWeixinAvilible(activity)) {
-                        PayUtils.wx(AppUrl.Pay_Order_One, order_number);
+                        PayUtils.wx(url, order_number,"");
+                    } else {
+                        ToastUtils.showToast(activity, "目前您的微信版本过低或未安装微信，需要安装微信才能使用");
+                    }
+                    pop.dismiss();
+                    ll_popup.clearAnimation();
+                }
+
+            }
+        });
+        ll_popup.startAnimation(AnimationUtils.loadAnimation(
+                activity, R.anim.activity_translate_in));
+        pop.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+    }  /**
+     * 支付弹窗
+     *
+     * @param activity
+     * @param order_number
+     * @param pay_style
+     */
+    public static void showPopupWindow(String url,Activity activity, final String order_number, final String pay_style,String reward) {
+        PopupWindow pop = new PopupWindow(activity);
+        View view = activity.getLayoutInflater().inflate(R.layout.pop_pay_void_layout, null);
+        LinearLayout ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(false);
+        pop.setContentView(view);
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent);
+        RelativeLayout rl_pay_zhifubao = (RelativeLayout) view.findViewById(R.id.rl_pay_zhifubao);
+        RelativeLayout rl_pay_wechat = (RelativeLayout) view.findViewById(R.id.rl_pay_wechat);
+        ImageView iv_pay_exit = view.findViewById(R.id.iv_pay_exit);
+        final ImageView iv_wecaht_select = view.findViewById(R.id.iv_wecaht_select);
+        final ImageView iv_zhifubao_select = view.findViewById(R.id.iv_zhifubao_select);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        iv_pay_exit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        rl_pay_zhifubao.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (AppUtils.isFastClick()) {
+                    iv_zhifubao_select.setImageResource(R.mipmap.daijia_pay_ok);
+                    iv_wecaht_select.setImageResource(R.mipmap.daijia_pay_no);
+                    PayUtils.zfbPay(url, activity, activity, order_number, pay_style,reward);
+                    pop.dismiss();
+                    ll_popup.clearAnimation();
+                }
+
+            }
+        });
+        rl_pay_wechat.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //微信支付
+                if (AppUtils.isFastClick()) {
+                    iv_zhifubao_select.setImageResource(R.mipmap.daijia_pay_no);
+                    iv_wecaht_select.setImageResource(R.mipmap.daijia_pay_ok);
+                    if (XueYiCheUtils.isWeixinAvilible(activity)) {
+                        PayUtils.wx(url, order_number,reward);
                     } else {
                         ToastUtils.showToast(activity, "目前您的微信版本过低或未安装微信，需要安装微信才能使用");
                     }
@@ -115,11 +183,14 @@ public class PayUtils {
     /**
      * 微信支付
      */
-    public static void wx(String url, String order_number) {
+    public static void wx(String url, String order_number, String reward) {
         if (XueYiCheUtils.IsHaveInternet(App.context)) {
             Map<String, String> map = new HashMap<>();
             map.put("order_sn", order_number);
             map.put("type", "wechat");
+            if(!TextUtils.isEmpty(reward)){
+                map.put("reward", reward);
+            }
             MyHttpUtils.postHttpMessage(url, map, WXZhiFuBean.class, new RequestCallBack<WXZhiFuBean>() {
                 @Override
                 public void requestSuccess(WXZhiFuBean json) {
@@ -182,11 +253,14 @@ public class PayUtils {
     /**
      * 支付宝
      */
-    public static void zfbPay(String url, Context context, final Activity activity, String order_number, final String pay_style) {
+    public static void zfbPay(String url, Context context, final Activity activity, String order_number, final String pay_style, String reward) {
         if (XueYiCheUtils.IsHaveInternet(activity)) {
             Map<String, String> map = new HashMap<>();
             map.put("order_sn", "" + order_number);
             map.put("type", "alipay");
+            if(!TextUtils.isEmpty(reward)){
+                map.put("reward", reward);
+            }
             MyHttpUtils.postHttpMessage(url, map, ZhiFuBaoBean.class, new RequestCallBack<ZhiFuBaoBean>() {
                 @Override
                 public void requestSuccess(ZhiFuBaoBean json) {
@@ -231,6 +305,8 @@ public class PayUtils {
                                 Intent intent = new Intent(activity, WaitYuYueActivity.class);
                                 intent.putExtra("order_number", order_number);
                                 activity.startActivity(intent);
+                            } else if ("dashang".equals(pay_style)) {
+                                EventBus.getDefault().post(new MyEvent("打赏支付成功"));
                             }
 
                         } else {

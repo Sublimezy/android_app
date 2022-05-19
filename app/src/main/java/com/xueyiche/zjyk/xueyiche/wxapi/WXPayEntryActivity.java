@@ -30,34 +30,38 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
         setContentView(R.layout.pay_result);
         api = WXAPIFactory.createWXAPI(this, "wx3c3dcf4648234b46");
         api.handleIntent(getIntent(), this);
-        Log.e("pay_ccccc","aaaaaaaaa");
+        Log.e("pay_ccccc", "aaaaaaaaa");
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        Log.e("pay_dddddddddd","lllllllllllll");
+        Log.e("pay_dddddddddd", "lllllllllllll");
         api.handleIntent(intent, this);
     }
 
     @Override
     public void onReq(BaseReq req) {
-        Log.e("pay_bbb",""+new Gson().toJson(req));
+        Log.e("pay_bbb", "" + new Gson().toJson(req));
 
     }
+
     /**
      * 四、接收支付返回结果：
      */
     @Override
     public void onResp(BaseResp resp) {
         String errStr = resp.errStr;
-        Log.e("pay_aaa",""+new Gson().toJson(resp));
+        Log.e("pay_aaa", "" + new Gson().toJson(resp));
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             String s = String.valueOf(resp.errCode);
-            Log.e("pay_code",""+s);
+            Log.e("pay_code", "" + s);
             if ("0".equals(s)) {
                 EventBus.getDefault().post(new MyEvent("支付成功"));
+
+                EventBus.getDefault().post(new MyEvent("打赏支付成功"));
+
 
             }
             finish();

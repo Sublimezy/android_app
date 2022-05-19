@@ -40,6 +40,7 @@ import com.xueyiche.zjyk.xueyiche.community.activity.TuWenXiangQingActivity;
 import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.DaShangActivity;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
@@ -376,6 +377,7 @@ public class CommunityFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), TuWenXiangQingActivity.class);
                     intent.putExtra("id",content_id);
                     startActivity(intent);
+//                    startActivity(new Intent(getContext(), DaShangActivity.class));
                 }
             });
         }

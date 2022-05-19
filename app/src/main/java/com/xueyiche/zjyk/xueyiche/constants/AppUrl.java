@@ -170,5 +170,6 @@ public interface AppUrl {
     String articlewelfare = IPWAIWANG+"api/Articlebanner/articlewelfare";
     String articlecommunity = IPWAIWANG+"api/Articlebanner/articlecommunity";
     String articleinfo = IPWAIWANG + "api/Articlebanner/articleinfo";
+    String userReward = IPWAIWANG + "api/Userindex/userReward";
 }
 
