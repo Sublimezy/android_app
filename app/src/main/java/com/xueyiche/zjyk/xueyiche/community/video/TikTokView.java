@@ -19,15 +19,21 @@ import com.dueeeke.videoplayer.controller.IControlComponent;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.dueeeke.videoplayer.util.L;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.community.view.LikeView;
 
 public class TikTokView extends FrameLayout implements IControlComponent {
 
     private ImageView thumb;
     private ImageView mPlayBtn;
 
+
     private ControlWrapper mControlWrapper;
     private int mScaledTouchSlop;
     private int mStartX, mStartY;
+
+    public ControlWrapper getmControlWrapper() {
+        return mControlWrapper;
+    }
 
     public TikTokView(@NonNull Context context) {
         super(context);
@@ -45,6 +51,7 @@ public class TikTokView extends FrameLayout implements IControlComponent {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_tiktok_controller, this, true);
         thumb = findViewById(R.id.iv_thumb);
         mPlayBtn = findViewById(R.id.play_btn);
+
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +61,9 @@ public class TikTokView extends FrameLayout implements IControlComponent {
         mScaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
+    public void playOrStop(){
+        mControlWrapper.togglePlay();
+    }
     /**
      * 解决点击和VerticalViewPager滑动冲突问题
      */
