@@ -89,25 +89,26 @@ public class YuSuanBean implements Serializable {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
-        private String price;
-        private String shichang_time;
-        private String shichang_price;
-        private String licheng_km;
-        private String licheng_price;
-        private String neiquyu_km;
-        private String neiquyu_km_price;
-        private String waiquyu_km;
-        private String waiquyu_km_price;
-        private String youhui_price;
-        private String total_price;
+    public static class DataBean implements Serializable {
+        private String qibu_price;//: "35",
+        private String shichang_time;//: "19.00", //时长
+        private String shichang_price;//: 0, //时长价格
+        private String licheng_km;//: 11.359, //里程
+        private String licheng_price;//: 51.795, //里程价格
+        private String neiquyu_km;//: 0, //区域内公里
+        private String neiquyu_km_price;//: 0, //区域内部公里数
+        private String waiquyu_km;//: 11.359, //区域外部公里
+        private String waiquyu_km_price;//: 51.795, //区域外部公里数
+        private String youhui_price;//: 0, //优惠价格
+        private String total_price;//: 51.795, //总价格
+        private String price;//: 51.795 //预估价格
 
-        public String getPrice() {
-            return price;
+        public String getQibu_price() {
+            return qibu_price;
         }
 
-        public void setPrices(String price) {
-            this.price = price;
+        public void setQibu_price(String qibu_price) {
+            this.qibu_price = qibu_price;
         }
 
         public String getShichang_time() {
@@ -188,6 +189,14 @@ public class YuSuanBean implements Serializable {
 
         public void setTotal_price(String total_price) {
             this.total_price = total_price;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
         }
     }
 }

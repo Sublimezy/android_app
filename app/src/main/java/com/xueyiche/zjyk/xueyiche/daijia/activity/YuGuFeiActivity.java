@@ -54,6 +54,8 @@ public class YuGuFeiActivity extends BaseActivity {
     TextView tvLichengfeiWai;
     @BindView(R.id.tv_youhui)
     TextView tvYouhui;
+    @BindView(R.id.tv_heji)
+    TextView tv_heji;
 
 
     public static void forward(Context context, String start_lng, String start_lat, String end_lng, String end_lat) {
@@ -104,7 +106,7 @@ public class YuGuFeiActivity extends BaseActivity {
                 if (1 == json.getCode()) {
                     YuSuanBean.DataBean data = json.getData();
                     tvMoney.setText("约"+data.getPrice()+"元");
-                    tvQibu.setText(""+data.getPrice()+"元");
+                    tvQibu.setText(""+data.getQibu_price()+"元");
                     tvShichangfeiTitle.setText("时长费（共"+data.getShichang_time()+"分钟）");
                     tvShichangfei.setText(""+data.getShichang_price()+"元");
                     tvLichengfeiTitle.setText("里程费（共"+data.getLicheng_km()+"公里）");
@@ -114,6 +116,7 @@ public class YuGuFeiActivity extends BaseActivity {
                     tvLichengfeiTitleWai.setText("区域外里程（共"+data.getWaiquyu_km()+"公里）");
                     tvLichengfeiWai.setText(""+data.getWaiquyu_km_price()+"元");
                     tvYouhui.setText(""+data.getYouhui_price()+"元");
+                    tv_heji.setText("预估金额 "+data.getPrice()+"元");
 
                 }
             }
