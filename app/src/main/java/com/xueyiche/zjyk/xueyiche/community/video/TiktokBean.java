@@ -58,7 +58,8 @@ public class TiktokBean {
     public int videoHeight;
     public String videoPlayUrl;
     public int videoWidth;
-
+    /** 是否已点赞 */
+    public boolean isLiked;
     public static List<TiktokBean> arrayTiktokBeanFromData(String str) {
 
         Type listType = new TypeToken<ArrayList<TiktokBean>>() {

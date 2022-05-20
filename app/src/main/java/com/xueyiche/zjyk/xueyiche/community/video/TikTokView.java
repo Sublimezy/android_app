@@ -25,8 +25,6 @@ public class TikTokView extends FrameLayout implements IControlComponent {
 
     private ImageView thumb;
     private ImageView mPlayBtn;
-
-
     private ControlWrapper mControlWrapper;
     private int mScaledTouchSlop;
     private int mStartX, mStartY;

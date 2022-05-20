@@ -503,4 +503,11 @@
     <string name="jg_channel_name_p_default">NORMAL</string>
     <string name="jg_channel_name_p_high">HIGH</string>
     <string name="splash_loading">广告加载中...</string>
+
+    <!-- 点赞选中 -->
+    <string name="icon_like_fill">&#xe60d;</string>
+    <!--评论-->
+    <string name="icon_comment">&#xe621;</string>
+    <!-- 更多 -->
+    <string name="icon_more">&#xe61b;</string>
 </resources>

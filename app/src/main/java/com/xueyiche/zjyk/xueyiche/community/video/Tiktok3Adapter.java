@@ -13,13 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
-import com.dueeeke.videoplayer.controller.ControlWrapper;
-import com.hjq.toast.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.community.cache.PreloadManager;
+import com.xueyiche.zjyk.xueyiche.community.view.IconFontTextView;
 import com.xueyiche.zjyk.xueyiche.community.view.LikeView;
-import com.xueyiche.zjyk.xueyiche.constants.App;
 
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
         PreloadManager.getInstance(context).addPreloadTask(item.videoDownloadUrl, position);
         Glide.with(context)
                 .load(item.coverImgUrl)
-                .placeholder(android.R.color.white)
+                .placeholder(android.R.color.black)
                 .into(holder.mThumb);
         holder.mTitle.setText(item.title);
         holder.mPosition = position;
@@ -57,16 +56,58 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
             @Override
             public void onLikeListener() {
 
-                Log.i("喜欢","1111111111");
+                if (!item.isLiked) {
+
+                    Log.i("喜欢", "1111111111");
+                    like(item,holder.ivLike, holder.animationView, context);
+                }
             }
         });
         holder.likeview.setOnPlayPauseListener(new LikeView.OnPlayPauseListener() {
             @Override
             public void onPlayOrPause() {
-                Log.i("喜欢","暂停或者播放");
                 holder.mTikTokView.playOrStop();
             }
         });
+        holder.animationView.setAnimation("like.json");
+        //点赞状态
+        if (item.isLiked) {
+            holder.ivLike.setTextColor(context.getResources().getColor(R.color.color_FF0041));
+        } else {
+            holder.ivLike.setTextColor(context.getResources().getColor(R.color.white));
+        }
+
+        holder.ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                like(item,holder.ivLike, holder.animationView, context);
+            }
+        });
+        holder.tvLikecount.setText("22.5w");
+        holder.tvCommentcount.setText("0");
+        holder.tvSharecount.setText("22");
+    }
+
+    /**
+     * 点赞动作
+     *
+     * @param ivLike
+     * @param animationView
+     * @param context
+     */
+    public void like(   TiktokBean item,IconFontTextView ivLike, LottieAnimationView animationView, Context context) {
+
+        if (!item.isLiked) {
+            //点赞
+            animationView.setVisibility(View.VISIBLE);
+            animationView.playAnimation();
+            ivLike.setTextColor(context.getResources().getColor(R.color.color_FF0041));
+        } else {
+            //取消点赞
+            animationView.setVisibility(View.INVISIBLE);
+            ivLike.setTextColor(context.getResources().getColor(R.color.white));
+        }
+        item.isLiked = !item.isLiked;
     }
 
     @Override
@@ -90,7 +131,12 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
         public TikTokView mTikTokView;
         public FrameLayout mPlayerContainer;
         public LikeView likeview;
+        IconFontTextView ivLike;
+        LottieAnimationView animationView;
 
+        public TextView tvLikecount;
+        public TextView tvCommentcount;
+        public TextView tvSharecount;
         ViewHolder(View itemView) {
             super(itemView);
             mTikTokView = itemView.findViewById(R.id.tiktok_View);
@@ -98,6 +144,13 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
             mThumb = mTikTokView.findViewById(R.id.iv_thumb);
             likeview = mTikTokView.findViewById(R.id.likeview);
             mPlayerContainer = itemView.findViewById(R.id.container);
+            ivLike = mTikTokView.findViewById(R.id.iv_like);
+            animationView = mTikTokView.findViewById(R.id.lottie_anim);
+
+            tvLikecount = mTikTokView.findViewById(R.id.tv_likecount);
+            tvCommentcount = mTikTokView.findViewById(R.id.tv_commentcount);
+            tvSharecount = mTikTokView.findViewById(R.id.tv_sharecount);
+
             itemView.setTag(this);
         }
     }
