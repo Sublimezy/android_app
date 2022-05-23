@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.community.OnVideoControllerListener;
 import com.xueyiche.zjyk.xueyiche.community.cache.PreloadManager;
 import com.xueyiche.zjyk.xueyiche.community.view.IconFontTextView;
 import com.xueyiche.zjyk.xueyiche.community.view.LikeView;
@@ -83,15 +84,24 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
                 like(item, holder.ivLike, holder.animationView, context);
             }
         });
-        holder.tvLikecount.setText("22.5w");
+        holder.tvLikecount.setText("0");
         holder.tvCommentcount.setText("0");
-        holder.tvSharecount.setText("22");
+        holder.tvSharecount.setText("0");
         holder.iv_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (listener == null) {
+                    return;
+                }
 
+                listener.onCommentClick();
             }
         });
+    }
+    private OnVideoControllerListener listener;
+
+    public void setListener(OnVideoControllerListener listener) {
+        this.listener = listener;
     }
 
     /**

@@ -109,18 +109,20 @@
         android:layout_below="@id/tv_quan_title"
         android:overScrollMode="never"
         android:scrollbars="none" />
+
     <RelativeLayout
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/recycler">
 
         <LinearLayout
-            android:visibility="gone"
-            android:paddingVertical="10dp"
             android:id="@+id/ll_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="13dp"
@@ -138,14 +140,15 @@
 
 
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="10dp"
-            android:layout_toLeftOf="@id/ll_pinglun"
-            android:layout_marginRight="10dp"
             android:id="@+id/ll_dianzan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/ll_pinglun"
+            android:gravity="center_vertical"
+            android:paddingVertical="10dp">
 
             <ImageView
                 android:layout_width="13dp"
@@ -163,13 +166,14 @@
 
 
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="10dp"
-            android:layout_alignParentRight="true"
             android:id="@+id/ll_pinglun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:paddingVertical="10dp">
 
             <ImageView
                 android:layout_width="13dp"
