@@ -44,6 +44,8 @@
         android:textSize="16sp" />
 
     <LinearLayout
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -58,9 +60,10 @@
                 android:id="@+id/iv_head"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@mipmap/logo"/>
+                android:src="@mipmap/logo" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/iv_focus"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -71,6 +74,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -91,13 +95,14 @@
         </RelativeLayout>
 
         <TextView
+            android:visibility="invisible"
             android:id="@+id/tv_likecount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-22dp"
             android:textColor="@color/white"
             android:textSize="12sp"
-            tools:text="22.5w" />
+            tools:text="0" />
 
         <com.xueyiche.zjyk.xueyiche.community.view.IconFontTextView
             android:id="@+id/iv_comment"
@@ -109,15 +114,17 @@
             android:textSize="32sp" />
 
         <TextView
+            android:visibility="invisible"
             android:id="@+id/tv_commentcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/white"
             android:textSize="12sp"
-            tools:text="3823" />
+            tools:text="0" />
 
         <com.xueyiche.zjyk.xueyiche.community.view.IconFontTextView
+            android:visibility="gone"
             android:id="@+id/iv_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,6 +134,7 @@
             android:textSize="32sp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_sharecount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,6 +144,7 @@
             tools:text="3371" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

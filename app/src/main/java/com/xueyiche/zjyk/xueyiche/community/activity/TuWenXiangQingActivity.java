@@ -1,6 +1,9 @@
 package com.xueyiche.zjyk.xueyiche.community.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -20,20 +24,34 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
+import com.xueyiche.zjyk.xueyiche.community.bean.CallSuccessBean;
 import com.xueyiche.zjyk.xueyiche.community.bean.TuWenDetailBean;
+import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.daijia.AlertPopWindow;
 import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.view.AdListView;
+import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.utils.BaseCommonAdapter;
+import com.xueyiche.zjyk.xueyiche.utils.CommentDialog;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.SharedUtils;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -92,6 +110,7 @@ public class TuWenXiangQingActivity extends BaseActivity {
     private String id;
     private LoadingLayout wrap;
     private QuanPicAdapter quanPicAdapter;
+    private CommentAdapter commentAdapter;
 
     @Override
     protected int initContentView() {
@@ -116,10 +135,12 @@ public class TuWenXiangQingActivity extends BaseActivity {
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         quanPicAdapter = new QuanPicAdapter(R.layout.quan_piclist_item_xiangqing);
         recyclerview.setAdapter(quanPicAdapter);
+
+
         getDataFromNet();
 
     }
-
+    private List<TuWenDetailBean.DataBean.MessagelistBean> list = new ArrayList<>();
     private void getDataFromNet() {
         Map<String, String> params = new HashMap<>();
         params.put("article_id", id);
@@ -130,12 +151,16 @@ public class TuWenXiangQingActivity extends BaseActivity {
                     wrap.showContent();
                     quanPicAdapter.setNewData(json.getData().getNewsinfo().getImages());
                     tvReleaseTime.setText(json.getData().getNewsinfo().getCreatetime());
-                    tvQuanTitle.setText(json.getData().getNewsinfo().getTitle());
+                    tvQuanTitle.setText(json.getData().getNewsinfo().getContent());
+                    List<TuWenDetailBean.DataBean.MessagelistBean> messagelist = json.getData().getMessagelist();
+
+                    commentAdapter = new CommentAdapter(messagelist, App.context, R.layout.shuoche_pl_item);
+                    lvPl.setAdapter(commentAdapter);
+                    commentAdapter.notifyDataSetChanged();
                 } else {
                     wrap.showError();
                     showToastShort(json.getMsg());
                 }
-
 
 
             }
@@ -148,9 +173,10 @@ public class TuWenXiangQingActivity extends BaseActivity {
     }
 
 
-
     @Override
     protected void initListener() {
+        refreshLayout.setEnableLoadMore(false);
+        refreshLayout.setEnableRefresh(false);
 
     }
 
@@ -177,6 +203,11 @@ public class TuWenXiangQingActivity extends BaseActivity {
             case R.id.mineHead:
                 break;
             case R.id.tv_gv_content:
+                if (XueYiCheUtils.IsLogin()) {
+                    showCommentDialog();
+                } else {
+                    openActivity(LoginFirstStepActivity.class);
+                }
                 break;
         }
     }
@@ -198,5 +229,86 @@ public class TuWenXiangQingActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    private class CommentAdapter extends BaseCommonAdapter {
+
+        public CommentAdapter(List mDatas, Context context, int layoutId) {
+            super(mDatas, context, layoutId);
+        }
+
+        @Override
+        protected void convert(com.xueyiche.zjyk.xueyiche.utils.BaseViewHolder viewHolder, Object item) {
+            TuWenDetailBean.DataBean.MessagelistBean pinglunBean = (TuWenDetailBean.DataBean.MessagelistBean) item;
+            String comment = pinglunBean.getText();
+            String head_img = pinglunBean.getUser_avatar();
+            String comment_nickname = pinglunBean.getUser_nickname();
+            String comment_time = pinglunBean.getCreatetime();
+            String user_id = pinglunBean.getUser_id();
+            viewHolder.setText(R.id.tv_pingjia_name, comment_nickname);
+            viewHolder.setText(R.id.tv_pl_content, comment);
+            viewHolder.setText(R.id.tv_pingjia_time, comment_time);
+            viewHolder.setPic(R.id.cv_pingjia, head_img);
+
+        }
+
+
+    }
+
+    private void showCommentDialog() {
+        new CommentDialog("说点什么...", new CommentDialog.SendListener() {
+            @Override
+            public void sendComment(String inputText) {
+                if (!TextUtils.isEmpty(inputText)) {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("article_id", id);
+                    params.put("text", inputText);
+                    MyHttpUtils.postHttpMessage(AppUrl.message, params, CallSuccessBean.class, new RequestCallBack<CallSuccessBean>() {
+                        @Override
+                        public void requestSuccess(CallSuccessBean json) {
+
+                            if (json.getCode() == 1) {
+                                Map<String, String> params = new HashMap<>();
+                                params.put("article_id", id);
+                                MyHttpUtils.postHttpMessage(AppUrl.articleinfo, params, TuWenDetailBean.class, new RequestCallBack<TuWenDetailBean>() {
+                                    @Override
+                                    public void requestSuccess(TuWenDetailBean json) {
+                                        if (json.getCode() == 1) {
+                                            wrap.showContent();
+                                            List<TuWenDetailBean.DataBean.MessagelistBean> messagelist = json.getData().getMessagelist();
+                                            commentAdapter = new CommentAdapter(messagelist, App.context, R.layout.shuoche_pl_item);
+                                            lvPl.setAdapter(commentAdapter);
+                                            commentAdapter.notifyDataSetChanged();
+                                        } else {
+                                            wrap.showError();
+                                            showToastShort(json.getMsg());
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void requestError(String errorMsg, int errorType) {
+                                        wrap.showError();
+                                    }
+                                });
+                            } else {
+                            }
+                            showToastShort(json.getMsg());
+                        }
+
+                        @Override
+                        public void requestError(String errorMsg, int errorType) {
+                            showToastShort("与服务器连接失败");
+
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(TuWenXiangQingActivity.this, "请输入评论内容", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }).show(getSupportFragmentManager(), "comment");
     }
 }

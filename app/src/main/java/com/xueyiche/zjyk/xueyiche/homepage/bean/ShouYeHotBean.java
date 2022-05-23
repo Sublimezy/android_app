@@ -98,12 +98,21 @@ public class ShouYeHotBean {
         public static class DataBeanX {
             private String id;
             private String title;
+            private String new_url;
             private String image;
             private List<String> images;
             private String video_file;
             private String description;
             private String content;
             private String createtime;
+
+            public String getNew_url() {
+                return new_url;
+            }
+
+            public void setNew_url(String new_url) {
+                this.new_url = new_url;
+            }
 
             public String getId() {
                 return id;

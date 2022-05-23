@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.welfare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
@@ -131,6 +134,16 @@ public class WelfareFragment extends BaseFragment {
         recyclerView.setAdapter(homeListAdapter);
 //        homeListAdapter.setNewData(imageurls);
         getHot();
+        homeListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ShouYeHotBean.DataBean.DataBeanX dataBeanX = homeListAdapter.getData().get(position);
+                Intent intent = new Intent(getContext(), CommonWebView.class);
+                intent.putExtra("weburl", "wangye");
+                intent.putExtra("httpUrl", dataBeanX.getNew_url());
+                startActivity(intent);
+            }
+        });
     }
 
     int pager = 1;

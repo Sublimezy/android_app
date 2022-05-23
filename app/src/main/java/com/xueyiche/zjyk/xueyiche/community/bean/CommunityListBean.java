@@ -100,6 +100,8 @@ public class CommunityListBean {
 
         public static class DataBeanX implements MultiItemEntity, ExpandableStatusFix {
             private String content;
+            private String avatar;
+            private String nickname;
             private String createtime;
             private String description;
             private String id;
@@ -107,6 +109,40 @@ public class CommunityListBean {
             private List<String> images;
             private String title;
             private String video_file;
+            private String user_id;
+            private String new_url;
+
+            public String getNew_url() {
+                return new_url;
+            }
+
+            public void setNew_url(String new_url) {
+                this.new_url = new_url;
+            }
+
+            public String getUser_id() {
+                return user_id;
+            }
+
+            public void setUser_id(String user_id) {
+                this.user_id = user_id;
+            }
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
+
+            public String getNickname() {
+                return nickname;
+            }
+
+            public void setNickname(String nickname) {
+                this.nickname = nickname;
+            }
 
             public String getContent() {
                 return content;

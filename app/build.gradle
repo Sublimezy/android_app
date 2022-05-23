@@ -288,4 +288,6 @@ dependencies {
  //视频播放  end
 
     implementation 'com.airbnb.android:lottie:2.8.0'
+
+    implementation 'com.guolindev.permissionx:permissionx:1.6.1'
 }

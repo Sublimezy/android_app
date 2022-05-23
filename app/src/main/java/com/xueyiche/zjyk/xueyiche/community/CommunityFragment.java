@@ -1,15 +1,21 @@
 package com.xueyiche.zjyk.xueyiche.community;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,6 +33,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.ctetin.expandabletextviewlibrary.ExpandableTextView;
 import com.gyf.immersionbar.ImmersionBar;
@@ -35,16 +42,25 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
+import com.xueyiche.zjyk.xueyiche.community.activity.ShiPinFaBuActivity;
 import com.xueyiche.zjyk.xueyiche.community.activity.ShiPinPlayActivity;
+import com.xueyiche.zjyk.xueyiche.community.activity.TuWenFabuActivity;
 import com.xueyiche.zjyk.xueyiche.community.activity.TuWenXiangQingActivity;
 import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaShangActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
+import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
+import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +69,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * * #                                                   #
@@ -84,6 +101,8 @@ import butterknife.ButterKnife;
 public class CommunityFragment extends BaseFragment {
     @BindView(R.id.iv_common_back)
     ImageView ivCommonBack;
+    @BindView(R.id.iv_send)
+    ImageView iv_send;
     @BindView(R.id.ll_common_back)
     LinearLayout llCommonBack;
     @BindView(R.id.tv_title)
@@ -128,7 +147,25 @@ public class CommunityFragment extends BaseFragment {
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
         tvTitle.setText("社区");
         initData();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         return view;
+    }
+    public void onEvent(MyEvent event) {
+        String msg = event.getMsg();
+        if (TextUtils.equals("图文发布成功", msg)) {
+            mRefreshLayout.setEnableLoadMore(true);
+            pager = 1;
+            getDataFromNet();
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     List<CommunityListBean.DataBean.DataBeanX> data = new ArrayList<>();
@@ -159,7 +196,90 @@ public class CommunityFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(communityAdapter);
         getDataFromNet();
+        iv_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFaBuDialog(getContext(), getActivity());
+            }
+        });
+    }
 
+    private void showFaBuDialog(Context context, Activity activity) {
+        RelativeLayout ll_popup;
+        PopupWindow pop;
+        pop = new PopupWindow(context);
+        View view = activity.getLayoutInflater().inflate(R.layout.dialog_send_circle,
+                null);
+        ll_popup = view.findViewById(R.id.ll_popup);
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(true);
+        pop.setContentView(view);
+        RelativeLayout parent = view.findViewById(R.id.parent);
+        ImageView bt1 = view.findViewById(R.id.iv_tuwen);
+        ImageView bt2 = view.findViewById(R.id.iv_shipin);
+        ImageView bt3 = view.findViewById(R.id.iv_exit);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (XueYiCheUtils.IsLogin()) {
+                    Intent intent1 = new Intent(context, TuWenFabuActivity.class);
+//                    intent1.putExtra("circle_id", circle_id);
+//                    intent1.putExtra("type", type);
+//                    intent1.putExtra("spot_id", spot_id);
+//                    intent1.putExtra("have_been_type", have_been_type);
+                    context.startActivity(intent1);
+
+                } else {
+                    showToastShort("请先登录");
+                    context.startActivity(new Intent(activity, LoginFirstStepActivity.class));
+//                    openActivity(LoginFirstStepActivity.class);
+                }
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                if (XueYiCheUtils.IsLogin()) {
+//                    if (ConstantsFiled.can_upload) {
+                        Intent intent = new Intent(context, ShiPinFaBuActivity.class);
+//                        intent.putExtra("type", type);
+//                        intent.putExtra("circle_id", circle_id);
+//                        intent.putExtra("have_been_type", have_been_type);
+                        context.startActivity(intent);
+//                    } else {
+//                        showToastShort("上一段视频还未完成,请稍后再试!");
+//                    }
+
+                } else {
+                    showToastShort("请先登录");
+                    context.startActivity(new Intent(activity, LoginFirstStepActivity.class));
+
+                }
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        ll_popup.startAnimation(AnimationUtils.loadAnimation(
+                context, R.anim.activity_translate_in));
+        pop.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
     int pager = 1;
@@ -235,6 +355,22 @@ public class CommunityFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, CommunityListBean.DataBean.DataBeanX item) {
 
+            helper.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (TextUtils.isEmpty(item.getVideo_file())) {
+                       //图文
+                        Intent intent = new Intent(getContext(), TuWenXiangQingActivity.class);
+                        intent.putExtra("id", item.getId());
+                        startActivity(intent);
+                    } else {
+                       //视频
+                        Intent intent = new Intent(getContext(), ShiPinPlayActivity.class);
+                        intent.putExtra("id", item.getId() + "");
+                        startActivity(intent);
+                    }
+                }
+            });
             switch (helper.getItemViewType()) {
                 case CommunityListBean.DataBean.DataBeanX.TEXT:
 
@@ -268,15 +404,28 @@ public class CommunityFragment extends BaseFragment {
             expandableTextView.setContent(item.getContent());
             Glide.with(App.context).load(item.getVideo_file())
                     .into(image);
-            helper.setText(R.id.tv_fabu_time,item.getCreatetime());
+            helper.setText(R.id.tv_fabu_time, item.getCreatetime());
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getContext(), ShiPinPlayActivity.class);
-                    intent.putExtra("id",item.getId()+"");
+                    intent.putExtra("id", item.getId() + "");
                     startActivity(intent);
                 }
             });
+            try {
+                if (!TextUtils.isEmpty(item.getAvatar())) {
+                    RoundedImageView riv_head = helper.getView(R.id.riv_head);
+                    Glide.with(App.context).load(item.getAvatar()).into(riv_head);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (!TextUtils.isEmpty(item.getNickname())) {
+                helper.setText(R.id.tvNickName, item.getNickname());
+            }
+
+
         }
 
         public void setOnlyText(BaseViewHolder helper, CommunityListBean.DataBean.DataBeanX item) {
@@ -285,7 +434,6 @@ public class CommunityFragment extends BaseFragment {
             expandableTextView.setContent("这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
 
         }
-
         /**
          * '
          * 多图
@@ -298,10 +446,18 @@ public class CommunityFragment extends BaseFragment {
             RecyclerView recycler = helper.getView(R.id.recycler);
             expandableTextView.bind(item);
             expandableTextView.setContent(item.getContent());
-            helper.setText(R.id.tv_fabu_time,item.getCreatetime());
+            helper.setText(R.id.tv_fabu_time, item.getCreatetime());
             recycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
             QuanPicAdapter quanPicAdapter = new QuanPicAdapter(item.getImages(), "" + item.getId());
             recycler.setAdapter(quanPicAdapter);
+            if (!TextUtils.isEmpty(item.getAvatar())) {
+                RoundedImageView riv_head = helper.getView(R.id.riv_head);
+                Glide.with(App.context).load(item.getAvatar()).into(riv_head);
+            }
+            if (!TextUtils.isEmpty(item.getNickname())) {
+                helper.setText(R.id.tvNickName, item.getNickname());
+            }
+
         }
 
 
@@ -363,12 +519,12 @@ public class CommunityFragment extends BaseFragment {
                     return false;
                 }
             }).into(holder.imageView);
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //图文
                     Intent intent = new Intent(getContext(), TuWenXiangQingActivity.class);
-                    intent.putExtra("id",content_id);
+                    intent.putExtra("id", content_id);
                     startActivity(intent);
                 }
             });

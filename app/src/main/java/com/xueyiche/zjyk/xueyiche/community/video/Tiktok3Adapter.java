@@ -59,7 +59,7 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
                 if (!item.isLiked) {
 
                     Log.i("喜欢", "1111111111");
-                    like(item,holder.ivLike, holder.animationView, context);
+                    like(item, holder.ivLike, holder.animationView, context);
                 }
             }
         });
@@ -80,12 +80,18 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
         holder.ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                like(item,holder.ivLike, holder.animationView, context);
+                like(item, holder.ivLike, holder.animationView, context);
             }
         });
         holder.tvLikecount.setText("22.5w");
         holder.tvCommentcount.setText("0");
         holder.tvSharecount.setText("22");
+        holder.iv_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     /**
@@ -95,7 +101,7 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
      * @param animationView
      * @param context
      */
-    public void like(   TiktokBean item,IconFontTextView ivLike, LottieAnimationView animationView, Context context) {
+    public void like(TiktokBean item, IconFontTextView ivLike, LottieAnimationView animationView, Context context) {
 
         if (!item.isLiked) {
             //点赞
@@ -132,11 +138,13 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
         public FrameLayout mPlayerContainer;
         public LikeView likeview;
         IconFontTextView ivLike;
+        IconFontTextView iv_comment;
         LottieAnimationView animationView;
 
         public TextView tvLikecount;
         public TextView tvCommentcount;
         public TextView tvSharecount;
+
         ViewHolder(View itemView) {
             super(itemView);
             mTikTokView = itemView.findViewById(R.id.tiktok_View);
@@ -146,6 +154,7 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
             mPlayerContainer = itemView.findViewById(R.id.container);
             ivLike = mTikTokView.findViewById(R.id.iv_like);
             animationView = mTikTokView.findViewById(R.id.lottie_anim);
+            iv_comment = mTikTokView.findViewById(R.id.iv_comment);
 
             tvLikecount = mTikTokView.findViewById(R.id.tv_likecount);
             tvCommentcount = mTikTokView.findViewById(R.id.tv_commentcount);

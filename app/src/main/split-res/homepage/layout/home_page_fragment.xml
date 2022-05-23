@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_15"
                     android:layout_marginVertical="@dimen/dp_20"
-                    android:drawableLeft="@mipmap/b"
+                    android:drawableLeft="@mipmap/huoyan"
                     android:drawablePadding="@dimen/dp_5"
                     android:text="热门信息"
                     android:textColor="#000000"

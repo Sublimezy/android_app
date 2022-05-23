@@ -9,12 +9,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import androidx.appcompat.app.AlertDialog;
+
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -46,6 +49,10 @@ import com.xueyiche.zjyk.xueyiche.submit.bean.DeleteIndentBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -584,5 +591,63 @@ public class AppUtils {
         dialog01.setCancelable(false);
         dialog01.show();
     }
+    /**
+     * 视频第一帧在安卓Q  可能不好使 这里做适配   适配安卓10
+     *
+     * @param bitmap
+     * @return
+     */
+    public static File compressImageShiPei(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            long length = baos.toByteArray().length;
+        }
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date(System.currentTimeMillis());
+        String filename = format.format(date);
+        File file;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            File PICTURES = App.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            //		获取图片沙盒文件夹
+//        //图片名称
+//        mFileName = "IMG_" + System.currentTimeMillis() + ".jpg";
+//        //图片路径
+//        mFilePath = PICTURES.getAbsolutePath()+"/"+mFileName;
+            file = new File(PICTURES.getAbsolutePath(), filename + ".png");
+
+        } else {
+            file = new File(Environment.getExternalStorageDirectory(), filename + ".png");
+
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        recycleBitmap(bitmap);
+        return file;
+    }
+    public static void recycleBitmap(Bitmap... bitmaps) {
+        if (bitmaps == null) {
+            return;
+        }
+        for (Bitmap bm : bitmaps) {
+            if (null != bm && !bm.isRecycled()) {
+                bm.recycle();
+            }
+        }
+    }
 }

@@ -91,6 +91,12 @@
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".community.activity.ShiPinFaBuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".community.activity.TuWenFabuActivity"
+            android:exported="false" />
+        <activity
             android:name=".community.activity.ShiPinPlayActivity"
             android:exported="false" />
         <activity

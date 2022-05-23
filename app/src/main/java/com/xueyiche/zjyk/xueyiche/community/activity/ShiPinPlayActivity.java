@@ -96,6 +96,7 @@ public class ShiPinPlayActivity extends BaseActivity {
                 }
             }
         });
+        
     }
 
     private void initVideoView() {
