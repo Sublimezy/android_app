@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
@@ -29,6 +30,8 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
+import com.xueyiche.zjyk.xueyiche.homepage.activities.DaiJianCheListActivity;
+import com.xueyiche.zjyk.xueyiche.homepage.activities.DaifBaoYangListActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.HomeListAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.ShouYeBannerBean;
@@ -272,11 +275,14 @@ public class HomeFragment extends BaseFragment {
                 PracticeCarActivity.forward(getActivity());
                 break;
             case R.id.ll_three:
+                DaiJianCheListActivity.forward(getActivity());
                 break;
             case R.id.ll_four:
+                DaifBaoYangListActivity.forward(getActivity());
                 break;
             case R.id.iv_kefu:
-
+                XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");
+                MobclickAgent.onEvent(getContext(), "kefu_phone");
                 break;
         }
     }
