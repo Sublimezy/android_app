@@ -260,13 +260,13 @@ dependencies {
     implementation 'com.pnikosis:materialish-progress:1.7'
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     //     PictureSelector 基础 (必须)
-    implementation 'io.github.lucksiege:pictureselector:v3.0.8'
+    implementation 'io.github.lucksiege:pictureselector:v3.0.9'
 //     图片压缩 (按需引入)
-    implementation 'io.github.lucksiege:compress:v3.0.8'
+    implementation 'io.github.lucksiege:compress:v3.0.9'
 //     图片裁剪 (按需引入)
-    implementation 'io.github.lucksiege:ucrop:v3.0.8'
+    implementation 'io.github.lucksiege:ucrop:v3.0.9'
 //     自定义相机 (按需引入)
-    implementation 'io.github.lucksiege:camerax:v3.0.8'
+    implementation 'io.github.lucksiege:camerax:v3.0.9'
 
     implementation 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
     implementation 'com.github.czy1121:loadinglayout:1.0.1'
