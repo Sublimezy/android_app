@@ -28,11 +28,14 @@ import com.luck.picture.lib.basic.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.config.SelectMimeType;
+import com.luck.picture.lib.engine.UriToFileTransformEngine;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.interfaces.OnExternalPreviewEventListener;
+import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener;
 import com.luck.picture.lib.permissions.PermissionChecker;
 import com.luck.picture.lib.style.PictureSelectorStyle;
 import com.luck.picture.lib.style.PictureWindowAnimationStyle;
+import com.luck.picture.lib.utils.SandboxTransformUtils;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -704,7 +707,15 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                 .isPreviewImage(true) // 是否支持预览图片
                 .isPreviewVideo(true) // 是否支持预览视频
                 .isDisplayCamera(false)// 是否显示拍照按钮
-                .setCompressEngine(new ImageCompressEngine());
+                .setSandboxFileEngine(new UriToFileTransformEngine() {
+                    @Override
+                    public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
+                        if (call != null) {
+                            String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
+                            call.onCallback(srcPath, sandboxPath);
+                        }
+                    }
+                });
     }
 
 
@@ -984,15 +995,15 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                     String token = json.getContent().getToken();
                     if (!TextUtils.isEmpty(token)) {
                         File fileCropUri;
-                        if (TextUtils.isEmpty(media.getCompressPath())) {
-                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                                fileCropUri = new File(media.getSandboxPath());
-                            } else {
-                                fileCropUri = new File(media.getRealPath());
-                            }
+//                        if (TextUtils.isEmpty(media.getCompressPath())) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                            fileCropUri = new File(media.getSandboxPath());
                         } else {
-                            fileCropUri = new File(media.getCompressPath());
+                            fileCropUri = new File(media.getRealPath());
                         }
+//                        } else {
+//                            fileCropUri = new File(media.getCompressPath());
+//                        }
 
                         uploadManager.put(fileCropUri, key, token, new UpCompletionHandler() {
                             @Override
@@ -1008,38 +1019,36 @@ public class RegistSiJiActivity extends BaseActivity implements OnAddressSelecte
                                             Log.i("张斯佳司机报名_", pictureMap.get(iterator.next()));
                                         }
                                         Map<String, String> params1 = new HashMap<>();
-                                        params1.put("driver_name",name);      //姓名
-                                        params1.put("sex","男".equals(sex) ? "1" : "0");      //性别
-                                        params1.put("driving_year",jialing);     //驾龄
-                                        params1.put("phone",phone);        //联系电话
-                                        params1.put("driving_number",jiashizhenghao);       //驾驶证号
-                                        params1.put("province",sheng_name);     //省份
-                                        params1.put("city",shi_name);     //城市
-                                        params1.put("provinceid",sheng_id);       //省份id
-                                        params1.put("cityid",shi_id);       //城市id
-                                        params1.put("head_img",pictureMap.get(0));     //免冠照片
-                                        params1.put("id_front",pictureMap.get(2));     //身份证正面
-                                        params1.put("id_back",pictureMap.get(1));      //身份证反面
-                                        params1.put("driving_license_main",pictureMap.get(3));     //驾驶证正面
-                                        params1.put("driving_license_vice",pictureMap.get(4));     //驾驶证反面
-                                        params1.put("type_car",type_car);     //是否有车 0无 1有
-                                        params1.put("travel_permit_url",pictureMap.get(5));        //行驶证正面
-                                        params1.put("travel_permit_back",pictureMap.get(6));       //行驶证反面
-                                        params1.put("brand_id",carPinPaiId);     //品牌ID
-                                        params1.put("series_id",carCheXiId);        //系列ID
-                                        params1.put("grace_45",pictureMap.get(7));     //正面45
-                                        params1.put("grace_ce",pictureMap.get(8));     //侧面
-                                        params1.put("grace_hou",pictureMap.get(9));        //后面
-                                        params1.put("grace_jiashi ",pictureMap.get(10));        //驾驶室
-
-
+                                        params1.put("driver_name", name);      //姓名
+                                        params1.put("sex", "男".equals(sex) ? "1" : "0");      //性别
+                                        params1.put("driving_year", jialing);     //驾龄
+                                        params1.put("phone", phone);        //联系电话
+                                        params1.put("driving_number", jiashizhenghao);       //驾驶证号
+                                        params1.put("province", sheng_name);     //省份
+                                        params1.put("city", shi_name);     //城市
+                                        params1.put("provinceid", sheng_id);       //省份id
+                                        params1.put("cityid", shi_id);       //城市id
+                                        params1.put("head_img", pictureMap.get(0));     //免冠照片
+                                        params1.put("id_front", pictureMap.get(2));     //身份证正面
+                                        params1.put("id_back", pictureMap.get(1));      //身份证反面
+                                        params1.put("driving_license_main", pictureMap.get(3));     //驾驶证正面
+                                        params1.put("driving_license_vice", pictureMap.get(4));     //驾驶证反面
+                                        params1.put("type_car", type_car);     //是否有车 0无 1有
+                                        params1.put("travel_permit_url", pictureMap.get(5));        //行驶证正面
+                                        params1.put("travel_permit_back", pictureMap.get(6));       //行驶证反面
+                                        params1.put("brand_id", carPinPaiId);     //品牌ID
+                                        params1.put("series_id", carCheXiId);        //系列ID
+                                        params1.put("grace_45", pictureMap.get(7));     //正面45
+                                        params1.put("grace_ce", pictureMap.get(8));     //侧面
+                                        params1.put("grace_hou", pictureMap.get(9));        //后面
+                                        params1.put("grace_jiashi ", pictureMap.get(10));        //驾驶室
 
 
                                         MyHttpUtils.postHttpMessage(AppUrl.entranceSave, params1, EntranceSaveBean.class, new RequestCallBack<EntranceSaveBean>() {
                                             @Override
                                             public void requestSuccess(EntranceSaveBean json) {
 
-                                                if(json.getStatus() == 200){
+                                                if (json.getStatus() == 200) {
 
 
                                                     finish();

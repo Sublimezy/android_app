@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.community.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -34,10 +35,13 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.config.SelectMimeType;
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration;
+import com.luck.picture.lib.engine.UriToFileTransformEngine;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.interfaces.OnExternalPreviewEventListener;
+import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener;
 import com.luck.picture.lib.style.PictureSelectorStyle;
 import com.luck.picture.lib.style.PictureWindowAnimationStyle;
+import com.luck.picture.lib.utils.SandboxTransformUtils;
 import com.permissionx.guolindev.PermissionX;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -662,7 +666,16 @@ public class ShiPinFaBuActivity extends BaseActivity {
                 .isPreviewImage(true) // 是否支持预览图片
                 .isPreviewVideo(true) // 是否支持预览视频
                 .isDisplayCamera(false)// 是否显示拍照按钮
-                .setCompressEngine(new ImageCompressEngine())
+//                .setCompressEngine(new ImageCompressEngine())
+                .setSandboxFileEngine(new UriToFileTransformEngine() {
+                    @Override
+                    public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
+                        if (call != null) {
+                            String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
+                            call.onCallback(srcPath,sandboxPath);
+                        }
+                    }
+                })
                 .setSelectedData(mAdapter.getData())// 是否传入已选图片
                 .forResult(PictureConfig.CHOOSE_REQUEST);
 

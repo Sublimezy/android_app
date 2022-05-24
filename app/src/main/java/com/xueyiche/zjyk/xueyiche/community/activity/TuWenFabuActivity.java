@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.community.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
@@ -25,10 +26,13 @@ import com.luck.picture.lib.basic.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.SelectMimeType;
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration;
+import com.luck.picture.lib.engine.UriToFileTransformEngine;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.interfaces.OnExternalPreviewEventListener;
+import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener;
 import com.luck.picture.lib.style.PictureSelectorStyle;
 import com.luck.picture.lib.style.PictureWindowAnimationStyle;
+import com.luck.picture.lib.utils.SandboxTransformUtils;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -206,19 +210,19 @@ public class TuWenFabuActivity extends BaseActivity {
                     if (!TextUtils.isEmpty(token)) {
                         File fileCropUri;
 
-                        if (TextUtils.isEmpty(selectList.get(i).getCompressPath())) {
-                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//                        if (TextUtils.isEmpty(selectList.get(i).getCompressPath())) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
 
-                                fileCropUri = new File(selectList.get(i).getSandboxPath());
+                            fileCropUri = new File(selectList.get(i).getSandboxPath());
 
-                            } else {
-
-                                fileCropUri = new File(selectList.get(i).getRealPath());
-                            }
                         } else {
 
-                            fileCropUri = new File(selectList.get(i).getCompressPath());
+                            fileCropUri = new File(selectList.get(i).getRealPath());
                         }
+//                        } else {
+//
+//                            fileCropUri = new File(selectList.get(i).getCompressPath());
+//                        }
                         uploadManager.put(fileCropUri, key, token, new UpCompletionHandler() {
                             @Override
                             public void complete(String key, ResponseInfo info, JSONObject response) {
@@ -540,7 +544,16 @@ public class TuWenFabuActivity extends BaseActivity {
                     .isPreviewImage(true) // 是否支持预览图片
                     .isPreviewVideo(true) // 是否支持预览视频
                     .isDisplayCamera(false)// 是否显示拍照按钮
-                    .setCompressEngine(new ImageCompressEngine())
+//                    .setCompressEngine(new ImageCompressEngine())
+                    .setSandboxFileEngine(new UriToFileTransformEngine() {
+                        @Override
+                        public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
+                            if (call != null) {
+                                String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
+                                call.onCallback(srcPath, sandboxPath);
+                            }
+                        }
+                    })
                     .setSelectedData(mAdapter.getData())// 是否传入已选图片
                     .forResult(PictureConfig.CHOOSE_REQUEST);
         }
