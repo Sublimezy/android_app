@@ -4,8 +4,8 @@ ext {
             buildToolsVersion: "28.0.3",
             minSdkVersion    : 21,
             targetSdkVersion : 29,
-            versionCode      : 119,
-            versionName      : "3.7.1"
+            versionCode      : 120,
+            versionName      : "4.0.0"
     ]
     dependencies = [
 //            "okhttp"                 : 'com.squareup.okhttp3:okhttp:3.11.0',//okHttp网络请求

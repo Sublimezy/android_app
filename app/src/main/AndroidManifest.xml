@@ -109,7 +109,14 @@
             android:name=".mine.activities.DriverPathActivity"
             android:exported="false" />
         <activity
+            android:name="com.amap.api.navi.AmapRouteActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|navigation"
+            android:launchMode="singleInstance" />
+        <activity
             android:name=".mine.activities.bianji.EditMySelfInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".practicecar.ContentTrainNewActivity"
             android:exported="false" />
         <activity
             android:name=".homepage.activities.DaifBaoYangListActivity"
@@ -119,6 +126,9 @@
             android:exported="false" />
         <activity
             android:name=".mine.activities.MyOrderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".homepage.activities.ContentActivity"
             android:exported="false" />
         <activity
             android:name=".mine.activities.OrderDetailActivity"

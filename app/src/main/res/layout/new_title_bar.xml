@@ -100,7 +100,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="11dp"
                 android:padding="5dp"
-                android:src="@mipmap/more_333"
+                android:src="@mipmap/choice_shaixuan"
                 android:visibility="gone" />
 
             <View

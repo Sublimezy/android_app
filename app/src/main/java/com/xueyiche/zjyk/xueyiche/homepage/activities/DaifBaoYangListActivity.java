@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.android.exoplayer2.C;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -28,7 +29,11 @@ import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.bean.CommonBean;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.CarBrandBean;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.DaiJianCheBean;
+import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
+import com.xueyiche.zjyk.xueyiche.homepage.view.OptionPicker;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
@@ -36,6 +41,7 @@ import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,14 +55,14 @@ public class DaifBaoYangListActivity extends BaseActivity {
 
     @BindView(R.id.iv_common_back)
     ImageView ivCommonBack;
+    @BindView(R.id.iv_caidan)
+    ImageView iv_caidan;
     @BindView(R.id.ll_common_back)
     LinearLayout llCommonBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_right_btn)
     TextView tvRightBtn;
-    @BindView(R.id.iv_caidan)
-    ImageView ivCaidan;
     @BindView(R.id.title_view_heng)
     View titleViewHeng;
     @BindView(R.id.rl_title)
@@ -67,6 +73,7 @@ public class DaifBaoYangListActivity extends BaseActivity {
     SmartRefreshLayout refreshLayout;
     private OrderAdapter orderAdapter;
     private LoadingLayout loading;
+    private CommonBean commonBean = new CommonBean();
 
     @Override
     protected int initContentView() {
@@ -80,7 +87,11 @@ public class DaifBaoYangListActivity extends BaseActivity {
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
         loading = LoadingLayout.wrap(refreshLayout);
         loading.showLoading();
+        iv_caidan.setVisibility(View.VISIBLE);
+        iv_caidan.setImageResource(R.mipmap.shaixuan);
+        commonBean.setType("");
     }
+
     public static void forward(Context context) {
         Intent intent = new Intent(context, DaifBaoYangListActivity.class);
         context.startActivity(intent);
@@ -88,6 +99,48 @@ public class DaifBaoYangListActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
+    }
+
+    public void choosrType() {
+        Map<String, String> map = new HashMap<>();
+        ArrayList<String> info = new ArrayList<>();
+        MyHttpUtils.postHttpMessage(AppUrl.cat_brand, map, CarBrandBean.class, new RequestCallBack<CarBrandBean>() {
+            @Override
+            public void requestSuccess(CarBrandBean json) {
+                if (1 == json.getCode()) {
+                    List<String> data = json.getData();
+                    if (data != null && data.size() > 0) {
+                        for (int i = 0; i < data.size(); i++) {
+                            info.add(data.get(i));
+                        }
+                        final OptionPicker picker = new OptionPicker(DaifBaoYangListActivity.this, info);
+                        picker.setOffset(1);
+                        picker.setSelectedIndex(0);
+                        picker.setTextSize(15);
+                        picker.setTitleTextColor(getResources().getColor(R.color._3232));
+                        picker.setTitleText("请选择车型");
+                        picker.setTitleTextSize(20);
+                        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int position, String option) {
+                                picker.setSelectedIndex(position);
+                                commonBean.setType(option);
+                                getDataNet();
+                            }
+
+                        });
+                        picker.show();
+                    }
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
+
 
     }
 
@@ -99,6 +152,16 @@ public class DaifBaoYangListActivity extends BaseActivity {
         recyclerView.addItemDecoration(gridItemDecoration);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(orderAdapter);
+        orderAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                DaiJianCheBean.DataBean.DataBean1 dataBean = (DaiJianCheBean.DataBean.DataBean1) adapter.getItem(position);
+                if (dataBean != null) {
+                    int id = dataBean.getId();
+                    ContentActivity.forward(DaifBaoYangListActivity.this, "" + id);
+                }
+            }
+        });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -152,7 +215,8 @@ public class DaifBaoYangListActivity extends BaseActivity {
         Map<String, String> params = new HashMap<>();
         params.put("pageNumber", pager + "");
         params.put("pageSize", 10 + "");
-        params.put("coordinate", lon+","+lat);
+        params.put("coordinate", lon + "," + lat);
+        params.put("brand", commonBean.getType());
         MyHttpUtils.postHttpMessage(AppUrl.maintenance, params, DaiJianCheBean.class, new RequestCallBack<DaiJianCheBean>() {
             @Override
             public void requestSuccess(DaiJianCheBean json) {
@@ -185,13 +249,14 @@ public class DaifBaoYangListActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ll_common_back, R.id.tv_right_btn})
+    @OnClick({R.id.ll_common_back, R.id.iv_caidan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_common_back:
                 finish();
                 break;
-            case R.id.tv_right_btn:
+            case R.id.iv_caidan:
+                choosrType();
                 break;
         }
     }
@@ -209,10 +274,10 @@ public class DaifBaoYangListActivity extends BaseActivity {
             TextView tv_name = helper.getView(R.id.tv_name);
             TextView tvLocation = helper.getView(R.id.tvLocation);
             TextView tvDiatance = helper.getView(R.id.tvDiatance);
-            Picasso.with(App.context).load(""+item.getImage()).into(iv_head);
+            Picasso.with(App.context).load("" + item.getImage()).into(iv_head);
             tv_name.setText(item.getTitle());
-            tvLocation.setText("地址："+item.getAddress());
-            tvDiatance.setText(item.getDistance()+"km");
+            tvLocation.setText("地址：" + item.getAddress());
+            tvDiatance.setText(item.getDistance() + "km");
         }
     }
 }

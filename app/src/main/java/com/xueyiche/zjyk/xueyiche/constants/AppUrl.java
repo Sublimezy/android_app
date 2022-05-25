@@ -175,5 +175,9 @@ public interface AppUrl {
     String message = IPWAIWANG + "api/Articlebanner/message";
     String validate_car = IPWAIWANG + "api/Articlebanner/validate_car";
     String maintenance = IPWAIWANG + "api/Articlebanner/maintenance";
+    String maintenance_info = IPWAIWANG + "api/Articlebanner/maintenance_info";
+    String cat_brand = IPWAIWANG + "api/Articlebanner/cat_brand";
+    String trainwith = IPWAIWANG + "api/Articlebanner/trainwith";
+    String trainwith_info = IPWAIWANG + "api/Articlebanner/trainwith_info";
 }
 

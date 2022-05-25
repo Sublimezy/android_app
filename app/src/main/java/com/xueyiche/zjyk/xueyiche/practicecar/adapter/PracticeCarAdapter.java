@@ -5,7 +5,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.constants.App;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.TrainWithBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 
 /**
@@ -35,12 +38,12 @@ import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
  * #            com.xueyiche.zjyk.xueyiche.practicecar.adapter
  * #            xueyiche5.0
  */
-public class PracticeCarAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class PracticeCarAdapter extends BaseQuickAdapter<TrainWithBean.DataBean.DataBean1, BaseViewHolder> {
     public PracticeCarAdapter(int layoutResId) {
         super(layoutResId);
     }
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, TrainWithBean.DataBean.DataBean1 item) {
         CustomShapeImageView iv_head = helper.getView(R.id.iv_head);
         TextView tv_name = helper.getView(R.id.tv_name);
         TextView tvJiaLing = helper.getView(R.id.tvJiaLing);
@@ -49,16 +52,22 @@ public class PracticeCarAdapter extends BaseQuickAdapter<String, BaseViewHolder>
         TextView tvType = helper.getView(R.id.tvType);
         TextView tvOrder = helper.getView(R.id.tvOrder);
         helper.addOnClickListener(R.id.tvOrder);
+        Picasso.with(App.context).load(item.getImage()).into(iv_head);
+        tv_name.setText(item.getTitle());
+        tvType.setText(item.getCat_brand());
+        tv_have_money.setText(item.getH_money()+"元/小时");
+        tvJiaLing.setText("驾龄"+item.getDriving_age()+"年");
+
         int adapterPosition = helper.getAdapterPosition();
-        if (0==adapterPosition) {
-            tv_have_money.setVisibility(View.VISIBLE);
-            tv_no_money.setVisibility(View.GONE);
-            tvType.setVisibility(View.VISIBLE);
-        }else {
-            tv_have_money.setVisibility(View.GONE);
-            tv_no_money.setVisibility(View.VISIBLE);
-            tvType.setVisibility(View.GONE);
-        }
+//        if (0==adapterPosition) {
+//            tv_have_money.setVisibility(View.VISIBLE);
+//            tv_no_money.setVisibility(View.GONE);
+//            tvType.setVisibility(View.VISIBLE);
+//        }else {
+//            tv_have_money.setVisibility(View.GONE);
+//            tv_no_money.setVisibility(View.VISIBLE);
+//            tvType.setVisibility(View.GONE);
+//        }
 
     }
 }
