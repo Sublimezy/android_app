@@ -192,19 +192,19 @@ public class HomeFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                LogUtil.i("首页滑动", "scrollX==" + scrollX + "  scrollY == " + scrollY + "   oldScrollY==" + oldScrollY);
-                if (scrollY > 100) {
-//                    changeTop(true);
-                    rlHomeTitle.setBackgroundColor(getResources().getColor(R.color.white));
-                } else {
-                    rlHomeTitle.setBackgroundColor(getResources().getColor(R.color.transparent));
-//                    changeTop(false);
-                }
-            }
-        });
+//        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+////                LogUtil.i("首页滑动", "scrollX==" + scrollX + "  scrollY == " + scrollY + "   oldScrollY==" + oldScrollY);
+//                if (scrollY > 100) {
+////                    changeTop(true);
+////                    rlHomeTitle.setBackgroundColor(getResources().getColor(R.color.white));
+//                } else {
+////                    rlHomeTitle.setBackgroundColor(getResources().getColor(R.color.transparent));
+////                    changeTop(false);
+//                }
+//            }
+//        });
     }
 
     int pager = 1;

@@ -8,6 +8,7 @@
 
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:layout_below="@id/rl_home_title"
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +37,7 @@
                 <com.zhpan.bannerview.BannerViewPager
                     android:id="@+id/banner_view"
                     android:layout_width="match_parent"
-                    android:layout_height="269dp" />
+                    android:layout_height="192dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -169,6 +170,7 @@
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     <RelativeLayout
+        android:background="#fff"
         android:id="@+id/rl_home_title"
         android:layout_width="match_parent"
         android:layout_height="76dp"
@@ -181,18 +183,19 @@
 
             <ImageView
                 android:id="@+id/iv_xueyiche"
-                android:layout_width="83dp"
-                android:layout_height="26dp"
+                android:layout_width="75dp"
+                android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="14dp"
                 android:src="@mipmap/xueyiche_wenzi" />
 
             <LinearLayout
+                android:layout_alignBottom="@id/iv_xueyiche"
                 android:id="@+id/ll_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="3dp"
                 android:layout_toRightOf="@id/iv_xueyiche"
                 android:clickable="true"
@@ -205,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:text="哈尔滨"
                     android:textColor="#a0a0a0"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
                 <ImageView
                     android:id="@+id/image_include_location"
