@@ -41,7 +41,7 @@ public class CommonWebView extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        ImmersionBar.with(this).titleBar(rlTitle).init();
+        ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
         showProgressDialog(false);
     }
     public static void forward(Context context,String weburl) {
