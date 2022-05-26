@@ -152,9 +152,10 @@ public class TuWenXiangQingActivity extends BaseActivity {
                     quanPicAdapter.setNewData(json.getData().getNewsinfo().getImages());
                     tvReleaseTime.setText(json.getData().getNewsinfo().getCreatetime());
                     tvQuanTitle.setText(json.getData().getNewsinfo().getContent());
-                    Glide.with(TuWenXiangQingActivity.this).load(json.getData().getNewsinfo().getAvatar());
+                    Glide.with(TuWenXiangQingActivity.this).load(json.getData().getNewsinfo().getAvatar()).into(cvHead);
                     List<TuWenDetailBean.DataBean.MessagelistBean> messagelist = json.getData().getMessagelist();
 
+                    tvName.setText(json.getData().getNewsinfo().getNickname());
                     commentAdapter = new CommentAdapter(messagelist, App.context, R.layout.shuoche_pl_item);
                     lvPl.setAdapter(commentAdapter);
                     commentAdapter.notifyDataSetChanged();

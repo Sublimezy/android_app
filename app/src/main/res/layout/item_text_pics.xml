@@ -111,10 +111,10 @@
         android:scrollbars="none" />
 
     <RelativeLayout
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recycler">
+        android:layout_below="@id/recycler"
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/ll_share"
@@ -142,6 +142,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_dianzan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

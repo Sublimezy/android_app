@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +47,9 @@ import com.xueyiche.zjyk.xueyiche.community.activity.ShiPinFaBuActivity;
 import com.xueyiche.zjyk.xueyiche.community.activity.ShiPinPlayActivity;
 import com.xueyiche.zjyk.xueyiche.community.activity.TuWenFabuActivity;
 import com.xueyiche.zjyk.xueyiche.community.activity.TuWenXiangQingActivity;
+import com.xueyiche.zjyk.xueyiche.community.bean.CallSuccessBean;
 import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
+import com.xueyiche.zjyk.xueyiche.community.bean.TuWenDetailBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -60,6 +63,7 @@ import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
+import com.xueyiche.zjyk.xueyiche.utils.CommentDialog;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
 import java.util.ArrayList;
@@ -435,7 +439,13 @@ public class CommunityFragment extends BaseFragment {
             if (!TextUtils.isEmpty(item.getNickname())) {
                 helper.setText(R.id.tvNickName, item.getNickname());
             }
-
+            LinearLayout ll_pinglun = helper.getView(R.id.ll_pinglun);
+            ll_pinglun.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showCommentDialog(item.getId());
+                }
+            });
 
         }
 
@@ -455,6 +465,7 @@ public class CommunityFragment extends BaseFragment {
          */
         public void setTextPics(BaseViewHolder helper, CommunityListBean.DataBean.DataBeanX item) {
             ExpandableTextView expandableTextView = helper.getView(R.id.tv_quan_title);
+
             RecyclerView recycler = helper.getView(R.id.recycler);
             expandableTextView.bind(item);
             expandableTextView.setContent(item.getContent());
@@ -477,12 +488,51 @@ public class CommunityFragment extends BaseFragment {
             if (!TextUtils.isEmpty(item.getNickname())) {
                 helper.setText(R.id.tvNickName, item.getNickname());
             }
+            LinearLayout ll_pinglun = helper.getView(R.id.ll_pinglun);
+            ll_pinglun.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showCommentDialog(item.getId());
+                }
+            });
 
         }
 
 
     }
+    private void showCommentDialog(String id) {
+        new CommentDialog("说点什么...", new CommentDialog.SendListener() {
+            @Override
+            public void sendComment(String inputText) {
+                if (!TextUtils.isEmpty(inputText)) {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("article_id", id);
+                    params.put("text", inputText);
+                    MyHttpUtils.postHttpMessage(AppUrl.message, params, CallSuccessBean.class, new RequestCallBack<CallSuccessBean>() {
+                        @Override
+                        public void requestSuccess(CallSuccessBean json) {
 
+                            if (json.getCode() == 1) {
+
+                            } else {
+                            }
+                            showToastShort(json.getMsg());
+                        }
+
+                        @Override
+                        public void requestError(String errorMsg, int errorType) {
+                            showToastShort("与服务器连接失败");
+
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(getContext(), "请输入评论内容", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }).show(getChildFragmentManager(), "comment");
+    }
     private final Handler handler = new Handler();
 
     public class QuanPicAdapter extends RecyclerView.Adapter<QuanPicAdapter.ViewHolder> {

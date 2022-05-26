@@ -78,6 +78,15 @@ public class TuWenDetailBean {
       private String description;
       private String content;
       private String createtime;
+      private String nickname;
+
+      public String getNickname() {
+        return nickname;
+      }
+
+      public void setNickname(String nickname) {
+        this.nickname = nickname;
+      }
 
       public String getAvatar() {
         return avatar;
