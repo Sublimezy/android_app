@@ -103,9 +103,6 @@ public class DaiJianCheListActivity extends BaseActivity {
     @Override
     protected void initData() {
         orderAdapter = new OrderAdapter(R.layout.item_daijianche_layout);
-        GridItemDecoration gridItemDecoration = new GridItemDecoration(this, DividerItemDecoration.VERTICAL);
-        gridItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-        recyclerView.addItemDecoration(gridItemDecoration);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(orderAdapter);
         orderAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
