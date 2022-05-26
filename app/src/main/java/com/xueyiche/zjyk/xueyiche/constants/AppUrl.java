@@ -179,5 +179,6 @@ public interface AppUrl {
     String cat_brand = IPWAIWANG + "api/Articlebanner/cat_brand";
     String trainwith = IPWAIWANG + "api/Articlebanner/trainwith";
     String trainwith_info = IPWAIWANG + "api/Articlebanner/trainwith_info";
+    String near_driving = IPWAIWANG + "api/Userindex/near_driving";
 }
 

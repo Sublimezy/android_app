@@ -2,29 +2,45 @@ package com.xueyiche.zjyk.xueyiche.daijia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RouteSearch;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.qrcode.Constant;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.utils.ToastUtils;
+import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.bean.CommonBean;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.ChooseDaijiaYuanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaShangActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaiJiaoActivity;
@@ -32,10 +48,12 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.LocationSearchActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.YuGuFeiActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.BuyOrderBean;
+import com.xueyiche.zjyk.xueyiche.daijia.bean.NearDrivingBean;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.YuSuanBean;
 import com.xueyiche.zjyk.xueyiche.daijia.view.YuYueLinkagePicker;
 import com.xueyiche.zjyk.xueyiche.homepage.view.DateUtils;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
+import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
@@ -48,6 +66,7 @@ import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -125,8 +144,77 @@ public class DaiJiaActivity extends BaseMapActivity {
     @Override
     protected void initData() {
         tv_title.setText("代驾");
+        getDataDriverList();
     }
+    private MarkerOptions markerOption;
+    private Marker marker;
+    private void getDataDriverList() {
+        new GDLocation().startLocation();
+        String lat = PrefUtils.getParameter("lat");
+        String lon = PrefUtils.getParameter("lon");
+        Map<String,String> map = new HashMap<>();
+        map.put("address_lng",""+lon);
+        map.put("address_lat",""+lat);
+        MyHttpUtils.postHttpMessage(AppUrl.near_driving, map, NearDrivingBean.class, new RequestCallBack<NearDrivingBean>() {
+            @Override
+            public void requestSuccess(NearDrivingBean json) {
+                if (1==json.getCode()) {
+                    NearDrivingBean.DataBean data = json.getData();
+                    if (data!=null) {
+                        List<NearDrivingBean.DataBean.UserListBean> user_list = data.getUser_list();
+                        if (user_list.size()>0) {
+                            for (int i = 0; i < user_list.size(); i++) {
+                                LatLng latlng = new LatLng(Double.parseDouble(user_list.get(i).getUser_lat()), Double.parseDouble(user_list.get(i).getUser_lng()));
+                                View viewCat = LayoutInflater.from(DaiJiaActivity.this).inflate(R.layout.item_map_nearby_layout, null);
+                                TextView tvName = viewCat.findViewById(R.id.tvName);
+                                TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
+                                CircleImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
+                                tvName.setText("代驾员:"+user_list.get(i).getName());
+                                Picasso.with(App.context).load(user_list.get(i).getHead_img()).into(ivLogoType);
+                                tvDistance.setText(" 距您:"+user_list.get(i).getJuli()+"km");
+                                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
+                                Bitmap bitmap = convertViewToBitmap(viewCat);
+                                markerOption = new MarkerOptions()
+                                        .position(latlng)
+                                        .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                                        .draggable(false);
+                                marker = aMap.addMarker(markerOption);
+                                marker.setObject(user_list.get(i));
+                                double la = Double.parseDouble(user_list.get(i).getUser_lat());
+                                double lo = Double.parseDouble(user_list.get(i).getUser_lng());
+                                LatLng   latLng = new LatLng(la, lo);
+                                LatLng finalLatLng1 = latLng;
+                                Glide.with(DaiJiaActivity.this).load(user_list.get(i).getHead_img()).into(new SimpleTarget<Drawable>() {
+                                    @Override
+                                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                        ivLogoType.setImageDrawable(resource);
+                                        Bitmap bitmapFromView = convertViewToBitmap(viewCat);
+                                        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmapFromView);
+                                        markerOption = new MarkerOptions().position(finalLatLng1).icon(bitmapDescriptor);
+                                        marker = aMap.addMarker(markerOption);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
 
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
+    }
+    //view 转bitmap
+    public static Bitmap convertViewToBitmap(View view) {
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap bitmap = view.getDrawingCache();
+        return bitmap;
+    }
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
