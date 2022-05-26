@@ -401,6 +401,12 @@ public class CommunityFragment extends BaseFragment {
             ExpandableTextView expandableTextView = helper.getView(R.id.tv_quan_title);
             CustomShapeImageView image = helper.getView(R.id.imageView_one);
             expandableTextView.bind(item);
+            if(TextUtils.isEmpty(item.getContent())){
+                expandableTextView.setVisibility(View.GONE);
+            }else{
+                expandableTextView.setVisibility(View.VISIBLE);
+
+            }
             expandableTextView.setContent(item.getContent());
             Glide.with(App.context).load(item.getVideo_file())
                     .into(image);
@@ -446,6 +452,12 @@ public class CommunityFragment extends BaseFragment {
             RecyclerView recycler = helper.getView(R.id.recycler);
             expandableTextView.bind(item);
             expandableTextView.setContent(item.getContent());
+            if(TextUtils.isEmpty(item.getContent())){
+                expandableTextView.setVisibility(View.GONE);
+            }else{
+                expandableTextView.setVisibility(View.VISIBLE);
+
+            }
             helper.setText(R.id.tv_fabu_time, item.getCreatetime());
             recycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
             QuanPicAdapter quanPicAdapter = new QuanPicAdapter(item.getImages(), "" + item.getId());

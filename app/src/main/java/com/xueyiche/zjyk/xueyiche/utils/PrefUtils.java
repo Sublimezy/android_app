@@ -17,7 +17,7 @@ import java.util.List;
 public class PrefUtils {
 
 
-	private static final String SHARE_PREFS_NAME = "xueyiche";
+	private static final String SHARE_PREFS_NAME = "xueyiche_new";
 
 	public static void putBoolean(Context ctx, String key, boolean value) {
 		SharedPreferences pref =  ctx.getSharedPreferences(SHARE_PREFS_NAME,

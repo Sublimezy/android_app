@@ -23,6 +23,7 @@
             app:srlPrimaryColor="@color/color_white" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -36,6 +37,7 @@
                     android:id="@+id/banner_view"
                     android:layout_width="match_parent"
                     android:layout_height="269dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,12 +155,12 @@
 
                     <androidx.recyclerview.widget.RecyclerView
 
-                        android:paddingHorizontal="@dimen/dp_15"
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:overScrollMode="never"
+                        android:paddingHorizontal="@dimen/dp_15"
                         android:scrollbars="none"
                         tools:listitem="@layout/item_home_5_layout" />
                 </RelativeLayout>
@@ -167,79 +169,86 @@
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_home_title"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true">
+        android:layout_height="76dp"
+        android:clickable="true"
+        android:paddingTop="20dp">
 
-        <LinearLayout
-            android:id="@+id/ll_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="3dp"
-            android:clickable="true"
-            android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56">
 
-
-            <TextView
-                android:id="@+id/text_include_location"
+            <LinearLayout
+                android:id="@+id/ll_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="哈尔滨"
-                android:textColor="#161616"
-                android:textSize="14dp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/text_include_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="哈尔滨"
+                    android:textColor="#161616"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/image_include_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/pic_home_xiangxia" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="12dp"
+                android:layout_toLeftOf="@id/iv_kefu"
+                android:layout_toRightOf="@id/ll_address"
+                android:background="@mipmap/pic_home_serch_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/pic_home_search" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="3dp"
+                    android:text="雅阁 | 奔腾B70领 | 克06"
+                    android:textColor="#ff000000"
+                    android:textSize="13dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
 
             <ImageView
-                android:id="@+id/image_include_location"
+                android:id="@+id/iv_kefu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/pic_home_xiangxia" />
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="@dimen/all_16dp"
+                android:src="@mipmap/pic_home_kefu" />
 
-        <LinearLayout
-            android:id="@+id/ll_search"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:layout_centerVertical="true"
-            android:layout_marginHorizontal="12dp"
-            android:layout_toLeftOf="@id/iv_kefu"
-            android:layout_toRightOf="@id/ll_address"
-            android:background="@mipmap/pic_home_serch_bg"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="14dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/pic_home_search" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="3dp"
-                android:text="雅阁 | 奔腾B70领 | 克06"
-                android:textColor="#ff000000"
-                android:textSize="13dp"
-                android:visibility="gone" />
-        </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/iv_kefu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="@dimen/all_16dp"
-            android:src="@mipmap/pic_home_kefu" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

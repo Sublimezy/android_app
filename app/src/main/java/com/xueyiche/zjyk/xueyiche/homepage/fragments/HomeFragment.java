@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -96,6 +98,10 @@ public class HomeFragment extends BaseFragment {
     LinearLayout llAddress;
     @BindView(R.id.ll_search)
     LinearLayout llSearch;
+    @BindView(R.id.scrollView)
+    NestedScrollView scrollView;
+    @BindView(R.id.rl_home_title)
+    RelativeLayout rlHomeTitle;
     private HomeListAdapter homeListAdapter;
     private List<ShouYeBannerBean.DataBean> data;
 
@@ -184,6 +190,19 @@ public class HomeFragment extends BaseFragment {
                 intent.putExtra("weburl", "wangye");
                 intent.putExtra("httpUrl", dataBeanX.getNew_url());
                 startActivity(intent);
+            }
+        });
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                LogUtil.i("首页滑动", "scrollX==" + scrollX + "  scrollY == " + scrollY + "   oldScrollY==" + oldScrollY);
+                if (scrollY > 100) {
+//                    changeTop(true);
+                    rlHomeTitle.setBackgroundColor(getResources().getColor(R.color.white));
+                } else {
+                    rlHomeTitle.setBackgroundColor(getResources().getColor(R.color.transparent));
+//                    changeTop(false);
+                }
             }
         });
     }
