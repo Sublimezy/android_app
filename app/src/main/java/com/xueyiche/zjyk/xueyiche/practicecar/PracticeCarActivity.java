@@ -97,6 +97,7 @@ public class PracticeCarActivity extends BaseActivity implements OnRefreshListen
     @Override
     protected void initView() {
         ButterKnife.bind(this, view);
+        tvTopRightButton.setVisibility(View.GONE);
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).keyboardEnable(true).init();
         practiceCarAdapter = new PracticeCarAdapter(R.layout.item_practice_car_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
