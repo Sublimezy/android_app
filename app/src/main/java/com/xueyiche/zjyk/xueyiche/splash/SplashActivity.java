@@ -66,6 +66,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 public class SplashActivity extends AppCompatActivity implements SplashADZoomOutListener, View.OnClickListener {
     protected static final String TAG = SplashActivity.class.getSimpleName();
@@ -132,6 +134,11 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
             public void onClick(View view) {
                 PrefUtils.putString(App.context, "app_xy", "1");
                 showTime();
+                if (App.splash_init) {
+                    JPushInterface.setDebugMode(true);
+                    JPushInterface.init(SplashActivity.this);
+                    App.szImei = JPushInterface.getRegistrationID(SplashActivity.this);
+                }
                 dialog01.dismiss();
             }
         });
@@ -144,7 +151,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(SplashActivity.this, UrlActivity.class);
-            intent.putExtra("url", "http://xueyiche.cn/xyc/Agreement/fwxy.html");
+            intent.putExtra("url", "http://tabankeji.com/djh5/daijiafuwuxieyi.html");
             intent.putExtra("type", "2");
             startActivity(intent);
 
@@ -154,7 +161,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(SplashActivity.this, UrlActivity.class);
-            intent.putExtra("url", "http://xueyiche.cn/xyc/Agreement/yszc.html");
+            intent.putExtra("url", "http://tabankeji.com/djh5/gerenxinxibaohuzhengce.html");
             intent.putExtra("type", "2");
             startActivity(intent);
 
@@ -560,6 +567,11 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
             if ("0".equals(app_xy)) {
                 showXY();
             } else {
+                if (App.splash_init) {
+                    JPushInterface.setDebugMode(true);
+                    JPushInterface.init(this);
+                    App.szImei = JPushInterface.getRegistrationID(this);
+                }
                 showTime();
             }
 

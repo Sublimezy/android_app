@@ -85,11 +85,11 @@ public class AboutXueYiCheActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.tv_yinsi:
-                intent.putExtra("url", "http://www.xueyiche.cn/xyc/Agreement/yszc.html");
+                intent.putExtra("url", "http://tabankeji.com/djh5/gerenxinxibaohuzhengce.html");
                 startActivity(intent);
                 break;
             case R.id.tv_fuwu:
-                intent.putExtra("url", "http://xueyiche.cn/xyc/Agreement/fwxy.html");
+                intent.putExtra("url", "http://tabankeji.com/djh5/daijiafuwuxieyi.html");
                 startActivity(intent);
                 break;
         }

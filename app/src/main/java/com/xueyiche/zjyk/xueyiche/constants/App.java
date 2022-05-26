@@ -51,6 +51,8 @@ public class App extends Application {
 
     public static int screenWidth;
     public static int screenHeight;
+    public static boolean splash_init =
+            true;  //true在splash 初始化         false  在app初始化
 
     //static 代码段可以防止内存泄露
     static {
@@ -74,18 +76,22 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
+
         application = this;
 //        MobSDK.init(this);
         Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
         context = getApplicationContext();
         handler = new Handler();
+
         DisplayMetrics mDisplayMetrics = getApplicationContext().getResources()
                 .getDisplayMetrics();
         screenWidth = mDisplayMetrics.widthPixels;
         screenHeight = mDisplayMetrics.heightPixels;
-        szImei = JPushInterface.getRegistrationID(this);
+        if (!splash_init) {
+            JPushInterface.setDebugMode(true);
+            JPushInterface.init(this);
+            szImei = JPushInterface.getRegistrationID(this);
+        }
         mNetWorkState = NetUtil.getNetWorkState(this);
         regToWx();
         initOkGo();
