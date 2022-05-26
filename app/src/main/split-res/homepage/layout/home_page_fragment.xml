@@ -179,7 +179,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56">
 
+            <ImageView
+                android:id="@+id/iv_xueyiche"
+                android:layout_marginLeft="14dp"
+                android:layout_centerVertical="true"
+                android:layout_width="83dp"
+                android:layout_height="26dp"
+                android:src="@mipmap/xueyiche_wenzi"
+                />
             <LinearLayout
+                android:layout_toRightOf="@id/iv_xueyiche"
                 android:id="@+id/ll_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -195,7 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="哈尔滨"
-                    android:textColor="#161616"
+                    android:textColor="#a0a0a0"
                     android:textSize="14dp" />
 
                 <ImageView
@@ -208,6 +217,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ll_search"
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"

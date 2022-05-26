@@ -152,6 +152,7 @@ public class CommunityFragment extends BaseFragment {
         }
         return view;
     }
+
     public void onEvent(MyEvent event) {
         String msg = event.getMsg();
         if (TextUtils.equals("图文发布成功", msg)) {
@@ -160,6 +161,7 @@ public class CommunityFragment extends BaseFragment {
             getDataFromNet();
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -253,11 +255,11 @@ public class CommunityFragment extends BaseFragment {
 
                 if (XueYiCheUtils.IsLogin()) {
 //                    if (ConstantsFiled.can_upload) {
-                        Intent intent = new Intent(context, ShiPinFaBuActivity.class);
+                    Intent intent = new Intent(context, ShiPinFaBuActivity.class);
 //                        intent.putExtra("type", type);
 //                        intent.putExtra("circle_id", circle_id);
 //                        intent.putExtra("have_been_type", have_been_type);
-                        context.startActivity(intent);
+                    context.startActivity(intent);
 //                    } else {
 //                        showToastShort("上一段视频还未完成,请稍后再试!");
 //                    }
@@ -359,12 +361,12 @@ public class CommunityFragment extends BaseFragment {
                 @Override
                 public void onClick(View view) {
                     if (TextUtils.isEmpty(item.getVideo_file())) {
-                       //图文
+                        //图文
                         Intent intent = new Intent(getContext(), TuWenXiangQingActivity.class);
                         intent.putExtra("id", item.getId());
                         startActivity(intent);
                     } else {
-                       //视频
+                        //视频
                         Intent intent = new Intent(getContext(), ShiPinPlayActivity.class);
                         intent.putExtra("id", item.getId() + "");
                         startActivity(intent);
@@ -401,9 +403,9 @@ public class CommunityFragment extends BaseFragment {
             ExpandableTextView expandableTextView = helper.getView(R.id.tv_quan_title);
             CustomShapeImageView image = helper.getView(R.id.imageView_one);
             expandableTextView.bind(item);
-            if(TextUtils.isEmpty(item.getContent())){
+            if (TextUtils.isEmpty(item.getContent())) {
                 expandableTextView.setVisibility(View.GONE);
-            }else{
+            } else {
                 expandableTextView.setVisibility(View.VISIBLE);
 
             }
@@ -420,10 +422,13 @@ public class CommunityFragment extends BaseFragment {
                 }
             });
             try {
-                if (!TextUtils.isEmpty(item.getAvatar())) {
-                    RoundedImageView riv_head = helper.getView(R.id.riv_head);
-                    Glide.with(App.context).load(item.getAvatar()).into(riv_head);
-                }
+                RoundedImageView riv_head = helper.getView(R.id.riv_head);
+//                if (!TextUtils.isEmpty(item.getAvatar())) {
+                Glide.with(App.context).load(item.getAvatar()).into(riv_head);
+//                } else {
+//                    Glide.with(App.context).load(R.mipmap.logo).into(riv_head);
+//
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -440,6 +445,7 @@ public class CommunityFragment extends BaseFragment {
             expandableTextView.setContent("这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是测试数据哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
 
         }
+
         /**
          * '
          * 多图
@@ -452,9 +458,9 @@ public class CommunityFragment extends BaseFragment {
             RecyclerView recycler = helper.getView(R.id.recycler);
             expandableTextView.bind(item);
             expandableTextView.setContent(item.getContent());
-            if(TextUtils.isEmpty(item.getContent())){
+            if (TextUtils.isEmpty(item.getContent())) {
                 expandableTextView.setVisibility(View.GONE);
-            }else{
+            } else {
                 expandableTextView.setVisibility(View.VISIBLE);
 
             }
@@ -462,10 +468,12 @@ public class CommunityFragment extends BaseFragment {
             recycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
             QuanPicAdapter quanPicAdapter = new QuanPicAdapter(item.getImages(), "" + item.getId());
             recycler.setAdapter(quanPicAdapter);
-            if (!TextUtils.isEmpty(item.getAvatar())) {
-                RoundedImageView riv_head = helper.getView(R.id.riv_head);
-                Glide.with(App.context).load(item.getAvatar()).into(riv_head);
-            }
+            RoundedImageView riv_head = helper.getView(R.id.riv_head);
+//            if (!TextUtils.isEmpty(item.getAvatar())) {
+            Glide.with(App.context).load(item.getAvatar()).into(riv_head);
+//            } else {
+//                Glide.with(App.context).load(R.mipmap.logo).into(riv_head);
+//            }
             if (!TextUtils.isEmpty(item.getNickname())) {
                 helper.setText(R.id.tvNickName, item.getNickname());
             }

@@ -71,12 +71,21 @@ public class TuWenDetailBean {
     public static class NewsinfoBean {
       private String id;
       private String title;
+      private String avatar;
       private String image;
       private List<String> images;
       private String video_file;
       private String description;
       private String content;
       private String createtime;
+
+      public String getAvatar() {
+        return avatar;
+      }
+
+      public void setAvatar(String avatar) {
+        this.avatar = avatar;
+      }
 
       public String getId() {
         return id;
