@@ -572,7 +572,7 @@ public class CommunityFragment extends BaseFragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, final int position) {
             String str = strs.get(position);
-            Glide.with(App.context).load(str).addListener(new RequestListener<Drawable>() {
+            Glide.with(App.context).load(str)/*.addListener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     handler.post(new Runnable() {
@@ -590,7 +590,7 @@ public class CommunityFragment extends BaseFragment {
                 public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                     return false;
                 }
-            }).into(holder.imageView);
+            })*/.into(holder.imageView);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
