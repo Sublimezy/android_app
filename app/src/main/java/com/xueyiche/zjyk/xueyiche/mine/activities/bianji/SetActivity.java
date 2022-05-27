@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.allen.library.SuperTextView;
 import com.gyf.immersionbar.ImmersionBar;
+import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -55,6 +56,8 @@ public class SetActivity extends BaseActivity {
     SuperTextView stQq;
     @BindView(R.id.st_clean)
     SuperTextView stClean;
+    @BindView(R.id.st_zhuxiao)
+    SuperTextView st_zhuxiao;
     @BindView(R.id.st_exit)
     SuperTextView stExit;
 
@@ -97,7 +100,7 @@ public class SetActivity extends BaseActivity {
         stBianjiCard.setRightString(decrypt_user_cards);
     }
 
-    @OnClick({R.id.ll_common_back, R.id.st_name, R.id.st_phone, R.id.st_bianji_card, R.id.st_wechat, R.id.st_qq, R.id.st_clean, R.id.st_exit})
+    @OnClick({R.id.ll_common_back, R.id.st_name, R.id.st_zhuxiao,R.id.st_phone, R.id.st_bianji_card, R.id.st_wechat, R.id.st_qq, R.id.st_clean, R.id.st_exit})
     public void onClick(View view) {
         Intent intent1 = new Intent(App.context, InformationChangeActivity.class);
         switch (view.getId()) {
@@ -140,45 +143,52 @@ public class SetActivity extends BaseActivity {
                         .show();
                 break;
             case R.id.st_exit:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setIcon(R.mipmap.logo);
-                builder.setTitle("是否退出登录？");
-                //点击空白处弹框不消失
-                builder.setCancelable(false);
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //清空数据 退出登录
-                        PrefUtils.putBoolean(App.context, "ISLOGIN", false);
-                        PrefUtils.putString(App.context, "user_phone", "");
-                        PrefUtils.putString(App.context, "user_cards", "");
-                        PrefUtils.putString(App.context, "driver_cards", "");
-                        PrefUtils.putString(App.context, "nickname", "");
-                        PrefUtils.putString(App.context, "user_name", "");
-                        PrefUtils.putString(App.context, "order_status", "");
-                        PrefUtils.putString(App.context, "address", "");
-                        PrefUtils.putString(App.context, "randNum", "");
-                        PrefUtils.putString(App.context, "sex", "");
-                        PrefUtils.putString(App.context, "head_img", "");
-                        PrefUtils.putString(App.context, "user_id", "");
-                        PrefUtils.putString(App.context, "user_random", "");
-                        PrefUtils.clear(App.context);
-                        EventBus.getDefault().post(new MyEvent("刷新FragmentLogin"));
-                        EventBus.getDefault().post(new MyEvent("刷新Fragment"));
-                        showToastShort("退出成功");
-                        finish();
-
-                    }
-                });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
+          outLogin("是否退出登录？","退出成功");
+                break;
+            case R.id.st_zhuxiao:
+                outLogin("是否注销账号？","注销成功");
                 break;
         }
+    }
+
+    private void outLogin(String title,String toast) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.logo);
+        builder.setTitle(title);
+        //点击空白处弹框不消失
+        builder.setCancelable(false);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //清空数据 退出登录
+                PrefUtils.putBoolean(App.context, "ISLOGIN", false);
+                PrefUtils.putString(App.context, "user_phone", "");
+                PrefUtils.putString(App.context, "user_cards", "");
+                PrefUtils.putString(App.context, "driver_cards", "");
+                PrefUtils.putString(App.context, "nickname", "");
+                PrefUtils.putString(App.context, "user_name", "");
+                PrefUtils.putString(App.context, "order_status", "");
+                PrefUtils.putString(App.context, "address", "");
+                PrefUtils.putString(App.context, "randNum", "");
+                PrefUtils.putString(App.context, "sex", "");
+                PrefUtils.putString(App.context, "head_img", "");
+                PrefUtils.putString(App.context, "user_id", "");
+                PrefUtils.putString(App.context, "user_random", "");
+                PrefUtils.clear(App.context);
+                EventBus.getDefault().post(new MyEvent("刷新FragmentLogin"));
+                EventBus.getDefault().post(new MyEvent("刷新Fragment"));
+                ToastUtils.showToast(SetActivity.this,toast);
+                finish();
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 }

@@ -8,6 +8,8 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -63,9 +65,12 @@ public class LoginSecondStepActivity extends BaseActivity {
     VerificationCodeInput verificationCodeInput;
     @BindView(R.id.tvGetPassWord)
     TextView tvGetPassWord;
+    @BindView(R.id.check_box)
+    CheckBox check_box;
     private CountDownTimerUtils countDownTimer;
     private String phone;
     private String yanzhengma;
+    private String isCheck = "1";
     @Override
     protected int initContentView() {
         return R.layout.login_second_step;
@@ -83,6 +88,16 @@ public class LoginSecondStepActivity extends BaseActivity {
     }
     @Override
     protected void initListener() {
+        check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    isCheck = "1";
+                } else {
+                    isCheck = "0";
+                }
+            }
+        });
         countDownTimer = new CountDownTimerUtils(tvGetPassWord, 60000, 1000);
         verificationCodeInput.setOnCompleteListener(new VerificationCodeInput.Listener() {
             @Override
@@ -164,7 +179,12 @@ public class LoginSecondStepActivity extends BaseActivity {
                 getPassWord();
                 break;
             case R.id.btLogin:
-                login();
+                if ("0".equals(isCheck)) {
+                    ToastUtils.showToast(LoginSecondStepActivity.this,"请阅读并同意遵守学易车法律条款与平台规则");
+                    break;
+                } else {
+                    login();
+                }
                 break;
             case R.id.tv_user_xieyi:
                 CommonWebView.forward(LoginSecondStepActivity.this,"xieyi");
