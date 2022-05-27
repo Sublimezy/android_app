@@ -163,7 +163,7 @@ dependencies {
     compile project(':textlibrary')
     //gson解析
     //picasso和glide的图片处理机制
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     //自适应布局
     implementation 'im.quar:autolayout-annotations:1.0.3'
