@@ -282,6 +282,7 @@ public class ShiPinPlayActivity extends BaseActivity {
                     TiktokBean data = new TiktokBean();
                     data.videoDownloadUrl = json.getData().getNewsinfo().getVideo_file();
                     data.title = json.getData().getNewsinfo().getTitle();
+                    data.authorImgUrl = json.getData().getNewsinfo().getAvatar();
                     mVideoList.add(data);
                     //使用此方法添加数据，使用notifyDataSetChanged会导致正在播放的视频中断
                     mTiktok2Adapter.notifyItemRangeChanged(size, mVideoList.size());

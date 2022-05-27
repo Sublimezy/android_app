@@ -20,6 +20,7 @@ import com.xueyiche.zjyk.xueyiche.community.OnVideoControllerListener;
 import com.xueyiche.zjyk.xueyiche.community.cache.PreloadManager;
 import com.xueyiche.zjyk.xueyiche.community.view.IconFontTextView;
 import com.xueyiche.zjyk.xueyiche.community.view.LikeView;
+import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 
 import java.util.List;
 
@@ -51,6 +52,10 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
                 .load(item.coverImgUrl)
                 .placeholder(android.R.color.black)
                 .into(holder.mThumb);
+        Glide.with(context)
+                .load(item.authorImgUrl)
+                .placeholder(android.R.color.black)
+                .into(holder.iv_head);
         holder.mTitle.setText(item.title);
         holder.mPosition = position;
         holder.likeview.setOnLikeListener(new LikeView.OnLikeListener() {
@@ -154,6 +159,7 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
         public TextView tvLikecount;
         public TextView tvCommentcount;
         public TextView tvSharecount;
+        public CircleImageView iv_head;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -165,6 +171,7 @@ public class Tiktok3Adapter extends RecyclerView.Adapter<Tiktok3Adapter.ViewHold
             ivLike = mTikTokView.findViewById(R.id.iv_like);
             animationView = mTikTokView.findViewById(R.id.lottie_anim);
             iv_comment = mTikTokView.findViewById(R.id.iv_comment);
+            iv_head = mTikTokView.findViewById(R.id.iv_head);
 
             tvLikecount = mTikTokView.findViewById(R.id.tv_likecount);
             tvCommentcount = mTikTokView.findViewById(R.id.tv_commentcount);

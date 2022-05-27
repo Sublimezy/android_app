@@ -446,7 +446,9 @@ public class CommunityFragment extends BaseFragment {
                     showCommentDialog(item.getId());
                 }
             });
-
+            RoundedImageView riv_head = helper.getView(R.id.riv_head);
+//            if (!TextUtils.isEmpty(item.getAvatar())) {
+            Glide.with(App.context).load(item.getAvatar()).into(riv_head);
         }
 
         public void setOnlyText(BaseViewHolder helper, CommunityListBean.DataBean.DataBeanX item) {
