@@ -40,6 +40,7 @@ import com.qq.e.ads.splash.SplashADZoomOutListener;
 import com.qq.e.comm.util.AdError;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.tencent.bugly.Bugly;
 import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -136,6 +137,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
                 showTime();
                 if (App.splash_init) {
                     JPushInterface.setDebugMode(true);
+                    Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
                     JPushInterface.init(SplashActivity.this);
                     App.szImei = JPushInterface.getRegistrationID(SplashActivity.this);
                 }
@@ -570,6 +572,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
                 if (App.splash_init) {
                     JPushInterface.setDebugMode(true);
                     JPushInterface.init(this);
+                    Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
                     App.szImei = JPushInterface.getRegistrationID(this);
                 }
                 showTime();

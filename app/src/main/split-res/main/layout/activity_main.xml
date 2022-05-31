@@ -36,7 +36,7 @@
             android:id="@+id/rb_community"
             style="@style/MenuTabB"
             android:drawableTop="@drawable/my_menu2_selector"
-            android:text="社区"
+            android:text="发现"
             android:textColor="@drawable/main_rb_back_text"
             android:textSize="@dimen/text_shiyisp" />
         <RadioButton

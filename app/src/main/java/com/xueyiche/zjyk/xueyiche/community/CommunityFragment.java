@@ -149,7 +149,7 @@ public class CommunityFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
-        tvTitle.setText("社区");
+        tvTitle.setText("发现");
         initData();
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);

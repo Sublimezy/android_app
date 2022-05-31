@@ -79,7 +79,7 @@ public class App extends Application {
 
         application = this;
 //        MobSDK.init(this);
-        Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
+
         context = getApplicationContext();
         handler = new Handler();
 
@@ -90,6 +90,7 @@ public class App extends Application {
         if (!splash_init) {
             JPushInterface.setDebugMode(true);
             JPushInterface.init(this);
+            Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
             szImei = JPushInterface.getRegistrationID(this);
         }
         mNetWorkState = NetUtil.getNetWorkState(this);
