@@ -168,7 +168,16 @@ public class MyOrderListActivity extends BaseActivity {
                     });
 
                 } else if("待付款".equals(orderAdapter.getData().get(position).getOrder_status())){
-                    EndActivity.forward(MyOrderListActivity.this,orderAdapter.getData().get(position).getOrder_sn());
+                    String bd_type = orderAdapter.getData().get(position).getBd_type();
+                    if (!TextUtils.isEmpty(bd_type)) {
+                        if ("1".equals(bd_type)) {
+                            Intent intent = new Intent(MyOrderListActivity.this, OrderDetailActivity.class);
+                            intent.putExtra("order_sn", orderAdapter.getData().get(position).getOrder_sn());
+                            startActivity(intent);
+                        }else {
+                            EndActivity.forward(MyOrderListActivity.this,orderAdapter.getData().get(position).getOrder_sn());
+                        }
+                    }
                 } else if("已取消".equals(orderAdapter.getData().get(position).getOrder_status())){
                     com.luck.picture.lib.utils.ToastUtils.showToast(MyOrderListActivity.this,"无订单详情！");
                 }else {
