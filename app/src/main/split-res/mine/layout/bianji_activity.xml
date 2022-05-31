@@ -94,6 +94,16 @@
                 xyc:sRightIconRes="@mipmap/jiantou"
                 xyc:sRightTextColor="@color/test_color"
                 xyc:sRightTextSize="@dimen/text_ershisp" />
+            <com.allen.library.SuperTextView
+                android:id="@+id/st_zhuxiao"
+                style="@style/bianji_list"
+                xyc:sDividerLineColor="@color/_cccccc"
+                xyc:sLeftTextColor="@color/test_color"
+                xyc:sLeftTextSize="@dimen/text_ershisp"
+                xyc:sLeftTextString="注销账户"
+                xyc:sRightIconRes="@mipmap/jiantou"
+                xyc:sRightTextColor="@color/test_color"
+                xyc:sRightTextSize="@dimen/text_ershisp" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/st_exit"

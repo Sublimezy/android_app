@@ -26,6 +26,7 @@ import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.ArrivedActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
@@ -164,9 +165,9 @@ public class HomeFragment extends BaseFragment {
 //                showToastShort(data.get(position)+"");
                 ShouYeBannerBean.DataBean dataBean = data.get(position);
                 if ("1".equals(dataBean.getUrl_type())) {
-                    Intent intent = new Intent(getContext(), CommonWebView.class);
-                    intent.putExtra("weburl", "wangye");
-                    intent.putExtra("httpUrl", dataBean.getUrl());
+                    Intent intent = new Intent(App.context, UrlActivity.class);
+                    intent.putExtra("url",dataBean.getUrl());
+                    intent.putExtra("type","3");
                     startActivity(intent);
                 }
             }

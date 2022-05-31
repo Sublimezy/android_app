@@ -106,6 +106,15 @@ class OrderListBean {
             private String order_status;
             private String createtime;
             private String mobile;
+            private String bd_type;
+
+            public String getBd_type() {
+                return bd_type;
+            }
+
+            public void setBd_type(String bd_type) {
+                this.bd_type = bd_type;
+            }
 
             public String getOrder_sn() {
                 return order_sn;
