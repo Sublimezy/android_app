@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -162,16 +163,11 @@ public class DaiJiaActivity extends BaseMapActivity {
                     NearDrivingBean.DataBean data = json.getData();
                     if (data!=null) {
                         List<NearDrivingBean.DataBean.UserListBean> user_list = data.getUser_list();
+                        aMap.moveCamera(CameraUpdateFactory.zoomTo(15.5f));
                         if (user_list.size()>0) {
                             for (int i = 0; i < user_list.size(); i++) {
                                 LatLng latlng = new LatLng(Double.parseDouble(user_list.get(i).getUser_lat()), Double.parseDouble(user_list.get(i).getUser_lng()));
-                                View viewCat = LayoutInflater.from(DaiJiaActivity.this).inflate(R.layout.item_map_nearby_layout, null);
-                                TextView tvName = viewCat.findViewById(R.id.tvName);
-                                TextView tvDistance = viewCat.findViewById(R.id.tvDistance);
-                                CircleImageView ivLogoType = viewCat.findViewById(R.id.ivLogoType);
-                                tvName.setText("代驾员:"+user_list.get(i).getName());
-                                Picasso.with(App.context).load(user_list.get(i).getHead_img()).into(ivLogoType);
-                                tvDistance.setText(" 距您:"+user_list.get(i).getJuli()+"km");
+                                View viewCat = LayoutInflater.from(DaiJiaActivity.this).inflate(R.layout.item_daijia_fujin, null);
                                 aMap.moveCamera(CameraUpdateFactory.changeLatLng(latlng));
                                 Bitmap bitmap = convertViewToBitmap(viewCat);
                                 markerOption = new MarkerOptions()
@@ -180,20 +176,6 @@ public class DaiJiaActivity extends BaseMapActivity {
                                         .draggable(false);
                                 marker = aMap.addMarker(markerOption);
                                 marker.setObject(user_list.get(i));
-                                double la = Double.parseDouble(user_list.get(i).getUser_lat());
-                                double lo = Double.parseDouble(user_list.get(i).getUser_lng());
-                                LatLng   latLng = new LatLng(la, lo);
-                                LatLng finalLatLng1 = latLng;
-                                Glide.with(DaiJiaActivity.this).load(user_list.get(i).getHead_img()).into(new SimpleTarget<Drawable>() {
-                                    @Override
-                                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                                        ivLogoType.setImageDrawable(resource);
-                                        Bitmap bitmapFromView = convertViewToBitmap(viewCat);
-                                        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmapFromView);
-                                        markerOption = new MarkerOptions().position(finalLatLng1).icon(bitmapDescriptor);
-                                        marker = aMap.addMarker(markerOption);
-                                    }
-                                });
                             }
                         }
                     }
@@ -233,6 +215,7 @@ public class DaiJiaActivity extends BaseMapActivity {
                 if (!TextUtils.isEmpty(aMapLocation.getAddress())) {
                     sLocation = aMapLocation.getAddress();
                 }
+
                 tvQidian.setText(sLocation);
                 Log.e("onLocationChanged", "" + city);
                 Log.e("onLocationChanged", "" + cityCode);
