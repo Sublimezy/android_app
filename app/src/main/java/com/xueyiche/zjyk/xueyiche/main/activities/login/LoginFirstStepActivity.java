@@ -41,7 +41,7 @@ public class LoginFirstStepActivity extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
+        ImmersionBar.with(this).titleBar(R.id.rl_title).statusBarDarkFont(true).init();
         instance = this;
     }
     @Override

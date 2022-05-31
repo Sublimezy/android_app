@@ -8,6 +8,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ import com.zhy.http.okhttp.callback.Callback;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -63,6 +65,8 @@ public class LoginSecondStepActivity extends BaseActivity {
     VerificationCodeInput verificationCodeInput;
     @BindView(R.id.tvGetPassWord)
     TextView tvGetPassWord;
+    @BindView(R.id.et_pwd)
+    EditText et_pwd;
     private CountDownTimerUtils countDownTimer;
     private String phone;
     private String yanzhengma;
@@ -78,7 +82,7 @@ public class LoginSecondStepActivity extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        ImmersionBar.with(this).titleBar(R.id.rl_title).init();
+        ImmersionBar.with(this).titleBar(R.id.rl_title).statusBarDarkFont(true).init();
 
     }
     @Override
@@ -164,6 +168,11 @@ public class LoginSecondStepActivity extends BaseActivity {
                 getPassWord();
                 break;
             case R.id.btLogin:
+                yanzhengma = et_pwd.getText().toString().trim();
+                if(TextUtils.isEmpty(yanzhengma)){
+                    showToastShort("请输入验证码");
+                    return;
+                }
                 login();
                 break;
             case R.id.tv_user_xieyi:
