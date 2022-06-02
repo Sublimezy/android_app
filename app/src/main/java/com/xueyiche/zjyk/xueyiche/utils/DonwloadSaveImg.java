@@ -83,7 +83,7 @@ public class DonwloadSaveImg {
                     mBitmap = BitmapFactory.decodeStream(inputStream);
                     inputStream.close();
                 }
-                saveFile(mBitmap);
+                saveFileShiPei(mBitmap);
                 mSaveMessage = "图片保存成功！";
             } catch (IOException e) {
                 mSaveMessage = "图片保存失败！";

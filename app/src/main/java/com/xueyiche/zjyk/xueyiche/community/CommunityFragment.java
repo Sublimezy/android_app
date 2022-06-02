@@ -572,25 +572,8 @@ public class CommunityFragment extends BaseFragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, final int position) {
             String str = strs.get(position);
-            Glide.with(App.context).load(str)/*.addListener(new RequestListener<Drawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(App.context).load(R.mipmap.icon_image_error).into(holder.imageView);
-                            holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                        }
-                    });
-
-                    return false;
-                }
-
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    return false;
-                }
-            })*/.into(holder.imageView);
+            Glide.with(App.context).load(str).into(holder.imageView);
+//            Glide.with(App.context).load("http://xychead.xueyiche.vip/fx_tuwen1653620811900.jpg").into(holder.imageView);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
