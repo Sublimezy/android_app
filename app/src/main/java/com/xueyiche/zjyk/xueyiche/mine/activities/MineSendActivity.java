@@ -38,6 +38,7 @@ import com.xueyiche.zjyk.xueyiche.community.bean.CallSuccessBean;
 import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
@@ -54,6 +55,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 public class MineSendActivity extends BaseActivity {
 
@@ -320,7 +322,13 @@ public class MineSendActivity extends BaseActivity {
                                 @Override
                                 public void requestSuccess(BaseBean json) {
                                     if (json.getCode() == 1) {
+                                        EventBus.getDefault().post(new MyEvent("图文发布成功", "刷新话题"));
                                         communityAdapter.remove(helper.getLayoutPosition());
+                                        List<CommunityListBean.DataBean.DataBeanX> data = communityAdapter.getData();
+                                        if(data== null || data.size() == 0){
+                                            pager = 1;
+                                            getDataFromNet();
+                                        }
                                     } else {
 
                                     }
@@ -416,6 +424,12 @@ public class MineSendActivity extends BaseActivity {
                                 public void requestSuccess(BaseBean json) {
                                     if (json.getCode() == 1) {
                                         communityAdapter.remove(helper.getLayoutPosition());
+                                        EventBus.getDefault().post(new MyEvent("图文发布成功", "刷新话题"));
+                                        List<CommunityListBean.DataBean.DataBeanX> data = communityAdapter.getData();
+                                        if(data== null || data.size() == 0){
+                                            pager = 1;
+                                            getDataFromNet();
+                                        }
                                     } else {
 
                                     }
