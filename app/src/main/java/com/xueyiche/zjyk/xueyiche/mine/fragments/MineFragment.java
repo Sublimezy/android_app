@@ -20,6 +20,7 @@ import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.AboutXueYiCheActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.ConstantlyAddressActivity;
+import com.xueyiche.zjyk.xueyiche.mine.activities.MineSendActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.MyOrderListActivity;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bean.MineCenterBean;
 import com.xueyiche.zjyk.xueyiche.mine.activities.bianji.EditMySelfInfoActivity;
@@ -57,6 +58,8 @@ public class MineFragment extends BaseFragment {
     ImageView ivMineSetting;
     @BindView(R.id.ll_my_order)
     LinearLayout llMyOrder;
+    @BindView(R.id.ll_wode_fabu)
+    LinearLayout ll_wode_fabu;
     @BindView(R.id.ll_changyong_dizhi)
     LinearLayout llChangyongDizhi;
     @BindView(R.id.ll_siji_baoming)
@@ -192,7 +195,8 @@ public class MineFragment extends BaseFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.mine_head, R.id.tv_mine_title, R.id.tv_mine_name, R.id.iv_mine_setting, R.id.ll_my_order, R.id.ll_changyong_dizhi, R.id.ll_siji_baoming, R.id.ll_shared_app, R.id.ll_kefu, R.id.ll_about})
+    @OnClick({R.id.mine_head, R.id.tv_mine_title, R.id.tv_mine_name, R.id.iv_mine_setting, R.id.ll_my_order
+            , R.id.ll_changyong_dizhi, R.id.ll_siji_baoming, R.id.ll_shared_app, R.id.ll_kefu, R.id.ll_about, R.id.ll_wode_fabu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_head:
@@ -231,6 +235,12 @@ public class MineFragment extends BaseFragment {
                     openActivity(LoginFirstStepActivity.class);
                 } else {
                     openActivity(ConstantlyAddressActivity.class);
+                }
+            case R.id.ll_wode_fabu:
+                if (!DialogUtils.IsLogin()) {
+                    openActivity(LoginFirstStepActivity.class);
+                } else {
+                    openActivity(MineSendActivity.class);
                 }
                 break;
             case R.id.ll_siji_baoming:

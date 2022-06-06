@@ -62,6 +62,7 @@ public class MyHttpUtils {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Response<String> response) {
                         Log.e("返回成功参数"+url, response.body());
+                        Log.e("返回成功参数token", PrefUtils.getParameter("token"));
                         String json = response.body();
 
                         try {

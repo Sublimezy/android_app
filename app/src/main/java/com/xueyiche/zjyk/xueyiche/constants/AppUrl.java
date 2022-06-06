@@ -180,5 +180,7 @@ public interface AppUrl {
     String trainwith = IPWAIWANG + "api/Articlebanner/trainwith";
     String trainwith_info = IPWAIWANG + "api/Articlebanner/trainwith_info";
     String near_driving = IPWAIWANG + "api/Userindex/near_driving";
+    String article_user = IPWAIWANG + "api/Articlebanner/article_user";
+    String article_user_del = IPWAIWANG + "api/Articlebanner/article_user_del";
 }
 

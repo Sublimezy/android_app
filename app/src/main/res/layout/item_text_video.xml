@@ -137,7 +137,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_video"
         android:visibility="visible">
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="10dp">
 
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/icon_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="删除"
+                android:textColor="#ff505050"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_share"
             android:layout_width="wrap_content"
