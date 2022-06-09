@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.toast.ToastUtils;
 import com.luck.picture.lib.basic.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -165,45 +166,49 @@ public class ShiPinFaBuActivity extends BaseActivity {
                     showToastShort("请选择视频");
                     return;
                 }
-                File file = AppUtils.compressImageShiPei(bitmap_video);
+
                 File fileVideo = new File(video_url);
                 showProgressDialog(false, "正在发布...");
                 Calendar calendar = Calendar.getInstance();
                 long timeInMillis = calendar.getTimeInMillis();
                 key = "fx_shipin" + timeInMillis + ".mp4";
                 key_image = "fx_shipin_image" + timeInMillis + ".jpg";
-                if (file != null || file.exists()) {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("key", key_image);
-                    MyHttpUtils.postHttpMessage(AppUrl.TOUXIANG, params, TokenBean.class, new RequestCallBack<TokenBean>() {
-                        @Override
-                        public void requestSuccess(TokenBean json) {
-                            if (json.getCode() == 200) {
-                                String token = json.getContent().getToken();
-                                if (!TextUtils.isEmpty(token)) {
-                                    uploadManager.put(file, key_image, token, new UpCompletionHandler() {
-                                        @Override
-                                        public void complete(String key, ResponseInfo info, JSONObject response) {
-                                            if (info.isOK()) {
-                                                Log.e("qiniu", "Upload Success");
-                                            } else {
-                                                String error = info.error;
-                                                //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                                            }
-                                        }
+                if (bitmap_video != null) {
 
-                                    }, null);
+                    File file = AppUtils.compressImageShiPei(bitmap_video);
+                    if (file != null || file.exists()) {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("key", key_image);
+                        MyHttpUtils.postHttpMessage(AppUrl.TOUXIANG, params, TokenBean.class, new RequestCallBack<TokenBean>() {
+                            @Override
+                            public void requestSuccess(TokenBean json) {
+                                if (json.getCode() == 200) {
+                                    String token = json.getContent().getToken();
+                                    if (!TextUtils.isEmpty(token)) {
+                                        uploadManager.put(file, key_image, token, new UpCompletionHandler() {
+                                            @Override
+                                            public void complete(String key, ResponseInfo info, JSONObject response) {
+                                                if (info.isOK()) {
+                                                    Log.e("qiniu", "Upload Success");
+                                                } else {
+                                                    String error = info.error;
+                                                    //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                                                }
+                                            }
+
+                                        }, null);
+                                    }
                                 }
                             }
-                        }
 
-                        @Override
-                        public void requestError(String errorMsg, int errorType) {
-                            Log.e("qiniu", "errorMsg 失败" + key + "   errorMsg   " + errorMsg);
-                        }
-                    });
+                            @Override
+                            public void requestError(String errorMsg, int errorType) {
+                                Log.e("qiniu", "errorMsg 失败" + key + "   errorMsg   " + errorMsg);
+                            }
+                        });
 
 
+                    }
                 }
                 Map<String, String> params = new HashMap<>();
                 params.put("key", key);
@@ -250,7 +255,7 @@ public class ShiPinFaBuActivity extends BaseActivity {
                                         } else {
                                             String error = info.error;
                                             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                                            showToastShort(error);
+                                            ToastUtils.show(error);
                                         }
                                     }
 
@@ -569,6 +574,12 @@ public class ShiPinFaBuActivity extends BaseActivity {
                     e.printStackTrace();
                 }
 
+//                if (selectList.size() > 0) {
+//                    video_url = selectList.get(0).getRealPath();
+////                    MediaMetadataRetriever media1 = new MediaMetadataRetriever();
+////                    media1.setDataSource(video_url);// videoPath 本地视频的路径
+////                    bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+//                }
                 if (selectList.size() > 0) {
 
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
@@ -645,7 +656,16 @@ public class ShiPinFaBuActivity extends BaseActivity {
 //                                            .setSandboxFileEngine(new MeSandboxFileEngine())
 //                                            .isOriginalControl(cb_original.isChecked())//原图功能
 //                                            .setPermissionDescriptionListener(getPermissionDescriptionListener())
-//                                            .setOutputAudioDir(getSandboxAudioOutputPath())
+//                                                .setOutputAudioDir(getSandboxAudioOutputPath())
+                                                .setSandboxFileEngine(new UriToFileTransformEngine() {
+                                                    @Override
+                                                    public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
+                                                        if (call != null) {
+                                                            String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
+                                                            call.onCallback(srcPath, sandboxPath);
+                                                        }
+                                                    }
+                                                })
                                                 .setSelectedData(mAdapter.getData())
                                                 .forResultActivity(PictureConfig.REQUEST_CAMERA);
                                     } else {
@@ -692,7 +712,7 @@ public class ShiPinFaBuActivity extends BaseActivity {
                     public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
                         if (call != null) {
                             String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
-                            call.onCallback(srcPath,sandboxPath);
+                            call.onCallback(srcPath, sandboxPath);
                         }
                     }
                 })
