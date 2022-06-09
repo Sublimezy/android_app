@@ -18,15 +18,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.umeng.analytics.MobclickAgent;
-import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
-import com.xueyiche.zjyk.xueyiche.constants.App;
-import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
-import com.xueyiche.zjyk.xueyiche.utils.StatusBarUtil;
-
-import java.util.ArrayList;
-
-import im.quar.autolayout.AutoLayoutActivity;
 import me.jessyan.autosize.internal.CancelAdapt;
 
 

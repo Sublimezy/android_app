@@ -78,7 +78,6 @@ public class App extends Application {
         super.onCreate();
 
         application = this;
-//        MobSDK.init(this);
 
         context = getApplicationContext();
         handler = new Handler();
@@ -88,20 +87,21 @@ public class App extends Application {
         screenWidth = mDisplayMetrics.widthPixels;
         screenHeight = mDisplayMetrics.heightPixels;
         if (!splash_init) {
-            JPushInterface.setDebugMode(true);
-            JPushInterface.init(this);
-            Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
-            szImei = JPushInterface.getRegistrationID(this);
+//            JPushInterface.setDebugMode(true);
+//            JPushInterface.init(this);
+//            Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
+//            szImei = JPushInterface.getRegistrationID(this);
+//            if (showAD) {
+//                GDTADManager.getInstance().initWith(this, "您在腾讯联盟开发者平台的APPID");
+//
+//            }
         }
         mNetWorkState = NetUtil.getNetWorkState(this);
         regToWx();
         initOkGo();
 //        AutoSizeConfig.getInstance().setCustomFragment(true);
 
-        if (showAD) {
-            GDTADManager.getInstance().initWith(this, "您在腾讯联盟开发者平台的APPID");
 
-        }
     }
 
 

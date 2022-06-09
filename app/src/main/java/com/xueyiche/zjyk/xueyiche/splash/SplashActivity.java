@@ -90,8 +90,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 //        XueYiCheUtils.getNowLocation(SplashActivity.this);
-        MobclickAgent.openActivityDurationTrack(false);
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);// 设置统计场景类型为普通统计
+
         tv_jump = (TextView) findViewById(R.id.tv_jump);
         choice_city = PrefUtils.getBoolean(App.context, "choice_city", false);
         mProcessResultUtil = new ProcessResultUtil(this);
@@ -120,9 +119,11 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
         //获取屏幕信息
         this.getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenWidth = dm.widthPixels;
+        int screenHeight = dm.heightPixels;
         WindowManager.LayoutParams params =
                 dialog01.getWindow().getAttributes();//获取dialog信息
-        params.width = screenWidth - 350;
+        params.width = screenWidth - 200;
+        params.height = screenHeight - 400;
         dialog01.getWindow().setAttributes(params);//设置大小
         tv_quxiao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +141,8 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
                     Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
                     JPushInterface.init(SplashActivity.this);
                     App.szImei = JPushInterface.getRegistrationID(SplashActivity.this);
+                    MobclickAgent.openActivityDurationTrack(false);
+                    MobclickAgent.setScenarioType(SplashActivity.this, MobclickAgent.EScenarioType.E_UM_NORMAL);// 设置统计场景类型为普通统计
                 }
                 dialog01.dismiss();
             }
@@ -289,25 +292,25 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
 
 
     private void res() {
-        AndPermission.with(SplashActivity.this)
-                .permission( Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,Permission.CAMERA, Permission.ACCESS_FINE_LOCATION,Permission.ACCESS_COARSE_LOCATION,Permission.READ_PHONE_STATE)
-                .onGranted(new Action() {
-                    @Override
-                    public void onAction(List<String> permissions) {
-                    gonext();
-                    }
-                })
-                .onDenied(new Action() {
-                    @Override
-                    public void onAction(List<String> permissions) {
-//                        Uri packageURI = Uri.parse("package:" + getPackageName());
-//                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
+//        AndPermission.with(SplashActivity.this)
+//                .permission( Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE,Permission.CAMERA, Permission.ACCESS_FINE_LOCATION,Permission.ACCESS_COARSE_LOCATION,Permission.READ_PHONE_STATE)
+//                .onGranted(new Action() {
+//                    @Override
+//                    public void onAction(List<String> permissions) {
+//                    gonext();
+//                    }
+//                })
+//                .onDenied(new Action() {
+//                    @Override
+//                    public void onAction(List<String> permissions) {
+////                        Uri packageURI = Uri.parse("package:" + getPackageName());
+////                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
+////                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+////                        startActivity(intent);
                         gonext();
-                    }
-                }).start();
+//                    }
+//                }).start();
     }
     public static final String SPLASH_POS_ID = "2001447730515391";
 
@@ -574,6 +577,8 @@ public class SplashActivity extends AppCompatActivity implements SplashADZoomOut
                     JPushInterface.init(this);
                     Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
                     App.szImei = JPushInterface.getRegistrationID(this);
+                    MobclickAgent.openActivityDurationTrack(false);
+                    MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);// 设置统计场景类型为普通统计
                 }
                 showTime();
             }

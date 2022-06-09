@@ -574,12 +574,12 @@
         <!-- <meta-data android:name="JPUSH_CHANNEL" android:value="${JPUSH_CHANNEL}"/> -->
         <!-- Required  . Enable it you can get statistics data with channel -->
         <!-- 高德地图定位 -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="589c161f45297d50eb000751" />
-        <meta-data
-            android:name="Channel ID"
-            android:value="xueyiche" />
+<!--        <meta-data-->
+<!--            android:name="UMENG_APPKEY"-->
+<!--            android:value="589c161f45297d50eb000751" />-->
+<!--        <meta-data-->
+<!--            android:name="Channel ID"-->
+<!--            android:value="xueyiche" />-->
 
         <provider
             android:name="com.qq.e.comm.GDTFileProvider"
