@@ -538,10 +538,20 @@ public class ShiPinFaBuActivity extends BaseActivity {
                 }
                 selectList = PictureSelector.obtainSelectorList(data);
                 if (selectList.size() > 0) {
-                    video_url = selectList.get(0).getRealPath();
-                    MediaMetadataRetriever media1 = new MediaMetadataRetriever();
-                    media1.setDataSource(video_url);// videoPath 本地视频的路径
-                    bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//                        fileCropUri = new File(selectList.get(i).getSandboxPath());
+                        video_url = selectList.get(0).getSandboxPath();
+                        MediaMetadataRetriever media1 = new MediaMetadataRetriever();
+                        media1.setDataSource(video_url);// videoPath 本地视频的路径
+                        bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+                    } else {
+                        video_url = selectList.get(0).getRealPath();
+                        MediaMetadataRetriever media1 = new MediaMetadataRetriever();
+                        media1.setDataSource(video_url);// videoPath 本地视频的路径
+                        bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+//                        fileCropUri = new File(selectList.get(i).getRealPath());
+                    }
                 }
                 mAdapter.setList(selectList);
                 mAdapter.notifyDataSetChanged();
@@ -560,10 +570,20 @@ public class ShiPinFaBuActivity extends BaseActivity {
                 }
 
                 if (selectList.size() > 0) {
-                    video_url = selectList.get(0).getRealPath();
-                    MediaMetadataRetriever media1 = new MediaMetadataRetriever();
-                    media1.setDataSource(video_url);// videoPath 本地视频的路径
-                    bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//                        fileCropUri = new File(selectList.get(i).getSandboxPath());
+                        video_url = selectList.get(0).getSandboxPath();
+                        MediaMetadataRetriever media1 = new MediaMetadataRetriever();
+                        media1.setDataSource(video_url);// videoPath 本地视频的路径
+                        bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+                    } else {
+                        video_url = selectList.get(0).getRealPath();
+                        MediaMetadataRetriever media1 = new MediaMetadataRetriever();
+                        media1.setDataSource(video_url);// videoPath 本地视频的路径
+                        bitmap_video = media1.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+//                        fileCropUri = new File(selectList.get(i).getRealPath());
+                    }
                 }
                 mAdapter.setList(selectList);
                 mAdapter.notifyDataSetChanged();

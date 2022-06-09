@@ -247,7 +247,8 @@ dependencies {
     //搜索功能
     implementation 'com.github.getActivity:ToastUtils:10.3'
     implementation 'com.amap.api:search:latest.integration'
-    implementation 'com.amap.api:navi-3dmap:latest.integration'
+//    implementation 'com.amap.api:navi-3dmap:latest.integration'
+    implementation 'com.amap.api:navi-3dmap:8.1.0_3dmap8.1.0'
 //    implementation('com.github.tohodog:QSVideoPlayer:2.2.8') {
 //        exclude group: 'org.slf4j'
 //    }
