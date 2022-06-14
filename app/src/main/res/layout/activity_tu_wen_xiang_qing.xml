@@ -9,9 +9,9 @@
     tools:context=".community.activity.TuWenXiangQingActivity">
 
 
-    <include layout="@layout/new_title_bar"
+    <include
         android:id="@+id/ic_title"
-        />
+        layout="@layout/new_title_bar" />
 
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout

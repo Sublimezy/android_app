@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.community.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,19 +30,24 @@ import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.community.bean.CallSuccessBean;
+import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
 import com.xueyiche.zjyk.xueyiche.community.bean.TuWenDetailBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.AlertPopWindow;
 import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.view.AdListView;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
+import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
+import com.xueyiche.zjyk.xueyiche.mine.activities.MineSendActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.BaseCommonAdapter;
 import com.xueyiche.zjyk.xueyiche.utils.CommentDialog;
+import com.xueyiche.zjyk.xueyiche.utils.MyDialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.SharedUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
@@ -57,6 +63,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 public class TuWenXiangQingActivity extends BaseActivity {
 
@@ -136,7 +143,8 @@ public class TuWenXiangQingActivity extends BaseActivity {
         quanPicAdapter = new QuanPicAdapter(R.layout.quan_piclist_item_xiangqing);
         recyclerview.setAdapter(quanPicAdapter);
 
-
+        tvRemark.setVisibility(View.VISIBLE);
+        tvRemark.setText("举报");
         getDataFromNet();
 
     }
@@ -197,6 +205,40 @@ public class TuWenXiangQingActivity extends BaseActivity {
             case R.id.cv_head:
                 break;
             case R.id.tv_remark:
+                //举报
+                new MyDialogUtils.Builder(TuWenXiangQingActivity.this, true, true, "举报此信息为不良信息?"
+                        , "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        Map<String, String> params = new HashMap<>();
+                        params.put("id", id + "");
+                        MyHttpUtils.postHttpMessage(AppUrl.article_user_report, params, BaseBean.class, new RequestCallBack<BaseBean>() {
+                            @Override
+                            public void requestSuccess(BaseBean json) {
+                                if (json.getCode() == 1) {
+                                    finish();
+                                } else {
+
+                                }
+                                showToastShort(json.getMsg());
+
+                            }
+
+                            @Override
+                            public void requestError(String errorMsg, int errorType) {
+
+                            }
+                        });
+                    }
+                }, "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.dismiss();
+                    }
+                }
+                ).create().show();
                 break;
             case R.id.tv_dianzan:
                 break;

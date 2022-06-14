@@ -182,5 +182,6 @@ public interface AppUrl {
     String near_driving = IPWAIWANG + "api/Userindex/near_driving";
     String article_user = IPWAIWANG + "api/Articlebanner/article_user";
     String article_user_del = IPWAIWANG + "api/Articlebanner/article_user_del";
+    String article_user_report = IPWAIWANG + "api/Articlebanner/article_user_report";
 }
 
