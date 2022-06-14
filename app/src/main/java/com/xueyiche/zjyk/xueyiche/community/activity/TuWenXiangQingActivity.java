@@ -2,17 +2,12 @@ package com.xueyiche.zjyk.xueyiche.community.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,22 +20,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.community.bean.CallSuccessBean;
-import com.xueyiche.zjyk.xueyiche.community.bean.CommunityListBean;
 import com.xueyiche.zjyk.xueyiche.community.bean.TuWenDetailBean;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.AlertPopWindow;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.view.AdListView;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
-import com.xueyiche.zjyk.xueyiche.mine.activities.MineSendActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
 import com.xueyiche.zjyk.xueyiche.mine.view.LoadingLayout;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
@@ -48,13 +36,9 @@ import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.utils.BaseCommonAdapter;
 import com.xueyiche.zjyk.xueyiche.utils.CommentDialog;
 import com.xueyiche.zjyk.xueyiche.utils.MyDialogUtils;
-import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.SharedUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +47,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 public class TuWenXiangQingActivity extends BaseActivity {
 
@@ -100,8 +83,7 @@ public class TuWenXiangQingActivity extends BaseActivity {
     TextView tvAddress;
     @BindView(R.id.banner_container)
     FrameLayout bannerContainer;
-    @BindView(R.id.tv_remark)
-    TextView tvRemark;
+
     @BindView(R.id.tv_dianzan)
     ImageView tvDianzan;
     @BindView(R.id.tv_sc_number)
@@ -114,6 +96,8 @@ public class TuWenXiangQingActivity extends BaseActivity {
     AdListView lvPl;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.tvRemark)
+    TextView tvRemark;
     private String id;
     private LoadingLayout wrap;
     private QuanPicAdapter quanPicAdapter;
@@ -148,7 +132,9 @@ public class TuWenXiangQingActivity extends BaseActivity {
         getDataFromNet();
 
     }
+
     private List<TuWenDetailBean.DataBean.MessagelistBean> list = new ArrayList<>();
+
     private void getDataFromNet() {
         Map<String, String> params = new HashMap<>();
         params.put("article_id", id);
@@ -196,7 +182,7 @@ public class TuWenXiangQingActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ll_common_back, R.id.cv_head, R.id.tv_remark, R.id.tv_dianzan, R.id.tv_sc_number, R.id.mineHead, R.id.tv_gv_content})
+    @OnClick({R.id.ll_common_back, R.id.cv_head, R.id.tvRemark, R.id.tv_dianzan, R.id.tv_sc_number, R.id.mineHead, R.id.tv_gv_content})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_common_back:
@@ -204,7 +190,7 @@ public class TuWenXiangQingActivity extends BaseActivity {
                 break;
             case R.id.cv_head:
                 break;
-            case R.id.tv_remark:
+            case R.id.tvRemark:
                 //举报
                 new MyDialogUtils.Builder(TuWenXiangQingActivity.this, true, true, "举报此信息为不良信息?"
                         , "确定", new DialogInterface.OnClickListener() {
@@ -254,6 +240,13 @@ public class TuWenXiangQingActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     class QuanPicAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
