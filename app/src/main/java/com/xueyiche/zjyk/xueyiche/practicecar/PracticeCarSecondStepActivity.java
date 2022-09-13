@@ -21,17 +21,11 @@ import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.daijia.RegistSiJiActivity;
-import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
-import com.xueyiche.zjyk.xueyiche.practicecar.activity.PracticeCarContentActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.adapter.PracticeCarAdapter;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.TrainWithBean;
 
-import net.lucode.hackware.magicindicator.FragmentContainerHelper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +63,7 @@ import butterknife.OnClick;
  * #            com.xueyiche.zjyk.xueyiche.practicecar
  * #            xueyiche5.0
  */
-public class PracticeCarActivity extends BaseActivity implements OnRefreshListener {
+public class PracticeCarSecondStepActivity extends BaseActivity implements OnRefreshListener {
     //    @BindView(R.id.magic_indicator3)
 //    MagicIndicator magicIndicator;
     @BindView(R.id.tv_top_right_button)
@@ -85,7 +79,7 @@ public class PracticeCarActivity extends BaseActivity implements OnRefreshListen
 
 
     public static void forward(Context context) {
-        Intent intent = new Intent(context, PracticeCarActivity.class);
+        Intent intent = new Intent(context, PracticeCarSecondStepActivity.class);
         context.startActivity(intent);
     }
 
@@ -150,7 +144,7 @@ public class PracticeCarActivity extends BaseActivity implements OnRefreshListen
                     case R.id.tvOrder:
                         TrainWithBean.DataBean.DataBean1 dataBean1 = (TrainWithBean.DataBean.DataBean1) adapter.getItem(position);
                         if (dataBean1!=null) {
-                            ContentTrainNewActivity.forward(PracticeCarActivity.this,""+dataBean1.getId());
+                            ContentTrainNewActivity.forward(PracticeCarSecondStepActivity.this,""+dataBean1.getId());
                         }
                         break;
                 }

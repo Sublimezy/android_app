@@ -502,6 +502,8 @@ public class CommunityFragment extends BaseFragment {
 
 
     }
+
+
     private void showCommentDialog(String id) {
         new CommentDialog("说点什么...", new CommentDialog.SendListener() {
             @Override

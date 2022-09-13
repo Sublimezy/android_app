@@ -125,11 +125,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:gravity="right"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="@dimen/dp_20"
                         android:drawableRight="@mipmap/jiantou"
                         android:drawablePadding="@dimen/dp_10"
+                        android:gravity="right"
                         android:hint="请您选择练车时长"
                         android:textColor="#ff333333"
                         android:textSize="@dimen/sp_12" />

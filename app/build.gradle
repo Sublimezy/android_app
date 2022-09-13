@@ -231,7 +231,7 @@ dependencies {
 // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
     implementation 'com.github.lihangleo2:ShadowLayout:3.0.1'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49'
     //网络请求
     implementation 'com.lzy.net:okgo:3.0.4'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'

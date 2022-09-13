@@ -45,7 +45,8 @@ import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
-import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarActivity;
+import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarFirstStepActivity;
+import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarSecondStepActivity;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
@@ -312,7 +313,7 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.ll_two:
-                PracticeCarActivity.forward(getActivity());
+                PracticeCarFirstStepActivity.forward(getActivity());
                 break;
             case R.id.ll_three:
                 DaiJianCheListActivity.forward(getActivity());

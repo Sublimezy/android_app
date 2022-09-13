@@ -92,66 +92,91 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".mine.activities.MineSendActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".community.activity.ShiPinFaBuActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".community.activity.TuWenFabuActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".community.activity.ShiPinPlayActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".community.activity.TuWenXiangQingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".mine.activities.bianji.SetActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.DriverPathActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.amap.api.navi.AmapRouteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|navigation"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".mine.activities.bianji.EditMySelfInfoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".practicecar.ContentTrainNewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".homepage.activities.DaifBaoYangListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".homepage.activities.DaiJianCheListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".mine.activities.MyOrderListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".homepage.activities.ContentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".mine.activities.OrderDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".daijia.activity.ChooseDaijiaYuanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".daijia.activity.DaShangActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".practicecar.PracticeCarActivity"
+            android:name=".practicecar.PracticeCarSecondStepActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".practicecar.PracticeCarFirstStepActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".daijia.activity.CancelOrderActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".daijia.activity.ArrivedActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
-        <activity android:name=".daijia.RegistSiJiActivity" />
+        <activity android:name=".daijia.RegistSiJiActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="android.max_aspect"
@@ -574,12 +599,12 @@
         <!-- <meta-data android:name="JPUSH_CHANNEL" android:value="${JPUSH_CHANNEL}"/> -->
         <!-- Required  . Enable it you can get statistics data with channel -->
         <!-- 高德地图定位 -->
-<!--        <meta-data-->
-<!--            android:name="UMENG_APPKEY"-->
-<!--            android:value="589c161f45297d50eb000751" />-->
-<!--        <meta-data-->
-<!--            android:name="Channel ID"-->
-<!--            android:value="xueyiche" />-->
+        <!--        <meta-data-->
+        <!--            android:name="UMENG_APPKEY"-->
+        <!--            android:value="589c161f45297d50eb000751" />-->
+        <!--        <meta-data-->
+        <!--            android:name="Channel ID"-->
+        <!--            android:value="xueyiche" />-->
 
         <provider
             android:name="com.qq.e.comm.GDTFileProvider"
