@@ -83,6 +83,10 @@ public class LoginSecondStepActivity extends BaseActivity {
         Intent intent = new Intent(context, LoginSecondStepActivity.class);
         intent.putExtra("phone",phone);
         context.startActivity(intent);
+
+
+
+        
     }
     @Override
     protected void initView() {
