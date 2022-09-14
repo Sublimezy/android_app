@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/sanshi"
+        android:text="请选择练习类型"
+        android:id="@+id/tv_title"
+        android:textColor="@color/colorOrange"
+        android:textSize="@dimen/text_seveneensp" />
+
+    <TextView
+        android:id="@+id/tv_ShunXu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="顺序练习"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/ershi"
+        android:paddingVertical="@dimen/dp_5"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shape"
+        android:layout_marginTop="@dimen/sanshi"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_fifteensp" />
+
+    <TextView
+        android:id="@+id/tv_MoNi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="模拟考试"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/ershi"
+        android:paddingVertical="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/sanshi"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shape"
+        android:layout_marginTop="@dimen/sanshi"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_fifteensp" />
+
+</LinearLayout>

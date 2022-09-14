@@ -79,7 +79,12 @@ public class GDLocation implements AMapLocationListener {
                 Log.i("getDrivingNear张斯佳", cityCode);
                 PrefUtils.putParameter("lat", "" + latitude);
                 PrefUtils.putParameter("lon", "" + longitude);
+                PrefUtils.putParameter("y", "" + latitude);
+                PrefUtils.putParameter("x", "" + longitude);
                 PrefUtils.putParameter("address", "" + address);
+                PrefUtils.putParameter("xiangxi_address", "" + address);
+
+
                 Log.e("GDLocation", "" + city);
                 Log.e("GDLocation", "" + cityCode);
                 Log.e("GDLocation", "" + latitude);

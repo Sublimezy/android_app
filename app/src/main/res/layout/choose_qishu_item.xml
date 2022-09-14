@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xueyiche.zjyk.xueyiche.practicecar.view.CheckableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="51dp">
+
+    <TextView
+        android:id="@+id/tv_qishu"
+        android:layout_width="@dimen/liushi"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="12期"
+        android:textColor="#4f4f4f"
+        android:textSize="17sp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/tv_qishu"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="1px"
+            android:layout_gravity="center_vertical"
+            android:layout_height="51dp"
+            android:background="@color/_cccccc" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/all_zouyou"
+            android:layout_marginTop="@dimen/slide_top_and_left"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每期应还463.20"
+                android:textColor="@color/test_color"
+                android:textSize="@dimen/side_letter_bar_letter_size" />
+
+            <TextView
+                android:id="@+id/tv_shouxufei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/seven"
+                android:text="含手续费46.20"
+                android:textColor="@color/test_color"
+                android:textSize="@dimen/side_letter_bar_letter_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/choose_ok"
+        android:layout_width="@dimen/shiwu"
+        android:layout_height="@dimen/shiwu"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/all_zouyou"
+        android:duplicateParentState="true"
+        android:src="@drawable/ic_hideable_item" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/yipx"
+        android:layout_below="@+id/view_line"
+        android:background="@color/_cccccc" />
+
+</com.xueyiche.zjyk.xueyiche.practicecar.view.CheckableLayout>

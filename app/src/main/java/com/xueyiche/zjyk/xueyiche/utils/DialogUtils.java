@@ -20,6 +20,9 @@ import android.widget.TextView;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+import com.xueyiche.zjyk.xueyiche.examtext.MoNiTestPage;
+import com.xueyiche.zjyk.xueyiche.examtext.kemua.SubjectAQuestion;
+import com.xueyiche.zjyk.xueyiche.examtext.kemud.SubjectDQuestion;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;
 import com.xueyiche.zjyk.xueyiche.mine.view.MClearEditText;
@@ -468,5 +471,55 @@ public class DialogUtils {
 
     }
 
+    public static void showTiShi(final Activity activity, String type) {
+        View view = LayoutInflater.from(App.context).inflate(R.layout.show_tishi_jiaokao_layout, null);
+        TextView tv_ShunXu = (TextView) view.findViewById(R.id.tv_ShunXu);
+        TextView tv_MoNi = (TextView) view.findViewById(R.id.tv_MoNi);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.Dialog).setView(view);
+        final AlertDialog dialog01 = builder.show();
+        //设置弹窗的宽度，高度
+        DisplayMetrics dm = new DisplayMetrics();
+        //获取屏幕信息
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int screenWidth = dm.widthPixels;
+        int screenHeigh = dm.heightPixels;
+        WindowManager.LayoutParams params = dialog01.getWindow().getAttributes();//获取dialog信息
+        params.width = screenWidth - 400;
+        params.height = screenHeigh / 2;
+        dialog01.getWindow().setAttributes(params);//设置大小
+        tv_ShunXu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ("1".equals(type)) {
+                    Intent intent = new Intent(App.context, SubjectAQuestion.class);
+                    activity.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(App.context, SubjectDQuestion.class);
+                    activity.startActivity(intent);
+                }
+                dialog01.dismiss();
+            }
+        });
+        tv_MoNi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ("1".equals(type)) {
+                    Intent intent = new Intent(App.context, MoNiTestPage.class);
+                    intent.putExtra("moni_style","1");
+                    intent.putExtra("type","1");
+                    activity.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(App.context, MoNiTestPage.class);
+                    intent.putExtra("moni_style","2");
+                    intent.putExtra("type","1");
+                    activity.startActivity(intent);
+                }
 
+                dialog01.dismiss();
+            }
+        });
+        //点击空白处弹框不消失
+        dialog01.setCancelable(true);
+        dialog01.show();
+    }
 }

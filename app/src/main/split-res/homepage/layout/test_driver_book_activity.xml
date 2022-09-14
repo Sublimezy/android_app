@@ -30,7 +30,7 @@
                 android:src="@mipmap/jx_top_pic"
                 android:visibility="gone" />
 
-            <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+            <com.xueyiche.zjyk.xueyiche.custom.RoundImageView
                 android:id="@+id/ivTop"
                 android:layout_width="match_parent"
                 android:layout_height="144dp"

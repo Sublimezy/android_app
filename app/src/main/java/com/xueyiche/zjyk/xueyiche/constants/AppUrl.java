@@ -183,5 +183,90 @@ public interface AppUrl {
     String article_user = IPWAIWANG + "api/Articlebanner/article_user";
     String article_user_del = IPWAIWANG + "api/Articlebanner/article_user_del";
     String article_user_report = IPWAIWANG + "api/Articlebanner/article_user_report";
+    //3.0国裕测试
+    String IPWAIWANGBEFORE = "http://112.103.231.139:8082/";
+    //身份类型
+    String usertype = IPWAIWANGBEFORE + "drivingtrainee/usertype.do";
+    String selectdrivingsecret= IPWAIWANGBEFORE + "drivingtrainee/selectdrivingsecret.do";
+    //点赞：社区、问答、视频内容
+    String FaXian_DianZan_Content = IPWAIWANGBEFORE + "mg/my/main_praise.do";
+    //文章详情 社区
+    String Discover_SheQu_Content = IPWAIWANGBEFORE + "mg/my/getDiscoverDetails.do";
+    //问答的发布
+    String Question_Post = IPWAIWANGBEFORE + "mg/questions_answers/release_question.do";
+    String TiJian_List = IPWAIWANGBEFORE + "mg/home/hospitalList.do";
+    //客服问题详情
+    String KeFu_Content = IPWAIWANGBEFORE + "mg/customService/selectQuestDetailById.do";
+    //客服问题List
+    String KeFu_List = IPWAIWANGBEFORE + "mg/customService/selectCustomService.do";
+    //在线客服聊天列表
+    String Zaixian_Kefu_List = IPWAIWANGBEFORE + "mg/message/getServiceMessageList.do";
+    //在线客服回复聊天内容
+    String Zaixian_User_Push = IPWAIWANGBEFORE + "mg/message/pushServiceMessage.do";
+    //答题赢现金成绩
+    String WinCash_Result = IPWAIWANGBEFORE + "";
+    //插入学习记录
+    String addlearningrecord = IPWAIWANGBEFORE + "drivingtrainee/addlearningrecord.do";
+    //答题赢现金名次列表
+    String DATIYINGXIANJINLIEBIAO = IPWAIWANGBEFORE + "mg/carlifeinfo/showanswerwincash.do";
+    //模拟考试排行榜
+    String MNKSPH = IPWAIWANGBEFORE + "mg/carlifeinfo/showsimulation.do";
+    //开始练车  结束练车
+    String startendpracticecar = IPWAIWANGBEFORE + "driving/startendpracticecar.do";
+    //教练端的预约列表
+    String coachreservationlist = IPWAIWANGBEFORE + "drivingtrainee/coachreservationlist.do";
+    //展示教练释放的时间段
+    String coachfreedperiodlist = IPWAIWANGBEFORE + "driving/coachfreedperiodlist.do";
+    //教练选择要释放的时间段
+    String addcoachperiod = IPWAIWANGBEFORE + "driving/addcoachperiod.do";
+    //教练列表
+    String drivingcoachlist = IPWAIWANGBEFORE + "driving/drivingcoachlist.do";
+    //预约练车
+    String addpracticedriving = IPWAIWANGBEFORE + "drivingtrainee/addpracticedriving.do";
+    //练车详情
+    String selectdrivingtraining = IPWAIWANGBEFORE + "drivingtrainee/selectdrivingtraining.do";
+    //评论
+    String evaluationboth = IPWAIWANGBEFORE + "drivingtrainee/evaluationboth.do";
+    //修改上下车
+    String updategetonoff = IPWAIWANGBEFORE + "drivingtrainee/updategetonoff.do";
+    //我的预约
+    String reservationuserlist = IPWAIWANGBEFORE + "drivingtrainee/reservationuserlist.do";
+    //我的驾考
+    String selectstudyprocess = IPWAIWANGBEFORE + "drivingtrainee/selectstudyprocess.do";
+    //学习记录
+    String studyinfolist = IPWAIWANGBEFORE + "drivingtrainee/studyinfolist.do";
+    //报名
+    String inserttrainee = IPWAIWANGBEFORE + "drivingtrainee/inserttrainee.do";
+    //订单详情
+    String orderinfo = IPWAIWANGBEFORE + "drivingtrainee/orderinfo.do";
+    //报名项目
+    String drivingentryproject = IPWAIWANGBEFORE + "drivingtrainee/drivingentryproject.do";
+    //测试支付
+    String paytypedrivingorder = IPWAIWANGBEFORE + "drivingtrainee/paytypedrivingorder.do";
+    //教练信息
+    String coachinfomation = IPWAIWANGBEFORE + "drivingtrainee/coachinfomation.do";
+    //可以预约的时间日期
+    String opendrivingreservation = IPWAIWANGBEFORE + "drivingtrainee/opendrivingreservation.do";
+    //预约考试
+    String addreservationexamination = IPWAIWANGBEFORE + "drivingtrainee/addreservationexamination.do";
+    //科目三的视频
+    String KEMUSAN = IPWAIWANGBEFORE + "mg/carlifeinfo/threesubjects.do";
+    //    教练释放的天数和当天的日期
+    String selectcoachdays = IPWAIWANGBEFORE + "driving/selectcoachdays.do";
+    //教练选择日期
+    String addcoachdate = IPWAIWANGBEFORE + "driving/addcoachdate.do";
+    //    学员查看-教练释放的天数和当天的日期
+    String stuselectcoachdays = IPWAIWANGBEFORE + "driving/stuselectcoachdays.do";
+
+
+
+
+
+
+
+
+
+
+
 }
 
