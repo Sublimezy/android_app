@@ -86,7 +86,7 @@ public class LoginSecondStepActivity extends BaseActivity {
 
 
 
-        
+
     }
     @Override
     protected void initView() {
