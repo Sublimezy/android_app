@@ -90,6 +90,40 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
+
+        <activity
+            android:name=".examtext.MiJiActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.ExamActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".driverschool.driverschool.TiJianActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".driverschool.ZaiXianKeFuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".driverschool.KeFuQuesContentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".driverschool.KeFuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".driverschool.driverschool.MiJiContentActivityTwo"
+            android:exported="false"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.TestDriverBookActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".mine.activities.MineSendActivity"
             android:exported="false"
@@ -461,6 +495,212 @@
         <activity
             android:name=".xycindent.fragments.indent_content.WZIndentDetailsOrderPractice"
             android:screenOrientation="portrait" /> <!-- 优惠券 -->
+
+        <activity
+            android:name=".examtext.kemua.PracticeTestOne"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.PracticeTestFour"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".newdriverschool.coach.activity.StartTrainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name=".newdriverschool.coach.activity.TrainingRecordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.activity.TrainingDateManageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.activity.TrainingDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.activity.TrainingTimeCoachActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.activity.WaitPingJiaTrainingDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.activity.YuYueDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.activity.YuYueTrainingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name=".newdriverschool.coach.student.BuyTrainTimeStudentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".newdriverschool.coach.student.CoachListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.student.StudentTrainTimeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.student.BuyKeShiDateActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.student.YuYueKaoShiActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.coach.student.YuYueLiancheDateActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsBaoMingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsIndentContentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsIndentContentBaoMingSuccessActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsOrderBuyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsOrderContentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsOrderOneTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsOrderRecordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsSelfTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsStudyContentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".newdriverschool.students.activity.StudentsStudyRecordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".examtext.kemua.SubjectAQuestion"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemua.AchievementOneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemua.CollectionA"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemua.CuoTiA"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemua.RandomTestA"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemua.ZhuanXiangA"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemua.ZhuanXiangContent"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.Answerwithcash"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.AnswerwithcashFinish"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.AnswerWithCashQuestion"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.PaiHangBang"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.MyResult"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.MyJiangJin"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.MoNiTestPage"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemub.SubjectbWeb"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemuc.KeMuSanVideo"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.AchievementFourActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.CollectionD"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.CuoTiD"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.RandomTestD"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.SubjectDQuestion"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.ZhuangXiangDContent"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".examtext.kemud.ZhuanXiangD"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.zz.fileprovider"

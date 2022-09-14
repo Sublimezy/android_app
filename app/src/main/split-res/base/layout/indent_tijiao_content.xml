@@ -13,13 +13,13 @@
         <RelativeLayout
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="45dp"
             android:background="@color/color_white">
 
             <LinearLayout
                 android:id="@+id/ll_exam_back"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="45dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -36,7 +36,7 @@
                 android:id="@+id/tv_login_back"
                 style="@style/shop_title_1"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text=""
@@ -47,7 +47,7 @@
             <TextView
                 android:id="@+id/tv_wenxintishi"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/all_zouyou"
                 android:layout_toLeftOf="@+id/iv_caidan"
@@ -61,7 +61,7 @@
             <ImageView
                 android:id="@+id/iv_caidan"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:padding="17dp"
                 android:src="@mipmap/czh_fx"

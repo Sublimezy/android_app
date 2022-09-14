@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <com.xueyiche.zjyk.xueyiche.driverschool.view.RoundImageView
+            android:layout_width="78dp"
+            android:id="@+id/riv_head"
+            android:layout_height="78dp"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
+            android:layout_marginRight="11dp"
+            android:src="@mipmap/lunbotu" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="----"
+                    android:textColor="#333333"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--km"
+                    android:id="@+id/tv_juli"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="2dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:drawableLeft="@mipmap/tj_wz"
+                    android:textColor="#ff666666"
+                    android:textSize="12sp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="------"
+                        android:layout_marginTop="7dp"
+                        android:textColor="@color/test_color"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="140dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_height="wrap_content"
+                        android:text="-------"
+                        android:textColor="@color/test_color"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_marginLeft="165dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#3D3D3D"
+                    android:layout_height="35dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/jx_tj_dh"
+                    android:id="@+id/iv_location"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/jx_tj_call"
+                    android:id="@+id/iv_phone"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#E3E3E3"
+        android:layout_marginTop="@dimen/all_16dp"
+        android:layout_marginLeft="@dimen/all_16dp"
+        android:layout_marginRight="@dimen/all_16dp"
+        android:layout_height="1dp"></View>
+</LinearLayout>

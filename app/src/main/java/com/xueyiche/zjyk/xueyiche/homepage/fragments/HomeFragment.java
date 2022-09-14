@@ -34,6 +34,7 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
+import com.xueyiche.zjyk.xueyiche.examtext.TestDriverBookActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.activities.DaiJianCheListActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.activities.DaifBaoYangListActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.HomeListAdapter;
@@ -300,7 +301,7 @@ public class HomeFragment extends BaseFragment {
         return "home";
     }
 
-    @OnClick({R.id.ll_one, R.id.ll_two, R.id.ll_three, R.id.ll_four, R.id.iv_kefu})
+    @OnClick({R.id.ll_one, R.id.ll_two, R.id.ll_three, R.id.ll_four, R.id.ll_five, R.id.iv_kefu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_one:
@@ -320,6 +321,13 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.ll_four:
                 DaifBaoYangListActivity.forward(getActivity());
+                break;
+            case R.id.ll_five:
+                if (XueYiCheUtils.IsLogin()) {
+                   openActivity(TestDriverBookActivity.class);
+                } else {
+                    LoginFirstStepActivity.forward(getActivity());
+                }
                 break;
             case R.id.iv_kefu:
                 XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");

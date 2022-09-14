@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_bg"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/shiba"
+        android:textColor="@color/_3333"
+        android:text="评价教练"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ershiba"
+        android:layout_height="wrap_content"/>
+    <RadioGroup
+        android:id="@+id/rg_menutab"
+        android:layout_marginTop="@dimen/ershijiu"
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/shiba"
+        android:layout_marginLeft="@dimen/shiba"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/er"
+        android:paddingTop="@dimen/yi">
+
+        <RadioButton
+            android:id="@+id/rbJiHao"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/new_remark_jihao_selector"
+            android:text="极好"
+            android:drawablePadding="5dp"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+        <RadioButton
+            android:id="@+id/rbLiangHao"
+            android:drawableTop="@drawable/new_remark_lianghao_selector"
+            android:text="良好"
+            android:drawablePadding="5dp"
+            android:layout_weight="1"
+
+            android:gravity="center_horizontal"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+        <RadioButton
+            android:id="@+id/rbJiaoCha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+
+            android:drawablePadding="5dp"
+
+            android:drawableTop="@drawable/new_remark_jiaocha_selector"
+            android:text="较差"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+
+
+        <RadioButton
+            android:id="@+id/rbJiaCha"
+            android:drawableTop="@drawable/new_remark_jicha_selector"
+            android:text="极差"
+            android:drawablePadding="5dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/side_letter_bar_letter_size" />
+    </RadioGroup>
+    <EditText
+        android:id="@+id/etRemark"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/all_include_height"
+        android:layout_marginRight="@dimen/all_include_height"
+        android:layout_marginTop="@dimen/ershi"
+        android:background="@drawable/gray_yuanjiao_bg_shape"
+        android:hint="写下你的感受..."
+        android:paddingRight="@dimen/slide_top_and_left_two"
+        android:paddingLeft="@dimen/shiba"
+        android:paddingTop="@dimen/ershier"
+        android:paddingBottom="@dimen/sishier"
+        android:textColorHint="@color/_9999"
+        android:textColor="@color/_3333"
+        android:textSize="12dp"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/ershiwu"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="@dimen/sishiwu">
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/_f2f3f5"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvQuXiao"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="取消"
+                android:textSize="@dimen/shisi"
+                android:textColor="@color/_666"
+                android:gravity="center"
+                android:layout_height="match_parent"/>
+            <View
+                android:layout_width="1px"
+                android:background="@color/_f2f3f5"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/tvSubmitIndent"
+                android:layout_weight="1"
+                android:text="提交订单"
+                android:textColor="#ff5000"
+                android:gravity="center"
+                android:textSize="@dimen/shisi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

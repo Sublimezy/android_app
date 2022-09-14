@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_bg"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/shiba"
+        android:textColor="@color/colorOrange"
+        android:text="@string/wenxinTishi"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ershiba"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/shiba"
+        android:textColor="@color/_666"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/ershiba"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/ershiwu"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="@dimen/sishiwu">
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/_f2f3f5"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvQuXiao"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="取消"
+                android:textSize="@dimen/shisi"
+                android:textColor="@color/_666"
+                android:gravity="center"
+                android:layout_height="match_parent"/>
+            <View
+                android:layout_width="1px"
+                android:background="@color/_f2f3f5"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/tvSubmitIndent"
+                android:layout_weight="1"
+                android:text="确定"
+                android:textColor="#ff5000"
+                android:gravity="center"
+                android:textSize="@dimen/shisi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
