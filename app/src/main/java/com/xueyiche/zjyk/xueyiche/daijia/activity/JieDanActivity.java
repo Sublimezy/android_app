@@ -192,6 +192,8 @@ public class JieDanActivity extends BaseMapActivity {
         }
     }
 
+
+
     private void getDataFromNet() {
         Map<String, String> params = new HashMap<>();
         params.put("order_sn", "" + order_sn);
