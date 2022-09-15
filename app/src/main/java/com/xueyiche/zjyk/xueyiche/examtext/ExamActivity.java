@@ -56,7 +56,7 @@ public class ExamActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mRG_exam_menutab.setOnCheckedChangeListener(this);
         tvTitle.setText("驾考练习");
         tvBaoMing.setText("报名");
-        tvBaoMing.setVisibility(View.VISIBLE);
+        tvBaoMing.setVisibility(View.GONE);
 
     }
 

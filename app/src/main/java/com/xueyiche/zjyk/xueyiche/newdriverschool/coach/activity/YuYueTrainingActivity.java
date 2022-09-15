@@ -21,6 +21,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.NewBaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.bean.StartTrainBean;
@@ -179,8 +180,9 @@ public class YuYueTrainingActivity extends NewBaseActivity {
                 startActivity(intent);
                 break;
             case R.id.tv_start:
-                String lan = PrefUtils.getParameter("y");
-                String lon = PrefUtils.getParameter("x");
+                new GDLocation().startLocation();
+                String lan = PrefUtils.getParameter("lat");
+                String lon = PrefUtils.getParameter("lon");
 
                 Map<String, String> params = new HashMap<>();
                 params.put("coach_user_id", coach_id);
