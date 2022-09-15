@@ -1,6 +1,8 @@
 package com.xueyiche.zjyk.xueyiche.homepage.fragments;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,6 +51,9 @@ import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.practicecar.PracticeCarSecondStepActivity;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.bannerview.utils.BannerUtils;
@@ -169,8 +174,8 @@ public class HomeFragment extends BaseFragment {
                 ShouYeBannerBean.DataBean dataBean = data.get(position);
                 if ("1".equals(dataBean.getUrl_type())) {
                     Intent intent = new Intent(App.context, UrlActivity.class);
-                    intent.putExtra("url",dataBean.getUrl());
-                    intent.putExtra("type","3");
+                    intent.putExtra("url", dataBean.getUrl());
+                    intent.putExtra("type", "3");
                     startActivity(intent);
                 }
             }
@@ -185,14 +190,14 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                Log.i("首页轮播__position",position+"");
+                Log.i("首页轮播__position", position + "");
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
 
-                Log.i("首页轮播__state",state+"");
+                Log.i("首页轮播__state", state + "");
             }
         });
 
@@ -314,7 +319,21 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.ll_two:
-                PracticeCarFirstStepActivity.forward(getActivity());
+                AndPermission.with(getActivity())
+                        .permission(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
+                        .onGranted(new Action() {
+                            @Override
+                            public void onAction(List<String> permissions) {
+                                PracticeCarFirstStepActivity.forward(getActivity());
+                            }
+                        })
+                        .onDenied(new Action() {
+                            @Override
+                            public void onAction(List<String> permissions) {
+
+                            }
+                        }).start();
+
                 break;
             case R.id.ll_three:
                 DaiJianCheListActivity.forward(getActivity());
@@ -324,7 +343,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.ll_five:
                 if (XueYiCheUtils.IsLogin()) {
-                   openActivity(TestDriverBookActivity.class);
+                    openActivity(TestDriverBookActivity.class);
                 } else {
                     LoginFirstStepActivity.forward(getActivity());
                 }

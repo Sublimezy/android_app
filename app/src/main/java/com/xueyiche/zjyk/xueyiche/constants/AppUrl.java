@@ -10,6 +10,7 @@ public interface AppUrl {
     String Insert_DeviceId = IPWAIWANG + "substitute/updateSubstituteDeviceId.do";
     //有证练车列表
     String getDriverListYZ = IPWAIWANG + "mg/practiceDriving/getDriverListYZ.do";
+    String orderSavePractice = IPWAIWANG + "api/Practicedriving/orderSave";
     //驾校订单支付
     String Driver_Shcool_Indent_Pay = IPWAIWANG + "mg/driver_school_order/pay_driver_school.do";
     //车生活订单支付
