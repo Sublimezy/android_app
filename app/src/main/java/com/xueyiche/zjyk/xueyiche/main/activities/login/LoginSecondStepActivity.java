@@ -160,6 +160,7 @@ public class LoginSecondStepActivity extends BaseActivity {
                             LoginBean.DataBean.UserinfoBean userinfo = json.getData().getUserinfo();
                             PrefUtils.putBoolean(App.context,"ISLOGIN",true);
                             PrefUtils.putParameter("token",userinfo.getToken());
+                            PrefUtils.putParameter("phone",userinfo.getMobile());
                             LoginFirstStepActivity.instance.finish();
                             postequipment();
                             finish();

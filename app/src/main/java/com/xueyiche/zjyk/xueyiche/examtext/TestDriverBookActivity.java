@@ -25,8 +25,11 @@ import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.UrlActivity;
 import com.xueyiche.zjyk.xueyiche.custom.RoundImageView;
 import com.xueyiche.zjyk.xueyiche.driverschool.driverschool.TiJianActivity;
+import com.xueyiche.zjyk.xueyiche.examtext.bean.PhoneUserIdBean;
 import com.xueyiche.zjyk.xueyiche.examtext.bean.UserTypeBean;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
+import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.activity.YuYueTrainingActivity;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.student.CoachListActivity;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.students.activity.StudentsBaoMingActivity;
@@ -38,6 +41,8 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.jessyan.autosize.internal.CancelAdapt;
 
@@ -65,8 +70,8 @@ public class TestDriverBookActivity extends BaseActivity implements View.OnClick
         llBack = (LinearLayout) view.findViewById(R.id.title_include).findViewById(R.id.ll_exam_back);
         tvTitle = (TextView) view.findViewById(R.id.title_include).findViewById(R.id.tv_login_back);
         tv_wenxintishi = (TextView) view.findViewById(R.id.title_include).findViewById(R.id.tv_wenxintishi);
-        tv_wenxintishi.setVisibility(View.VISIBLE);
-        tv_wenxintishi.setText("兼职");
+        tv_wenxintishi.setVisibility(View.GONE);
+        tv_wenxintishi.setText("");
         rv_baoming_qian = (RecyclerView) view.findViewById(R.id.rv_baoming_qian);
         rv_baoming_hou = (RecyclerView) view.findViewById(R.id.rv_baoming_hou);
         ivEntrance = view.findViewById(R.id.iv_entrance);
@@ -118,56 +123,72 @@ public class TestDriverBookActivity extends BaseActivity implements View.OnClick
     private void initEntrance() {
 //        学员，我的驾考
 //        教练，教学管理
-//        OkHttpUtils.post().url(AppUrl.usertype).addParams("user_id",PrefUtils.getParameter("user_id"))
-        String user_id = PrefUtils.getParameter("user_id");
-        Log.e("user_id", "" + user_id);
-        OkHttpUtils.post().url(AppUrl.usertype).addParams("user_id", PrefUtils.getParameter("user_id"))
-                .build().execute(new Callback() {
+        Map<String,String> map = new HashMap<>();
+        map.put("phone",PrefUtils.getParameter("phone"));
+        MyHttpUtils.postHttpMessageNoToken("http://jknew.xueyiche.vip:90/api/user/userinfo", map, PhoneUserIdBean.class, new RequestCallBack<PhoneUserIdBean>() {
             @Override
-            public Object parseNetworkResponse(Response response) throws IOException {
-                String string = response.body().string();
-                Log.e("usertype", string);
+            public void requestSuccess(PhoneUserIdBean json) {
+                if (1==json.getCode()) {
+                    PhoneUserIdBean.DataDTO data = json.getData();
+                    String user_id = data.getUser_id();
+                    PrefUtils.putParameter("user_id",user_id);
+                    Log.e("user_id_new",""+user_id);
+                    OkHttpUtils.post().url(AppUrl.usertype).addParams("user_id", user_id)
+                            .build().execute(new Callback() {
+                                @Override
+                                public Object parseNetworkResponse(Response response) throws IOException {
+                                    String string = response.body().string();
+                                    Log.e("usertype", string);
 
-                if (!TextUtils.isEmpty(string)) {
-                    UserTypeBean userTypeBean = JsonUtil.parseJsonToBean(string, UserTypeBean.class);
-                    if (userTypeBean != null) {
-                        App.handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                int code = userTypeBean.getCode();
-                                if (200 == code) {
-                                    UserTypeBean.ContentBean content = userTypeBean.getContent();
-                                    stu_coach = content.getStu_coach();
-                                    stu_sign_up = content.getStu_sign_up();
-                                    if ("1".equals(stu_coach)) {
-                                        ivEntrance.setImageResource(R.mipmap.jiaoxueguanli);
-                                        tvEntrance.setText("教学管理");
-                                    } else {
-                                        //学员
+                                    if (!TextUtils.isEmpty(string)) {
+                                        UserTypeBean userTypeBean = JsonUtil.parseJsonToBean(string, UserTypeBean.class);
+                                        if (userTypeBean != null) {
+                                            App.handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    int code = userTypeBean.getCode();
+                                                    if (200 == code) {
+                                                        UserTypeBean.ContentBean content = userTypeBean.getContent();
+                                                        stu_coach = content.getStu_coach();
+                                                        stu_sign_up = content.getStu_sign_up();
+                                                        if ("1".equals(stu_coach)) {
+                                                            ivEntrance.setImageResource(R.mipmap.jiaoxueguanli);
+                                                            tvEntrance.setText("教学管理");
+                                                        } else {
+                                                            //学员
 //            学员，点击我的驾考，报名了的进入那个进程的，没报名的就是报名页
-                                        ivEntrance.setImageResource(R.mipmap.new_jx_bm);
-                                        tvEntrance.setText("我的驾考");
+                                                            ivEntrance.setImageResource(R.mipmap.new_jx_bm);
+                                                            tvEntrance.setText("我的驾考");
+                                                        }
+
+                                                        PrefUtils.putParameter("coach_id", content.getCoach_id());
+                                                    }
+                                                }
+                                            });
+                                        }
                                     }
-
-                                    PrefUtils.putParameter("coach_id", content.getCoach_id());
+                                    return string;
                                 }
-                            }
-                        });
-                    }
+
+                                @Override
+                                public void onError(Request request, Exception e) {
+
+                                }
+
+                                @Override
+                                public void onResponse(Object response) {
+
+                                }
+                            });
                 }
-                return string;
             }
 
             @Override
-            public void onError(Request request, Exception e) {
-
-            }
-
-            @Override
-            public void onResponse(Object response) {
+            public void requestError(String errorMsg, int errorType) {
 
             }
         });
+
     }
 
     @Override

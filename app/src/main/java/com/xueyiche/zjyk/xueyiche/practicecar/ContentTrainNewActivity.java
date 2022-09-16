@@ -18,6 +18,7 @@ import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.AmapPageType;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
+import com.bigkoo.pickerview.TimePickerView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.utils.ToastUtils;
 import com.tencent.bugly.proguard.A;
@@ -30,9 +31,12 @@ import com.xueyiche.zjyk.xueyiche.homepage.activities.DaifBaoYangListActivity;
 import com.xueyiche.zjyk.xueyiche.homepage.adapters.ShouYeBannerAdapter;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.MaintenanceBean;
 import com.xueyiche.zjyk.xueyiche.homepage.view.OptionPicker;
+import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderNumberBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.TrainWithInfoBean;
+import com.xueyiche.zjyk.xueyiche.utils.PayUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhpan.bannerview.BannerViewPager;
@@ -41,7 +45,10 @@ import com.zhpan.bannerview.utils.BannerUtils;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
 import com.zhpan.indicator.enums.IndicatorStyle;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,9 +105,18 @@ public class ContentTrainNewActivity extends BaseActivity {
     TextView tvOrder;
     @BindView(R.id.tvChoodeTime)
     TextView tvChoodeTime;
+    @BindView(R.id.tvStartTime)
+    TextView tvStartTime;
     private TrainWithInfoBean.DataBean data;
     @BindView(R.id.rl_title)
     RelativeLayout rlTitle;
+    private TimePickerView pvTime;
+    private String hour_num = "";
+    private String sLocation = "";
+    private String choosedate = "";
+    private String lat = "";
+    private String lon = "";
+    private String id;
 
     @Override
     protected int initContentView() {
@@ -117,6 +133,7 @@ public class ContentTrainNewActivity extends BaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
         tvTitle.setText("详情");
+        startTIme();
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
         mViewPager.setIndicatorSliderGap(BannerUtils.dp2px(6));
         mViewPager.setScrollDuration(1500);
@@ -142,8 +159,56 @@ public class ContentTrainNewActivity extends BaseActivity {
         getDataFromNet();
     }
 
+    //谷歌的时间选择器
+    private void startTIme() {
+        //控制时间范围(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
+        //因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
+        Calendar selectedDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        int nian = selectedDate.get(Calendar.YEAR);
+        int yue = selectedDate.get(Calendar.MONTH);
+        int day = selectedDate.get(Calendar.DAY_OF_MONTH);
+        int hour = selectedDate.get(Calendar.HOUR_OF_DAY);
+        int min = selectedDate.get(Calendar.MINUTE);
+        startDate.set(nian, yue, day, hour, min);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(nian + 10, 11, 31, 23, 59);
+        //时间选择器
+        pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                // 这里回调过来的v,就是show()方法里面所添加的 View 参数，如果show的时候没有添加参数，v则为null
+                String times = getTimes(date);
+                if (!TextUtils.isEmpty(times)) {
+                    tvStartTime.setText(times);
+                    choosedate = times;
+                }
+
+            }
+        })
+                //年月日时分秒 的显示与否，不设置则默认全部显示
+                .setType(new boolean[]{true, true, true, true, true, false})
+                .setLabel("年", "月", "日", "时", "分", "")
+                .isCenterLabel(true)
+                .setDividerColor(getResources().getColor(R.color._f2f3f4f5))
+                .setContentSize(16)
+                .setCancelColor(getResources().getColor(R.color.colorOrange))
+                .setSubmitColor(getResources().getColor(R.color.colorOrange))
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setDecorView(null)
+                .isDialog(true)
+                .build();
+
+    }
+
+    private String getTimes(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return format.format(date);
+    }
+
     private void getDataFromNet() {
-        String id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id");
         Map<String, String> map = new HashMap<>();
         map.put("id", id);
         MyHttpUtils.postHttpMessage(AppUrl.trainwith_info, map, TrainWithInfoBean.class, new RequestCallBack<TrainWithInfoBean>() {
@@ -159,7 +224,7 @@ public class ContentTrainNewActivity extends BaseActivity {
                         } else {
                             tvMoney.setText("¥0");
                         }
-                        tvDriverYear.setText("驾龄"+data.getDriving_age()+"年");
+                        tvDriverYear.setText("驾龄" + data.getDriving_age() + "年");
                         if (data.getImages().size() > 0) {
                             mViewPager.create(data.getImages());
                         }
@@ -187,11 +252,11 @@ public class ContentTrainNewActivity extends BaseActivity {
             Bundle extras = data.getExtras();
             switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
                 case 222:
-                    String latitude1 = extras.getString("lat");
-                    String longitude1 = extras.getString("lon");
-                    String address1 = extras.getString("title");
-                    if (!TextUtils.isEmpty(address1)) {
-                        tvChooseLocation.setText(address1);
+                    lat = extras.getString("lat");
+                    lon = extras.getString("lon");
+                    sLocation = extras.getString("title");
+                    if (!TextUtils.isEmpty(sLocation)) {
+                        tvChooseLocation.setText(sLocation);
                     }
                     break;
 
@@ -201,7 +266,7 @@ public class ContentTrainNewActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ll_common_back, R.id.tvChooseLocation, R.id.tvOrder, R.id.tvChoodeTime})
+    @OnClick({R.id.ll_common_back, R.id.tvChooseLocation, R.id.tvOrder, R.id.tvChoodeTime, R.id.tvStartTime})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_common_back:
@@ -214,12 +279,60 @@ public class ContentTrainNewActivity extends BaseActivity {
                 chooseTime();
                 break;
             case R.id.tvOrder:
-                ToastUtils.showToast(ContentTrainNewActivity.this, "下单成功");
-                finish();
+                xiadan();
+                break;
+            case R.id.tvStartTime:
+                pvTime.show(tvStartTime);
                 break;
         }
     }
 
+    private void xiadan() {
+        if (XueYiCheUtils.IsLogin()) {
+            if (TextUtils.isEmpty(hour_num)) {
+                ToastUtils.showToast(ContentTrainNewActivity.this, "选择练车时长！");
+                return;
+            }
+            if (TextUtils.isEmpty(sLocation)) {
+                ToastUtils.showToast(ContentTrainNewActivity.this, "选择接送地点！");
+                return;
+            }
+            if (TextUtils.isEmpty(choosedate)) {
+                ToastUtils.showToast(ContentTrainNewActivity.this, "请选择开始时间！");
+                return;
+            }
+            Map<String, String> map = new HashMap<>();
+            map.put("order_type", "3");
+            map.put("start_address", "" + sLocation);
+            map.put("start_address_lng", "" + lon);
+            map.put("start_address_lat", "" + lat);
+            map.put("practice_id", "" + id);
+            map.put("hour_num", "" + hour_num);
+            map.put("fixed_time", "" + choosedate);
+            MyHttpUtils.postHttpMessage(AppUrl.orderSavePractice, map, OrderNumberBean.class, new RequestCallBack<OrderNumberBean>() {
+                @Override
+                public void requestSuccess(OrderNumberBean json) {
+                    if (1 == json.getCode()) {
+                        OrderNumberBean.DataDTO data = json.getData();
+                        if (data != null) {
+                            String order_sn = data.getOrder_sn();
+                            if (!TextUtils.isEmpty(order_sn)) {
+                                PayUtils.showPopupWindow(AppUrl.Pay_Order_One, ContentTrainNewActivity.this, order_sn, "daijia");
+                            }
+                        }
+                    }
+                    ToastUtils.showToast(ContentTrainNewActivity.this, json.getMsg());
+                }
+
+                @Override
+                public void requestError(String errorMsg, int errorType) {
+
+                }
+            });
+        } else {
+            LoginFirstStepActivity.forward(ContentTrainNewActivity.this);
+        }
+    }
     private void chooseTime() {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 1; i < 12; i++) {
@@ -237,7 +350,7 @@ public class ContentTrainNewActivity extends BaseActivity {
             public void onOptionPicked(int position, String option) {
                 picker.setSelectedIndex(position);
                 tvChoodeTime.setText(option);
-
+                hour_num = "" + (position + 1);
             }
 
         });

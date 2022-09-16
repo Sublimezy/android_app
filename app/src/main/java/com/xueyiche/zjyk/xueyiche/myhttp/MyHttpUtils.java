@@ -96,6 +96,68 @@ public class MyHttpUtils {
                     }
                 });
     }
+    public static <T> void postHttpMessageNoToken(final String url, Map<String, String> params, final Class<T> clazz, final RequestCallBack<T> listener) {
+        Log.e("postmap____________", url + "~~~~~" + params.toString() + "");
+
+        OkGo.<String>post(url)//
+                .tag(url)
+                .headers("Content-Type", "application/json")
+//                .headers("token", PrefUtils.getParameter("token"))
+                .params(params)
+                .converter(new StringConvert())
+                .adapt(new ObservableResponse<String>())
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull Disposable disposable) throws Exception {
+//                        progressView.show();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<String>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                        // addDisposable(d);
+
+                    }
+
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull Response<String> response) {
+                        Log.e("返回成功参数"+url, response.body());
+                        Log.e("返回成功参数token", PrefUtils.getParameter("token"));
+                        String json = response.body();
+
+                        try {
+                            if (listener != null) {
+                                T t = JsonUtils.jsonToBean(json, clazz);
+                                if (t != null) {
+                                    listener.requestSuccess(t);
+                                } else {
+                                    listener.requestError("请求失败,无数据", -1);
+                                }
+
+                            }
+                        } catch (Exception e) {
+                            Log.e("返回失败参数_异常了", e.toString());
+                            listener.requestError(e.toString(), -1);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                        Log.e("返回失败参数"+url, e.toString());
+                        if (listener != null) {
+                            listener.requestError(e.toString(), -1);
+                        }
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 
 
     /**

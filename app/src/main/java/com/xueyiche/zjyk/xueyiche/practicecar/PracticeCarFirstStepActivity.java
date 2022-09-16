@@ -31,8 +31,10 @@ import com.xueyiche.zjyk.xueyiche.base.GDLocation;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.ChooseDaijiaYuanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.DaiJiaoActivity;
+import com.xueyiche.zjyk.xueyiche.daijia.activity.EndActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.LocationSearchActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.YuGuFeiActivity;
@@ -45,10 +47,12 @@ import com.xueyiche.zjyk.xueyiche.homepage.view.OptionPicker;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderNumberBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 import com.xueyiche.zjyk.xueyiche.route.DrivingRouteOverLay;
 import com.xueyiche.zjyk.xueyiche.utils.AMapUtil;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
+import com.xueyiche.zjyk.xueyiche.utils.PayUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 
@@ -61,6 +65,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * * #
@@ -100,6 +105,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
     private String driving_id = "";
     private String daijiao_phone = "";
     private String daijiao_name = "";
+    private String hour_num = "";
 
     @Override
     protected int initContentView() {
@@ -126,29 +132,54 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
 
     }
 
+    public void onEvent(MyEvent event) {
+        String msg = event.getMsg();
+        if (TextUtils.equals("支付成功", msg)) {
+            ToastUtils.showToast(PracticeCarFirstStepActivity.this, "支付成功！");
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
     @Override
     protected void initData() {
-        tv_title.setText("代驾");
+        tv_title.setText("有证练车");
         getDataDriverList();
     }
+
     private MarkerOptions markerOption;
     private Marker marker;
+
     private void getDataDriverList() {
         new GDLocation().startLocation();
         String lat = PrefUtils.getParameter("lat");
         String lon = PrefUtils.getParameter("lon");
-        Map<String,String> map = new HashMap<>();
-        map.put("address_lng",""+lon);
-        map.put("address_lat",""+lat);
+        Map<String, String> map = new HashMap<>();
+        map.put("address_lng", "" + lon);
+        map.put("address_lat", "" + lat);
         MyHttpUtils.postHttpMessage(AppUrl.near_driving, map, NearDrivingBean.class, new RequestCallBack<NearDrivingBean>() {
             @Override
             public void requestSuccess(NearDrivingBean json) {
-                if (1==json.getCode()) {
+                if (1 == json.getCode()) {
                     NearDrivingBean.DataBean data = json.getData();
-                    if (data!=null) {
+                    if (data != null) {
                         List<NearDrivingBean.DataBean.UserListBean> user_list = data.getUser_list();
                         aMap.moveCamera(CameraUpdateFactory.zoomTo(15.5f));
-                        if (user_list.size()>0) {
+                        if (user_list.size() > 0) {
                             for (int i = 0; i < user_list.size(); i++) {
                                 LatLng latlng = new LatLng(Double.parseDouble(user_list.get(i).getUser_lat()), Double.parseDouble(user_list.get(i).getUser_lng()));
                                 View viewCat = LayoutInflater.from(PracticeCarFirstStepActivity.this).inflate(R.layout.item_daijia_fujin, null);
@@ -173,6 +204,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
             }
         });
     }
+
     //view 转bitmap
     public static Bitmap convertViewToBitmap(View view) {
         view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
@@ -181,6 +213,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
         Bitmap bitmap = view.getDrawingCache();
         return bitmap;
     }
+
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
@@ -306,7 +339,6 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
     }
 
 
-
     @OnClick({R.id.iv_user, R.id.tv_choose_daijia, R.id.tv_xiadan, R.id.tv_choose_people, R.id.tvChoodeTime, R.id.tv_yuyue_time, R.id.ll_common_back, R.id.rb_richang, R.id.rb_yuyue, R.id.tv_qidian})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -324,7 +356,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
                 tv_xiadan.setText("立即下单");
                 break;
             case R.id.rb_yuyue:
-               PracticeCarSecondStepActivity.forward(PracticeCarFirstStepActivity.this);
+                PracticeCarSecondStepActivity.forward(PracticeCarFirstStepActivity.this);
                 break;
 
             case R.id.tv_qidian:
@@ -345,71 +377,55 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
                 break;
             case R.id.tv_xiadan:
                 //下单
-                if (XueYiCheUtils.IsLogin()) {
-                    showToastShort("直接下单 有证练车");
-                } else {
-                    LoginFirstStepActivity.forward(PracticeCarFirstStepActivity.this);
-                }
+                xiadan();
                 break;
         }
     }
 
-    private void buy() {
-        if (XueYiCheUtils.IsHaveInternet(App.context)) {
-            if ("2".equals(order_type)) {
-                if (TextUtils.isEmpty(daijiao_phone)) {
-                    ToastUtils.showToast(PracticeCarFirstStepActivity.this, "请选择乘车人！");
-                    return;
-                }
-
+    private void xiadan() {
+        if (XueYiCheUtils.IsLogin()) {
+            Calendar selectedDate = Calendar.getInstance();
+            int nian = selectedDate.get(Calendar.YEAR);
+            int yue = selectedDate.get(Calendar.MONTH);
+            int day = selectedDate.get(Calendar.DAY_OF_MONTH);
+            int hour = selectedDate.get(Calendar.HOUR_OF_DAY);
+            int min = selectedDate.get(Calendar.MINUTE);
+            if (TextUtils.isEmpty(hour_num)) {
+                ToastUtils.showToast(PracticeCarFirstStepActivity.this,"选择练车时长！");
+                return;
             }
-            if ("1".equals(order_type)) {
-                if (TextUtils.isEmpty(choose_time)) {
-                    ToastUtils.showToast(PracticeCarFirstStepActivity.this, "请选择预约时间！");
-                    return;
-                }
-            }
-            showProgressDialog(false);
             Map<String, String> map = new HashMap<>();
-            map.put("order_type", "" + order_type);
-            map.put("start_address", "" + sLocation);
-            map.put("start_address_lng", "" + sLon);
-            map.put("start_address_lat", "" + sLat);
-            map.put("end_address", "" + eLocation);
-            map.put("end_address_lng", "" + eLon);
-            map.put("end_address_lat", "" + eLat);
-            map.put("driving_id", "" + driving_id);
-            if ("2".equals(order_type)) {
-                map.put("call_name", "" + daijiao_name);
-                map.put("call_mobile", "" + daijiao_phone);
-            }
-            if ("1".equals(order_type)) {
-                map.put("fixed_time", "" + choose_time);
-            }
-            String s = new Gson().toJson(map);
-            Log.e("login_json", "" + s);
-            Log.e("login_json", "" + PrefUtils.getParameter("token"));
-            MyHttpUtils.postHttpMessage(AppUrl.orderSave, map, BuyOrderBean.class, new RequestCallBack<BuyOrderBean>() {
+            map.put("order_type","3");
+            map.put("start_address",""+sLocation);
+            map.put("start_address_lng",""+sLon);
+            map.put("start_address_lat",""+sLat);
+            map.put("practice_id","");
+            map.put("hour_num",""+hour_num);
+            map.put("fixed_time",nian+"年"+yue+"月"+day+"日"+hour+":"+min);
+            MyHttpUtils.postHttpMessage(AppUrl.orderSavePractice, map, OrderNumberBean.class, new RequestCallBack<OrderNumberBean>() {
                 @Override
-                public void requestSuccess(BuyOrderBean json) {
-                    if (1 == json.getCode()) {
-                        WaitActivity.forward(PracticeCarFirstStepActivity.this,""+json.getData().getOrder_sn());
-                        finish();
+                public void requestSuccess(OrderNumberBean json) {
+                    if (1==json.getCode()) {
+                        OrderNumberBean.DataDTO data = json.getData();
+                        if (data!=null) {
+                            String order_sn = data.getOrder_sn();
+                            if (!TextUtils.isEmpty(order_sn)) {
+                                PayUtils.showPopupWindow(AppUrl.Pay_Order_One, PracticeCarFirstStepActivity.this, order_sn, "daijia");
+                            }
+                        }
                     }
-                    ToastUtils.showToast(PracticeCarFirstStepActivity.this, "" + json.getMsg());
-                    stopProgressDialog();
+                    ToastUtils.showToast(PracticeCarFirstStepActivity.this,json.getMsg());
                 }
 
                 @Override
                 public void requestError(String errorMsg, int errorType) {
-                    stopProgressDialog();
+
                 }
             });
         } else {
-            ToastUtils.showToast(PracticeCarFirstStepActivity.this, "请检查网络连接！");
+            LoginFirstStepActivity.forward(PracticeCarFirstStepActivity.this);
         }
     }
-
     public void startTimePicker() {
         ArrayList<String> firstList = new ArrayList<String>();
         ArrayList<ArrayList<String>> secondList = new ArrayList<ArrayList<String>>();
@@ -509,6 +525,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
             public void onOptionPicked(int position, String option) {
                 picker.setSelectedIndex(position);
                 tvChoodeTime.setText(option);
+                hour_num =""+(position+1);
                 next();
             }
 
