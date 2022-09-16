@@ -21,12 +21,10 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.NewBaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.activity.YuYueDetailsActivity;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.bean.YuYueTrainingBean;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.myhttp.RequestCallBack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -197,7 +195,7 @@ public class TrainingRecordActivity extends NewBaseActivity {
             helper.setText(R.id.tv_kemu, item.getEntry_project());//科目二
             helper.setText(R.id.tv_name, item.getStu_name());
 
-            helper.setText(R.id.tv_time, item.getSelected_period());
+            helper.setText(R.id.tv_order_sn, item.getSelected_period());
             helper.setText(R.id.tv_phone, "联系方式：" + item.getTrainee_phone());
             //  待点评   练车中   代练车
             TextView tv_pingjia = helper.getView(R.id.tv_pingjia);

@@ -254,7 +254,7 @@ public class TiJianActivity extends BaseActivity implements View.OnClickListener
             public XueYuanViewHolder(View view) {
                 tv_juli = (TextView) view.findViewById(R.id.tv_juli);
                 tv_name = (TextView) view.findViewById(R.id.tv_name);
-                tv_time = (TextView) view.findViewById(R.id.tv_time);
+                tv_time = (TextView) view.findViewById(R.id.tv_order_sn);
                 tv_location = (TextView) view.findViewById(R.id.tv_location);
                 iv_phone = (ImageView) view.findViewById(R.id.iv_phone);
                 iv_location = (ImageView) view.findViewById(R.id.iv_location);

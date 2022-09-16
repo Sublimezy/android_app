@@ -204,7 +204,7 @@ public class WaitYuYueActivity extends BaseActivity implements View.OnClickListe
                                                 View viewTop = LayoutInflater.from(App.context).inflate(R.layout.map_top_bg, null);
                                                 // 显示 InfoWindow, 该接口会先隐藏其他已添加的InfoWindow, 再添加新的InfoWindow
 
-                                                final TextView tv_time = (TextView) viewTop.findViewById(R.id.tv_time);
+                                                final TextView tv_time = (TextView) viewTop.findViewById(R.id.tv_order_sn);
                                                 if (mTimer2 == null && mTask2 == null) {
                                                     mTimer2 = new Timer();
                                                     mTask2 = new TimerTask() {

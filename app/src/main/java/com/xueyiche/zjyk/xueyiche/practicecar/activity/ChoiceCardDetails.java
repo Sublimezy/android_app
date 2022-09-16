@@ -349,7 +349,7 @@ public class ChoiceCardDetails extends BaseActivity implements View.OnClickListe
 
             public RemarkViewHolder(View view) {
                 cv_remark_head = view.findViewById(R.id.cv_remark_head);
-                tv_time = view.findViewById(R.id.tv_time);
+                tv_time = view.findViewById(R.id.tv_order_sn);
                 rb_remark_grade = view.findViewById(R.id.rb_remark_grade);
                 tv_start_grade = view.findViewById(R.id.tv_start_grade);
                 tv_content = view.findViewById(R.id.tv_content);

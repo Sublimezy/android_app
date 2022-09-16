@@ -19,11 +19,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_order_sn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:drawableLeft="@mipmap/more_333"
+        android:drawableLeft="@mipmap/icon_shijian"
         android:drawablePadding="10dp"
         android:text="2022-03-21 21:32"
         android:textColor="#6f6d6d"
@@ -40,7 +40,7 @@
         android:textColor="@color/normal_text_color"
         android:textSize="14dp"
         app:layout_constraintLeft_toLeftOf="@id/tv_last_number"
-        app:layout_constraintTop_toBottomOf="@id/tv_time" />
+        app:layout_constraintTop_toBottomOf="@id/tv_order_sn" />
 
     <TextView
         android:id="@+id/tv_end"

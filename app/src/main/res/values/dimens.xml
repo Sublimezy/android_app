@@ -105,7 +105,7 @@
 
     <!-- 顶部按钮padding -->
     <dimen name="pickerview_topbar_padding">20dp</dimen>
-
+    <dimen name="sanshiliu">36dp</dimen>
     <!-- 顶部按钮文字大小 -->
     <!--px-->
     <dimen name="yipx">1px</dimen>
