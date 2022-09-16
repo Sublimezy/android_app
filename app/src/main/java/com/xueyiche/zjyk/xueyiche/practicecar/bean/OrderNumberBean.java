@@ -11,6 +11,10 @@ public class OrderNumberBean {
         return code;
     }
 
+
+
+
+    
     public void setCode(int code) {
         this.code = code;
     }
