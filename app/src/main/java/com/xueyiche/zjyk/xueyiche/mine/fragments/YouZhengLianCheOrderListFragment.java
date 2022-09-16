@@ -135,6 +135,9 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
 
 //                        ToastUtils.show("取消");
                         Map<String, String> params = new HashMap<>();
+                        params.put("order_sn",orderAdapter.getData().get(position).getOrder_sn());
+                        params.put("quxiao_reason","1");
+                        params.put("quxiao_remarks","1");
                         MyHttpUtils.postHttpMessage(AppUrl.cancelOrder_youzheng, params, BaseBean.class, new RequestCallBack<BaseBean>() {
                             @Override
                             public void requestSuccess(BaseBean json) {
@@ -172,7 +175,7 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         params.put("pageNumber", pager + "");
         params.put("pageSize", 10 + "");
-        MyHttpUtils.postHttpMessage(AppUrl.userOrderDetails_youzheng, params, YouZhengLianCheBean.class, new RequestCallBack<YouZhengLianCheBean>() {
+        MyHttpUtils.postHttpMessage(AppUrl.orderList_youzheng, params, YouZhengLianCheBean.class, new RequestCallBack<YouZhengLianCheBean>() {
             @Override
             public void requestSuccess(YouZhengLianCheBean json) {
                 refreshLayout.finishRefresh();

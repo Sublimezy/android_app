@@ -8,6 +8,7 @@ public interface AppUrl {
     String IPWAIWANG = "http://guanli.xueyiche.vip:101/";
     String cancelOrder_youzheng = IPWAIWANG + "api/Practicedriving/cancelOrder";
     String userOrderDetails_youzheng = IPWAIWANG + "api/Practicedriving/userOrderDetails";
+    String orderList_youzheng = IPWAIWANG + "api/Practicedriving/orderList";
     String SelectCarTypeAndPrice = IPWAIWANG + "mg/practiceDriving/selectCarTypeAndPrice.do";
     String Insert_DeviceId = IPWAIWANG + "substitute/updateSubstituteDeviceId.do";
     //有证练车列表
