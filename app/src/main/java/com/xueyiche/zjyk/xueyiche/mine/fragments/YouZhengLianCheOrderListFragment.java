@@ -172,7 +172,7 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         params.put("pageNumber", pager + "");
         params.put("pageSize", 10 + "");
-        MyHttpUtils.postHttpMessage(AppUrl.orderList, params, YouZhengLianCheBean.class, new RequestCallBack<YouZhengLianCheBean>() {
+        MyHttpUtils.postHttpMessage(AppUrl.userOrderDetails_youzheng, params, YouZhengLianCheBean.class, new RequestCallBack<YouZhengLianCheBean>() {
             @Override
             public void requestSuccess(YouZhengLianCheBean json) {
                 refreshLayout.finishRefresh();
