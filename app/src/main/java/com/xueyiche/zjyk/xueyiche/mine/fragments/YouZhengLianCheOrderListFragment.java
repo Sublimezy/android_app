@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.xueyiche.mine.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
+import com.xueyiche.zjyk.xueyiche.main.activities.main.BaseBean;
+import com.xueyiche.zjyk.xueyiche.mine.activities.YouZhengLianCheDetailActivity;
 import com.xueyiche.zjyk.xueyiche.mine.bean.OrderListBean;
 import com.xueyiche.zjyk.xueyiche.mine.bean.YouZhengLianCheBean;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
@@ -122,16 +125,34 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.item_view:
-                        ToastUtils.show("去详情" + position);
+//                        ToastUtils.show("去详情" + position);
+                        Intent intent = new Intent(getContext(), YouZhengLianCheDetailActivity.class);
+                        intent.putExtra("order_sn",orderAdapter.getData().get(position).getOrder_sn());
+                        startActivity(intent);
                         break;
 
                     case R.id.btn_cancel:
 
-                        ToastUtils.show("取消");
+//                        ToastUtils.show("取消");
+                        Map<String, String> params = new HashMap<>();
+                        MyHttpUtils.postHttpMessage("", params, BaseBean.class, new RequestCallBack<BaseBean>() {
+                            @Override
+                            public void requestSuccess(BaseBean json) {
+                                if(json.getCode() == 1){
+                                    orderAdapter.getData().get(position).setOrder_status("已取消");
+                                    orderAdapter.notifyItemChanged(position);
+                                }
+                            }
+
+                            @Override
+                            public void requestError(String errorMsg, int errorType) {
+
+                            }
+                        });
                         break;
 
                     case R.id.btn_contact:
-                        ToastUtils.show("联系");
+//                        ToastUtils.show("联系");
 
                         XueYiCheUtils.CallPhone(getActivity(),"联系教练?",orderAdapter.getData().get(position).getMobile());
                         break;
@@ -146,14 +167,6 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
     int pager = 1;
 
     private void getDataFromNet() {
-//        YouZhengLianCheBean.DataBean.DataBeanX data = new YouZhengLianCheBean.DataBean.DataBeanX();
-//        orderAdapter.addData(data);
-//        orderAdapter.addData(data);
-//        orderAdapter.addData(data);
-//        orderAdapter.addData(data);
-//        orderAdapter.addData(data);
-//        orderAdapter.addData(data);
-//        orderAdapter.addData(data);
 
         Map<String, String> params = new HashMap<>();
         params.put("pageNumber", pager + "");
@@ -199,23 +212,22 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
 
             helper.setText(R.id.tv_order_sn, "订单号: " + item.getOrder_sn());
             helper.setText(R.id.state, "订单号: " + item.getOrder_status());
-            helper.setText(R.id.tv_start, "开始地点: " + item.getStart_address());
-            helper.setText(R.id.tv_end, "结束地点: " + item.getEnd_address());
+            helper.setText(R.id.tv_start, "接送地点: " + item.getStart_address());
+//            helper.setText(R.id.tv_end, "结束地点: " + item.getEnd_address());
             helper.setText(R.id.tv_time, "" + item.getCreatetime());
 
             if ("已完成".equals(item.getOrder_status())) {
                 helper.setVisible(R.id.btn_cancel, false);
-                helper.setVisible(R.id.view, false);
-                helper.setVisible(R.id.btn_contact, false);
+                helper.setVisible(R.id.view, true);
+                helper.setVisible(R.id.btn_contact, true);
             } else if ("已取消".equals(item.getOrder_status())) {
                 helper.setVisible(R.id.btn_cancel, false);
-                helper.setVisible(R.id.btn_contact, false);
-                helper.setVisible(R.id.view, false);
+                helper.setVisible(R.id.btn_contact, true);
+                helper.setVisible(R.id.view, true);
             } else {
                 helper.setVisible(R.id.btn_cancel, true);
                 helper.setVisible(R.id.btn_contact, true);
                 helper.setVisible(R.id.view, true);
-
             }
             helper.addOnClickListener(R.id.item_view, R.id.btn_cancel, R.id.btn_contact);
         }

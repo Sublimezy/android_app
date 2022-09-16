@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".mine.activities.YouZhengLianCheDetailActivity">
+
+    <include layout="@layout/title_bar" android:id="@+id/title_layout"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nes_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_layout"
+        >
+        <LinearLayout
+            android:paddingHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+<!--
+单价（60元/小时），练车时长（2小时），费用金额-->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:id="@+id/tv_order_sn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单号: Y2022091418442802616"
+                    android:textColor="#6f6d6d"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="练车中"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_order_sn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_order_sn" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="接送地点: 科技大厦"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_xiadan_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="下单时间: 科技大厦"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_yuyue_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="预约时间: 科技大厦"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_coash_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="教练姓名: 科技大厦"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_coash_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="教练联系方式: 科技大厦"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_danjian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="单价（60元/小时）"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_lianche_shichang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="练车时长（2小时）"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+            <TextView
+                android:id="@+id/tv_feiyong_jine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="费用金额: 1100元"
+                android:textColor="@color/normal_text_color"
+                android:textSize="14dp"
+                />
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ package com.xueyiche.zjyk.xueyiche.constants;
 public interface AppUrl {
     //3.0国裕测试
     String IPWAIWANG = "http://guanli.xueyiche.vip:101/";
+    String userOrderDetails_youzheng = IPWAIWANG + "api/Practicedriving/userOrderDetails";
     String SelectCarTypeAndPrice = IPWAIWANG + "mg/practiceDriving/selectCarTypeAndPrice.do";
     String Insert_DeviceId = IPWAIWANG + "substitute/updateSubstituteDeviceId.do";
     //有证练车列表
