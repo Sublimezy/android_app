@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.core.widget.NestedScrollView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
@@ -59,6 +61,8 @@ public class YouZhengLianCheDetailActivity extends BaseActivity {
     TextView tvFeiyongJine;
     @BindView(R.id.nes_scrollView)
     NestedScrollView nesScrollView;
+    @BindView(R.id.ll_content)
+    LinearLayout ll_content;
     private String order_sn;
 
     @Override
@@ -71,6 +75,7 @@ public class YouZhengLianCheDetailActivity extends BaseActivity {
         order_sn = getIntent().getStringExtra("order_sn");
 
         ButterKnife.bind(this);
+        ImmersionBar.with(this).titleBar(titleBarRl).statusBarDarkFont(true).init();
     }
 
     @Override
@@ -82,7 +87,7 @@ public class YouZhengLianCheDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        loading = LoadingLayout.wrap(nesScrollView);
+        loading = LoadingLayout.wrap(ll_content);
         loading.showLoading();
         titleBarTitleText.setText("订单详情");
         loading.setRetryListener(new View.OnClickListener() {
@@ -100,18 +105,18 @@ public class YouZhengLianCheDetailActivity extends BaseActivity {
         MyHttpUtils.postHttpMessage(AppUrl.userOrderDetails_youzheng, params, YouZhengLianCheDetailBean.class, new RequestCallBack<YouZhengLianCheDetailBean>() {
             @Override
             public void requestSuccess(YouZhengLianCheDetailBean json) {
-                loading.showContent();
                 if (json.getCode() == 1) {
-                    tvOrderSn.setText("订单号: " + json.getData().getOrder_sn());
+                    loading.showContent();
+                    tvOrderSn.setText("订单号: " + formatString(json.getData().getOrder_sn()));
                     state.setText(json.getData().getOrder_status());
-                    tvStart.setText("接送地点: " + json.getData().getStart_address());
+                    tvStart.setText("接送地点: " + formatString(json.getData().getStart_address()));
                     tvXiadanTime.setText("下单时间: " + json.getData().getCreatetime());
                     tvYuyueTime.setText("预约时间: " + (TextUtils.isEmpty(json.getData().getFixed_time()) ? "----" : json.getData().getFixed_time()));
                     tvCoashName.setText("教练姓名: " + (TextUtils.isEmpty(json.getData().getPractice_nickname()) ? "----" : json.getData().getPractice_nickname()));
                     tvCoashPhone.setText("教练联系方式: " + (TextUtils.isEmpty(json.getData().getPractice_username()) ? "----" : json.getData().getPractice_username()));
-                    tvDanjian.setText("单价: " + json.getData().getH_money() + "元/小时");
-                    tvLiancheShichang.setText("练车时长: " + json.getData().getHour_num() + "小时");
-                    tvFeiyongJine.setText("费用金额: " + json.getData().getTotal_price() + "元");
+                    tvDanjian.setText("单价: " + formatString(json.getData().getH_money()) + "元/小时");
+                    tvLiancheShichang.setText("练车时长: " + formatString(json.getData().getHour_num()) + "小时");
+                    tvFeiyongJine.setText("费用金额: " + formatString(json.getData().getTotal_price()) + "元");
 
 
                 } else {
@@ -137,5 +142,9 @@ public class YouZhengLianCheDetailActivity extends BaseActivity {
             case R.id.tv_yuyue_time:
                 break;
         }
+    }
+
+    private String formatString(String input) {
+        return TextUtils.isEmpty(input) ? "----" : input;
     }
 }

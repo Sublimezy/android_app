@@ -107,7 +107,7 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                pager = 0;
+                pager = 1;
                 getDataFromNet();
             }
         });
@@ -135,9 +135,10 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
 
 //                        ToastUtils.show("取消");
                         Map<String, String> params = new HashMap<>();
-                        MyHttpUtils.postHttpMessage("", params, BaseBean.class, new RequestCallBack<BaseBean>() {
+                        MyHttpUtils.postHttpMessage(AppUrl.cancelOrder_youzheng, params, BaseBean.class, new RequestCallBack<BaseBean>() {
                             @Override
                             public void requestSuccess(BaseBean json) {
+                                ToastUtils.show(json.getMsg());
                                 if(json.getCode() == 1){
                                     orderAdapter.getData().get(position).setOrder_status("已取消");
                                     orderAdapter.notifyItemChanged(position);
@@ -146,7 +147,7 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
 
                             @Override
                             public void requestError(String errorMsg, int errorType) {
-
+                                ToastUtils.show("服务器内部错误");
                             }
                         });
                         break;
@@ -178,7 +179,6 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
                 refreshLayout.finishLoadMore();
                 if (json.getCode() == 1) {
                     if (pager == 1) {
-
                         List<YouZhengLianCheBean.DataBean.DataBeanX> data = json.getData().getData();
                         orderAdapter.setNewData(data);
                     } else {
@@ -211,7 +211,7 @@ public class YouZhengLianCheOrderListFragment extends Fragment {
         protected void convert(@NonNull BaseViewHolder helper, YouZhengLianCheBean.DataBean.DataBeanX item) {
 
             helper.setText(R.id.tv_order_sn, "订单号: " + item.getOrder_sn());
-            helper.setText(R.id.state, "订单号: " + item.getOrder_status());
+            helper.setText(R.id.state, "" + item.getOrder_status());
             helper.setText(R.id.tv_start, "接送地点: " + item.getStart_address());
 //            helper.setText(R.id.tv_end, "结束地点: " + item.getEnd_address());
             helper.setText(R.id.tv_time, "" + item.getCreatetime());

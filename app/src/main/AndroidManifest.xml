@@ -91,7 +91,7 @@
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".YouZhengLianCheDetailActivity"
+            android:name=".mine.activities.YouZhengLianCheDetailActivity"
             android:exported="false" />
         <activity
             android:name=".examtext.MiJiActivity"
