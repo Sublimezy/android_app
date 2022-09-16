@@ -1,6 +1,5 @@
 package com.xueyiche.zjyk.xueyiche.daijia.activity;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,13 +18,11 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseMapActivity;
-import com.xueyiche.zjyk.xueyiche.constants.App;
 import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
 import com.xueyiche.zjyk.xueyiche.daijia.bean.IndentContentBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
-import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.WaveMapUtils;
 
 import java.util.HashMap;
@@ -46,7 +42,7 @@ import de.greenrobot.event.EventBus;
 public class WaitActivity extends BaseMapActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_time)
+    @BindView(R.id.tv_order_sn)
     TextView tvTime;
     @BindView(R.id.rl_title)
     RelativeLayout rlTitle;

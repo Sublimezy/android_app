@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+
+import com.hjq.toast.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cookie.CookieJarImpl;
@@ -100,7 +102,7 @@ public class App extends Application {
         regToWx();
         initOkGo();
 //        AutoSizeConfig.getInstance().setCustomFragment(true);
-
+        ToastUtils.init(this);
 
     }
 

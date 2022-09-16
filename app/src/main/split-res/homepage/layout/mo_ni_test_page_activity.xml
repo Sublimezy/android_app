@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/tv_order_sn"
                 android:layout_marginLeft="107dp"
                 android:text="45分钟"
                 android:textColor="#232323"

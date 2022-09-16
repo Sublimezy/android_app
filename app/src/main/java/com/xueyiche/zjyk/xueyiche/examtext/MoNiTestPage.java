@@ -1,6 +1,5 @@
 package com.xueyiche.zjyk.xueyiche.examtext;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,22 +11,11 @@ import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
-import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.examtext.bean.UserTypeBean;
 import com.xueyiche.zjyk.xueyiche.examtext.kemua.PracticeTestOne;
 import com.xueyiche.zjyk.xueyiche.examtext.kemud.PracticeTestFour;
 import com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.myhttp.MyHttpUtils;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.myhttp.RequestCallBack;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.student.StudentTrainTimeActivity;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.coach.student.YuYueLiancheDateActivity;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.students.activity.StudentsBaoMingActivity;
-import com.xueyiche.zjyk.xueyiche.newdriverschool.students.activity.StudentsSelfTestActivity;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by zhanglei on 2016/10/13.
@@ -48,7 +36,7 @@ public class MoNiTestPage extends BaseActivity implements View.OnClickListener {
         ImageView ivBack = (ImageView) view.findViewById(R.id.test_moni_activity_include).findViewById(R.id.ll_test_license_back);
         tv_achievement_title = (TextView) view.findViewById(R.id.test_moni_activity_include).findViewById(R.id.tv_achievement_title);
         mo_ni_head = (CircleImageView) view.findViewById(R.id.mo_ni_head);
-        tv_time = (TextView) view.findViewById(R.id.tv_time);
+        tv_time = (TextView) view.findViewById(R.id.tv_order_sn);
         if (!DialogUtils.IsLogin()) {
             mo_ni_head.setImageResource(R.mipmap.mo_ni_head);
         } else {
