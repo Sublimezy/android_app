@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
@@ -65,6 +66,8 @@ public class ZaiXianKeFuActivity extends BaseActivity implements View.OnClickLis
         textChange tc1 = new textChange();
         ed_zaixian_user.addTextChangedListener(tc1);
         tv_login_back.setText("在线客服");
+
+        ImmersionBar.with(this).titleBar(R.id.ll_title).statusBarDarkFont(true).init();
     }
 
     @Override
