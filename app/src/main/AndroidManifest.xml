@@ -92,44 +92,54 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".mine.activities.YouZhengLianCheDetailActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".examtext.MiJiActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.ExamActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".driverschool.driverschool.TiJianActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".driverschool.ZaiXianKeFuActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".driverschool.KeFuQuesContentActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".driverschool.KeFuActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".driverschool.driverschool.MiJiContentActivityTwo"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|keyboardHidden|orientation"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".examtext.TestDriverBookActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.MineSendActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".community.activity.ShiPinFaBuActivity"
             android:exported="false"
@@ -137,82 +147,103 @@
         <activity
             android:name=".community.activity.TuWenFabuActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".community.activity.ShiPinPlayActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".community.activity.TuWenXiangQingActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.bianji.SetActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.DriverPathActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.amap.api.navi.AmapRouteActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|navigation"
+            android:configChanges="orientation|keyboardHidden|screenSize|navigation|smallestScreenSize|screenLayout"
             android:launchMode="singleInstance"
+
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.bianji.EditMySelfInfoActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.ContentTrainNewActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".homepage.activities.DaifBaoYangListActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".homepage.activities.DaiJianCheListActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.MyOrderListActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".homepage.activities.ContentActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activities.OrderDetailActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".daijia.activity.ChooseDaijiaYuanActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".daijia.activity.DaShangActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.PracticeCarSecondStepActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.PracticeCarFirstStepActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".daijia.activity.CancelOrderActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".daijia.activity.ArrivedActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".daijia.RegistSiJiActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -227,6 +258,7 @@
         <activity
             android:name=".splash.SplashActivity"
             android:screenOrientation="portrait"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -290,47 +322,68 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".mine.activities.ConstantlyAddressActivity"
-            android:screenOrientation="portrait" />
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".daijia.DaiJiaActivity"
-            android:screenOrientation="portrait" />
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".practicecar.activity.PracticeCarContentActivity"
-            android:screenOrientation="portrait" />
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".daijia.activity.LocationSearchActivity"
-            android:screenOrientation="portrait" />
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 代驾行程 -->
         <!-- 代驾待付款 -->
         <!-- 代驾目的选择城市 -->
         <activity
             android:name=".daijia.activity.CityActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 代驾 -->
         <!-- 代驾紧急联系人 -->
         <!-- 已接单 -->
         <activity
             android:name=".daijia.activity.JieDanActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".daijia.activity.ChooseDaiJiaoActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 取消理由原因 -->
         <activity
             android:name=".daijia.activity.LiYouActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 代驾优惠券列表 -->
         <activity
             android:name=".daijia.activity.YouHuiQuanActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 费用明细预估费 -->
         <activity
             android:name=".daijia.activity.YuGuFeiActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 代驾订单结束去评价 -->
         <activity
@@ -339,73 +392,120 @@
             android:windowSoftInputMode="adjustPan" /> <!-- 代驾预约订单等待界面 -->
         <activity
             android:name=".daijia.activity.WaitYuYueActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 代驾代叫服务 -->
         <activity
             android:name=".daijia.activity.DaiJiaoActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 预约代驾备注 -->
         <!-- 代驾进行中订单 -->
         <activity
             android:name=".daijia.activity.JinXingActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 等待接单 -->
         <activity
             android:name=".daijia.activity.WaitActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 立即练车 -->
         <activity
             android:name=".practicecar.activity.lianche.NowPracticeActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 预约练车 -->
         <activity
             android:name=".practicecar.activity.lianche.YuYuePracticeActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 选教练练车 -->
         <activity
             android:name=".practicecar.activity.lianche.DriverPracticeActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 选品牌练车 -->
         <activity
             android:name=".practicecar.activity.lianche.PinPaiPracticeActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 添加紧急联系人 -->
         <activity
             android:name=".practicecar.activity.lianche.JinjiPhoneActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /> <!-- 车辆估价订单驳回详情 -->
         <activity
             android:name=".practicecar.activity.OrderFaBuOkActivity"
-            android:screenOrientation="portrait" />
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".pay.bean.AppPayChaXun"
-            android:screenOrientation="portrait" /> <!-- 答题赢现金问题详情 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  /> <!-- 答题赢现金问题详情 -->
         <activity
             android:name=".submit.PracticeCarSubmitIndent"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".xycindent.fragments.indent_content.PutStudentCardActivity"
-            android:screenOrientation="portrait" /> <!-- 培训机构报名页面 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  /> <!-- 培训机构报名页面 -->
         <activity
             android:name=".xycindent.fragments.indent_content.PingJiaDriverSchool"
-            android:screenOrientation="portrait" /> <!-- 第一步登录 -->
-        <activity android:name=".main.activities.login.LoginFirstStepActivity" /> <!-- 第二部登录 -->
-        <activity android:name=".main.activities.login.LoginSecondStepActivity" /> <!-- 进入练车 -->
-        <activity android:name=".xycindent.fragments.indent_content.PracticeIndentContent" /> <!-- 二手车订单详情 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  /> <!-- 第一步登录 -->
+        <activity android:name=".main.activities.login.LoginFirstStepActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait" /> <!-- 第二部登录 -->
+        <activity android:name=".main.activities.login.LoginSecondStepActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait" /> <!-- 进入练车 -->
+        <activity android:name=".xycindent.fragments.indent_content.PracticeIndentContent"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait" /> <!-- 二手车订单详情 -->
         <!-- 最新活动 -->
-        <activity android:name=".mine.activities.message.NewPlayActivity" /> <!-- 引导页 -->
+        <activity android:name=".mine.activities.message.NewPlayActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait" /> <!-- 引导页 -->
         <!-- 驾校投票报名页 -->
         <!-- 车生活提交订单 -->
         <!-- 车生活详情 -->
         <!-- 订单 -->
         <activity
             android:name=".xycindent.activities.IndentActivity"
-            android:screenOrientation="portrait" /> <!-- 更改头像 -->
-        <activity android:name=".mine.activities.bianji.ChangeHeadActivity" /> <!-- 车保险的车型 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  /> <!-- 更改头像 -->
+        <activity android:name=".mine.activities.bianji.ChangeHeadActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait" /> <!-- 车保险的车型 -->
         <!-- 主页 -->
         <activity
             android:name=".main.activities.main.MainActivity"
             android:launchMode="singleTask"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 赢现金答题页 -->
         <!-- 银行卡的页面 -->
         <!-- 超级会员 -->
@@ -416,20 +516,28 @@
         <!-- 洗车支付2页 -->
         <activity
             android:name=".xycindent.fragments.indent_content.PingJia"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".splash.GuangGaoActivity"
-            android:screenOrientation="portrait" /> <!-- 我的易币 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  /> <!-- 我的易币 -->
         <!-- 赢现金活动页 -->
         <meta-data
             android:name="android.webkit.WebView.EnableSafeBrowsing"
             android:value="true" /> <!-- 打开相册 -->
         <activity
             android:name=".xycindent.fragments.indent_content.IndentDetailsOrderPractice"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 易币商城 -->
         <activity
             android:name=".xycindent.fragments.indent_content.PingJiaOrderDriver"
-            android:screenOrientation="portrait" /> <!-- 车辆风采照片展示 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"/> <!-- 车辆风采照片展示 -->
         <!-- 选车型 -->
         <!-- 教练评价页面 -->
         <!-- 新闻列表 -->
@@ -445,30 +553,46 @@
         <!-- 科目一我的成绩 -->
         <activity
             android:name=".mine.activities.bianji.SettingActivity"
-            android:screenOrientation="portrait" /> <!-- 昵称 -->
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"  /> <!-- 昵称 -->
         <activity
             android:name=".mine.activities.bianji.InformationChangeActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 性别 -->
         <!-- 使用帮助 -->
         <!-- 关于学易车 -->
         <activity
             android:name=".mine.activities.AboutXueYiCheActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 教练详情页面 -->
         <activity
             android:name=".practicecar.activity.ChoiceCardDetails"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 提交订单后的订单详情 -->
         <activity
             android:name=".pay.RechargeActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 添加银行卡页面 -->
         <!-- POI检索界面 -->
         <activity
             android:name=".pay.JiFenChongZhi"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 驾校详情页面 -->
         <activity
             android:name=".constants.UrlActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 公共的url -->
         <activity
             android:name=".base.CommonWebView"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
 
         <service
@@ -478,61 +602,84 @@
 
         <activity
             android:name=".pay.AppPay"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.activity.lianche.SubmitZhiJiePractice"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".practicecar.activity.lianche.AllRemarkActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 支付成功 -->
         <activity
             android:name=".pay.PaySucceedActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 车辆估价 不予评估 -->
         <activity
             android:name=".practicecar.activity.OrderTrainerActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 无证的activity -->
         <!-- 优惠券 -->
         <activity
             android:name=".mine.activities.youhuiquan.YouHuiQuan"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".xycindent.fragments.indent_content.WZIndentDetailsOrderPractice"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" /> <!-- 优惠券 -->
         <activity
             android:name=".examtext.kemua.PracticeTestOne"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.PracticeTestFour"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.StartTrainActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.TrainingRecordActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.TrainingDateManageActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.TrainingDetailsActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.TrainingTimeCoachActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.WaitPingJiaTrainingDetailActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.YuYueDetailsActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.activity.YuYueTrainingActivity"
@@ -541,158 +688,197 @@
         <activity
             android:name=".newdriverschool.coach.student.BuyTrainTimeStudentActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.student.CoachListActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.student.StudentTrainTimeActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.student.BuyKeShiDateActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.student.YuYueKaoShiActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.coach.student.YuYueLiancheDateActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsBaoMingActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsIndentContentActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsIndentContentBaoMingSuccessActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsOrderBuyActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsOrderContentActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsOrderOneTestActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsOrderRecordActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsSelfTestActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsStudyContentActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newdriverschool.students.activity.StudentsStudyRecordActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.SubjectAQuestion"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.AchievementOneActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.CollectionA"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.CuoTiA"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.RandomTestA"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.ZhuanXiangA"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemua.ZhuanXiangContent"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.Answerwithcash"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.AnswerwithcashFinish"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.AnswerWithCashQuestion"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.PaiHangBang"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.MyResult"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.MyJiangJin"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.MoNiTestPage"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemub.SubjectbWeb"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemuc.KeMuSanVideo"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.AchievementFourActivity"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.CollectionD"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.CuoTiD"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.RandomTestD"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.SubjectDQuestion"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.ZhuangXiangDContent"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
         <activity
             android:name=".examtext.kemud.ZhuanXiangD"
             android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
 
         <provider

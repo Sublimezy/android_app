@@ -74,13 +74,24 @@ import java.util.HashMap;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 import de.greenrobot.event.EventBus;
+import me.jessyan.autosize.internal.CustomAdapt;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Activity的基类
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements CustomAdapt{
+    //适配折叠屏
+    @Override
+    public boolean isBaseOnWidth() {
+        return false;
+    }
+
+    @Override
+    public float getSizeInDp() {
+        return 720;
+    }
     protected View view;
     private BaseProgressDialog mProgressDialog = null;
     /**
