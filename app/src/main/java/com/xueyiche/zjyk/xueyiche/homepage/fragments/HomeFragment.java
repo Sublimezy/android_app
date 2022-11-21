@@ -23,7 +23,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
@@ -350,7 +349,6 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.iv_kefu:
                 XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");
-                MobclickAgent.onEvent(getContext(), "kefu_phone");
                 break;
         }
     }

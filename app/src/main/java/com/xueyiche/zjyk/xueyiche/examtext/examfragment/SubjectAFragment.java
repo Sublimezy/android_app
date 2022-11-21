@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
@@ -220,7 +219,6 @@ public class SubjectAFragment extends BaseFragment implements View.OnClickListen
             case R.id.tv_practice_test:
                 Intent intent6 = new Intent(App.context, MoNiTestPage.class);
                 intent6.putExtra("moni_style","1");
-                MobclickAgent.onEvent(getActivity(), "one_monikaoshi");
                 startActivity(intent6);
                 break;
 

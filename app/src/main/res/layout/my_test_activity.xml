@@ -13,12 +13,13 @@
         android:layout_height="wrap_content"
         android:clipToPadding="true"
         android:fitsSystemWindows="true" />
+
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
-        android:layout_above="@+id/rlBottom"
-        android:layout_below="@+id/title_include"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/rlBottom"
+        android:layout_below="@+id/title_include"
         android:background="@android:color/white"
         app:srlEnableAutoLoadMore="false"
         app:srlPrimaryColor="@color/color_white">
@@ -29,6 +30,7 @@
             app:srlAccentColor="@color/colorOrange"
             app:srlDrawableProgress="@drawable/animation_loading_frame"
             app:srlPrimaryColor="@color/color_white" />
+
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
@@ -61,7 +63,7 @@
                         android:layout_marginLeft="@dimen/shiwu"
                         android:layout_marginTop="@dimen/ershiwu"
                         android:layout_marginRight="@dimen/shiwu"
-                        android:text="欢迎沓沓同学 这是您来到学易车的第11天"
+                        android:text="欢迎--同学 这是您来到学易车的第0天"
                         android:textColor="@color/_3333"
                         android:textSize="@dimen/shisan" />
 
@@ -119,9 +121,11 @@
                     android:text="学习进程"
                     android:textColor="@color/_3333"
                     android:textSize="@dimen/shiwu" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_one"
                         android:layout_width="match_parent"

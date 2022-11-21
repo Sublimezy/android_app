@@ -69,6 +69,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/sanshiwu"
+        android:inputType="number"
         android:hint="请输入验证码" />
 
     <TextView

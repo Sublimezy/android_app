@@ -335,7 +335,7 @@ public class ContentTrainNewActivity extends BaseActivity {
     }
     private void chooseTime() {
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 1; i < 12; i++) {
+        for (int i = 2; i < 13; i++) {
             list.add("" + i + "小时");
         }
         final OptionPicker picker = new OptionPicker(ContentTrainNewActivity.this, list);
@@ -350,7 +350,9 @@ public class ContentTrainNewActivity extends BaseActivity {
             public void onOptionPicked(int position, String option) {
                 picker.setSelectedIndex(position);
                 tvChoodeTime.setText(option);
-                hour_num = "" + (position + 1);
+                int total = (position + 2)*(Integer.parseInt(data.getMoney()));
+                tvMoney.setText("¥" + total);
+                hour_num = "" + (position + 2);
             }
 
         });

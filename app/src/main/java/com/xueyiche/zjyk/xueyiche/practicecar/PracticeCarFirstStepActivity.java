@@ -47,6 +47,7 @@ import com.xueyiche.zjyk.xueyiche.homepage.view.OptionPicker;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.practicecar.bean.DanJiaBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.bean.OrderNumberBean;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
 import com.xueyiche.zjyk.xueyiche.route.DrivingRouteOverLay;
@@ -93,7 +94,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
     TextView tv_choose_daijia;
     @BindView(R.id.rl_title)
     RelativeLayout rl_title;
-
+    private int unit_price = 1;
     private String sLocation = "";
     private String sLat = "";
     private String sLon = "";
@@ -158,7 +159,29 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
     @Override
     protected void initData() {
         tv_title.setText("有证练车");
+        getDanJia();
         getDataDriverList();
+    }
+
+    private void getDanJia() {
+        Map<String, String> map = new HashMap<>();
+        MyHttpUtils.postHttpMessage(AppUrl.unit_price, map, DanJiaBean.class, new RequestCallBack<DanJiaBean>() {
+            @Override
+            public void requestSuccess(DanJiaBean json) {
+                if (1 == json.getCode()) {
+                    DanJiaBean.DataDTO data = json.getData();
+                    if (data != null) {
+                        unit_price = data.getUnit_price();
+
+                    }
+                }
+            }
+
+            @Override
+            public void requestError(String errorMsg, int errorType) {
+
+            }
+        });
     }
 
     private MarkerOptions markerOption;
@@ -171,7 +194,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
         Map<String, String> map = new HashMap<>();
         map.put("address_lng", "" + lon);
         map.put("address_lat", "" + lat);
-        MyHttpUtils.postHttpMessage(AppUrl.near_driving, map, NearDrivingBean.class, new RequestCallBack<NearDrivingBean>() {
+        MyHttpUtils.postHttpMessage(AppUrl.near_practice, map, NearDrivingBean.class, new RequestCallBack<NearDrivingBean>() {
             @Override
             public void requestSuccess(NearDrivingBean json) {
                 if (1 == json.getCode()) {
@@ -391,30 +414,30 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
             int hour = selectedDate.get(Calendar.HOUR_OF_DAY);
             int min = selectedDate.get(Calendar.MINUTE);
             if (TextUtils.isEmpty(hour_num)) {
-                ToastUtils.showToast(PracticeCarFirstStepActivity.this,"选择练车时长！");
+                ToastUtils.showToast(PracticeCarFirstStepActivity.this, "选择练车时长！");
                 return;
             }
             Map<String, String> map = new HashMap<>();
-            map.put("order_type","3");
-            map.put("start_address",""+sLocation);
-            map.put("start_address_lng",""+sLon);
-            map.put("start_address_lat",""+sLat);
-            map.put("practice_id","");
-            map.put("hour_num",""+hour_num);
-            map.put("fixed_time",nian+"年"+yue+"月"+day+"日"+hour+":"+min);
+            map.put("order_type", "3");
+            map.put("start_address", "" + sLocation);
+            map.put("start_address_lng", "" + sLon);
+            map.put("start_address_lat", "" + sLat);
+            map.put("practice_id", "");
+            map.put("hour_num", "" + hour_num);
+            map.put("fixed_time", nian + "年" + yue + "月" + day + "日" + hour + ":" + min);
             MyHttpUtils.postHttpMessage(AppUrl.orderSavePractice, map, OrderNumberBean.class, new RequestCallBack<OrderNumberBean>() {
                 @Override
                 public void requestSuccess(OrderNumberBean json) {
-                    if (1==json.getCode()) {
+                    if (1 == json.getCode()) {
                         OrderNumberBean.DataDTO data = json.getData();
-                        if (data!=null) {
+                        if (data != null) {
                             String order_sn = data.getOrder_sn();
                             if (!TextUtils.isEmpty(order_sn)) {
                                 PayUtils.showPopupWindow(AppUrl.Pay_Order_One, PracticeCarFirstStepActivity.this, order_sn, "daijia");
                             }
                         }
                     }
-                    ToastUtils.showToast(PracticeCarFirstStepActivity.this,json.getMsg());
+                    ToastUtils.showToast(PracticeCarFirstStepActivity.this, json.getMsg());
                 }
 
                 @Override
@@ -426,6 +449,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
             LoginFirstStepActivity.forward(PracticeCarFirstStepActivity.this);
         }
     }
+
     public void startTimePicker() {
         ArrayList<String> firstList = new ArrayList<String>();
         ArrayList<ArrayList<String>> secondList = new ArrayList<ArrayList<String>>();
@@ -510,7 +534,7 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
 
     private void chooseTime() {
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 1; i < 12; i++) {
+        for (int i = 2; i < 13; i++) {
             list.add("" + i + "小时");
         }
         final OptionPicker picker = new OptionPicker(PracticeCarFirstStepActivity.this, list);
@@ -524,8 +548,10 @@ public class PracticeCarFirstStepActivity extends BaseMapActivity {
             @Override
             public void onOptionPicked(int position, String option) {
                 picker.setSelectedIndex(position);
-                tvChoodeTime.setText(option);
-                hour_num =""+(position+1);
+                int total = (position + 2) * unit_price;
+                tvChoodeTime.setText(option+"（预估费用约"+total+"元）");
+                hour_num = "" + (position + 2);
+
                 next();
             }
 

@@ -172,9 +172,9 @@ public class StudentsBaoMingActivity extends NewBaseActivity implements View.OnC
 
     @Override
     protected void initData() {
-        tv_wenxintishi.setVisibility(View.VISIBLE);
+//        tv_wenxintishi.setVisibility(View.VISIBLE);
         tvTitle.setText("报名");
-        tv_wenxintishi.setText("报名须知");
+//        tv_wenxintishi.setText("报名须知");
         getDataFromNet();
     }
 

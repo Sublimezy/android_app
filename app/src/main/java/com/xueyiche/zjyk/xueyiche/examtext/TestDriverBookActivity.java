@@ -214,9 +214,9 @@ public class TestDriverBookActivity extends BaseActivity implements View.OnClick
 
                 break;
             case R.id.ll_xuecheliucheng:
-                intent3.putExtra("url", "http://xueyiche.cn/xyc/kaojiazhao/xuecheliucheng.html");
-                intent3.putExtra("type", "8");
-                startActivity(intent3);
+//                intent3.putExtra("url", "http://xueyiche.cn/xyc/kaojiazhao/xuecheliucheng.html");
+//                intent3.putExtra("type", "8");
+//                startActivity(intent3);
                 break;
             case R.id.ll_baoming_test:
                 openActivity(StudentsBaoMingActivity.class);

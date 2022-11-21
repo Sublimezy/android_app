@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.xuexiang.xupdate.XUpdate;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.community.CommunityFragment;
@@ -59,6 +60,9 @@ public class MainActivity extends BaseActivity {
             Intent bindintent = new Intent(this, LocationService.class);
             startService(bindintent);
         }
+        XUpdate.newBuild(this)
+                .updateUrl("http://guanli.xueyiche.vip:101/index.php/api/Articlebanner/version")
+                .update();
     }
 
     @Override

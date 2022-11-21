@@ -39,7 +39,6 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -212,8 +211,6 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
     protected void onResume() {
         super.onResume();
         postequipment();
-        MobclickAgent.onPageStart("BaseActivity"); // [统计页面(仅有Activity的应用中SDK自动调用,不需要单独写。参数为页面名称,可自定义)]
-        MobclickAgent.onResume(this);// 友盟统计，所有Activity中添加，父类添加后子类不用重复添加
         //设置不自动弹出软键盘
         mapView.onResume();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -336,8 +333,6 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
     protected void onPause() {
         super.onPause();
         mapView.onPause();
-        MobclickAgent.onPageEnd("BaseActivity"); // [(仅有Activity的应用中SDK自动调用,不需要单独写)保证onPageEnd在onPause之前调用,因为onPause中会保存信息。参数页面名称,可自定义]
-        MobclickAgent.onPause(this);// 友盟统计，所有Activity中添加，父类添加后子类不用重复添加
     }
 
     @Override

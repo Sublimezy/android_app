@@ -35,6 +35,14 @@ public class JsonUtil {
 	}
 
 	/**
+	 * 把 单个指定类型的对象 转换为 JSON 字符串
+	 * @param src
+	 * @return
+	 */
+	public static String toJson(Object src) {
+		return new Gson().toJson(src);
+	}
+	/**
 	 * 把一个json字符串变成对象
 	 * @param json
 	 * @param cls

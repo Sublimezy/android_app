@@ -1,5 +1,7 @@
 package com.xueyiche.zjyk.xueyiche.constants;
 
+import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NEW_VERSION;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -28,8 +30,15 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.tencent.bugly.Bugly;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.entity.UpdateError;
+import com.xuexiang.xupdate.listener.OnUpdateFailureListener;
+import com.xuexiang.xupdate.utils.UpdateUtils;
 import com.xueyiche.zjyk.xueyiche.R;
+import com.xueyiche.zjyk.xueyiche.splash.MyPreferences;
 import com.xueyiche.zjyk.xueyiche.utils.NetUtil;
+import com.xueyiche.zjyk.xueyiche.utils.OKHttpUpdateHttpService;
+import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -78,34 +87,51 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         application = this;
-
+        initOkGo();
+        initXUpdate();
         context = getApplicationContext();
         handler = new Handler();
-
         DisplayMetrics mDisplayMetrics = getApplicationContext().getResources()
                 .getDisplayMetrics();
         screenWidth = mDisplayMetrics.widthPixels;
         screenHeight = mDisplayMetrics.heightPixels;
-        if (!splash_init) {
-//            JPushInterface.setDebugMode(true);
-//            JPushInterface.init(this);
-//            Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
-//            szImei = JPushInterface.getRegistrationID(this);
-//            if (showAD) {
-//                GDTADManager.getInstance().initWith(this, "您在腾讯联盟开发者平台的APPID");
-//
-//            }
+        boolean agree = MyPreferences.getInstance(context).hasAgreePrivacyAgreement();
+        if (agree) {
+            JPushInterface.setDebugMode(true);
+            JPushInterface.init(this);
+            Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
+            szImei = JPushInterface.getRegistrationID(this);
+            regToWx();
+            mNetWorkState = NetUtil.getNetWorkState(this);
+            ToastUtils.init(this);
         }
-        mNetWorkState = NetUtil.getNetWorkState(this);
-        regToWx();
-        initOkGo();
+
+
 //        AutoSizeConfig.getInstance().setCustomFragment(true);
-        ToastUtils.init(this);
+
 
     }
-
+    private void initXUpdate() {
+        XUpdate.get()
+                .debug(true)
+                .isWifiOnly(false)                                               //默认设置只在wifi下检查版本更新
+                .isGet(true)                                                    //默认设置使用get请求检查版本
+                .isAutoMode(false)                                              //默认设置非自动模式，可根据具体使用配置
+                .param("versionCode", UpdateUtils.getVersionCode(this))         //设置默认公共请求参数
+                .param("appKey", getPackageName())
+                .setOnUpdateFailureListener(new OnUpdateFailureListener() {     //设置版本更新出错的监听
+                    @Override
+                    public void onFailure(UpdateError error) {
+                        if (error.getCode() != CHECK_NO_NEW_VERSION) {          //对不同错误进行处理
+                            com.luck.picture.lib.utils.ToastUtils.showToast(context,error.toString());
+                        }
+                    }
+                })
+                .supportSilentInstall(true)                                     //设置是否支持静默安装，默认是true
+                .setIUpdateHttpService(new OKHttpUpdateHttpService())           //这个必须设置！实现网络请求功能。
+                .init(this);                                                    //这个必须初始化
+    }
 
     public static boolean showAD = false;
 

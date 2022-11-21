@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -281,7 +280,6 @@ public class MineFragment_back extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.ll_kefu:
                 XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");
-                MobclickAgent.onEvent(getContext(), "kefu_phone");
                 break;
             case R.id.ll_about:
                 openActivity(AboutXueYiCheActivity.class);

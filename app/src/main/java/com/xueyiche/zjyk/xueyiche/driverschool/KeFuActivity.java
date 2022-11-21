@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -144,7 +143,6 @@ public class KeFuActivity extends BaseActivity implements View.OnClickListener {
             //点击电话客服
             case R.id.tv_customservice_call:
                 XueYiCheUtils.CallPhone(KeFuActivity.this, "拨打客服电话", "0451-58627471");
-                MobclickAgent.onEvent(this, "kefu_phone");
                 break;
             case R.id.tv_customservice_zaixian:
                 if (DialogUtils.IsLogin()) {

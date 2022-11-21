@@ -70,16 +70,16 @@ public class DaiJianCheListActivity extends BaseActivity {
     View titleViewHeng;
     @BindView(R.id.rl_title)
     RelativeLayout rlTitle;
-    @BindView(R.id.recycler_view)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.refresh_layout)
+    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     private OrderAdapter orderAdapter;
     private LoadingLayout loading;
 
     @Override
     protected int initContentView() {
-        return R.layout.activity_my_order_list;
+        return R.layout.activity_mine_send;
     }
 
     @Override

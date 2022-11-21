@@ -8,7 +8,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.NewBaseActivity;
 import com.xueyiche.zjyk.xueyiche.constants.App;

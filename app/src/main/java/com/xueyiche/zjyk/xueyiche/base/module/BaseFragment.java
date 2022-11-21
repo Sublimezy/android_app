@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.xueyiche.base.view.LoadingPager;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -136,7 +135,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd("BaseFragment"); // 统计页面
     }
 
     //短Toast
@@ -152,7 +150,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart("BaseFragment"); // 统计页面
     }
 
     /**

@@ -20,7 +20,6 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.utils.ToastUtils;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.CommonWebView;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;

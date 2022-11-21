@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseFragment;
 import com.xueyiche.zjyk.xueyiche.constants.App;
@@ -257,7 +256,6 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.ll_kefu:
                 XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "0451-58627471");
-                MobclickAgent.onEvent(getContext(), "kefu_phone");
                 break;
             case R.id.ll_about:
                 openActivity(AboutXueYiCheActivity.class);

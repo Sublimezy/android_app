@@ -32,7 +32,6 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
-import com.umeng.analytics.MobclickAgent;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.xueyiche.base.view.LoadingPager;
@@ -273,14 +272,12 @@ public abstract class BaseMapFragment extends Fragment implements RouteSearch.On
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        MobclickAgent.onPageEnd("BaseFragment"); // 统计页面
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
-        MobclickAgent.onPageStart("BaseFragment"); // 统计页面
     }
 
     /**

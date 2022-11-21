@@ -44,6 +44,7 @@ import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.DialogUtils;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
+import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -222,7 +223,7 @@ public class StudentsSelfTestActivity extends NewBaseActivity implements View.On
                 break;
             case R.id.tvKeFu:
                 //客服
-                openActivity(KeFuActivity.class);
+                XueYiCheUtils.CallPhone(StudentsSelfTestActivity.this, "拨打客服电话", "0451-58627471");
                 break;
             case R.id.btNextStudy:
                 if (!TextUtils.isEmpty(subject_type)) {

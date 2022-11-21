@@ -183,6 +183,7 @@ public class CommonWebView extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
         pass_web_view.onPause();
     }
 
