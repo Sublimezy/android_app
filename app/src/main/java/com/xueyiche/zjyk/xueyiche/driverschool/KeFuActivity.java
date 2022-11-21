@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xueyiche.zjyk.xueyiche.R;
@@ -60,6 +61,7 @@ public class KeFuActivity extends BaseActivity implements View.OnClickListener {
         lv_faq = (AdListView) view.findViewById(R.id.lv_faq);
         lv_faq.setItemsCanFocus(true);
         tv_login_back.setText("客服");
+        ImmersionBar.with(this).titleBar(R.id.ll_title).statusBarDarkFont(true).init();
     }
 
     @Override
