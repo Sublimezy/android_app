@@ -336,6 +336,9 @@
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="0dp"
                     android:overScrollMode="never"
                     android:scrollbars="none" />
 
