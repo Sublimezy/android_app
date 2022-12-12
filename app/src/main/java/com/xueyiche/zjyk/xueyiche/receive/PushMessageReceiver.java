@@ -1,28 +1,10 @@
 package com.xueyiche.zjyk.xueyiche.receive;
-
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.xueyiche.zjyk.xueyiche.constants.App;
-import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
-import com.xueyiche.zjyk.xueyiche.daijia.DaiJiaFragment;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.JinXingActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitYuYueActivity;
-import com.xueyiche.zjyk.xueyiche.daijia.bean.GoDaiJiaBean;
 import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
-import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
-
-import java.io.IOException;
-
 import cn.jpush.android.api.CmdMessage;
 import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.JPushInterface;

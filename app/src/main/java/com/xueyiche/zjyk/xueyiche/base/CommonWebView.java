@@ -2,24 +2,25 @@ package com.xueyiche.zjyk.xueyiche.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.xueyiche.R;
-import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
-import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,33 +28,47 @@ import butterknife.OnClick;
 /**
  * Created by ZL on 2017/1/10.
  */
-public class CommonWebView extends BaseActivity {
+public class CommonWebView extends AppCompatActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.rl_title)
     RelativeLayout rlTitle;
     @BindView(R.id.pass_web_view)
     WebView pass_web_view;
+
     @Override
-    protected int initContentView() {
-        return R.layout.must_pass_skill;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.must_pass_skill);
+        initView();
+        initData();
     }
-    @Override
-    protected void initView() {
+
+    private void initView() {
         ButterKnife.bind(this);
+        //透明状态栏
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            int option = window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            window.getDecorView().setSystemUiVisibility(option);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         ImmersionBar.with(this).titleBar(rlTitle).statusBarDarkFont(true).init();
-        showProgressDialog(false);
     }
-    public static void forward(Context context,String weburl) {
+
+    public static void forward(Context context, String weburl) {
         Intent intent = new Intent(context, CommonWebView.class);
-        intent.putExtra("weburl",weburl);
+        intent.putExtra("weburl", weburl);
         context.startActivity(intent);
     }
-    @Override
-    protected void initListener() {
-    }
-    @Override
-    protected void initData() {
+
+
+
+    private void initData() {
         Intent intent = getIntent();
         String weburl = intent.getStringExtra("weburl");
         String httpUrl = intent.getStringExtra("httpUrl");
@@ -65,6 +80,12 @@ public class CommonWebView extends BaseActivity {
             } else if ("one_talk".equals(weburl)) {
                 tvTitle.setText("考试说明");
                 pass_web_view.loadUrl("http://xueyiche.cn/xyc/monilianxi/keyishuoming.html");
+            }  else if ("yinsizhengce".equals(weburl)) {
+                tvTitle.setText("隐私政策");
+                pass_web_view.loadUrl("http://tabankeji.com/djh5/gerenxinxibaohuzhengce.html");
+            }   else if ("fuwuxieyi".equals(weburl)) {
+                tvTitle.setText("服务协议");
+                pass_web_view.loadUrl("http://tabankeji.com/djh5/daijiafuwuxieyi.html");
             } else if ("two_xuzhi".equals(weburl)) {
                 tvTitle.setText("科二须知");
                 pass_web_view.loadUrl("http://xueyiche.cn/xyc/monilianxi/keerxuzhi.html");
@@ -104,7 +125,7 @@ public class CommonWebView extends BaseActivity {
 
             } else if ("xieyi".equals(weburl)) {
                 tvTitle.setText("服务协议");
-                pass_web_view.loadUrl("http://xueyiche.cn/xyc/agreement/userAgreement.html");
+                pass_web_view.loadUrl("http://tabankeji.com/djh5/daijiafuwuxieyi.html");
             } else if ("zhengxinbaogao".equals(weburl)) {
                 tvTitle.setText("征信报告");
                 pass_web_view.loadUrl(baoxianurl);
@@ -137,7 +158,7 @@ public class CommonWebView extends BaseActivity {
                 };
                 pass_web_view.setWebChromeClient(wvcc);
                 pass_web_view.loadUrl("http://xueyiche.cn/xyc/moudledriver/moudledriver.html");
-            }else if("wangye".equals(weburl)){
+            } else if ("wangye".equals(weburl)) {
 
                 WebChromeClient wvcc = new WebChromeClient() {
                     @Override
@@ -157,18 +178,17 @@ public class CommonWebView extends BaseActivity {
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
-                    stopProgressDialog();
+
                 }
 
                 @Override
                 public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                     super.onReceivedError(view, request, error);
-                    stopProgressDialog();
+
                 }
             });
         } else {
-            stopProgressDialog();
-            showToastShort("请检查网络");
+
         }
 
     }

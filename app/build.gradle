@@ -253,11 +253,10 @@ dependencies {
 //        exclude group: 'org.slf4j'
 //    }
     // 此处以JCore 3.2.4 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:3.2.4'
+    implementation 'cn.jiguang.sdk:jcore:3.3.6'
     // 此处以JPush 4.6.4 版本为例
-    implementation 'cn.jiguang.sdk:jpush:4.8.1'
+    implementation 'cn.jiguang.sdk:jpush:4.8.4'
     implementation 'com.github.zhpanvip:BannerViewPager:3.5.0'
-    implementation 'com.qq.e.union:union:4.373.1243'
     implementation 'com.pnikosis:materialish-progress:1.7'
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     //     PictureSelector 基础 (必须)

@@ -56,12 +56,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
+import me.jessyan.autosize.internal.CustomAdapt;
 
 
 /**
  * Activity的基类
  */
-public abstract class BaseMapActivity extends AppCompatActivity implements RouteSearch.OnRouteSearchListener, AMapLocationListener, LocationSource {
+public abstract class BaseMapActivity extends AppCompatActivity implements RouteSearch.OnRouteSearchListener, AMapLocationListener, LocationSource, CustomAdapt {
     protected View view;
     private BaseProgressDialog mProgressDialog = null;
     /**
@@ -80,6 +81,16 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Route
     private final int ROUTE_TYPE_DRIVE = 2;
     protected OnLocationChangedListener mListener;
     protected AMapLocationClientOption mLocationOption;
+    //适配折叠屏
+    @Override
+    public boolean isBaseOnWidth() {
+        return false;
+    }
+
+    @Override
+    public float getSizeInDp() {
+        return 720;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

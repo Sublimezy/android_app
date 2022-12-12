@@ -18,7 +18,7 @@ import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
-import com.qq.e.comm.managers.GDTADManager;
+import com.mob.MobSDK;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -38,8 +38,6 @@ import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.splash.MyPreferences;
 import com.xueyiche.zjyk.xueyiche.utils.NetUtil;
 import com.xueyiche.zjyk.xueyiche.utils.OKHttpUpdateHttpService;
-import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
-
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -47,7 +45,6 @@ import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 public class App extends Application {
-
     /**
      * 全局Context，方便引用
      */
@@ -58,13 +55,6 @@ public class App extends Application {
     public static int mNetWorkState;
     public static final String APP_ID = "wx3c3dcf4648234b46";
     public static IWXAPI wxapi;
-//    public JCVideoPlayerStandard VideoPlaying;
-
-    public static int screenWidth;
-    public static int screenHeight;
-    public static boolean splash_init =
-            true;  //true在splash 初始化         false  在app初始化
-
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -92,17 +82,15 @@ public class App extends Application {
         initXUpdate();
         context = getApplicationContext();
         handler = new Handler();
-        DisplayMetrics mDisplayMetrics = getApplicationContext().getResources()
-                .getDisplayMetrics();
-        screenWidth = mDisplayMetrics.widthPixels;
-        screenHeight = mDisplayMetrics.heightPixels;
+
         boolean agree = MyPreferences.getInstance(context).hasAgreePrivacyAgreement();
         if (agree) {
-            JPushInterface.setDebugMode(true);
+            JPushInterface.setDebugMode(false);
             JPushInterface.init(this);
             Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
             szImei = JPushInterface.getRegistrationID(this);
             regToWx();
+            MobSDK.init(this);
             mNetWorkState = NetUtil.getNetWorkState(this);
             ToastUtils.init(this);
         }

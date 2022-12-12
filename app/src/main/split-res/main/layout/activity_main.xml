@@ -18,7 +18,7 @@
     <RadioGroup
         android:id="@+id/rg_menutab"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sishiliu"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/er"
         android:paddingTop="@dimen/yi">

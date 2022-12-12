@@ -5,7 +5,6 @@ package com.xueyiche.zjyk.xueyiche.base;
  */
 
 import android.annotation.TargetApi;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,64 +15,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.bumptech.glide.Glide;
-
-import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.storage.UpCancellationSignal;
-import com.qiniu.android.storage.UpCompletionHandler;
-import com.qiniu.android.storage.UpProgressHandler;
-import com.qiniu.android.storage.UploadManager;
-import com.qiniu.android.storage.UploadOptions;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.xueyiche.constants.App;
-import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
-import com.xueyiche.zjyk.xueyiche.constants.StringConstants;
-import com.xueyiche.zjyk.xueyiche.constants.bean.TokenBean;
-import com.xueyiche.zjyk.xueyiche.constants.bean.UserInfo;
-import com.xueyiche.zjyk.xueyiche.constants.event.MyEvent;
+
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
-import com.xueyiche.zjyk.xueyiche.utils.JsonUtil;
-import com.xueyiche.zjyk.xueyiche.utils.LogUtil;
+
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.StatusBarUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.framework.loopshare.LoopShareResultListener;
-import de.greenrobot.event.EventBus;
 import me.jessyan.autosize.internal.CustomAdapt;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;

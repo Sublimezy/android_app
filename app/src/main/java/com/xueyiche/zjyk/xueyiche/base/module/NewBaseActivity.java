@@ -27,6 +27,7 @@ import com.xueyiche.zjyk.xueyiche.constants.AppUrl;
 import com.xueyiche.zjyk.xueyiche.homepage.bean.SuccessBackBean;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
+import com.xueyiche.zjyk.xueyiche.splash.MyPreferences;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.utils.StatusBarUtil;
@@ -36,13 +37,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
-import im.quar.autolayout.AutoLayoutActivity;
+import me.jessyan.autosize.internal.CustomAdapt;
 
 
 /**
  * Activity的基类
  */
-public abstract class NewBaseActivity extends AppCompatActivity {
+public abstract class NewBaseActivity extends AppCompatActivity implements CustomAdapt {
     protected View view;
     private BaseProgressDialog mProgressDialog = null;
     /**
@@ -50,9 +51,17 @@ public abstract class NewBaseActivity extends AppCompatActivity {
      */
 
 
-    private int netMobile;
     private InputMethodManager manager;
+    //适配折叠屏
+    @Override
+    public boolean isBaseOnWidth() {
+        return false;
+    }
 
+    @Override
+    public float getSizeInDp() {
+        return 720;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +70,12 @@ public abstract class NewBaseActivity extends AppCompatActivity {
         view = View.inflate(getBaseContext(), initContentView(), null);
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setContentView(view);
-        MapsInitializer.updatePrivacyShow(App.context, true, true);
-        MapsInitializer.updatePrivacyAgree(App.context, true);
+        boolean agree = MyPreferences.getInstance(this).hasAgreePrivacyAgreement();
+        if (agree) {
+            MapsInitializer.updatePrivacyShow(App.context, true, true);
+            MapsInitializer.updatePrivacyAgree(App.context, true);
+        }
+
         initView();
         initListener();
         initData();
@@ -85,7 +98,11 @@ public abstract class NewBaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //设置不自动弹出软键盘
-        postequipment();
+
+        boolean agree = MyPreferences.getInstance(this).hasAgreePrivacyAgreement();
+        if (agree) {
+            postequipment();
+        }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
     private void postequipment() {

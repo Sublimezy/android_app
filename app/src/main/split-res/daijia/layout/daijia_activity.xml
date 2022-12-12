@@ -36,7 +36,8 @@
 
             <RadioGroup
                 android:layout_width="wrap_content"
-                android:layout_height="42dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dp_5"
                 android:layout_marginTop="@dimen/slide_top_and_left_two"
                 android:background="@drawable/daijia_yuanjiao_max"
                 android:gravity="center"
@@ -44,38 +45,44 @@
 
                 <RadioButton
                     android:id="@+id/rb_richang"
-                    android:layout_width="64dp"
-                    android:layout_height="@dimen/sanshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/shiwu"
                     android:background="@drawable/choose_selector_shape"
                     android:button="@null"
                     android:checked="true"
                     android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
                     android:text="即时"
                     android:textColor="@drawable/daijia_choose_text_color"
                     android:textSize="@dimen/text_sixteensp" />
 
                 <RadioButton
                     android:id="@+id/rb_yuyue"
-                    android:layout_width="64dp"
-                    android:layout_height="@dimen/sanshi"
-                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:background="@drawable/choose_selector_shape"
                     android:button="@null"
                     android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
                     android:text="预约"
                     android:textColor="@drawable/daijia_choose_text_color"
                     android:textSize="@dimen/text_sixteensp" />
 
                 <RadioButton
                     android:id="@+id/rb_daijiao"
-                    android:layout_width="64dp"
-                    android:layout_height="@dimen/sanshi"
-                    android:layout_marginLeft="@dimen/slide_top_and_left_two"
-                    android:layout_marginRight="@dimen/ershiwu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_10"
                     android:background="@drawable/choose_selector_shape"
                     android:button="@null"
                     android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
                     android:text="代叫"
                     android:textColor="@drawable/daijia_choose_text_color"
                     android:textSize="@dimen/text_sixteensp" />
@@ -196,7 +203,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/sishiliu"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical">
 
@@ -218,7 +225,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="51dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical">
 
 

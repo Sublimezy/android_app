@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.permissionx.guolindev.PermissionX;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
@@ -318,21 +319,23 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.ll_two:
-                AndPermission.with(getActivity())
-                        .permission(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
-                        .onGranted(new Action() {
-                            @Override
-                            public void onAction(List<String> permissions) {
-                                PracticeCarFirstStepActivity.forward(getActivity());
-                            }
-                        })
-                        .onDenied(new Action() {
-                            @Override
-                            public void onAction(List<String> permissions) {
+                PermissionX.init(getActivity()).permissions(
+                                Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION
+                        )
+                        .explainReasonBeforeRequest()
+                        .onExplainRequestReason((scope, deniedList) ->
+                                scope.showRequestReasonDialog(deniedList, "为了更好的使用有证练车服务,需要申请学易车APP访问位置信息。您可以通过系统\"设置\"进行权限管理。", "允许", "拒绝")
+                        )
+                        .onForwardToSettings((scope, deniedList) ->
+                                scope.showForwardToSettingsDialog(deniedList, "去设置中获取使用权限", "允许","拒绝")
+                        )
+                        .request((allGranted, grantedList, deniedList) ->
+                                {
+                                    PracticeCarFirstStepActivity.forward(getActivity());
+//                                    MyPreferences.getInstance(MainActivity.this).setInitSplashPermission(true);
 
-                            }
-                        }).start();
-
+                                }
+                        );
                 break;
             case R.id.ll_three:
                 DaiJianCheListActivity.forward(getActivity());

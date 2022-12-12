@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xueyiche.zjyk.xueyiche">
 
-    <permission
-        android:name="com.xueyiche.zjyk.xueyiche.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
+
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,26 +34,26 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- Android Q后台定位权限 -->
     <uses-permission
         android:name="android.permission.MOUNT_FORMAT_FILFOREGROUND_SERVICEESYSTEMS"
-        tools:ignore="ProtectedPermissions" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+        /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission
         android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+       /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
+        android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 一般权限 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
+    <permission
+        android:name="com.xueyiche.zjyk.xueyiche.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -519,11 +517,7 @@
             android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".splash.GuangGaoActivity"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait"  /> <!-- 我的易币 -->
+        <!-- 我的易币 -->
         <!-- 赢现金活动页 -->
         <meta-data
             android:name="android.webkit.WebView.EnableSafeBrowsing"
@@ -1025,22 +1019,12 @@
         <!-- <meta-data -->
         <!-- android:name="Channel ID" -->
         <!-- android:value="xueyiche" /> -->
-        <provider
-            android:name="com.qq.e.comm.GDTFileProvider"
-            android:authorities="${applicationId}.gdt.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/gdt_file_path" />
-        </provider>
+
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" /> <!-- 声明SDK所需要的组件 -->
-        <service
-            android:name="com.qq.e.comm.DownloadService"
-            android:exported="false" />
+
     </application>
 
 </manifest>
