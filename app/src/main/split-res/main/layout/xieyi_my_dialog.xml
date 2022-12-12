@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="265dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/radius_dialog_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="3"
+                android:text="请你务必仔细阅读充分理解隐私政策的条款,为了向您提供即时通讯,内容分享等服务,包括但不限于:我们需要收集你的设备信息等个人信息,你可以在设置中查看,更改你的授权"
+                android:textColor="#000"
+                android:textSize="13dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="你可阅读"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+                <TextView
+                    android:id="@+id/tv_fuwuxieyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《服务协议》"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="13dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="和"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+                <TextView
+                    android:id="@+id/tv_yinsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《隐私权限》"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="13dp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_tongyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="了解详细信息,如你同意,请点击同意开始接受我们的服务"
+
+                android:textColor="#000"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:id="@+id/btn_dialog_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:text="拒绝"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/btn_dialog_ok"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:text="同意"
+                android:textAllCaps="false"
+                android:textColor="@color/colorOrange"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
