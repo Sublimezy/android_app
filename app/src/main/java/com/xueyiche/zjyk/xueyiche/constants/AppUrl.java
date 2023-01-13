@@ -110,7 +110,7 @@ public interface AppUrl {
     //加油支付宝接口
     String JYZFB = IPWAIWANG + "mg/orderinfo/payjiayou.do";
     //f头像的token
-    String TOUXIANG = "http://112.103.231.134:8082/" + "mg/qiniuun/token.do";
+    String TOUXIANG = "http://122.9.33.73:8082/" + "mg/qiniuun/token.do";
     String GETYOUHUIQUAN = IPWAIWANG + "mg/evaluate/insertmycoupon.do";
     //预约列表
     String Order_List = IPWAIWANG + "yueche/myYuyueList.do";
