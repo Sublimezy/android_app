@@ -19,6 +19,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="57dp"
                 android:layout_marginRight="57dp"
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical">
 
@@ -55,6 +56,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginTop="@dimen/dp_30"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -197,6 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="22dp"
+                        android:visibility="gone"
                         android:drawableTop="@mipmap/test_important"
                         android:text="@string/kaoshizhongdian"
                         android:textColor="@color/test_color"

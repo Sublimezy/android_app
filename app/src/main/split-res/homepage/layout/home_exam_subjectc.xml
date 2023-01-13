@@ -16,6 +16,7 @@
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="57dp"
             android:layout_marginRight="57dp"
+            android:visibility="gone"
             android:layout_marginTop="20dp"
             android:gravity="center_vertical">
 
@@ -56,6 +57,7 @@
             android:layout_marginBottom="@dimen/all_16dp"
             android:layout_marginLeft="@dimen/all_16dp"
             android:text="科目三教程"
+            android:layout_marginTop="@dimen/dp_30"
             android:textColor="#ff333333"
             android:textSize="16sp" />
      <androidx.recyclerview.widget.RecyclerView

@@ -190,7 +190,8 @@ public interface AppUrl {
     String article_user_del = IPWAIWANG + "api/Articlebanner/article_user_del";
     String article_user_report = IPWAIWANG + "api/Articlebanner/article_user_report";
     //3.0国裕测试
-    String IPWAIWANGBEFORE = "http://112.103.231.139:8082/";
+//    String IPWAIWANGBEFORE = "http://112.103.231.139:8082/";
+    String IPWAIWANGBEFORE = "http://122.9.33.73:8082/";
     //身份类型
     String usertype = IPWAIWANGBEFORE + "drivingtrainee/usertype.do";
     String selectdrivingsecret= IPWAIWANGBEFORE + "drivingtrainee/selectdrivingsecret.do";
