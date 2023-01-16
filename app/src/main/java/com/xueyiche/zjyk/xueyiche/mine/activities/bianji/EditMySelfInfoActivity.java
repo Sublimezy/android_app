@@ -39,6 +39,7 @@ import com.luck.picture.lib.style.SelectMainStyle;
 import com.luck.picture.lib.style.TitleBarStyle;
 import com.luck.picture.lib.utils.DateUtils;
 import com.luck.picture.lib.utils.StyleUtils;
+import com.permissionx.guolindev.PermissionX;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -62,6 +63,7 @@ import com.xueyiche.zjyk.xueyiche.utils.ImageCompressEngine;
 import com.xueyiche.zjyk.xueyiche.utils.LoginUtils;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropImageEngine;
+import com.yanzhenjie.permission.Permission;
 
 import org.json.JSONObject;
 
@@ -154,7 +156,23 @@ public class EditMySelfInfoActivity extends BaseActivity {
         mAdapterMianGuan = new GridImageAdapter2(EditMySelfInfoActivity.this, new GridImageAdapter2.onAddPicClickListener() {
             @Override
             public void onAddPicClick() {
-                getPictureSelectionModel().forResult(CodeMianGuan);
+                PermissionX.init(EditMySelfInfoActivity.this).permissions(
+                        Permission.CAMERA,
+                        Permission.READ_EXTERNAL_STORAGE
+                        )
+                        .explainReasonBeforeRequest()
+                        .onExplainRequestReason((scope, deniedList) ->
+                                scope.showRequestReasonDialog(deniedList, "为了更好的使用修改头像,需要申请学易车APP相机和相册权限。您可以通过系统\"设置\"进行权限管理。", "允许", "拒绝")
+                        )
+                        .onForwardToSettings((scope, deniedList) ->
+                                scope.showForwardToSettingsDialog(deniedList, "去设置中获取使用权限", "允许","拒绝")
+                        )
+                        .request((allGranted, grantedList, deniedList) ->
+                                {
+                                    getPictureSelectionModel().forResult(CodeMianGuan);
+                                }
+                        );
+
             }
         });
         mAdapterMianGuan.setSelectMax(1);

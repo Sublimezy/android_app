@@ -310,10 +310,24 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_one:
-                boolean b = XueYiCheUtils.IsLogin();
-                Log.e("IsLogin", "" + b);
                 if (XueYiCheUtils.IsLogin()) {
-                    goDaiJiao();
+                    PermissionX.init(getActivity()).permissions(
+                            Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION
+                    )
+                            .explainReasonBeforeRequest()
+                            .onExplainRequestReason((scope, deniedList) ->
+                                    scope.showRequestReasonDialog(deniedList, "为了更好的使用有代驾服务,需要申请学易车APP访问位置信息。您可以通过系统\"设置\"进行权限管理。", "允许", "拒绝")
+                            )
+                            .onForwardToSettings((scope, deniedList) ->
+                                    scope.showForwardToSettingsDialog(deniedList, "去设置中获取使用权限", "允许","拒绝")
+                            )
+                            .request((allGranted, grantedList, deniedList) ->
+                                    {
+                                        goDaiJiao();
+
+                                    }
+                            );
+
                 } else {
                     LoginFirstStepActivity.forward(getActivity());
                 }
@@ -332,7 +346,6 @@ public class HomeFragment extends BaseFragment {
                         .request((allGranted, grantedList, deniedList) ->
                                 {
                                     PracticeCarFirstStepActivity.forward(getActivity());
-//                                    MyPreferences.getInstance(MainActivity.this).setInitSplashPermission(true);
 
                                 }
                         );

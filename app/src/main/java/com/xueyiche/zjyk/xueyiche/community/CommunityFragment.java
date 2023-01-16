@@ -38,6 +38,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.ctetin.expandabletextviewlibrary.ExpandableTextView;
 import com.gyf.immersionbar.ImmersionBar;
+import com.permissionx.guolindev.PermissionX;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
@@ -58,13 +59,16 @@ import com.xueyiche.zjyk.xueyiche.daijia.activity.DaShangActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.JieDanActivity;
 import com.xueyiche.zjyk.xueyiche.daijia.activity.WaitActivity;
 import com.xueyiche.zjyk.xueyiche.main.activities.login.LoginFirstStepActivity;
+import com.xueyiche.zjyk.xueyiche.main.activities.main.MainActivity;
 import com.xueyiche.zjyk.xueyiche.mine.decoration.GridItemDecoration;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.practicecar.view.CustomShapeImageView;
+import com.xueyiche.zjyk.xueyiche.splash.MyPreferences;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.CommentDialog;
 import com.xueyiche.zjyk.xueyiche.utils.XueYiCheUtils;
+import com.yanzhenjie.permission.Permission;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -205,7 +209,24 @@ public class CommunityFragment extends BaseFragment {
         iv_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFaBuDialog(getContext(), getActivity());
+                PermissionX.init(getActivity()).permissions(
+                        Permission.CAMERA,
+                        Permission.READ_EXTERNAL_STORAGE
+                )
+                        .explainReasonBeforeRequest()
+                        .onExplainRequestReason((scope, deniedList) ->
+                                scope.showRequestReasonDialog(deniedList, "为了更好的使用发布功能,需要申请学易车APP相机和相册权限。您可以通过系统\"设置\"进行权限管理。", "允许", "拒绝")
+                        )
+                        .onForwardToSettings((scope, deniedList) ->
+                                scope.showForwardToSettingsDialog(deniedList, "去设置中获取使用权限", "允许","拒绝")
+                        )
+                        .request((allGranted, grantedList, deniedList) ->
+                                {
+                                    showFaBuDialog(getContext(), getActivity());
+
+                                }
+                        );
+
             }
         });
     }

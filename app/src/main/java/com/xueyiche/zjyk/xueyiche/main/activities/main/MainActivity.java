@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.permissionx.guolindev.PermissionX;
 import com.xuexiang.xupdate.XUpdate;
 import com.xueyiche.zjyk.xueyiche.R;
 import com.xueyiche.zjyk.xueyiche.base.module.BaseActivity;
@@ -24,9 +25,12 @@ import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.receive.LocationService;
 import com.xueyiche.zjyk.xueyiche.receive.UpLocationService;
+import com.xueyiche.zjyk.xueyiche.splash.MyPreferences;
+import com.xueyiche.zjyk.xueyiche.splash.SplashActivity;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.welfare.WelfareFragment;
+import com.yanzhenjie.permission.Permission;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,6 +76,29 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         changeFragment(0);
+        if (!MyPreferences.getInstance(MainActivity.this).hasInitSplashPermission()) {
+            PermissionX.init(MainActivity.this).permissions(
+                    Permission.ACCESS_FINE_LOCATION,
+                    Permission.READ_PHONE_STATE,
+                    Permission.ACCESS_COARSE_LOCATION
+            )
+                    .explainReasonBeforeRequest()
+                    .onExplainRequestReason((scope, deniedList) ->
+                            scope.showRequestReasonDialog(deniedList, "为了获取定位城市,需要申请学易车APP访问位置信息。您可以通过系统\"设置\"进行权限管理。", "允许", "拒绝")
+                    )
+                    .onForwardToSettings((scope, deniedList) ->
+                            scope.showForwardToSettingsDialog(deniedList, "去设置中获取使用权限", "允许","拒绝")
+                    )
+                    .request((allGranted, grantedList, deniedList) ->
+                            {
+                                MyPreferences.getInstance(MainActivity.this).setInitSplashPermission(true);
+
+
+                            }
+                    );
+            MyPreferences.getInstance(MainActivity.this).setInitSplashPermission(true);
+        }
+
     }
 
     //切换页面

@@ -58,21 +58,10 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MobSDK.submitPolicyGrantResult(true);
-                        PermissionX.init(SplashActivity.this).permissions(
-                                        Permission.CAMERA,
-                                        Permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_WIFI_STATE,
-                                        Permission.READ_PHONE_STATE)
-                                .explainReasonBeforeRequest()
-                                .request((allGranted, grantedList, deniedList) ->
-                                        {
-                                            MyPreferences.getInstance(SplashActivity.this).setInitSplashPermission(true);
-                                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                );
                         MyPreferences.getInstance(SplashActivity.this).setAgreePrivacyAgreement(true);
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                         dialog.dismiss();
                     }
                 }, "拒绝", new DialogInterface.OnClickListener() {
@@ -121,27 +110,9 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
     }
     @SuppressLint("WrongConstant")
     private void res() {
-        boolean agree = MyPreferences.getInstance(SplashActivity.this).hasInitSplashPermission();
-        if (agree) {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        } else {
-            PermissionX.init(SplashActivity.this).permissions(
-                            Permission.CAMERA,
-                            Permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_WIFI_STATE,
-                            Permission.READ_PHONE_STATE)
-                    .explainReasonBeforeRequest()
-                    .request((allGranted, grantedList, deniedList) ->
-                            {
-                                MyPreferences.getInstance(SplashActivity.this).setInitSplashPermission(true);
-                                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                    );
-        }
     }
 
     private void showTime() {
