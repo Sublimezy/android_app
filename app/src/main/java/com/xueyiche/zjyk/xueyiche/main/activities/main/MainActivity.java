@@ -24,9 +24,7 @@ import com.xueyiche.zjyk.xueyiche.mine.fragments.MineFragment;
 import com.xueyiche.zjyk.xueyiche.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.xueyiche.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.xueyiche.receive.LocationService;
-import com.xueyiche.zjyk.xueyiche.receive.UpLocationService;
 import com.xueyiche.zjyk.xueyiche.splash.MyPreferences;
-import com.xueyiche.zjyk.xueyiche.splash.SplashActivity;
 import com.xueyiche.zjyk.xueyiche.utils.AppUtils;
 import com.xueyiche.zjyk.xueyiche.utils.PrefUtils;
 import com.xueyiche.zjyk.xueyiche.welfare.WelfareFragment;
@@ -37,6 +35,7 @@ import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Owner on 2016/9/13.
@@ -67,6 +66,10 @@ public class MainActivity extends BaseActivity {
         XUpdate.newBuild(this)
                 .updateUrl("http://guanli.xueyiche.vip:101/index.php/api/Articlebanner/version")
                 .update();
+        if (App.jpushON_OFF) {
+
+            JPushInterface.resumePush(App.context);
+        }
     }
 
     @Override
@@ -173,8 +176,11 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, "再点击一次退出学易车", Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         } else {
-            Intent ser = new Intent(this, UpLocationService.class);
-            stopService(ser);
+//            Intent ser = new Intent(this, UpLocationService.class);
+//            stopService(ser);
+            if (App.jpushON_OFF) {
+                JPushInterface.stopPush(App.context);
+            }
             AppUtils.AppExit(MainActivity.this);
         }
     }

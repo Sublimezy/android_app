@@ -55,6 +55,7 @@ public class App extends Application {
     public static int mNetWorkState;
     public static final String APP_ID = "wx3c3dcf4648234b46";
     public static IWXAPI wxapi;
+    public static boolean jpushON_OFF = true; //极光推送在退出的时候  关闭  重新打开恢复  为了应用宝的审核
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -85,7 +86,6 @@ public class App extends Application {
 
         boolean agree = MyPreferences.getInstance(context).hasAgreePrivacyAgreement();
         if (agree) {
-            JPushInterface.setDebugMode(false);
             JPushInterface.init(this);
             Bugly.init(getApplicationContext(), "8a3ab79bd2", false);
             szImei = JPushInterface.getRegistrationID(this);

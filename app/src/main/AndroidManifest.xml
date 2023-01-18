@@ -508,9 +508,9 @@
         <!-- 银行卡的页面 -->
         <!-- 超级会员 -->
         <!-- 客服中心 -->
-        <service android:name=".receive.UpLocationService" />
+<!--        <service android:name=".receive.UpLocationService" />-->
 
-        <receiver android:name=".receive.AlarmssReceiver" /> <!-- 首页点击进入的活动页 -->
+<!--        <receiver android:name=".receive.AlarmssReceiver" /> &lt;!&ndash; 首页点击进入的活动页 &ndash;&gt;-->
         <!-- 洗车支付2页 -->
         <activity
             android:name=".xycindent.fragments.indent_content.PingJia"
