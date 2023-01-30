@@ -1,2 +1,5 @@
 include ':app', ':library', ':textlibrary'
 include ':lib_YZxing-lib'
+rootProject.name = "学易车"
+
+
