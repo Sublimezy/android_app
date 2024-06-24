@@ -17,9 +17,7 @@ import com.xueyiche.zjyk.jiakao.mine.view.CircleImageView;
 import com.xueyiche.zjyk.jiakao.utils.DialogUtils;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
-/**
- * Created by zhanglei on 2016/10/13.
- */
+
 public class MoNiTestPage extends BaseActivity implements View.OnClickListener {
     private CircleImageView mo_ni_head;
     private TextView tv_achievement_title, tv_time;

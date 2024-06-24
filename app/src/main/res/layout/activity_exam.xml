@@ -11,8 +11,8 @@
         android:id="@+id/rg_exam_menutab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dp_20"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dp_20">
 
         <RadioButton
             android:id="@+id/rb_subject1"
@@ -30,12 +30,11 @@
         <RadioButton
             android:id="@+id/rb_subject2"
             style="@style/MenuTab"
+            android:layout_marginTop="5dp"
             android:background="@drawable/mine_selector_back"
             android:drawableBottom="@drawable/rb_xian_select"
             android:drawablePadding="5dp"
-            android:layout_marginTop="5dp"
             android:text="@string/test_book_two"
-            android:visibility="gone"
             android:textColor="@drawable/rb_select"
             android:textSize="15sp" />
 
@@ -43,12 +42,11 @@
         <RadioButton
             android:id="@+id/rb_subject3"
             style="@style/MenuTab"
+            android:layout_marginTop="5dp"
             android:background="@drawable/mine_selector_back"
             android:drawableBottom="@drawable/rb_xian_select"
             android:drawablePadding="5dp"
-            android:layout_marginTop="5dp"
             android:text="@string/test_book_three"
-            android:visibility="gone"
             android:textColor="@drawable/rb_select"
             android:textSize="15sp" />
 
@@ -56,21 +54,19 @@
         <RadioButton
             android:id="@+id/rb_subject4"
             style="@style/MenuTab"
+            android:layout_marginTop="5dp"
             android:background="@drawable/mine_selector_back"
             android:drawableBottom="@drawable/rb_xian_select"
             android:drawablePadding="5dp"
-            android:layout_marginTop="5dp"
             android:text="@string/test_book_four"
             android:textColor="@drawable/rb_select"
             android:textSize="15sp" />
     </RadioGroup>
 
-
-    <com.xueyiche.zjyk.jiakao.main.view.NoScrollViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rg_exam_menutab" />
-
+        android:layout_below="@+id/rg_exam_menutab"/>
 
 </RelativeLayout>

@@ -3,7 +3,6 @@ package com.xueyiche.zjyk.jiakao.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.base.CommonWebView;
-import com.xueyiche.zjyk.jiakao.constants.App;
 
 public class XieYiDialogUtils extends Dialog {
     public XieYiDialogUtils(Context context) {
@@ -169,21 +166,11 @@ public class XieYiDialogUtils extends Dialog {
             ((TextView) layout.findViewById(R.id.tv_yinsi)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(App.context, CommonWebView.class);
-//                    intent.putExtra("url", "http://tabankeji.com/djh5/gerenxinxibaohuzhengce.html");
-                    intent.putExtra("weburl", "yinsizhengce");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    App.context.startActivity(intent);
                 }
             });
             ((TextView) layout.findViewById(R.id.tv_fuwuxieyi)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(App.context, CommonWebView.class);
-//                    intent.putExtra("url", "http://tabankeji.com/djh5/daijiafuwuxieyi.html");
-                    intent.putExtra("weburl", "fuwuxieyi");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    App.context.startActivity(intent);
                 }
             });
             dialog.setCancelable(mCancelable);

@@ -29,9 +29,6 @@ import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 import java.util.List;
 
-/**
- * Created by Owner on 2016/9/28.
- */
 public class SubjectDQuestion extends BaseActivity {
 
     private ReaderViewPager readerViewPager;

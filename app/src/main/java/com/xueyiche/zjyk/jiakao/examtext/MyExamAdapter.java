@@ -9,9 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.xueyiche.zjyk.jiakao.factory.FragmentFactory;
 
 
-/**
- * Created by Owner on 2016/9/13.
- */
+
 public class MyExamAdapter extends FragmentPagerAdapter {
 
 
@@ -29,6 +27,6 @@ public class MyExamAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return FragmentFactory.COUNT1;
+        return FragmentFactory.COUNT;
     }
 }

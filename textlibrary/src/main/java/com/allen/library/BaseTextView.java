@@ -9,8 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Allen on 2017/6/29.
- * <p>
  * 基础TextView
  */
 

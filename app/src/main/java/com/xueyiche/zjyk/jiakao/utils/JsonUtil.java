@@ -15,8 +15,6 @@ import java.util.Map;
 
 /**
  * 封装的是使用Gson解析json的方法
- * @author Administrator
- *
  */
 public class JsonUtil {
 

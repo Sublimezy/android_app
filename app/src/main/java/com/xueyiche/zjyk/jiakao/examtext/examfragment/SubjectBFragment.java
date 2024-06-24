@@ -7,14 +7,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.base.CommonWebView;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.examtext.kemub.SubjectbWeb;
 
-/**
- * Created by Owner on 2016/9/23.
- */
+
 public class SubjectBFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout ll_daoche, ll_poting, ll_quxian, ll_zhijiao, ll_cefang,ll_must_pass;
@@ -54,7 +51,6 @@ public class SubjectBFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(App.context, SubjectbWeb.class);
-        Intent intent1 = new Intent(App.context, CommonWebView.class);
         switch (v.getId()) {
             case R.id.ll_daoche:
                 intent.putExtra("TITLE","daoche_ruku");
@@ -75,14 +71,6 @@ public class SubjectBFragment extends BaseFragment implements View.OnClickListen
             case R.id.ll_zhijiao:
                 intent.putExtra("TITLE","zhijiaozhuanwan");
                 startActivity(intent);
-                break;
-            case R.id.tv_must_pass:
-                intent1.putExtra("weburl","biguo");
-                startActivity(intent1);
-                break;
-            case R.id.tv_keer_xuzhi:
-                intent1.putExtra("weburl","two_xuzhi");
-                startActivity(intent1);
                 break;
 
         }

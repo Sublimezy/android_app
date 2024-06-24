@@ -1,8 +1,6 @@
 package com.xueyiche.zjyk.jiakao.homepage.bean;
 
-/**
- * Created by Owner on 2016/10/24.
- */
+
 public class MyResultBean {
     public String shijian;
     public String fenshu;

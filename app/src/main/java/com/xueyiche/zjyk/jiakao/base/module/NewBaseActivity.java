@@ -59,7 +59,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
         initView();
         initListener();
         initData();
-//        // 添加Activity到堆栈
+        // 添加Activity到堆栈
         AppUtils.getAppManager().addActivity(this);
         //透明状态栏
         Window window = getWindow();
@@ -84,6 +84,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
         }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+
     //点击空白处软件盘消失
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -102,6 +103,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
         // 结束Activity&从堆栈中移除
         AppUtils.getAppManager().finishActivity(this);
     }
+
     @Override
     public Resources getResources() {
         //禁止app字体大小跟随系统字体大小调节
@@ -113,6 +115,7 @@ public abstract class NewBaseActivity extends AppCompatActivity {
         }
         return resources;
     }
+
     @Override
     protected void onPause() {
         super.onPause();

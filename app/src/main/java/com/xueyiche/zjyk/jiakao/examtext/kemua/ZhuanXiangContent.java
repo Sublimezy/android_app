@@ -24,9 +24,6 @@ import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 import java.util.List;
 
-/**
- * Created by Owner on 2016/10/14.
- */
 public class ZhuanXiangContent extends BaseActivity{
     private ReaderViewPager readerViewPager;
     private List<Questiona> allQuestionA;

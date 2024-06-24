@@ -16,9 +16,7 @@ import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.base.module.DBManager;
 import com.xueyiche.zjyk.jiakao.constants.App;
 
-/**
- * Created by Owner on 2016/10/13.
- */
+
 public class ZhuanXiangA extends BaseActivity {
 
     private ListView mLV_zhuangxiang;

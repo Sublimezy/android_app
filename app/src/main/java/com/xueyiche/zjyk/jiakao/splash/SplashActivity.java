@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mob.MobSDK;
@@ -23,8 +24,9 @@ import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 import com.xueyiche.zjyk.jiakao.utils.XieYiDialogUtils;
 
+//程序入口
+public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class SplashActivity extends AppCompatActivity implements  View.OnClickListener {
     protected static final String TAG = SplashActivity.class.getSimpleName();
     private TextView tv_jump;
     private boolean choice_city;
@@ -33,12 +35,12 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //  getSupportActionBar().hide();
+
         //全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-//        XueYiCheUtils.getNowLocation(SplashActivity.this);
+
 
         tv_jump = (TextView) findViewById(R.id.tv_jump);
         choice_city = PrefUtils.getBoolean(App.context, "choice_city", false);
@@ -46,6 +48,7 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
 
 
     }
+
     /**
      * 腾讯要求 必须有协议提示
      */
@@ -74,9 +77,6 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
     }
 
 
-
-
-
     private void initViews() {
         ImageView mRl_splash = (ImageView) findViewById(R.id.image_splash);
 //        mRl_splash.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -103,13 +103,17 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
 
         });
         mRl_splash.startAnimation(set);
+
         showTime();
+
     }
+
+    //抑制特定Lint检查的警告或错误
     @SuppressLint("WrongConstant")
     private void res() {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showTime() {
@@ -120,7 +124,6 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
             res();
         }
     }
-
 
 
     @Override
@@ -140,15 +143,11 @@ public class SplashActivity extends AppCompatActivity implements  View.OnClickLi
     }
 
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         alpha.cancel();
     }
-
-
 
 
 }

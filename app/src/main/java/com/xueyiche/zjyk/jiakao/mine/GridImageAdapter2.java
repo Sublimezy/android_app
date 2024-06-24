@@ -20,11 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-/**
- * @author：luck
- * @date：2016-7-27 23:02
- * @describe：GridImageAdapter
- */
+
 public class GridImageAdapter2 extends
         RecyclerView.Adapter<GridImageAdapter2.ViewHolder> {
     public static final String TAG = "PictureSelector";

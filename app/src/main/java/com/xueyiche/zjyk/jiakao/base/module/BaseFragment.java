@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,12 +29,20 @@ public abstract class BaseFragment extends Fragment {
     private InputMethodManager manager;
     private BaseProgressDialog mProgressDialog = null;
 
+    //在片段附加到活动时调用。它将上下文对象赋值给 mContext 变量，用于后续操作
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.mContext = context;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    //    创建并返回片段的视图。初始化 InputMethodManager，用于处理软键盘隐藏
+//    。设置 LoadingPager 作为片段的视图，并实现点击空白处隐藏软键盘的功能。
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,10 +78,11 @@ public abstract class BaseFragment extends Fragment {
         return loadingPager;
     }
 
-        @Override
+    //处理片段的可见性变化。当片段变得可见时调用 onVisible，不可见时调用 onInvisible。
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             onVisible();
         } else {
@@ -81,11 +92,11 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-
     /**
      * @author wulee
      */
-
+//显示和隐藏进度对话框。showProgressDialog 显示进度对话框，
+// 并允许设置是否可取消及取消监听器。stopProgressDialog 隐藏进度对话框。
     public void showProgressDialog(Activity activity, BaseProgressDialog.OnCancelListener cancelListener, boolean cancelable, String msg) {
 
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -119,7 +130,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract void lazyLoad();
-
+//处理片段可见性变化时的逻辑。onVisible 调用 lazyLoad 方法执行懒加载操作
+// ，onInvisible 是一个空方法，子类可重写它以执行不可见时的操作。
     protected void onInvisible() {
     }
 

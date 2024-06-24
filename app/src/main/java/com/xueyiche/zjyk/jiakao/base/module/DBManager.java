@@ -17,9 +17,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Owner on 2016/9/29.
- */
+
 public class
 DBManager {
 

@@ -2,9 +2,7 @@ package com.xueyiche.zjyk.jiakao.homepage.bean;
 
 import java.util.List;
 
-/**
- * Created by ZL on 2017/1/11.
- */
+
 public class KeMuSanBean {
 
 

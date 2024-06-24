@@ -13,9 +13,7 @@ import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.utils.NetUtil;
 
-/**
- * Created by ZL on 2017/1/11.
- */
+
 public class KeMuSanVideo extends BaseActivity implements View.OnClickListener{
     private VideoView video_view;
     private ImageView iv_kesan_back;

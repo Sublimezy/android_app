@@ -126,8 +126,6 @@ public class EditMySelfInfoActivity extends BaseActivity {
     protected void initData() {
         String name = getIntent().getStringExtra("name");
         head = getIntent().getStringExtra("head");
-        LogUtils.i("张斯佳naem", name);
-        LogUtils.i("张斯佳head", head);
         etNackname.setText(name);
         initRecycler();
         ArrayList<LocalMedia> list = new ArrayList<>();
@@ -260,7 +258,6 @@ public class EditMySelfInfoActivity extends BaseActivity {
                                 if (info.isOK()) {
                                     Map<String, String> params = new HashMap<>();
                                     params.put("nickname", etNackname.getText().toString().trim());
-                                    params.put("avatar", StringConstants.QiNiu + key);
                                     MyHttpUtils.postHttpMessage(AppUrl.userInfoEdit, params, BaseResponseBean.class, new RequestCallBack<BaseResponseBean>() {
                                         @Override
                                         public void requestSuccess(BaseResponseBean json) {

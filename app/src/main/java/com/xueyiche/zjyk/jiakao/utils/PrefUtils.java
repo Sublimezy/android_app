@@ -3,6 +3,7 @@ package com.xueyiche.zjyk.jiakao.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
 import com.xueyiche.zjyk.jiakao.constants.App;
 
 import java.util.ArrayList;
@@ -10,9 +11,8 @@ import java.util.List;
 
 /**
  * 专门访问和设置SharePreference的工具类, 保存和配置一些设置信息
- * 
- * @author Kevin
- * 
+ * SharedPreferences是一种轻量级的数据存储方式，
+ * 适用于保存简单的键值对数据，如应用的配置信息、用户偏好设置等。
  */
 public class PrefUtils {
 
@@ -144,6 +144,33 @@ public class PrefUtils {
 		sp.commit();
 	}
 
+	// 保存实体信息到SharedPreferences
+	public static void putParameter(Context context, String key, Object object) {
+
+		SharedPreferences preferences = context.getSharedPreferences(SHARE_PREFS_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = preferences.edit();
+
+		// 使用 Gson 将对象转换为 JSON 字符串
+		Gson gson = new Gson();
+		String json = gson.toJson(object);
+
+		editor.putString(key, json);
+		editor.apply();
+	}
+
+	// 获取实体信息从SharedPreferences
+	public static <T> T getParameter(Context context, String key, Class<T> clazz) {
+		SharedPreferences preferences = context.getSharedPreferences(SHARE_PREFS_NAME, Context.MODE_PRIVATE);
+		String json = preferences.getString(key, null);
+
+		if (json != null) {
+			// 使用 Gson 将 JSON 字符串转换为对象
+			Gson gson = new Gson();
+			return gson.fromJson(json, clazz);
+		} else {
+			return null;
+		}
+	}
 
 
 }

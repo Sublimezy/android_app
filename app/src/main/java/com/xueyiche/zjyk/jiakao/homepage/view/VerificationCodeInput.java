@@ -27,7 +27,7 @@ import android.widget.LinearLayout;
 
 import com.xueyiche.zjyk.jiakao.R;
 
-
+//ViewGroup 是一个抽象类，用于定义布局容器的基本行为
 public class VerificationCodeInput extends ViewGroup {
 
     private final static String TYPE_NUMBER = "number";

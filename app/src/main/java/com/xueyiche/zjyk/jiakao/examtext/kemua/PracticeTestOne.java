@@ -57,9 +57,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Owner on 2016/10/12.
- */
+
 //模拟考试页面
 public class PracticeTestOne extends BaseActivity implements View.OnClickListener {
     private ReaderViewPager readerViewPager;

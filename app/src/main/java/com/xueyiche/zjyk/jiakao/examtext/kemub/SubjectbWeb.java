@@ -13,9 +13,7 @@ import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.utils.XueYiCheUtils;
 
-/**
- * Created by Owner on 2016/12/30.
- */
+
 public class SubjectbWeb extends BaseActivity implements View.OnClickListener {
 
     private TextView tv_title;

@@ -1,8 +1,6 @@
 package com.xueyiche.zjyk.jiakao.homepage.bean;
 
-/**
- * Created by Owner on 2016/10/12.
- */
+
 public class OptionBean {
     public String A;
     public String B;

@@ -72,6 +72,7 @@
     <string name="tv_lianminka">联名卡</string>
     <string name="tv_indent">订单</string>
     <string name="tv_mine">我的</string>
+    <string name="tv_jiakao">驾考</string>
     <string name="tv_loading">加载中…</string>
     <string name="shuxian">|</string>
     <string name="tv_grade">分</string>
@@ -81,6 +82,7 @@
     <string name="tv_user">用户</string>
     <string name="tv_fenshu">分数</string>
     <string name="tv_usetime">用时</string>
+    <string name="tv_message">消息</string>
     <string name="tv_zongtipingjia">文字评价或选择标签</string>
     <string name="tv_fuwutaidu">服务态度</string>
     <string name="tv_jishushuiping">技术水平</string>

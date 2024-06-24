@@ -16,13 +16,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @Package: com.keji.zsj.virtual_country.utils.httputils
- * @ClassName: HttpUtils
- * @Description: java类作用描述
- * @Author: 松鼠爱吃肉
- * @CreateDate: 2020/12/1 12:42
- */
+
 public class MyHttpUtils {
     /**
      * post网络请求
@@ -35,6 +29,7 @@ public class MyHttpUtils {
      */
     public static <T> void postHttpMessage(final String url, Map<String, String> params, final Class<T> clazz, final RequestCallBack<T> listener) {
         Log.e("postmap____________", url + "~~~~~" + params.toString() + "");
+        System.out.println(params);
 
         OkGo.<String>post(url)//
                 .tag(url)

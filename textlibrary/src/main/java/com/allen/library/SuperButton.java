@@ -10,8 +10,6 @@ import android.view.Gravity;
 import android.widget.Button;
 
 /**
- * Created by Allen on 2017/7/6.
- * <p>
  * 超级按钮  实现shape所有的属性
  */
 

@@ -1,8 +1,6 @@
 package com.xueyiche.zjyk.jiakao.homepage.view;
 
-/**
- * Created by zhanglei on 2016/9/28.
- */
+
 import android.content.Context;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;

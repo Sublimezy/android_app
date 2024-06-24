@@ -18,9 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by zhanglei on 2016/10/19.
- */
+
 public class AchievementOneActivity extends BaseActivity implements View.OnClickListener {
     private ImageView ivBack, ivHeGe, ivLook;
     private TextView tvGrade, tvTime,tv_kemu_chengji;

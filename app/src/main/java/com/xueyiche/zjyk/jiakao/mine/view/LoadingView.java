@@ -22,9 +22,7 @@ import com.nineoldandroids.view.ViewHelper;
 import com.xueyiche.zjyk.jiakao.R;
 
 
-/**
- * Created by zzz40500 on 15/4/6.
- */
+
 public class LoadingView extends LinearLayout {
 
     private static final int ANIMATION_DURATION = 500;

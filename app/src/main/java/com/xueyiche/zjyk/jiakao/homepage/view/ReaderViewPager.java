@@ -1,8 +1,6 @@
 package com.xueyiche.zjyk.jiakao.homepage.view;
 
-/**
- * Created by zhanglei on 2016/9/28.
- */
+
 import android.content.Context;
 import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
@@ -11,9 +9,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import java.lang.reflect.Field;
 
-/**
- * Created by Owner on 2016/9/28.
- */
+
 public class ReaderViewPager extends ViewPager{
 
     public ReaderViewPager(Context context) {

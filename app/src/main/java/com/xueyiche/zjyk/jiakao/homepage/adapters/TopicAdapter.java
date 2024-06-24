@@ -14,9 +14,7 @@ import com.xueyiche.zjyk.jiakao.homepage.bean.Questiona;
 
 import java.util.List;
 
-/**
- * Created by Owner on 2016/10/17.
- */
+
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder>{
     private Context mContext;
     private final LayoutInflater inflater;

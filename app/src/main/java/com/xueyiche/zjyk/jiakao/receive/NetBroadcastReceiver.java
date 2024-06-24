@@ -9,9 +9,7 @@ import com.xueyiche.zjyk.jiakao.utils.NetUtil;
 
 import java.util.ArrayList;
 
-/**
- * Created by cheng on 2016/11/28.
- */
+
 public class NetBroadcastReceiver extends BroadcastReceiver {
     public static ArrayList<netEventHandler> mListeners = new ArrayList<netEventHandler>();
     private static String NET_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";

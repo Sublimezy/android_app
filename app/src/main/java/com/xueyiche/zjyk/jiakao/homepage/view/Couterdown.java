@@ -1,14 +1,9 @@
 package com.xueyiche.zjyk.jiakao.homepage.view;
 
 import android.os.CountDownTimer;
+//倒计时
 public class Couterdown extends CountDownTimer {
-    /**
-     * @param millisInFuture    The number of millis in the future from the call
-     *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
-     *                          is called.
-     * @param countDownInterval The interval along the way to receive
-     *                          {@link #onTick(long)} callbacks.
-     */
+
     public Couterdown(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
     }

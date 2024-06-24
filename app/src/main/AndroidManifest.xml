@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xueyiche.zjyk.jiakao">
+    <!--    用于声明应用程序需要的权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -9,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 读取网络信息状态 -->
@@ -26,9 +28,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- Android Q后台定位权限 -->
-    <uses-permission
-        android:name="android.permission.MOUNT_FORMAT_FILFOREGROUND_SERVICEESYSTEMS"
-        /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILFOREGROUND_SERVICEESYSTEMS" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
@@ -86,13 +86,13 @@
         tools:replace="android:allowBackup">
         <activity
             android:name="com.xueyiche.zjyk.jiakao.mine.activities.bianji.SetActivity"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.xueyiche.zjyk.jiakao.mine.activities.bianji.EditMySelfInfoActivity"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -106,8 +106,8 @@
             android:value="portrait|landscape" /> <!-- 全新需要的Activity -->
         <activity
             android:name="com.xueyiche.zjyk.jiakao.splash.SplashActivity"
-            android:screenOrientation="portrait"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"
             android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -115,18 +115,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.VIEW" /> -->
-            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            <!-- <data android:scheme="wx2c016c0ed633dbd2" /> -->
-            <!-- </intent-filter> -->
+             <intent-filter>
+             <action android:name="android.intent.action.VIEW" />
+             <category android:name="android.intent.category.DEFAULT" />
+             <data android:scheme="wx2c016c0ed633dbd2" />
+             </intent-filter>
 
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.VIEW" /> -->
-            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            <!-- <data android:scheme="wx2c016c0ed633dbd2" /> -->
-            <!-- </intent-filter> -->
+             <intent-filter>
+             <action android:name="android.intent.action.VIEW" />
+             <category android:name="android.intent.category.DEFAULT" />
+             <data android:scheme="wx2c016c0ed633dbd2" />
+             </intent-filter>
 
         </activity>
 
@@ -142,176 +142,158 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
 
-        <activity android:name="com.xueyiche.zjyk.jiakao.main.activities.login.LoginFirstStepActivity"
-            android:exported="false"
+        <activity
+            android:name="com.xueyiche.zjyk.jiakao.main.activities.login.LoginFirstStepActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" /> <!-- 第二部登录 -->
-        <activity android:name="com.xueyiche.zjyk.jiakao.main.activities.login.LoginSecondStepActivity"
-            android:exported="false"
+        <activity
+            android:name="com.xueyiche.zjyk.jiakao.main.activities.login.LoginSecondStepActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.xueyiche.zjyk.jiakao.mine.activities.bianji.ChangeHeadActivity"
-            android:exported="false"
+        <activity
+            android:name="com.xueyiche.zjyk.jiakao.mine.activities.bianji.ChangeHeadActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" /> <!-- 车保险的车型 -->
         <!-- 主页 -->
         <activity
             android:name="com.xueyiche.zjyk.jiakao.main.activities.main.MainActivity"
-            android:launchMode="singleTask"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" /> <!-- 赢现金答题页 -->
 
         <activity
             android:name="com.xueyiche.zjyk.jiakao.mine.activities.bianji.InformationChangeActivity"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" /> <!-- 性别 -->
-        <!-- 使用帮助 -->
-        <!-- 关于驾考APP -->
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.mine.activities.AboutXueYiCheActivity"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" /> <!-- 教练详情页面 -->
 
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.constants.UrlActivity"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" /> <!-- 公共的url -->
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.base.CommonWebView"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" />
-
+<!--模拟考试页面-->
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.PracticeTestOne"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+<!--        模拟考试页面-->
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.PracticeTestFour"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.SubjectAQuestion"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.AchievementOneActivity"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.CollectionA"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.CuoTiA"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.RandomTestA"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.ZhuanXiangA"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.ZhuanXiangContent"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.Answerwithcash"
             android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.AnswerwithcashFinish"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.AnswerWithCashQuestion"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.PaiHangBang"
-            android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" />
+
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.MyResult"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.MyJiangJin"
             android:exported="false"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait" />
+
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.MoNiTestPage"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemub.SubjectbWeb"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemuc.KeMuSanVideo"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.AchievementFourActivity"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.CollectionD"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.CuoTiD"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.RandomTestD"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.SubjectDQuestion"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.ZhuangXiangDContent"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.ZhuanXiangD"
-            android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <provider
@@ -359,11 +341,14 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity> <!-- Required SDK核心功能 -->
+        </activity>
+
+        <!-- Required SDK核心功能 -->
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" /> <!-- 声明SDK所需要的组件 -->
+            android:required="false" />
+        <!-- 声明SDK所需要的组件 -->
 
     </application>
 

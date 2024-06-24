@@ -14,9 +14,7 @@ import com.xueyiche.zjyk.jiakao.homepage.db.MyResultDB;
 
 import java.util.List;
 
-/**
- * Created by zhanglei on 2016/10/24.
- */
+
 public class MyResultAdapterA extends BaseAdapter {
     private List<MyResultBean>  list;
 

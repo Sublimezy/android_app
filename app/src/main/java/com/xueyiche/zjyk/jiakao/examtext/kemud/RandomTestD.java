@@ -26,9 +26,7 @@ import com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager;
 
 import java.util.List;
 
-/**
- * Created by Owner on 2016/10/11.
- */
+
 public class RandomTestD extends BaseActivity{
     private ReaderViewPager readerViewPager;
     private PagerAdapter adapter;

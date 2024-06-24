@@ -124,13 +124,6 @@
             android:textColor="@color/_9999"
             android:textSize="@dimen/side_letter_bar_letter_size" />
 
-        <TextView
-            android:id="@+id/tv_user_xieyi"
-            android:text="驾考APP法律条款与平台规则"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorOrange"
-            android:textSize="@dimen/side_letter_bar_letter_size" />
     </LinearLayout>
 
 </LinearLayout>

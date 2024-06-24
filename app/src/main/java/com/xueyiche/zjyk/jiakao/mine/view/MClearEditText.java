@@ -17,8 +17,6 @@ import android.widget.EditText;
 import com.xueyiche.zjyk.jiakao.R;
 
 /**
- * Created by zhanglei on 17/7/25.
- * <p/>
  * 有清除功能的EditText：只有当有焦点和文本不为空的时候才显示
  */
 public class MClearEditText extends EditText implements View.OnFocusChangeListener, TextWatcher {

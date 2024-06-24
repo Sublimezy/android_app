@@ -20,7 +20,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.base.CommonWebView;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
@@ -36,9 +35,7 @@ import com.zhy.http.okhttp.callback.Callback;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by Owner on 2016/9/23.
- */
+
 public class SubjectCFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView recycler_view;
     private GridLayoutManager mLayoutManage;
@@ -186,16 +183,7 @@ public class SubjectCFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_must_pass:
-                Intent intent1 = new Intent(App.context, CommonWebView.class);
-                intent1.putExtra("weburl", "biguo");
-                startActivity(intent1);
-                break;
-            case R.id.tv_kesan_xuzhi:
-                Intent intent2 = new Intent(App.context, CommonWebView.class);
-                intent2.putExtra("weburl", "three_xuzhi");
-                startActivity(intent2);
-                break;
+
         }
     }
 

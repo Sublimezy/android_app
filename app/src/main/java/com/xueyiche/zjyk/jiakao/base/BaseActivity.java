@@ -1,8 +1,6 @@
 package com.xueyiche.zjyk.jiakao.base;
 
-/**
- * Created by YJF on 2020/3/13.
- */
+
 
 import android.annotation.TargetApi;
 import android.content.Context;

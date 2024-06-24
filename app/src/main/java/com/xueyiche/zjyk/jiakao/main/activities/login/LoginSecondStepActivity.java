@@ -1,6 +1,7 @@
 package com.xueyiche.zjyk.jiakao.main.activities.login;
 
-import android.content.Context;
+import static com.xueyiche.zjyk.jiakao.constants.App.context;
+
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,12 +13,9 @@ import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.base.CommonWebView;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
-import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
 import com.xueyiche.zjyk.jiakao.constants.bean.YanZhengMa;
-import com.xueyiche.zjyk.jiakao.homepage.bean.SuccessBackBean;
 import com.xueyiche.zjyk.jiakao.homepage.view.VerificationCodeInput;
 import com.xueyiche.zjyk.jiakao.main.bean.LoginBean;
 import com.xueyiche.zjyk.jiakao.mine.view.CountDownTimerUtils;
@@ -33,9 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by ZL on 2018/2/6.
- */
+
 public class LoginSecondStepActivity extends BaseActivity {
     @BindView(R.id.tvPhone)
     TextView tvPhone;
@@ -51,25 +47,20 @@ public class LoginSecondStepActivity extends BaseActivity {
     private String phone;
     private String yanzhengma;
     private String isCheck = "1";
+
     @Override
     protected int initContentView() {
         return R.layout.login_second_step;
     }
-    public static void forward(Context context,String phone) {
-        Intent intent = new Intent(context, LoginSecondStepActivity.class);
-        intent.putExtra("phone",phone);
-        context.startActivity(intent);
 
 
-
-
-    }
     @Override
     protected void initView() {
         ButterKnife.bind(this);
         ImmersionBar.with(this).titleBar(R.id.rl_title).statusBarDarkFont(true).init();
 
     }
+
     @Override
     protected void initListener() {
         check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -91,6 +82,7 @@ public class LoginSecondStepActivity extends BaseActivity {
         });
 
     }
+
     @Override
     protected void initData() {
         Intent intent = getIntent();
@@ -103,8 +95,9 @@ public class LoginSecondStepActivity extends BaseActivity {
     private void getPassWord() {
         countDownTimer.start();
         Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("event", "mobilelogin");
+        params.put("phone", phone);
+        params.put("email", phone);
+        params.put("event", "MOBILE_LOGIN");
         MyHttpUtils.postHttpMessage(AppUrl.sendSMS, params, YanZhengMa.class, new RequestCallBack<YanZhengMa>() {
             @Override
             public void requestSuccess(YanZhengMa json) {
@@ -122,22 +115,34 @@ public class LoginSecondStepActivity extends BaseActivity {
             }
         });
     }
+
     private void login() {
-        if (XueYiCheUtils.IsHaveInternet(App.context)) {
+        if (XueYiCheUtils.IsHaveInternet(context)) {
             if (!TextUtils.isEmpty(yanzhengma)) {
                 Map<String, String> params = new HashMap<>();
-                params.put("mobile", phone);
+                params.put("email", phone);
                 params.put("captcha", yanzhengma);
-                params.put("type", "1");
+                params.put("loginType", "CAPTCHA");
                 MyHttpUtils.postHttpMessage(AppUrl.LOGIN, params, LoginBean.class, new RequestCallBack<LoginBean>() {
                     @Override
                     public void requestSuccess(LoginBean json) {
-                        if (json.getCode() == 1) {
-                            LoginBean.DataBean.UserinfoBean userinfo = json.getData().getUserinfo();
-                            PrefUtils.putBoolean(App.context,"ISLOGIN",true);
-                            PrefUtils.putParameter("token",userinfo.getToken());
-                            PrefUtils.putParameter("phone",userinfo.getMobile());
+                        if (json.getCode() == 200) {
+
+                            LoginBean.DataBean.DistanceUser userinfo = json.getData().getDistanceUser();
+                            String token = json.getData().getToken();
+
                             LoginFirstStepActivity.instance.finish();
+
+                            PrefUtils.putBoolean(context, "ISLOGIN", true);
+                            PrefUtils.putParameter("token", token);
+                            PrefUtils.putParameter(context,"userinfo", userinfo);
+                            LoginBean.DataBean.DistanceUser distanceUser = PrefUtils.getParameter(context, "userinfo", LoginBean.DataBean.DistanceUser.class);
+
+
+                            System.out.println(distanceUser);
+
+
+
                             finish();
                         }
                         showToastShort(json.getMsg());
@@ -150,10 +155,11 @@ public class LoginSecondStepActivity extends BaseActivity {
                 });
             }
         } else {
-            ToastUtils.showToast(LoginSecondStepActivity.this,"请检查网络连接");
+            ToastUtils.showToast(LoginSecondStepActivity.this, "请检查网络连接");
         }
     }
-    @OnClick({R.id.ll_exam_back, R.id.tvGetPassWord, R.id.btLogin, R.id.tv_user_xieyi})
+
+    @OnClick({R.id.ll_exam_back, R.id.tvGetPassWord, R.id.btLogin})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_exam_back:
@@ -165,21 +171,19 @@ public class LoginSecondStepActivity extends BaseActivity {
             case R.id.btLogin:
 
                 yanzhengma = et_pwd.getText().toString().trim();
-                if(TextUtils.isEmpty(yanzhengma)){
+                if (TextUtils.isEmpty(yanzhengma)) {
                     showToastShort("请输入验证码");
                     return;
                 }
-                login();
+
                 if ("0".equals(isCheck)) {
-                    ToastUtils.showToast(LoginSecondStepActivity.this,"请阅读并同意遵守驾考APP法律条款与平台规则");
+                    ToastUtils.showToast(LoginSecondStepActivity.this, "请阅读并同意遵守驾考APP法律条款与平台规则");
                     break;
                 } else {
                     login();
                 }
                 break;
-            case R.id.tv_user_xieyi:
-                CommonWebView.forward(LoginSecondStepActivity.this,"xieyi");
-                break;
+
         }
     }
 }

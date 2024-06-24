@@ -14,47 +14,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="57dp"
-                android:layout_marginRight="57dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/tv_exam_shuoming"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:drawableLeft="@mipmap/test_shuoming"
-                    android:drawablePadding="7dp"
-                    android:text="@string/kaoshishuoming"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tv_biguojiqiao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:drawableLeft="@mipmap/test_skill"
-                    android:drawablePadding="7dp"
-                    android:text="@string/biguojiqiao"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="25dp"
-                    android:layout_centerInParent="true"
-                    android:background="#979797" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -67,14 +26,6 @@
                     android:paddingLeft="38dp"
                     android:paddingRight="30dp"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/tv_one"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@mipmap/test_suiji"
-                        android:text="@string/suijilianxi"
-                        android:textColor="@color/test_color"
-                        android:textSize="@dimen/text_fifteensp" />
                     <TextView
                         android:id="@+id/tv_three"
                         android:layout_width="wrap_content"
@@ -96,20 +47,8 @@
                         android:text="@string/mychnegji"
                         android:textColor="@color/test_color"
                         android:textSize="@dimen/text_fifteensp" />
-
-                    <TextView
-                        android:id="@+id/tv_seven"
-                        android:visibility="gone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_seven"
-                        android:layout_centerHorizontal="true"
-                        android:drawableTop="@mipmap/test_money"
-                        android:layout_marginTop="22dp"
-                        android:text="@string/wodejiangjin"
-                        android:textColor="@color/test_color"
-                        android:textSize="@dimen/text_fifteensp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
@@ -159,6 +98,7 @@
                         android:layout_centerInParent="true"
                          />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
@@ -185,44 +125,10 @@
                         android:textColor="@color/test_color"
                         android:textSize="@dimen/text_fifteensp" />
 
-                    <TextView
-                        android:id="@+id/tv_six"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="47dp"
-                        android:text="@string/paihangbang"
-                        android:visibility="gone"
-                        android:gravity="center_horizontal"
-                        android:drawableTop="@mipmap/test_paihangbang"
-                        android:textColor="@color/test_color"
-                        android:textSize="@dimen/text_fifteensp" />
-
-                    <TextView
-                        android:id="@+id/tv_eight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="22dp"
-                        android:visibility="gone"
-                        android:drawableTop="@mipmap/test_important"
-                        android:text="@string/kaoshizhongdian"
-                        android:textColor="@color/test_color"
-                        android:textSize="@dimen/text_fifteensp" />
                 </LinearLayout>
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/bt_wincash"
-                android:layout_width="280dp"
-                android:layout_height="@dimen/all_include_height"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/all_include_height"
-                android:layout_marginTop="@dimen/all_include_height"
-                android:background="@drawable/button_shape"
-                android:text="答题赢现金"
-                android:textColor="@color/color_white"
-                android:textSize="25sp"
-                android:visibility="gone" />
+
 
         </LinearLayout>
     </ScrollView>

@@ -39,59 +39,110 @@ public class LoginBean {
     }
 
     public static class DataBean {
-        private UserinfoBean userinfo;
 
-        public UserinfoBean getUserinfo() {
-            return userinfo;
+        private DistanceUser distanceUser;
+
+        private String token;
+
+        public String getToken() {
+            return token;
         }
 
-        public void setUserinfo(UserinfoBean userinfo) {
-            this.userinfo = userinfo;
+        public void setToken(String token) {
+            this.token = token;
         }
 
-        public static class UserinfoBean {
-            private String id;
-            private String username;
-            private String nickname;
-            private String mobile;
+        public DistanceUser getDistanceUser() {
+            return distanceUser;
+        }
+
+        public void setUserinfo(DistanceUser distanceUser) {
+            this.distanceUser = distanceUser;
+        }
+
+        public static class DistanceUser {
+            /** 用户ID */
+            private Long userId;
+
+            /** 用户账号 */
+            private String userName;
+
+            /** 用户昵称 */
+            private String nickName;
+
+            /** 用户邮箱 */
+            private String email;
+
+            /** 手机号码 */
+            private String phonenumber;
+
+            /** 用户性别 */
+            private Long sex;
+
+            /** 头像地址 */
             private String avatar;
-            private String score;
-            private String token;
-            private String user_id;
-            private String createtime;
-            private String expiretime;
-            private String expires_in;
 
-            public String getId() {
-                return id;
+            /** 密码 */
+            private String password;
+
+            /** 帐号状态 */
+            private Long status;
+
+            /** 删除标志 */
+            private Long delFlag;
+
+            /** 粉丝数量 */
+            private Long fans;
+
+            /** 关注的人的数量 */
+            private Long followee;
+
+            public Long getUserId() {
+                return userId;
             }
 
-            public void setId(String id) {
-                this.id = id;
+            public void setUserId(Long userId) {
+                this.userId = userId;
             }
 
-            public String getUsername() {
-                return username;
+            public String getUserName() {
+                return userName;
             }
 
-            public void setUsername(String username) {
-                this.username = username;
+            public void setUserName(String userName) {
+                this.userName = userName;
             }
 
-            public String getNickname() {
-                return nickname;
+            public String getNickName() {
+                return nickName;
             }
 
-            public void setNickname(String nickname) {
-                this.nickname = nickname;
+            public void setNickName(String nickName) {
+                this.nickName = nickName;
             }
 
-            public String getMobile() {
-                return mobile;
+            public String getEmail() {
+                return email;
             }
 
-            public void setMobile(String mobile) {
-                this.mobile = mobile;
+            public void setEmail(String email) {
+                this.email = email;
+            }
+
+            public String getPhonenumber() {
+                return phonenumber;
+            }
+
+            public void setPhonenumber(String phonenumber) {
+                this.phonenumber = phonenumber;
+            }
+
+            public Long getSex() {
+                return sex;
+            }
+
+            public void setSex(Long sex) {
+                this.sex = sex;
             }
 
             public String getAvatar() {
@@ -102,53 +153,47 @@ public class LoginBean {
                 this.avatar = avatar;
             }
 
-            public String getScore() {
-                return score;
+            public String getPassword() {
+                return password;
             }
 
-            public void setScore(String score) {
-                this.score = score;
+            public void setPassword(String password) {
+                this.password = password;
             }
 
-            public String getToken() {
-                return token;
+            public Long getStatus() {
+                return status;
             }
 
-            public void setToken(String token) {
-                this.token = token;
+            public void setStatus(Long status) {
+                this.status = status;
             }
 
-            public String getUser_id() {
-                return user_id;
+            public Long getDelFlag() {
+                return delFlag;
             }
 
-            public void setUser_id(String user_id) {
-                this.user_id = user_id;
+            public void setDelFlag(Long delFlag) {
+                this.delFlag = delFlag;
             }
 
-            public String getCreatetime() {
-                return createtime;
+            public Long getFans() {
+                return fans;
             }
 
-            public void setCreatetime(String createtime) {
-                this.createtime = createtime;
+            public void setFans(Long fans) {
+                this.fans = fans;
             }
 
-            public String getExpiretime() {
-                return expiretime;
+            public Long getFollowee() {
+                return followee;
             }
 
-            public void setExpiretime(String expiretime) {
-                this.expiretime = expiretime;
-            }
-
-            public String getExpires_in() {
-                return expires_in;
-            }
-
-            public void setExpires_in(String expires_in) {
-                this.expires_in = expires_in;
+            public void setFollowee(Long followee) {
+                this.followee = followee;
             }
         }
     }
+
+
 }

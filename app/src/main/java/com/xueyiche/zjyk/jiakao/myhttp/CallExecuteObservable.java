@@ -10,13 +10,7 @@ import io.reactivex.exceptions.CompositeException;
 import io.reactivex.exceptions.Exceptions;
 import io.reactivex.plugins.RxJavaPlugins;
 
-/**
- * @Package: com.example.yjf.tata.utils.net
- * @ClassName: CallExecuteObservable
- * @Description: java类作用描述
- * @Author: 松鼠爱吃肉
- * @CreateDate: 2020/7/20 18:20
- */
+
 public class CallExecuteObservable<T> extends Observable<Response<T>> {
     private final Call<T> originalCall;
 

@@ -13,9 +13,7 @@ import com.xueyiche.zjyk.jiakao.constants.bean.PaiHangBean;
 
 import java.util.List;
 
-/**
- * Created by Owner on 2017/1/12.
- */
+
 public class MyPaiHangBangAdapter extends BaseAdapter{
     private List<PaiHangBean.ContentBean> content;
 

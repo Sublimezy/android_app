@@ -12,9 +12,7 @@ import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.homepage.adapters.MyResultAdapterA;
 import com.xueyiche.zjyk.jiakao.homepage.adapters.MyResultAdapterD;
 
-/**
- * Created by zhanglei on 2016/10/24.
- */
+
 public class MyResult extends BaseActivity implements View.OnClickListener{
     private LinearLayout llBack;
     private ListView listView;

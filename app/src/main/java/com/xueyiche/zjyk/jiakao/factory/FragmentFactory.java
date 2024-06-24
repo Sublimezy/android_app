@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class FragmentFactory {
     public static final int COUNT = 4;
-    public static final int COUNT1 = 2;
+//    public static final int COUNT1 = 2;
     public static Map<Integer, Fragment> map = new HashMap<>();
 
 
@@ -25,14 +25,13 @@ public class FragmentFactory {
                 case 0:
                     fragment = new SubjectAFragment();
                     break;
-//                case 1:
-//                    fragment = new SubjectBFragment();
-//
-//                    break;
-//                case 2:
-//                    fragment = new SubjectCFragment();
-//                    break;
                 case 1:
+                    fragment = new SubjectBFragment();
+                    break;
+                case 2:
+                    fragment = new SubjectCFragment();
+                    break;
+                case 3:
                     fragment = new SubjectDFragment();
                     break;
             }

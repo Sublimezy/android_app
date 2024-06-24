@@ -1,8 +1,6 @@
 package com.xueyiche.zjyk.jiakao.homepage.bean;
 
-/**
- * Created by Owner on 2016/9/29.
- */
+
 public class Questiona {
 
     public String question;

@@ -8,38 +8,50 @@
         android:id="@+id/navigation_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_above="@+id/rl_bottom" />
+        android:layout_above="@+id/rl_bottom"
+        android:layout_weight="1" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/yi"
         android:background="@color/all_line_color" />
+
     <RadioGroup
         android:id="@+id/rg_menutab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/er"
-        android:paddingTop="@dimen/yi">
+        android:paddingTop="@dimen/yi"
+        android:paddingBottom="@dimen/er">
 
         <RadioButton
             android:id="@+id/rb_home"
             style="@style/MenuTabB"
             android:checked="true"
             android:drawableTop="@drawable/my_menu1_selector"
-            android:text="驾考"
+            android:text="@string/tv_jiakao"
             android:textColor="@drawable/main_rb_back_text"
             android:textSize="@dimen/text_shiyisp" />
 
 
         <RadioButton
+            android:id="@+id/rb_message"
+            style="@style/MenuTabB"
+            android:drawableTop="@drawable/my_menu2_selector"
+            android:text="@string/tv_message"
+            android:textColor="@drawable/main_rb_back_text"
+            android:textSize="@dimen/text_shiyisp" />
+
+        <RadioButton
             android:id="@+id/rb_my"
             style="@style/MenuTabB"
+            android:layout_height="match_parent"
             android:drawableTop="@drawable/my_menu5_selector"
             android:text="@string/tv_mine"
             android:textColor="@drawable/main_rb_back_text"
             android:textSize="@dimen/text_shiyisp" />
+
+
     </RadioGroup>
 
 </LinearLayout>

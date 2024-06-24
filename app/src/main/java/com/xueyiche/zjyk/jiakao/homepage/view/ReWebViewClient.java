@@ -3,6 +3,7 @@ package com.xueyiche.zjyk.jiakao.homepage.view;
 import android.graphics.Bitmap;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+//显示网页内容
 public class ReWebViewClient extends WebViewClient {
 
     @Override

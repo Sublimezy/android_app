@@ -14,8 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * Created by allen on 2016/11/21.
- * <p>
  * 通用的textView可以实现大部分常用布局样式
  */
 

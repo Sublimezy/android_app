@@ -24,9 +24,7 @@ import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Owner on 2016/9/28.
- */
+
 public class SubjectAQuestion extends BaseActivity implements View.OnClickListener {
     //顺序练习
     private ReaderViewPager readerViewPager;
@@ -139,7 +137,9 @@ public class SubjectAQuestion extends BaseActivity implements View.OnClickListen
     }
 
     private void initViewPager() {
+
         adapter = new PagerAdapter() {
+
             @Override
             public boolean isViewFromObject(View arg0, Object arg1) {
                 return arg0 == arg1;

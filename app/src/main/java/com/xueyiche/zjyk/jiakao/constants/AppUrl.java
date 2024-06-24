@@ -1,12 +1,9 @@
 package com.xueyiche.zjyk.jiakao.constants;
 
-/**
- * Created by Owner on 2016/9/20.
- */
 
 public interface AppUrl {
     //3.0国裕测试
-    String IPWAIWANG = "http://guanli.xueyiche.vip:101/";
+    String IPWAIWANG = "http://192.168.121.1:8080";
     String cancelOrder_youzheng = IPWAIWANG + "api/Practicedriving/cancelOrder";
     String userOrderDetails_youzheng = IPWAIWANG + "api/Practicedriving/userOrderDetails";
     String orderList_youzheng = IPWAIWANG + "api/Practicedriving/orderList";
@@ -111,7 +108,7 @@ public interface AppUrl {
     //加油支付宝接口
     String JYZFB = IPWAIWANG + "mg/orderinfo/payjiayou.do";
     //f头像的token
-    String TOUXIANG = "http://122.9.33.73:8082/" + "mg/qiniuun/token.do";
+    String TOUXIANG = IPWAIWANG + "/common/upload";
     String GETYOUHUIQUAN = IPWAIWANG + "mg/evaluate/insertmycoupon.do";
     //预约列表
     String Order_List = IPWAIWANG + "yueche/myYuyueList.do";
@@ -126,22 +123,22 @@ public interface AppUrl {
 
 
     //代驾相关接口
-    String ChangYong_Address= IPWAIWANG + "substitute/selectAddressList.do";
+    String ChangYong_Address = IPWAIWANG + "substitute/selectAddressList.do";
     //添加常用地址
-    String Add_ChangYong_Address= IPWAIWANG + "substitute/insertAddress.do";
-    String Update_ChangYong_Address= IPWAIWANG + "substitute/updateAddress.do";
-    String getSubstituteDriverInfoByJobNumber= IPWAIWANG + "substitute/getSubstituteDriverInfoByJobNumber.do";
+    String Add_ChangYong_Address = IPWAIWANG + "substitute/insertAddress.do";
+    String Update_ChangYong_Address = IPWAIWANG + "substitute/updateAddress.do";
+    String getSubstituteDriverInfoByJobNumber = IPWAIWANG + "substitute/getSubstituteDriverInfoByJobNumber.do";
     //获取订单信息
-    String Get_Order= IPWAIWANG + "substitute/getSubstituteOrderDetail.do";
-    String Pay_Order_One= IPWAIWANG + "api/userindex/userPay";
+    String Get_Order = IPWAIWANG + "substitute/getSubstituteOrderDetail.do";
+    String Pay_Order_One = IPWAIWANG + "api/userindex/userPay";
     //获取司机经纬度
-    String DaiJia_location= IPWAIWANG + "substitute/getSubstituteDriverJWD.do";
+    String DaiJia_location = IPWAIWANG + "substitute/getSubstituteDriverJWD.do";
     //代叫电话
-    String PingTai_Constants= IPWAIWANG + "substitute/getSysValue.do";
+    String PingTai_Constants = IPWAIWANG + "substitute/getSysValue.do";
     //评价代驾
-    String PingJia_DaiJia= IPWAIWANG + "substitute/scoreSubstituteOrder.do";
+    String PingJia_DaiJia = IPWAIWANG + "substitute/scoreSubstituteOrder.do";
     //取消订单
-    String Quxiao_Indent= IPWAIWANG + "substitute/cancleSubstituteOrder.do";
+    String Quxiao_Indent = IPWAIWANG + "substitute/cancleSubstituteOrder.do";
     //获取司机位置
     String SJ = IPWAIWANG + "substitute/getDriverJWDByOrderNumber.do";
     //根据useid获取代驾订单
@@ -152,12 +149,12 @@ public interface AppUrl {
     String Czh_Share_number = IPWAIWANG + "mg/my/shareRecord.do";
     //车生活 金融服务
 //更新经纬度
-    String updatelonlatuser = IPWAIWANG +"mg/home/updatelonlatuser.do";
-    String drivingList = IPWAIWANG +"api/Userindex/drivingList";
-    String cancelOrder = IPWAIWANG +"api/Userindex/cancelOrder";
-    String orderSave = IPWAIWANG +"api/Userindex/orderSave";
-    String sendSMS = IPWAIWANG +"index.php/api/Sms/send";
-    String LOGIN = IPWAIWANG + "index.php/api/User/mobilelogin";
+    String updatelonlatuser = IPWAIWANG + "mg/home/updatelonlatuser.do";
+    String drivingList = IPWAIWANG + "api/Userindex/drivingList";
+    String cancelOrder = IPWAIWANG + "api/Userindex/cancelOrder";
+    String orderSave = IPWAIWANG + "api/Userindex/orderSave";
+    String sendSMS = IPWAIWANG + "/app/email/sendEmail";
+    String LOGIN = IPWAIWANG + "/app/user/userLogin";
     String orderBudgetPrice = IPWAIWANG + "api/Userindex/orderBudgetPrice";
     String orderDetails = IPWAIWANG + "api/Userindex/orderDetails";
     String userOrderDetails = IPWAIWANG + "api/Userindex/userOrderDetails";
@@ -170,13 +167,13 @@ public interface AppUrl {
     String orderAssess = IPWAIWANG + "api/Userindex/orderAssess";
     String entranceSave = IPWAIWANG + "api/tatapublic/entranceSave";
 
-    String banner = IPWAIWANG+"api/Articlebanner/banner";
-    String topswitch = IPWAIWANG+"api/Articlebanner/topswitch";
-    String articlewelfare = IPWAIWANG+"api/Articlebanner/articlewelfare";
-    String articlecommunity = IPWAIWANG+"api/Articlebanner/articlecommunity";
+    String banner = IPWAIWANG + "api/Articlebanner/banner";
+    String topswitch = IPWAIWANG + "api/Articlebanner/topswitch";
+    String articlewelfare = IPWAIWANG + "api/Articlebanner/articlewelfare";
+    String articlecommunity = IPWAIWANG + "api/Articlebanner/articlecommunity";
     String articleinfo = IPWAIWANG + "api/Articlebanner/articleinfo";
     String userReward = IPWAIWANG + "api/Userindex/userReward";
-    String community_up = IPWAIWANG +"api/Articlebanner/community_up";
+    String community_up = IPWAIWANG + "api/Articlebanner/community_up";
     String message = IPWAIWANG + "api/Articlebanner/message";
     String validate_car = IPWAIWANG + "api/Articlebanner/validate_car";
     String maintenance = IPWAIWANG + "api/Articlebanner/maintenance";
@@ -195,7 +192,7 @@ public interface AppUrl {
     String IPWAIWANGBEFORE = "http://122.9.33.73:8082/";
     //身份类型
     String usertype = IPWAIWANGBEFORE + "drivingtrainee/usertype.do";
-    String selectdrivingsecret= IPWAIWANGBEFORE + "drivingtrainee/selectdrivingsecret.do";
+    String selectdrivingsecret = IPWAIWANGBEFORE + "drivingtrainee/selectdrivingsecret.do";
     //点赞：社区、问答、视频内容
     String FaXian_DianZan_Content = IPWAIWANGBEFORE + "mg/my/main_praise.do";
     //文章详情 社区
@@ -265,15 +262,6 @@ public interface AppUrl {
     String addcoachdate = IPWAIWANGBEFORE + "driving/addcoachdate.do";
     //    学员查看-教练释放的天数和当天的日期
     String stuselectcoachdays = IPWAIWANGBEFORE + "driving/stuselectcoachdays.do";
-
-
-
-
-
-
-
-
-
 
 
 }

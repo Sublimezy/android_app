@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
-
+//对话框
 public class CustomDialog extends Dialog {
 
 	public CustomDialog(Context context) {
