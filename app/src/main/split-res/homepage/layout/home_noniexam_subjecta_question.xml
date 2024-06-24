@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.xueyiche.zjyk.xueyiche.homepage.view.ReaderViewPager
+            <com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager
                 android:id="@+id/vp_subjectA"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

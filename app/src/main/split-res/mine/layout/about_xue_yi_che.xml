@@ -15,7 +15,7 @@
         android:layout_below="@+id/about_xue_include"
         android:layout_height="wrap_content">
         <ImageView
-            android:src="@mipmap/about_xueyiche"
+            android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
@@ -66,7 +66,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="@string/gongsi"
             android:textColor="@color/test_color"
             android:layout_marginTop="@dimen/shisi"
             android:layout_width="wrap_content"

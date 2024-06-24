@@ -2,15 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#ff5000</color>
-    <color name="myred">#eb4f38</color>
+    <color name="colorAccent">#3ca0ec</color>
+    <color name="myred">#3ca0ec</color>
     <color name="darkgray">#cccc</color>
     <color name="color_white">#ffffff</color>
     <color name="btn_press_color">#5677fc</color>
     <color name="btn_pressed_color">#3ca0ec</color>
     <color name="all_black">#000000</color>
     <color name="base_dialog_bg">#cccc</color>
-    <color name="colorOrange">#ff5000</color>
+    <color name="colorOrange">#3ca0ec</color>
     <color name="tgray">#66f2f3f5</color>
     <color name="divider">#E5E5E5</color>
     <color name="shadow">#AAEBEBEB</color>
@@ -21,14 +21,14 @@
     <color name="alpha_gray">#CC646464</color>
     <color name="theme_gray">#646464</color>
     <color name="colorPink">#f9ec55e7</color>
-    <color name="top_bg_color">#ff5000</color>
+    <color name="top_bg_color">#3ca0ec</color>
     <color name="test_color">#666666</color>
     <color name="all_line_color">#f5f5f5</color>
     <color name="_3232">#323232</color>
     <color name="_4f4f4f">#4f4f4f</color>
     <color name="wheel_unselect_text">#c2c1c1</color>
     <color name="color_FF0041">#ff2c54</color>
-    <color name="wave">#FF580C</color>
+    <color name="wave">#3ca0ec</color>
     <color name="bottom_line">#EEEEEE</color>
     <color name="app_color_white_transparent">#E0DBDBDB</color>
     <color name="app_color_black">#000000</color>
@@ -46,7 +46,7 @@
     <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
     <color name="pickerview_bgColor_overlay">#60000000</color>
     <color name="pickerview_bgColor_default">#FFFFFFFF</color>
-    <color name="wheel_bg">#f2f2f2</color>
+    <color name="wheel_bg">#3ca0ec</color>
     <color name="red">#f60c0c</color>
     <color name="_cccccc">#cccccc</color>
     <color name="select">#f2f3f5</color>

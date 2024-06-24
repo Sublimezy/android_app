@@ -99,6 +99,7 @@
 
                     <TextView
                         android:id="@+id/tv_seven"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/iv_seven"
@@ -190,6 +191,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="47dp"
                         android:text="@string/paihangbang"
+                        android:visibility="gone"
                         android:gravity="center_horizontal"
                         android:drawableTop="@mipmap/test_paihangbang"
                         android:textColor="@color/test_color"

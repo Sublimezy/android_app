@@ -34,7 +34,7 @@
     <string name="year">年</string>
     <string name="month">月</string>
     <string name="day">日</string>
-    <string name="app_name">学易车</string>
+    <string name="app_name">驾考APP</string>
     <string name="load_error">重新加载</string>
     <string name="select_city">选择城市</string>
     <string name="hot_city">热门城市</string>
@@ -91,13 +91,13 @@
     <string name="tv_activitypage">活动页</string>
     <string name="tv_activityrule">活动规则</string>
     <string name="tv_dati_title">“答题赢现金”活动规则</string>
-    <string name="tv_dati_content">“答题赢现金”是学易车为本平台已注册学员准备的一款学习娱乐赢现金相结合的活动。</string>
+    <string name="tv_dati_content">“答题赢现金”是驾考APP为本平台已注册学员准备的一款学习娱乐赢现金相结合的活动。</string>
     <string name="tv_dati_guihua">规划如下：</string>
-    <string name="tv_dati_guihua_one">1、学易车注册用户。</string>
+    <string name="tv_dati_guihua_one">1、驾考APP注册用户。</string>
     <string name="tv_dati_guihua_two">2、用户可以在全天的（0：00~24:00）任意时间内，45分钟内答100道科目一、科目四的汇合考题。</string>
     <string name="tv_dati_guihua_three">3、每天早8：00准时公布前一天的参与答题的获得名单，排名标准为分数最高、用时最少的顺序，取其前10名。</string>
     <string name="tv_dati_guihua_four">4、活动奖金以“现金”形式，存入到获奖用户在本平台中“我的钱包”里，该笔“现金”可提现也可在平台消费。</string>
-    <string name="tv_dati_guihua_five">5、活动所有相关事宜及解释权归学易车平台所有。</string>
+    <string name="tv_dati_guihua_five">5、活动所有相关事宜及解释权归驾考APP平台所有。</string>
     <string name="zanwuindent">暂无订单</string>
     <string name="car_service">汽车服务</string>
     <string name="huichichuiwan">汇吃惠玩</string>
@@ -180,7 +180,7 @@
     <string name="weixinzhifu">微信支付</string>
     <string name="fangbiankuaijie">方便快捷</string>
     <string name="querenchongzhi">确认充值</string>
-    <string name="qingbaodingbenren">提现仅支持工商银行学易车联名卡</string>
+    <string name="qingbaodingbenren">提现仅支持工商银行驾考APP联名卡</string>
     <string name="chikaren">持卡人：</string>
     <string name="querenbangding">确认绑定</string>
     <string name="qingshurujiashizheng">请输入驾驶证号</string>
@@ -203,14 +203,14 @@
     <string name="shared_app">分享APP</string>
     <string name="yijianfankui">意见反馈</string>
     <string name="use_help">使用帮助</string>
-    <string name="about_xueyiche">关于学易车</string>
+    <string name="about_xueyiche">关于驾考APP</string>
     <string name="take_photo">拍照</string>
     <string name="photobook">从相册选取</string>
     <string name="chongzhi">充值</string>
     <string name="shuru_phone">请输入手机号码</string>
     <string name="shuruyanzhengma">请输入验证码</string>
     <string name="get_yanzhengma">获取验证码</string>
-    <string name="tongyi_jieshou">登录即代表您同意学易车</string>
+    <string name="tongyi_jieshou">登录即代表您同意驾考APP</string>
     <string name="xueyiche_xieyi">用户协议</string>
     <string name="xiangce">相册</string>
     <string name="yuyuexiaoxi">预约消息</string>
@@ -221,7 +221,7 @@
     <string name="zanwudianpu">暂无店铺</string>
     <string name="EBuse_rule">积分使用规则</string>
     <string name="jifenmingxi">积分明细</string>
-    <string name="EB_rule_one">1.积分是学易车推出的用户回馈方式，用户可用积分在学易车“车生活”抵扣相应的折扣。</string>
+    <string name="EB_rule_one">1.积分是驾考APP推出的用户回馈方式，用户可用积分在驾考APP“车生活”抵扣相应的折扣。</string>
     <string name="EB_rule_two">2.用户有以下方式获得积分：通过消费获得、通过购买积分、转发朋友圈及新用户注册。</string>
     <string name="EB_rule_three">3.比例方式：1元=100积分</string>
     <string name="wodeyue">我的零钱</string>
@@ -235,8 +235,7 @@
     <string name="telephone_number">手机号码</string>
     <string name="tuichudenglu">退出登录</string>
     <string name="app_banben">v1.0</string>
-    <string name="copyright_c_2017_2018">copyright(c)2017-2020</string>
-    <string name="gongsi">哈尔滨易一车科技有限公司   版权所有</string>
+    <string name="copyright_c_2017_2018">copyright(c)2017-2023</string>
     <string name="daozhangyinhangka">到账银行卡：</string>
     <string name="card_name">持卡人姓名：</string>
     <string name="card_kaihuhang">开户行：</string>

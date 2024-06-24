@@ -17,13 +17,13 @@
             android:orientation="vertical"
             android:layout_centerInParent="true"
             android:layout_height="wrap_content">
-            <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+            <com.xueyiche.zjyk.jiakao.mine.view.CircleImageView
                 android:id="@+id/mo_ni_head"
                 android:src="@mipmap/mo_ni_head"
                 android:layout_width="75dp"
                 android:layout_height="75dp" />
             <TextView
-                android:text="学易车"
+                android:text="驾考APP"
                 android:textSize="@dimen/text_fifteensp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/shiwu"

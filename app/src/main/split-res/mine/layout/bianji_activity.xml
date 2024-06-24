@@ -50,6 +50,7 @@
             <com.allen.library.SuperTextView
                 android:id="@+id/st_bianji_card"
                 style="@style/bianji_list"
+                android:visibility="gone"
                 xyc:sDividerLineColor="@color/_cccccc"
                 xyc:sLeftTextColor="@color/test_color"
                 xyc:sLeftTextSize="@dimen/text_ershisp"

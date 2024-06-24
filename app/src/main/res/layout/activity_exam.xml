@@ -6,19 +6,12 @@
     android:orientation="vertical"
     android:windowTranslucentNavigation="false">
 
-    <include
-        android:id="@+id/exam_include"
-        layout="@layout/indent_tijiao_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true" />
 
     <RadioGroup
         android:id="@+id/rg_exam_menutab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/exam_include"
+        android:paddingTop="@dimen/dp_20"
         android:orientation="horizontal">
 
         <RadioButton
@@ -42,6 +35,7 @@
             android:drawablePadding="5dp"
             android:layout_marginTop="5dp"
             android:text="@string/test_book_two"
+            android:visibility="gone"
             android:textColor="@drawable/rb_select"
             android:textSize="15sp" />
 
@@ -54,6 +48,7 @@
             android:drawablePadding="5dp"
             android:layout_marginTop="5dp"
             android:text="@string/test_book_three"
+            android:visibility="gone"
             android:textColor="@drawable/rb_select"
             android:textSize="15sp" />
 
@@ -71,7 +66,7 @@
     </RadioGroup>
 
 
-    <com.xueyiche.zjyk.xueyiche.main.view.NoScrollViewPager
+    <com.xueyiche.zjyk.jiakao.main.view.NoScrollViewPager
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

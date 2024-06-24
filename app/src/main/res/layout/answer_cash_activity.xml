@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.xueyiche.zjyk.xueyiche.mine.view.CircleImageView
+                        <com.xueyiche.zjyk.jiakao.mine.view.CircleImageView
                             android:id="@+id/test_head"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="10dp"
-                            android:text="学易车"
+                            android:text="驾考APP"
                             android:textColor="@color/_4f4f4f"
                             android:textSize="@dimen/text_seveneensp" />
                     </LinearLayout>

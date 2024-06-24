@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/sanshier"
         android:layout_marginTop="@dimen/sanshiba"
-        android:text="欢迎来到学易车"
+        android:text="欢迎来到驾考APP"
         android:textColor="@color/_4f4f4f"
         android:textSize="30sp" />
 

@@ -26,7 +26,7 @@
                 android:id="@+id/tv_xyc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学易车"
+                android:text="驾考APP"
                 android:textStyle="bold"
                 android:textColor="@color/_4f4f4f"
                 android:textSize="@dimen/mine_include_text_size" />

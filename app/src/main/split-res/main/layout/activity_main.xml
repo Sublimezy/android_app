@@ -28,25 +28,9 @@
             style="@style/MenuTabB"
             android:checked="true"
             android:drawableTop="@drawable/my_menu1_selector"
-            android:text="@string/tv_home_1"
+            android:text="驾考"
             android:textColor="@drawable/main_rb_back_text"
             android:textSize="@dimen/text_shiyisp" />
-
-        <RadioButton
-            android:id="@+id/rb_community"
-            style="@style/MenuTabB"
-            android:drawableTop="@drawable/my_menu2_selector"
-            android:text="发现"
-            android:textColor="@drawable/main_rb_back_text"
-            android:textSize="@dimen/text_shiyisp" />
-        <RadioButton
-            android:id="@+id/rb_welfare"
-            style="@style/MenuTabB"
-            android:drawableTop="@drawable/my_menu3_selector"
-            android:text="福利"
-            android:textColor="@drawable/main_rb_back_text"
-            android:textSize="@dimen/text_shiyisp" />
-
 
 
         <RadioButton

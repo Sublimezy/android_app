@@ -45,7 +45,7 @@
             android:textSize="@dimen/text_fifteensp" />
     </LinearLayout>
 
-    <com.xueyiche.zjyk.xueyiche.homepage.view.VerificationCodeInput
+    <com.xueyiche.zjyk.jiakao.homepage.view.VerificationCodeInput
         android:id="@+id/verificationCodeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
 
         <TextView
             android:id="@+id/tv_user_xieyi"
-            android:text="学易车法律条款与平台规则"
+            android:text="驾考APP法律条款与平台规则"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorOrange"

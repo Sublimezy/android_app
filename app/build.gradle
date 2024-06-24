@@ -27,7 +27,7 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
-        applicationId "com.xueyiche.zjyk.xueyiche"
+        applicationId "com.xueyiche.zjyk.jiakao"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -51,16 +51,7 @@ android {
             res.srcDirs = ['src/main/res',
                            'src/main/split-res/base',
                            'src/main/split-res/homepage',
-                           'src/main/split-res/practicecar',
-                           'src/main/split-res/discover',
-                           'src/main/split-res/driverschool',
-                           'src/main/split-res/guide',
                            'src/main/split-res/main',
-                           'src/main/split-res/splash',
-                           'src/main/split-res/indent',
-                           'src/main/split-res/daijia',
-                           'src/main/split-res/community',
-                           'src/main/split-res/welfare',
                            'src/main/split-res/mine']
             debug.setRoot('build-types/debug')
             release.setRoot('build-types/release')
@@ -93,12 +84,6 @@ android {
     }
     productFlavors {
     }
-//    sourceSets.main {
-//        assets.srcDirs = ['assets']
-//        jniLibs.srcDirs = ['libs']//指定jniLibs文件夹路径
-//
-//
-//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -133,15 +118,6 @@ MobSDK {
                 BypassApproval = "false"
                 Enable = "true"
             }
-//            SinaWeibo {
-//                id 3
-//                sortId 3
-//                appKey "2512510913"
-//                appSecret "3aadf9a6b5d21ce60ec752a8be4d1c2b"
-//                callbackUri "http://www.xueyiche.cn"
-//                shareByAppClient true
-//                enable true
-//            }
         }
     }
 }
@@ -155,7 +131,6 @@ allprojects {
 
 dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation files('libs/AMapTrack_1.4.1_AMapLocation_6.1.0_20220402.jar')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     //考题的module
@@ -179,11 +154,9 @@ dependencies {
     implementation 'com.zhy:okhttputils:2.0.0'
     //eventbus
     compile files('libs/eventbus-2.4.0.jar')
-    //下拉刷新上拉加载
-    implementation project(':lib_YZxing-lib')
+
     implementation 'com.xw.repo:PullToRefresh:2.1@aar'
     //支付宝支付
-    compile files('libs/alipaySdk-20161222.jar')
     compile files('libs/libammsdk.jar')
     //七牛云图片存储
     implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
@@ -246,16 +219,9 @@ dependencies {
 //    implementation 'com.amap.api:location:latest.integration'
     //搜索功能
     implementation 'com.github.getActivity:ToastUtils:10.3'
-    implementation 'com.amap.api:search:latest.integration'
-//    implementation 'com.amap.api:navi-3dmap:latest.integration'
-    implementation 'com.amap.api:navi-3dmap:8.1.0_3dmap8.1.0'
 //    implementation('com.github.tohodog:QSVideoPlayer:2.2.8') {
 //        exclude group: 'org.slf4j'
 //    }
-    // 此处以JCore 3.2.4 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:3.3.6'
-    // 此处以JPush 4.6.4 版本为例
-    implementation 'cn.jiguang.sdk:jpush:4.8.4'
     implementation 'com.github.zhpanvip:BannerViewPager:3.5.0'
     implementation 'com.pnikosis:materialish-progress:1.7'
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
