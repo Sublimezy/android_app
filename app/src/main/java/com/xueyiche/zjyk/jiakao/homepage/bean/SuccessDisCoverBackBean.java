@@ -1,8 +1,5 @@
-package com.xueyiche.zjyk.xueyiche.practicecar.bean;
+package com.xueyiche.zjyk.jiakao.homepage.bean;
 
-/**
- * Created by ZL on 2018/4/3.
- */
 public class SuccessDisCoverBackBean {
 
     /**

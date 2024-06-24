@@ -3,6 +3,7 @@ package com.xueyiche.zjyk.jiakao.constants;
 /**
  * Created by Owner on 2016/9/20.
  */
+
 public interface AppUrl {
     //3.0国裕测试
     String IPWAIWANG = "http://guanli.xueyiche.vip:101/";
