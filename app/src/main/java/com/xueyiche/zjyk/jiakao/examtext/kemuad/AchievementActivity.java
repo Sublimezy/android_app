@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext.kemua;
+package com.xueyiche.zjyk.jiakao.examtext.kemuad;
 
 import android.content.Intent;
 import android.view.View;
@@ -8,23 +8,17 @@ import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
-import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.examtext.MoNiTestPage;
-import com.xueyiche.zjyk.jiakao.homepage.bean.Questiona;
-import com.xueyiche.zjyk.jiakao.homepage.db.KaoJiaZhaoDao;
-import com.xueyiche.zjyk.jiakao.homepage.db.MyResultDB;
+import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 
-public class AchievementOneActivity extends BaseActivity implements View.OnClickListener {
+public class AchievementActivity extends BaseActivity implements View.OnClickListener {
     private ImageView ivBack, ivHeGe, ivLook;
     private TextView tvGrade, tvTime,tv_kemu_chengji;
     private int i;
-    private MyResultDB db;
-    private KaoJiaZhaoDao dbK;
+    private QuestionDBHelper mHelper;
     private boolean cuotia;
     private Button ivOnce;
 
@@ -58,8 +52,8 @@ public class AchievementOneActivity extends BaseActivity implements View.OnClick
     protected void initData() {
 
         Intent intent = getIntent();
-        db = new MyResultDB(App.context);
-        dbK = new KaoJiaZhaoDao(App.context);
+//        db = new MyResultDB(App.context);
+//        dbK = new QuestionDBHelper(App.context);
         String number = intent.getStringExtra("number");
         long time = intent.getLongExtra("time", 0);
         Date date = new Date();
@@ -70,7 +64,7 @@ public class AchievementOneActivity extends BaseActivity implements View.OnClick
         tvGrade.setText(number);
         tvTime.setText("用时 : " + format);
         String date1 = intent.getStringExtra("presenttimed");
-        db.add(date1,number,format,"1");
+//        db.add(date1,number,format,"1");
         i = Integer.parseInt(number);
         if (i < 90) {
             ivHeGe.setVisibility(View.VISIBLE);
@@ -85,7 +79,7 @@ public class AchievementOneActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        List<Questiona> allCuoTiA = dbK.findAllCuoTiA();
+/*        List<QuestionBean> allCuoTiA = dbK.findAllCuoTiA();
         cuotia = allCuoTiA.size() == 0;
         switch (v.getId()) {
             case R.id.iv_achievement_back:
@@ -104,7 +98,7 @@ public class AchievementOneActivity extends BaseActivity implements View.OnClick
                     startActivity(new Intent(App.context, CuoTiA.class));
                 }
                 break;
-        }
+        }*/
 
     }
 }

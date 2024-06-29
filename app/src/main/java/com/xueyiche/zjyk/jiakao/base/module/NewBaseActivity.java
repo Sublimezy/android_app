@@ -37,13 +37,14 @@ import me.jessyan.autosize.internal.CustomAdapt;
  * Activity的基类
  */
 public abstract class NewBaseActivity extends AppCompatActivity {
+
     protected View view;
+
     private BaseProgressDialog mProgressDialog = null;
+
     /**
      * 网络类型
      */
-
-
     private InputMethodManager manager;
 
     @Override

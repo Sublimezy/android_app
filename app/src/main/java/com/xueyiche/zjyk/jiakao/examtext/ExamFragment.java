@@ -53,8 +53,7 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
 
     private void initData() {
-        FragmentManager supportFragmentManager = getChildFragmentManager();
-        viewPager.setAdapter(new MyExamAdapter(supportFragmentManager));
+        viewPager.setAdapter(new MyExamAdapter( getChildFragmentManager()));
         mRG_exam_menutab.setOnCheckedChangeListener(this);
 
     }
@@ -63,6 +62,7 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_subject1:
+            case R.id.rb_subject4:
                 viewPager.setCurrentItem(0, false);//禁用动画
                 break;
             case R.id.rb_subject2:
@@ -70,9 +70,6 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
                 break;
             case R.id.rb_subject3:
                 viewPager.setCurrentItem(2, false);
-                break;
-            case R.id.rb_subject4:
-                viewPager.setCurrentItem(3, false);
                 break;
         }
     }

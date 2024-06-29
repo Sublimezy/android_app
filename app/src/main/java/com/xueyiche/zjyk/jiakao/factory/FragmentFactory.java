@@ -1,10 +1,9 @@
 package com.xueyiche.zjyk.jiakao.factory;
 import androidx.fragment.app.Fragment;
 
-import com.xueyiche.zjyk.jiakao.examtext.examfragment.SubjectAFragment;
+import com.xueyiche.zjyk.jiakao.examtext.examfragment.SubjectADFragment;
 import com.xueyiche.zjyk.jiakao.examtext.examfragment.SubjectBFragment;
 import com.xueyiche.zjyk.jiakao.examtext.examfragment.SubjectCFragment;
-import com.xueyiche.zjyk.jiakao.examtext.examfragment.SubjectDFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,16 +22,14 @@ public class FragmentFactory {
         if (fragment == null) {
             switch (position) {
                 case 0:
-                    fragment = new SubjectAFragment();
+                case 3:
+                    fragment = new SubjectADFragment();
                     break;
                 case 1:
                     fragment = new SubjectBFragment();
                     break;
                 case 2:
                     fragment = new SubjectCFragment();
-                    break;
-                case 3:
-                    fragment = new SubjectDFragment();
                     break;
             }
         }

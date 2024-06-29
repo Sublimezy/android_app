@@ -1,5 +1,6 @@
 package com.xueyiche.zjyk.jiakao.homepage.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.homepage.bean.Questiona;
+import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
 
 import java.util.List;
 
@@ -19,9 +20,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     private Context mContext;
     private final LayoutInflater inflater;
     private final Resources resources;
-    private List<Questiona> allQuestionC;
+    private List<QuestionBean> allQuestionC;
 
-    public TopicAdapter(Context mContext,List<Questiona> allQuestionC) {
+    public TopicAdapter(Context mContext,List<QuestionBean> allQuestionC) {
         this.mContext = mContext;
         this.allQuestionC = allQuestionC;
         inflater = LayoutInflater.from(mContext);
@@ -36,38 +37,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     }
 
     @Override
-    public void onBindViewHolder(final TopicViewHolder holder, final int position) {
+    public void onBindViewHolder(final TopicViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.tv_id.setText((position + 1) + "");
         holder.tv_id.setTextColor(Color.parseColor("#b3afaf"));
         holder.tv_id.setBackgroundResource(R.drawable.bg_topic_no);
-        Questiona questiona = allQuestionC.get(position);
-        String a_state = questiona.getA_state();
-        String b_state = questiona.getB_state();
-        String c_state = questiona.getC_state();
-        String d_state = questiona.getD_state();
-        if (a_state!="1"||b_state!="1"||c_state!="1"||d_state!="1"){
-            if (a_state.equals("2")) {
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_true);
-            }else if (a_state.equals("3")){
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_flase);
-            }
-            if (b_state.equals("2")) {
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_true);
-            }else if (b_state.equals("3")){
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_flase);
-            }
-            if (c_state.equals("2")) {
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_true);
-            }else if (c_state.equals("3")){
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_flase);
-            }
-            if (d_state.equals("2")) {
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_true);
-            }else if (d_state.equals("3")){
-                holder.tv_id.setBackgroundResource(R.mipmap.bg_topic_flase);
-            }
-        }
+        QuestionBean questionBean = allQuestionC.get(position);
+
         if (prePosition == position) {
             holder.tv_id.setTextColor(Color.parseColor("#b3afaf"));
         }

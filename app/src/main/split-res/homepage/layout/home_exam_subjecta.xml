@@ -17,23 +17,24 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_30"
-                android:layout_height="match_parent">
-                
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_30">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingLeft="38dp"
-                    android:paddingRight="30dp"
-                    android:layout_height="wrap_content">
+                    android:paddingRight="30dp">
+
                     <TextView
                         android:id="@+id/tv_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
-                        android:text="@string/wodecuoti"
                         android:drawableTop="@mipmap/test_wrong"
+                        android:text="@string/wodecuoti"
                         android:textColor="@color/test_color"
                         android:textSize="@dimen/text_fifteensp" />
 
@@ -41,9 +42,9 @@
                         android:id="@+id/tv_five"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableTop="@mipmap/tesy_my_result"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="47dp"
+                        android:drawableTop="@mipmap/tesy_my_result"
                         android:text="@string/mychnegji"
                         android:textColor="@color/test_color"
                         android:textSize="@dimen/text_fifteensp" />
@@ -51,15 +52,16 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:id="@+id/ll_test_practice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="38dp"
                         android:layout_centerInParent="true"
+                        android:layout_marginTop="38dp"
                         android:background="@mipmap/test_shunxu_practice"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
@@ -84,53 +86,68 @@
                     </LinearLayout>
 
 
-
                     <TextView
                         android:id="@+id/tv_practice_test"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="模拟考试"
-                        android:layout_marginTop="140dp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:background="@mipmap/test_exam"
                         android:layout_centerInParent="true"
-                         />
+                        android:layout_marginTop="140dp"
+                        android:background="@mipmap/test_exam"
+                        android:gravity="center"
+                        android:text="模拟考试"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginRight="38dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_height="wrap_content">
+                    android:layout_marginRight="38dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:drawableTop="@mipmap/test_ptactice"
                         android:text="@string/zhuanxianglianxi"
                         android:textColor="@color/test_color"
-                        android:drawableTop="@mipmap/test_ptactice"
                         android:textSize="@dimen/text_fifteensp" />
+
                     <TextView
                         android:id="@+id/tv_four"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="@string/mycollection"
                         android:drawableTop="@mipmap/test_selection"
+                        android:text="@string/mycollection"
                         android:textColor="@color/test_color"
                         android:textSize="@dimen/text_fifteensp" />
 
                 </LinearLayout>
             </RelativeLayout>
 
+            <ProgressBar
+                android:id="@+id/progress_par"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
 
+            <TextView
+                android:id="@+id/text_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Progress: 0 / 100"
+                android:textSize="18sp" />
 
         </LinearLayout>
+
+
     </ScrollView>
 
 

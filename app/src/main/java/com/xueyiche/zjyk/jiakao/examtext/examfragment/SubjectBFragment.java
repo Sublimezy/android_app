@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
+import com.xueyiche.zjyk.jiakao.base.module.NewBaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.examtext.kemub.SubjectbWeb;
 
@@ -45,11 +46,13 @@ public class SubjectBFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected Object setLoadDate() {
-        return "2121";
+        return "1111";
     }
 
     @Override
     public void onClick(View v) {
+
+
         Intent intent = new Intent(App.context, SubjectbWeb.class);
         switch (v.getId()) {
             case R.id.ll_daoche:

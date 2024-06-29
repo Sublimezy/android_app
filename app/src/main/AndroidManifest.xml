@@ -174,7 +174,7 @@
 
 <!--模拟考试页面-->
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.PracticeTestOne"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeTestActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -187,43 +187,37 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.SubjectAQuestion"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeNormalActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.AchievementOneActivity"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.AchievementActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.CollectionA"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.CollectionActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.CuoTiA"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeWrongActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.RandomTestA"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeSpecialActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.ZhuanXiangA"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemua.ZhuanXiangContent"
+            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeSpecialContentActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -268,12 +262,6 @@
 
         <activity
             android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.CuoTiD"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.RandomTestD"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />

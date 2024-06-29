@@ -1,77 +1,78 @@
-package com.xueyiche.zjyk.jiakao.examtext.kemua;
+package com.xueyiche.zjyk.jiakao.examtext.kemuad;
 
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import android.text.TextUtils;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.homepage.bean.OptionBean;
-import com.xueyiche.zjyk.jiakao.homepage.bean.Questiona;
-import com.xueyiche.zjyk.jiakao.homepage.db.KaoJiaZhaoDao;
+import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
+import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
 import com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 import java.util.List;
 
 
-public class CollectionA extends BaseActivity{
+public class CollectionActivity extends BaseActivity {
     private ReaderViewPager readerViewPager;
-    private List<Questiona> allCollectQuestion;
+    private List<QuestionBean> allCollectQuestion;
     private PagerAdapter adapter;
-    private KaoJiaZhaoDao db;
+
     private TextView mTV_title_mun;
     private LinearLayout mLL_questionback;
     private TextView mTV_move;
     private int timu_qid;
+    private QuestionDBHelper mHelper;
 
     @Override
     protected int initContentView() {
-        db = new KaoJiaZhaoDao(App.context);
-        allCollectQuestion = db.findAllShouCangA();
+        QuestionBean questionBean = new QuestionBean(null, "1", "c1", null);
+        allCollectQuestion = mHelper.getAllQuestionByParams(questionBean);
         return R.layout.home_exam_subjecta_collection;
     }
 
     @Override
     protected void initView() {
-            readerViewPager = (ReaderViewPager) view.findViewById(R.id.vp_subjectA);
-            mTV_title_mun = (TextView) view.findViewById(R.id.exam_question_collect).findViewById(R.id.tv_title_num);
-        mTV_title_mun.setText(1 +"/"+allCollectQuestion.size());
-            mLL_questionback = (LinearLayout) view.findViewById(R.id.exam_question_collect).findViewById(R.id.ll_question_back);
-            //移除
-            mTV_move = (TextView) view.findViewById(R.id.exam_question_collect).findViewById(R.id.tv_move);
-            mLL_questionback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-            readerViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        readerViewPager = (ReaderViewPager) view.findViewById(R.id.vp_subjectA);
+        mTV_title_mun = (TextView) view.findViewById(R.id.exam_question_collect).findViewById(R.id.tv_title_num);
+        mTV_title_mun.setText(1 + "/" + allCollectQuestion.size());
+        mLL_questionback = (LinearLayout) view.findViewById(R.id.exam_question_collect).findViewById(R.id.ll_question_back);
+        //移除
+        mTV_move = (TextView) view.findViewById(R.id.exam_question_collect).findViewById(R.id.tv_move);
+        mLL_questionback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-                }
+        readerViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                @Override
-                public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
                 //    final   Questiona questiond = allCollectQuestion.get(position);
 
-                    timu_qid = position+1;
-                    mTV_title_mun.setText(timu_qid +"/"+allCollectQuestion.size());
-                }
+                timu_qid = position + 1;
+                mTV_title_mun.setText(timu_qid + "/" + allCollectQuestion.size());
+            }
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-                }
-            });
+            }
+        });
         initViewPager();
     }
 
@@ -97,16 +98,19 @@ public class CollectionA extends BaseActivity{
                                     Object obj) {
                 container.removeView((View) obj);
             }
+
             private int mChildCount = 0;
+
             @Override
             public void notifyDataSetChanged() {
                 mChildCount = getCount();
                 super.notifyDataSetChanged();
             }
+
             @Override
-            public int getItemPosition(Object object)   {
-                if ( mChildCount > 0) {
-                    mChildCount --;
+            public int getItemPosition(Object object) {
+                if (mChildCount > 0) {
+                    mChildCount--;
                     return POSITION_NONE;
                 }
                 return super.getItemPosition(object);
@@ -115,36 +119,31 @@ public class CollectionA extends BaseActivity{
             @Override
             public Object instantiateItem(ViewGroup container, final int position) {
                 {
-                    final Questiona questiond = allCollectQuestion.get(position);
+                    final QuestionBean questiond = allCollectQuestion.get(position);
                     //正确答案
-                    final String trueanswer = questiond.getTrue_answer();
-                    final String answer_1 = questiond.getAnswer_1();
-                    final String answer_2 = questiond.getAnswer_2();
-                    final String answer_3 = questiond.getAnswer_3();
-                    final String answer_4 = questiond.getAnswer_4();
+                    final String answer = questiond.getAnswer();
+                    final String item1 = questiond.getItem1();
+                    final String item2 = questiond.getItem2();
+                    final String item3 = questiond.getItem3();
+                    final String item4 = questiond.getItem4();
                     final String question = questiond.getQuestion();
-                    final String question_type = questiond.getQuestion_type();
-                    final String explain = questiond.getExplain();
-                    final String true_answer = questiond.getTrue_answer();
-                    final String img = questiond.getImg();
-                    String a_state = questiond.getA_state();
-                    String b_state = questiond.getB_state();
-                    String c_state = questiond.getC_state();
-                    String d_state = questiond.getD_state();
-                    String explain_state = questiond.getExplain_state();
+                    final String questionType = questiond.getQuestionType();
+                    final String explains = questiond.getExplains();
+                    final String url = questiond.getUrl();
+
                     mTV_move.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String qid1 = questiond.getQid();
-                        db.delete(qid1);
-                        allCollectQuestion = db.findAllShouCangA();
-                        adapter.notifyDataSetChanged();
-                        mTV_title_mun.setText(timu_qid+"/"+allCollectQuestion.size());
-                        if (allCollectQuestion.size()==0) {
-                            finish();
+                        @Override
+                        public void onClick(View v) {
+              /*              String qid1 = questiond.getQid();
+                            db.delete(qid1);
+                            allCollectQuestion = db.findAllShouCangA();*/
+                            adapter.notifyDataSetChanged();
+                            mTV_title_mun.setText(timu_qid + "/" + allCollectQuestion.size());
+                            if (allCollectQuestion.size() == 0) {
+                                finish();
+                            }
                         }
-                    }
-                });
+                    });
                     //多选答案的实体类
                     final OptionBean optionBean = new OptionBean();
                     optionBean.setA("0");
@@ -155,12 +154,12 @@ public class CollectionA extends BaseActivity{
                     TextView mTV_qusetion = (TextView) view.findViewById(R.id.tv_question);
                     //问题的图片
                     ImageView mIV_kemu1 = (ImageView) view.findViewById(R.id.iv_kemu1);
-                    if (!TextUtils.isEmpty(img)) {
+           /*         if (!TextUtils.isEmpty(img)) {
                         Picasso.with(App.context).load("http://jiakao.xueyiche.net/" + img)
                                 .placeholder(R.mipmap.lunbotu).error(R.mipmap.lunbotu).into(mIV_kemu1);
-                    }else {
+                    } else {
                         mIV_kemu1.setVisibility(View.GONE);
-                    }
+                    }*/
                     ImageView xianc = (ImageView) view.findViewById(R.id.xian_c);
                     ImageView xiand = (ImageView) view.findViewById(R.id.xian_d);
                     //题目类型
@@ -186,8 +185,8 @@ public class CollectionA extends BaseActivity{
                     final ImageView mIV_c = (ImageView) view.findViewById(R.id.iv_c);
                     final ImageView mIV_d = (ImageView) view.findViewById(R.id.iv_d);
 
-                    int timu_qid = position+1;
-                    mTV_qusetion.setText(timu_qid+"/"+allCollectQuestion.size());
+/*                    int timu_qid = position + 1;
+                    mTV_qusetion.setText(timu_qid + "/" + allCollectQuestion.size());
                     if ("2".equals(question_type)) {
                         mIV_questiontype.setImageResource(R.mipmap.panduan);
                         xianc.setVisibility(View.GONE);
@@ -195,46 +194,46 @@ public class CollectionA extends BaseActivity{
                         mLL_c.setVisibility(View.GONE);
                         mLL_d.setVisibility(View.GONE);
                     }
-                    if (a_state!="1"||b_state!="1"||c_state!="1"||d_state!="1"){
+                    if (a_state != "1" || b_state != "1" || c_state != "1" || d_state != "1") {
                         if (a_state.equals("2")) {
                             mIV_a.setImageResource(R.mipmap.zhengque);
-                        }else if (a_state.equals("3")){
+                        } else if (a_state.equals("3")) {
                             mIV_a.setImageResource(R.mipmap.cuowu);
                         }
                         if (b_state.equals("2")) {
                             mIV_b.setImageResource(R.mipmap.zhengque);
-                        }else if (b_state.equals("3")){
+                        } else if (b_state.equals("3")) {
                             mIV_b.setImageResource(R.mipmap.cuowu);
                         }
                         if (c_state.equals("2")) {
                             mIV_c.setImageResource(R.mipmap.zhengque);
-                        }else if (c_state.equals("3")){
+                        } else if (c_state.equals("3")) {
                             mIV_c.setImageResource(R.mipmap.cuowu);
                         }
                         if (d_state.equals("2")) {
                             mIV_d.setImageResource(R.mipmap.zhengque);
-                        }else if (d_state.equals("3")){
+                        } else if (d_state.equals("3")) {
                             mIV_d.setImageResource(R.mipmap.cuowu);
                         }
                         if (explain_state.equals("2")) {
                             mLL_explan.setVisibility(View.VISIBLE);
                         }
-                    }else {
+                    } else {
                         //题目是单选
                         mLL_a.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 if ("1".equals(trueanswer)) {
                                     mIV_a.setImageResource(R.mipmap.zhengque);
-                                }else if ("2".equals(trueanswer)){
+                                } else if ("2".equals(trueanswer)) {
                                     mIV_b.setImageResource(R.mipmap.zhengque);
                                     mIV_a.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("3".equals(trueanswer)){
+                                } else if ("3".equals(trueanswer)) {
                                     mIV_c.setImageResource(R.mipmap.zhengque);
                                     mIV_a.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("4".equals(trueanswer)){
+                                } else if ("4".equals(trueanswer)) {
                                     mIV_d.setImageResource(R.mipmap.zhengque);
                                     mIV_a.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
@@ -250,15 +249,15 @@ public class CollectionA extends BaseActivity{
                             public void onClick(View v) {
                                 if ("2".equals(true_answer)) {
                                     mIV_b.setImageResource(R.mipmap.zhengque);
-                                }else if ("1".equals(trueanswer)){
+                                } else if ("1".equals(trueanswer)) {
                                     mIV_a.setImageResource(R.mipmap.zhengque);
                                     mIV_b.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("3".equals(trueanswer)){
+                                } else if ("3".equals(trueanswer)) {
                                     mIV_c.setImageResource(R.mipmap.zhengque);
                                     mIV_b.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("4".equals(trueanswer)){
+                                } else if ("4".equals(trueanswer)) {
                                     mIV_d.setImageResource(R.mipmap.zhengque);
                                     mIV_b.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
@@ -273,15 +272,15 @@ public class CollectionA extends BaseActivity{
                             public void onClick(View v) {
                                 if ("3".equals(true_answer)) {
                                     mIV_c.setImageResource(R.mipmap.zhengque);
-                                }else if ("1".equals(trueanswer)){
+                                } else if ("1".equals(trueanswer)) {
                                     mIV_a.setImageResource(R.mipmap.zhengque);
                                     mIV_c.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("2".equals(trueanswer)){
+                                } else if ("2".equals(trueanswer)) {
                                     mIV_b.setImageResource(R.mipmap.zhengque);
                                     mIV_c.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("4".equals(trueanswer)){
+                                } else if ("4".equals(trueanswer)) {
                                     mIV_d.setImageResource(R.mipmap.zhengque);
                                     mIV_c.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
@@ -296,15 +295,15 @@ public class CollectionA extends BaseActivity{
                             public void onClick(View v) {
                                 if ("4".equals(true_answer)) {
                                     mIV_d.setImageResource(R.mipmap.zhengque);
-                                }else if ("2".equals(trueanswer)){
+                                } else if ("2".equals(trueanswer)) {
                                     mIV_b.setImageResource(R.mipmap.zhengque);
                                     mIV_d.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("3".equals(trueanswer)){
+                                } else if ("3".equals(trueanswer)) {
                                     mIV_c.setImageResource(R.mipmap.zhengque);
                                     mIV_d.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
-                                }else if ("1".equals(trueanswer)){
+                                } else if ("1".equals(trueanswer)) {
                                     mIV_a.setImageResource(R.mipmap.zhengque);
                                     mIV_d.setImageResource(R.mipmap.cuowu);
                                     mLL_explan.setVisibility(View.VISIBLE);
@@ -315,32 +314,34 @@ public class CollectionA extends BaseActivity{
                             }
                         });
                     }
-                    mTV_qusetion.setText("       "+timu_qid+"."+ question);
-                    mTV_ansa.setText(answer_1==null? "正确": answer_1);
-                    mTV_ansb.setText(answer_2==null? "错误": answer_2);
-                    if (answer_3==null) {
+                    mTV_qusetion.setText("       " + timu_qid + "." + question);
+                    mTV_ansa.setText(answer_1 == null ? "正确" : answer_1);
+                    mTV_ansb.setText(answer_2 == null ? "错误" : answer_2);
+                    if (answer_3 == null) {
                         mLL_c.setVisibility(View.INVISIBLE);
-                    }else {
+                    } else {
                         mTV_ansc.setText(answer_3);
                     }
-                    if (answer_4==null) {
+                    if (answer_4 == null) {
                         mLL_d.setVisibility(View.INVISIBLE);
-                    }else {
+                    } else {
                         mTV_ansd.setText(answer_4);
                     }
                     mTV_analysis.setText(explain);
                     //点击事件
                     container.addView(view);
+                    return view;*/
                     return view;
                 }
             }
+
 
             @Override
             public int getCount() {
                 return allCollectQuestion.size();
             }
         };
-        if (readerViewPager!=null) {
+        if (readerViewPager != null) {
             readerViewPager.setAdapter(adapter);
         }
     }
@@ -348,9 +349,9 @@ public class CollectionA extends BaseActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        if (readerViewPager!=null) {
+        if (readerViewPager != null) {
             int currentItem = readerViewPager.getCurrentItem();
-            PrefUtils.putInt(App.context,"COLLECT",currentItem);
+            PrefUtils.putInt(App.context, "COLLECT", currentItem);
         }
     }
 
@@ -358,7 +359,7 @@ public class CollectionA extends BaseActivity{
     protected void onStart() {
         super.onStart();
         int currentitem = PrefUtils.getInt(App.context, "COLLECT", 0);
-        if (readerViewPager!=null) {
+        if (readerViewPager != null) {
             readerViewPager.setCurrentItem(currentitem);
         }
 

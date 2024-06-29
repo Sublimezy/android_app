@@ -11,8 +11,7 @@ import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.examtext.kemua.PracticeTestOne;
-import com.xueyiche.zjyk.jiakao.examtext.kemud.PracticeTestFour;
+import com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeTestActivity;
 import com.xueyiche.zjyk.jiakao.mine.view.CircleImageView;
 import com.xueyiche.zjyk.jiakao.utils.DialogUtils;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
@@ -69,12 +68,7 @@ public class MoNiTestPage extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.start_test:
                 if ("1".equals(moni_style)) {
-                    Intent intent = new Intent(App.context, PracticeTestOne.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent);
-                    finish();
-                } else if ("2".equals(moni_style)) {
-                    Intent intent = new Intent(App.context, PracticeTestFour.class);
+                    Intent intent = new Intent(App.context, PracticeTestActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     finish();

@@ -1,73 +1,75 @@
-package com.xueyiche.zjyk.jiakao.examtext.kemua;
+package com.xueyiche.zjyk.jiakao.examtext.kemuad;
 
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import android.text.TextUtils;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.homepage.bean.Questiona;
-import com.xueyiche.zjyk.jiakao.homepage.db.KaoJiaZhaoDao;
+import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
+import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
 import com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 import java.util.List;
 
 
-public class CuoTiA extends BaseActivity{
+public class PracticeWrongActivity extends BaseActivity {
     private ReaderViewPager readerViewPager;
-    private List<Questiona> allCollectQuestion;
+    private List<QuestionBean> allCollectQuestion;
     private PagerAdapter adapter;
-    private KaoJiaZhaoDao db;
+
     private TextView mTV_title_mun;
     private LinearLayout mLL_questionback;
     private TextView mTV_move;
+    private QuestionDBHelper mHelper;
 
     @Override
     protected int initContentView() {
-        db = new KaoJiaZhaoDao(App.context);
-        allCollectQuestion = db.findAllCuoTiA();
-            return R.layout.home_exam_subjecta_cuoti;
+
+        QuestionBean questionBean = new QuestionBean(null, "1", "c1", null);
+        allCollectQuestion = mHelper.getAllQuestionByParams(questionBean);
+        return R.layout.home_exam_subjecta_cuoti;
     }
+
     @Override
     protected void initView() {
-            readerViewPager = (ReaderViewPager) view.findViewById(R.id.vp_subjectA);
-            mTV_title_mun = (TextView) view.findViewById(R.id.tv_title_num);
-            mLL_questionback = (LinearLayout) view.findViewById(R.id.ll_question_back);
-        mTV_title_mun.setText(1+"/"+allCollectQuestion.size());
-            mLL_questionback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-            readerViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        readerViewPager = (ReaderViewPager) view.findViewById(R.id.vp_subjectA);
+        mTV_title_mun = (TextView) view.findViewById(R.id.tv_title_num);
+        mLL_questionback = (LinearLayout) view.findViewById(R.id.ll_question_back);
+        mTV_title_mun.setText(1 + "/" + allCollectQuestion.size());
+        mLL_questionback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        readerViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                }
+            }
 
-                @Override
-                public void onPageSelected(int position) {
+            @Override
+            public void onPageSelected(int position) {
 
-                    final Questiona questiond = allCollectQuestion.get(position);
-                    //正确答案
-                    int timu_qid = position+1;
-                    mTV_title_mun.setText(timu_qid+"/"+allCollectQuestion.size());
-                }
+                final QuestionBean questiond = allCollectQuestion.get(position);
+                //正确答案
+                int timu_qid = position + 1;
+                mTV_title_mun.setText(timu_qid + "/" + allCollectQuestion.size());
+            }
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-                }
-            });
+            }
+        });
         initViewPager();
     }
 
@@ -94,16 +96,19 @@ public class CuoTiA extends BaseActivity{
                                     Object obj) {
                 container.removeView((View) obj);
             }
+
             private int mChildCount = 0;
+
             @Override
             public void notifyDataSetChanged() {
                 mChildCount = getCount();
                 super.notifyDataSetChanged();
             }
+
             @Override
-            public int getItemPosition(Object object)   {
-                if ( mChildCount > 0) {
-                    mChildCount --;
+            public int getItemPosition(Object object) {
+                if (mChildCount > 0) {
+                    mChildCount--;
                     return POSITION_NONE;
                 }
                 return super.getItemPosition(object);
@@ -112,34 +117,28 @@ public class CuoTiA extends BaseActivity{
             @Override
             public Object instantiateItem(ViewGroup container, final int position) {
                 {
-                    final Questiona questiond = allCollectQuestion.get(position);
+                    final QuestionBean questiond = allCollectQuestion.get(position);
                     //正确答案
-                    final String trueanswer = questiond.getTrue_answer();
-                    final String answer_1 = questiond.getAnswer_1();
-                    final String answer_2 = questiond.getAnswer_2();
-                    final String answer_3 = questiond.getAnswer_3();
-                    final String answer_4 = questiond.getAnswer_4();
+                    final String answer = questiond.getAnswer();
+                    final String item1 = questiond.getItem1();
+                    final String item2 = questiond.getItem2();
+                    final String item3 = questiond.getItem3();
+                    final String item4 = questiond.getItem4();
                     final String question = questiond.getQuestion();
-                    final String question_type = questiond.getQuestion_type();
-                    final String explain = questiond.getExplain();
-                    final String true_answer = questiond.getTrue_answer();
-                    final String img = questiond.getImg();
-                    final String qid = questiond.getQid();
-                    String a_state = questiond.getA_state();
-                    String b_state = questiond.getB_state();
-                    String c_state = questiond.getC_state();
-                    String d_state = questiond.getD_state();
-                    String explain_state = questiond.getExplain_state();
+                    final String questionType = questiond.getQuestionType();
+                    final String explains = questiond.getExplains();
+                    final String url = questiond.getUrl();
+
                     View view = View.inflate(container.getContext(), R.layout.subjecta_question_item, null);
                     TextView mTV_qusetion = (TextView) view.findViewById(R.id.tv_question);
                     //问题的图片
                     ImageView mIV_kemu1 = (ImageView) view.findViewById(R.id.iv_kemu1);
-                    if (!TextUtils.isEmpty(img)) {
+       /*             if (!TextUtils.isEmpty(img)) {
                         Picasso.with(App.context).load("http://jiakao.xueyiche.net/" + img)
                                 .placeholder(R.mipmap.lunbotu).error(R.mipmap.lunbotu).into(mIV_kemu1);
                     }else {
                         mIV_kemu1.setVisibility(View.GONE);
-                    }
+                    }*/
                     ImageView xianc = (ImageView) view.findViewById(R.id.xian_c);
                     ImageView xiand = (ImageView) view.findViewById(R.id.xian_d);
                     //题目类型
@@ -163,9 +162,9 @@ public class CuoTiA extends BaseActivity{
                     final ImageView mIV_c = (ImageView) view.findViewById(R.id.iv_c);
                     final ImageView mIV_d = (ImageView) view.findViewById(R.id.iv_d);
 
-                    int timu_qid = position+1;
-                    mTV_qusetion.setText(timu_qid+"/"+allCollectQuestion.size());
-                    if ("2".equals(question_type)) {
+                    int timu_qid = position + 1;
+                    mTV_qusetion.setText(timu_qid + "/" + allCollectQuestion.size());
+                /*        if ("2".equals(question_type)) {
                         mIV_questiontype.setImageResource(R.mipmap.panduan);
                         xianc.setVisibility(View.GONE);
                         xiand.setVisibility(View.GONE);
@@ -201,7 +200,7 @@ public class CuoTiA extends BaseActivity{
                     if (explain_state.equals("2")) {
                         mLL_explan.setVisibility(View.VISIBLE);
                     }
-                    //题目是单选
+                //题目是单选
                     mLL_a.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -369,6 +368,8 @@ public class CuoTiA extends BaseActivity{
                         mTV_ansd.setText(answer_4);
                     }
                     mTV_analysis.setText(explain);
+                    */
+
                     //点击事件
                     //返回
                     mLL_questionback.setOnClickListener(new View.OnClickListener() {
@@ -388,7 +389,7 @@ public class CuoTiA extends BaseActivity{
                 return allCollectQuestion.size();
             }
         };
-        if (readerViewPager!=null) {
+        if (readerViewPager != null) {
             readerViewPager.setAdapter(adapter);
         }
     }
@@ -396,9 +397,9 @@ public class CuoTiA extends BaseActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        if (readerViewPager!=null) {
+        if (readerViewPager != null) {
             int currentItem = readerViewPager.getCurrentItem();
-            PrefUtils.putInt(App.context,"COLLECT",currentItem);
+            PrefUtils.putInt(App.context, "COLLECT", currentItem);
         }
     }
 
@@ -406,7 +407,7 @@ public class CuoTiA extends BaseActivity{
     protected void onStart() {
         super.onStart();
         int currentitem = PrefUtils.getInt(App.context, "COLLECT", 0);
-        if (readerViewPager!=null) {
+        if (readerViewPager != null) {
             readerViewPager.setCurrentItem(currentitem);
         }
 

@@ -10,7 +10,6 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.homepage.adapters.MyResultAdapterA;
-import com.xueyiche.zjyk.jiakao.homepage.adapters.MyResultAdapterD;
 
 
 public class MyResult extends BaseActivity implements View.OnClickListener{
@@ -18,7 +17,7 @@ public class MyResult extends BaseActivity implements View.OnClickListener{
     private ListView listView;
     private MyResultAdapterA adapterA;
     private TextView tvTitle;
-    private MyResultAdapterD myResultAdapterD;
+
     @Override
     protected int initContentView() {
         return R.layout.my_result_activity;
@@ -31,7 +30,6 @@ public class MyResult extends BaseActivity implements View.OnClickListener{
         listView = (ListView) view.findViewById(R.id.my_result_list_view);
         llBack.setOnClickListener(this);
         adapterA = new MyResultAdapterA();
-        myResultAdapterD = new MyResultAdapterD();
 
         ImmersionBar.with(this).titleBar(R.id.ll_title).statusBarDarkFont(true).init();
         tvTitle.setText("我的成绩");
@@ -49,9 +47,6 @@ public class MyResult extends BaseActivity implements View.OnClickListener{
         String myresult = intent.getStringExtra("myresult");
         if ("1".equals(myresult)) {
             listView.setAdapter(adapterA);
-            adapterA.notifyDataSetChanged();
-        }else if ("2".equals(myresult)){
-            listView.setAdapter(myResultAdapterD);
             adapterA.notifyDataSetChanged();
         }
 
