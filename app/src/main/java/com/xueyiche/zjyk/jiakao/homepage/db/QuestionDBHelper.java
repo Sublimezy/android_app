@@ -165,6 +165,9 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
                     null, null, null, null, null);
 
 
+
+
+
             List<QuestionBean> result = new ArrayList<>();
 
             QuestionBean que;
@@ -177,6 +180,7 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String url = cursor.getString(cursor.getColumnIndex("url"));
                 @SuppressLint("Range") String answer = cursor.getString(cursor.getColumnIndex("answer"));
                 @SuppressLint("Range") String explains = cursor.getString(cursor.getColumnIndex("explains"));
+                @SuppressLint("Range") long questionType = cursor.getLong(cursor.getColumnIndex("questionType"));
                 que = new QuestionBean();
                 que.setQuestion(question);
                 que.setItem1(item1);
@@ -186,6 +190,7 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
                 que.setUrl(url);
                 que.setAnswer(answer);
                 que.setExplains(explains);
+                que.setQuestionType(questionType);
                 result.add(que);
             }
 

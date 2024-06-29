@@ -152,7 +152,11 @@
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name="com.xueyiche.zjyk.jiakao.exam.kemuad.PracticeNormalActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.xueyiche.zjyk.jiakao.mine.activities.bianji.ChangeHeadActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"

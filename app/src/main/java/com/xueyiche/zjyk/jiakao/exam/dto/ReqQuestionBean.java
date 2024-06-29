@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.exam.bean;
+package com.xueyiche.zjyk.jiakao.exam.dto;
 
 import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
 

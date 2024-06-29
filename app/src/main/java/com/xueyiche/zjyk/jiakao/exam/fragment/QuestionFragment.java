@@ -1,40 +1,31 @@
 package com.xueyiche.zjyk.jiakao.exam.fragment;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
-import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
-import com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager;
-
-import java.util.List;
-import java.util.Random;
 
 public class QuestionFragment extends Fragment {
-    //顺序练习
-    private ReaderViewPager readerViewPager;
-    private PagerAdapter adapter;
+    private FragmentListener fragmentListener;
 
-    private QuestionDBHelper mHelp;
+    public interface FragmentListener {
+        void process(int str);
+    }
 
-    private TextView mTV_title_mun;
-
-    private CheckBox ck_collection;
+    private int position;
+    private TextView mTV_analysis_answer;
+    private TextView mTV_analysis;
+    private LinearLayout ll_explan;
     private int[] imgs = {R.mipmap.pic_yi, R.mipmap.pic_er, R.mipmap.pic_san, R.mipmap.pic_si, R.mipmap.pic_wu, R.mipmap.pic_liu,
             R.mipmap.pic_qi, R.mipmap.pic_ba, R.mipmap.pic_jiu, R.mipmap.pic_shi, R.mipmap.pic_shiyi, R.mipmap.pic_shier,
             R.mipmap.pic_shisan};
@@ -55,23 +46,15 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         Context context = getContext();
-        Bundle arguments = getArguments();
-
-        int size = arguments.getInt("size", 0);
-        int position = arguments.getInt("position", 0);
-        QuestionBean questionBean = arguments.getParcelable("questionBean");
 
         View view = LayoutInflater.from(context).inflate(R.layout.subjecta_question_item, container, false);
 
+        Bundle arguments = getArguments();
 
-        //题目的数量
-        mTV_title_mun = (TextView) view.findViewById(R.id.exam_question_include).findViewById(R.id.tv_title_num);
-        mTV_title_mun.setText(1 + "/" + size);
-
-        //收藏
-        ck_collection = (CheckBox) view.findViewById(R.id.exam_question_include).findViewById(R.id.ck_collection);
+        int size = arguments.getInt("size", 0);
+        position = arguments.getInt("position", 0);
+        QuestionBean questionBean = arguments.getParcelable("questionBean");
 
 
         final Long question_type = questionBean.getQuestionType();
@@ -87,7 +70,7 @@ public class QuestionFragment extends Fragment {
         String questionType = null;
 
         if (question_type == 0) {
-            questionType = "选择题";
+            questionType = "单选题";
         } else if (question_type == 1) {
             questionType = "判断题";
         } else if (question_type == 2) {
@@ -96,10 +79,10 @@ public class QuestionFragment extends Fragment {
 
 
         //题目
-        TextView mTV_qusetion = (TextView) view.findViewById(R.id.tv_question);
+        TextView mTV_qusetion = (TextView) view.findViewById(R.id.question);
 
         //题目类型
-        TextView mIV_questiontype = view.findViewById(R.id.iv_questiontype);
+        TextView mIV_questiontype = view.findViewById(R.id.question_type);
 
         //答案的文本内容
         TextView mTV_ansa = (TextView) view.findViewById(R.id.tv_ansa);
@@ -107,8 +90,12 @@ public class QuestionFragment extends Fragment {
         TextView mTV_ansc = (TextView) view.findViewById(R.id.tv_ansc);
         TextView mTV_ansd = (TextView) view.findViewById(R.id.tv_ansd);
 
+
+        ll_explan = view.findViewById(R.id.ll_explan);
         //解析文本内容
-        TextView mTV_analysis = (TextView) view.findViewById(R.id.tv_analysis);
+        mTV_analysis_answer = (TextView) view.findViewById(R.id.tv_analysis_answer);
+        mTV_analysis = (TextView) view.findViewById(R.id.tv_analysis);
+
 
         mTV_qusetion.setText(question);
         mIV_questiontype.setText(questionType);
@@ -155,16 +142,30 @@ public class QuestionFragment extends Fragment {
             }
         });
 
+
         return view;
     }
 
-    void handleLinearLayoutClick(String option, String answer) {
-
-        if (!option.equals(answer)) {
-
-        } else {
-
+    @Override
+    public void onAttach(@NonNull Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof FragmentListener) {
+            fragmentListener = (FragmentListener) activity;
         }
+    }
+
+    void handleLinearLayoutClick(String option, String answer) {
+//设置正确选项的背景
+        //如果选错，
+        if (!option.equals(answer)) {
+            ll_explan.setVisibility(View.VISIBLE);
+            mTV_analysis_answer.setText("答案：" + answer + "您的选项" + option);
+//给option设置红色,显示 explain,
+        } else {
+//延迟1秒后翻页
+            fragmentListener.process(position);
+        }
+
 
     }
 }

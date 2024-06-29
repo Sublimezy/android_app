@@ -1,32 +1,22 @@
 package com.xueyiche.zjyk.jiakao.exam.kemuad;
 
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.exam.adapter.QuestionAdapter;
+import com.xueyiche.zjyk.jiakao.exam.fragment.QuestionFragment;
 import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
 import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
 import com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager;
-import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 import java.util.List;
-import java.util.Random;
 
 
-public class PracticeNormalActivity extends BaseActivity {
+public class PracticeNormalActivity extends BaseActivity implements QuestionFragment.FragmentListener {
 
     private LinearLayout mLL_questionback;
     private ReaderViewPager readerViewPager;
@@ -70,7 +60,7 @@ public class PracticeNormalActivity extends BaseActivity {
 
         readerViewPager = (ReaderViewPager) view.findViewById(R.id.vp_subjectA);
 
-        QuestionAdapter adapter = new QuestionAdapter(getSupportFragmentManager(),questionBeanList );
+        QuestionAdapter adapter = new QuestionAdapter(getSupportFragmentManager(), questionBeanList);
 
         readerViewPager.setAdapter(adapter);
     }
@@ -86,4 +76,8 @@ public class PracticeNormalActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void process(int position) {
+        readerViewPager.setCurrentItem(position + 1);
+    }
 }

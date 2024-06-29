@@ -22,7 +22,7 @@ import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
 import com.xueyiche.zjyk.jiakao.exam.MoNiTestPage;
-import com.xueyiche.zjyk.jiakao.exam.bean.ReqQuestionBean;
+import com.xueyiche.zjyk.jiakao.exam.dto.ReqQuestionBean;
 import com.xueyiche.zjyk.jiakao.exam.kemuad.PracticeNormalActivity;
 import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
 import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
@@ -37,14 +37,12 @@ import java.util.Map;
 
 
 //科目一的fragment
-public class SubjectADFragment extends BaseFragment implements View.OnClickListener {
+public class SubjectADFragment extends BaseFragment implements View.OnClickListener{
     private QuestionDBHelper mHelper;
     private LinearLayout ll_test_practice;
     private TextView mTV_shunxuid, tv_practice_test;
     private TextView mTV_four, mTV_three, mTV_two, mTV_five;
-    private boolean cuotia;
-    private boolean shoucanga;
-    private boolean chengji;
+
     private ProgressBar progressBar;
     private TextView textProgress;
     private ProgressBar progressBar2;
@@ -252,6 +250,8 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
 
     }
+
+
 
     private class ImportDataTask extends AsyncTask<Void, Integer, Void> {
 
