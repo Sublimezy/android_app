@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext;
+package com.xueyiche.zjyk.jiakao.exam;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,13 +9,13 @@ import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
-import com.xueyiche.zjyk.jiakao.homepage.adapters.MyResultAdapterA;
+import com.xueyiche.zjyk.jiakao.homepage.adapters.MyResultAdapter;
 
 
 public class MyResult extends BaseActivity implements View.OnClickListener{
     private LinearLayout llBack;
     private ListView listView;
-    private MyResultAdapterA adapterA;
+    private MyResultAdapter adapterA;
     private TextView tvTitle;
 
     @Override
@@ -29,7 +29,7 @@ public class MyResult extends BaseActivity implements View.OnClickListener{
         tvTitle = (TextView) view.findViewById(R.id.my_result_include).findViewById(R.id.tv_login_back);
         listView = (ListView) view.findViewById(R.id.my_result_list_view);
         llBack.setOnClickListener(this);
-        adapterA = new MyResultAdapterA();
+        adapterA = new MyResultAdapter();
 
         ImmersionBar.with(this).titleBar(R.id.ll_title).statusBarDarkFont(true).init();
         tvTitle.setText("我的成绩");

@@ -81,7 +81,6 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_marginTop="2dp"
-                            android:text="@string/_0_1310"
                             android:textColor="@color/color_white" />
                     </LinearLayout>
 
@@ -142,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
-                android:text="Progress: 0 / 100"
+                android:text="Progress"
                 android:textSize="18sp" />
 
         </LinearLayout>

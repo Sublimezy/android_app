@@ -25,12 +25,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <TextView
                     android:id="@+id/iv_questiontype"
                     android:layout_width="wrap_content"
                     android:paddingLeft="@dimen/si"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/danxuan" />
+                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

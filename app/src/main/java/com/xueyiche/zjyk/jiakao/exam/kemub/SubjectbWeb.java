@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext.kemub;
+package com.xueyiche.zjyk.jiakao.exam.kemub;
 
 import android.content.Intent;
 import android.view.View;

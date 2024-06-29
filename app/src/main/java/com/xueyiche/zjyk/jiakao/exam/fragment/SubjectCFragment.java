@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext.examfragment;
+package com.xueyiche.zjyk.jiakao.exam.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,23 +16,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.constants.AppUrl;
-import com.xueyiche.zjyk.jiakao.examtext.kemuc.KeMuSanVideo;
+import com.xueyiche.zjyk.jiakao.exam.kemuc.KeMuSanVideo;
 import com.xueyiche.zjyk.jiakao.homepage.bean.KeMuSanBean;
 import com.xueyiche.zjyk.jiakao.utils.ACache;
 import com.xueyiche.zjyk.jiakao.utils.JsonUtil;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 import com.xueyiche.zjyk.jiakao.utils.XueYiCheUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -75,7 +69,7 @@ public class SubjectCFragment extends BaseFragment implements View.OnClickListen
         if (XueYiCheUtils.IsHaveInternet(getContext())) {
             String user_phone = PrefUtils.getString(App.context, "user_phone", "");
             showProgressDialog(getActivity(),false);
-            OkHttpUtils.post().url(AppUrl.KEMUSAN).addParams("user_phone", user_phone).
+/*            OkHttpUtils.post().url(AppUrl.KEMUSAN).addParams("user_phone", user_phone).
                     build().execute(new Callback() {
                 @Override
                 public Object parseNetworkResponse(Response response) throws IOException {
@@ -97,7 +91,7 @@ public class SubjectCFragment extends BaseFragment implements View.OnClickListen
                 public void onResponse(Object response) {
                     stopProgressDialog();
                 }
-            });
+            });*/
 
         }
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {

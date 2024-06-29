@@ -55,7 +55,7 @@ public class MyHttpUtils {
 
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Response<String> response) {
-                        Log.e("返回成功参数"+url, response.body());
+                        Log.e("返回成功参数" + url, response.body());
                         Log.e("返回成功参数token", PrefUtils.getParameter("token"));
                         String json = response.body();
 
@@ -77,7 +77,7 @@ public class MyHttpUtils {
 
                     @Override
                     public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                        Log.e("返回失败参数"+url, e.toString());
+                        Log.e("返回失败参数" + url, e.toString());
                         if (listener != null) {
                             listener.requestError(e.toString(), -1);
                         }
@@ -90,6 +90,7 @@ public class MyHttpUtils {
                     }
                 });
     }
+
     public static <T> void postHttpMessageNoToken(final String url, Map<String, String> params, final Class<T> clazz, final RequestCallBack<T> listener) {
         Log.e("postmap____________", url + "~~~~~" + params.toString() + "");
 
@@ -117,7 +118,7 @@ public class MyHttpUtils {
 
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Response<String> response) {
-                        Log.e("返回成功参数"+url, response.body());
+                        Log.e("返回成功参数" + url, response.body());
                         Log.e("返回成功参数token", PrefUtils.getParameter("token"));
                         String json = response.body();
 
@@ -139,7 +140,7 @@ public class MyHttpUtils {
 
                     @Override
                     public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                        Log.e("返回失败参数"+url, e.toString());
+                        Log.e("返回失败参数" + url, e.toString());
                         if (listener != null) {
                             listener.requestError(e.toString(), -1);
                         }
@@ -154,23 +155,16 @@ public class MyHttpUtils {
     }
 
 
-    /**
-     * @param url
-     * @param clazz
-     * @param listener
-     * @param <T>
-     */
-    public static <T> void getHttpMessage(final String url, final Class<T> clazz, final RequestCallBack<T> listener) {
-        getHttpMessage(url, "application/json", clazz, listener);
-    }
 
-    public static <N> void getHttpMessage(final String url, String header, final Class<N> bean, final RequestCallBack<N> listener) {
+
+    public static <N> void getHttpMessage(final String url, Map<String, String> params, final Class<N> bean, final RequestCallBack<N> listener) {
         Log.e("get-------", url + "");
 
         OkGo.<String>get(url)
                 .tag(url)
                 .converter(new StringConvert())
-                .headers("Content-Type", header)
+                .headers("Content-Type", "application/json")
+                .params(params)
                 .adapt(new ObservableResponse<String>())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -189,20 +183,25 @@ public class MyHttpUtils {
 
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Response<String> response) {
-                        Log.e("返回成功参数", url+":"+response.body());
+                        Log.e("返回成功参数", url + ":" + response.body());
                         String json = response.body();
 
                         try {
                             if (listener != null) {
                                 N t = JsonUtils.jsonToBean(json, bean);
+
                                 if (t != null) {
                                     listener.requestSuccess(t);
+                                    Log.e("回调返回成功参数", url + ":" + response.body());
                                 } else {
                                     listener.requestError("请求失败,无数据", -1);
                                 }
                             }
                         } catch (Exception e) {
+                            Log.e("json转换bean失败", response.body());
+                            System.out.println(e);
                             listener.requestError(e.toString(), -1);
+
                         }
                     }
 
@@ -220,7 +219,6 @@ public class MyHttpUtils {
                     }
                 });
     }
-
 
 
     /**
@@ -266,7 +264,7 @@ public class MyHttpUtils {
                     public void onNext(@io.reactivex.annotations.NonNull Response<String> response) {
                         Log.e("返回成功参数", response.body());
                         String json = response.body();
-                        Log.e("返回成功参数_是否使用了缓存", response.isFromCache()+"111111");
+                        Log.e("返回成功参数_是否使用了缓存", response.isFromCache() + "111111");
 
 
                         try {

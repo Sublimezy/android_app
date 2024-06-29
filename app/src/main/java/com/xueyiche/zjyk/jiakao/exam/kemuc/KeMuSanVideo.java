@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext.kemuc;
+package com.xueyiche.zjyk.jiakao.exam.kemuc;
 
 import android.content.Intent;
 import android.media.MediaPlayer;

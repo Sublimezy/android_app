@@ -1,26 +1,17 @@
-package com.xueyiche.zjyk.jiakao.examtext;
+package com.xueyiche.zjyk.jiakao.exam;
 
-import android.content.Intent;
-
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.main.activities.main.MainActivity;
-import com.xueyiche.zjyk.jiakao.main.view.NoScrollViewPager;
-import com.xueyiche.zjyk.jiakao.mine.fragments.MineFragment;
 
 
 public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
@@ -49,11 +40,13 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         ImmersionBar.with(this).titleBar(R.id.ll_title).statusBarDarkFont(true).init();
         viewPager.addOnPageChangeListener(this);
         initData();
+
+
     }
 
 
     private void initData() {
-        viewPager.setAdapter(new MyExamAdapter( getChildFragmentManager()));
+        viewPager.setAdapter(new MyExamAdapter(getChildFragmentManager()));
         mRG_exam_menutab.setOnCheckedChangeListener(this);
 
     }

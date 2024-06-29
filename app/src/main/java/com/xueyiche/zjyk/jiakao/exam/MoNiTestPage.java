@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext;
+package com.xueyiche.zjyk.jiakao.exam;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -11,7 +11,6 @@ import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeTestActivity;
 import com.xueyiche.zjyk.jiakao.mine.view.CircleImageView;
 import com.xueyiche.zjyk.jiakao.utils.DialogUtils;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
@@ -67,12 +66,12 @@ public class MoNiTestPage extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_test:
-                if ("1".equals(moni_style)) {
+/*                if ("1".equals(moni_style)) {
                     Intent intent = new Intent(App.context, PracticeTestActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     finish();
-                }
+                }*/
                 break;
             case R.id.ll_test_license_back:
                 finish();

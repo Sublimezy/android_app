@@ -172,114 +172,28 @@
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- 性别 -->
 
-<!--模拟考试页面-->
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeTestActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-<!--        模拟考试页面-->
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.PracticeTestFour"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeNormalActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.AchievementActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.CollectionActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeWrongActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeSpecialActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeSpecialContentActivity"
+            android:name="com.xueyiche.zjyk.jiakao.exam.MyResult"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.MyResult"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.MoNiTestPage"
+            android:name="com.xueyiche.zjyk.jiakao.exam.MoNiTestPage"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemub.SubjectbWeb"
+            android:name="com.xueyiche.zjyk.jiakao.exam.kemub.SubjectbWeb"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemuc.KeMuSanVideo"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.AchievementFourActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.CollectionD"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.CuoTiD"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.SubjectDQuestion"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.ZhuangXiangDContent"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.examtext.kemud.ZhuanXiangD"
+            android:name="com.xueyiche.zjyk.jiakao.exam.kemuc.KeMuSanVideo"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />

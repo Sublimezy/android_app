@@ -51,6 +51,5 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Progress: 0 / 100"
         android:textSize="18sp" />
 </LinearLayout>

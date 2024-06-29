@@ -1,4 +1,4 @@
-package com.xueyiche.zjyk.jiakao.examtext.examfragment;
+package com.xueyiche.zjyk.jiakao.exam.fragment;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
-import com.xueyiche.zjyk.jiakao.base.module.NewBaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.examtext.kemub.SubjectbWeb;
+import com.xueyiche.zjyk.jiakao.exam.kemub.SubjectbWeb;
 
 
 public class SubjectBFragment extends BaseFragment implements View.OnClickListener {

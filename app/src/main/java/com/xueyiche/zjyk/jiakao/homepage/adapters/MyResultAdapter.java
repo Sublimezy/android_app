@@ -14,7 +14,7 @@ import com.xueyiche.zjyk.jiakao.homepage.bean.MyResultBean;
 import java.util.List;
 
 
-public class MyResultAdapterA extends BaseAdapter {
+public class MyResultAdapter extends BaseAdapter {
     private List<MyResultBean> list;
 
 

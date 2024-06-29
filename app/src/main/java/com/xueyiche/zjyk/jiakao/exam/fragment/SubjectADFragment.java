@@ -1,10 +1,14 @@
-package com.xueyiche.zjyk.jiakao.examtext.examfragment;
+package com.xueyiche.zjyk.jiakao.exam.fragment;
 
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.TextUtils;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +20,20 @@ import android.widget.Toast;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.examtext.MoNiTestPage;
-import com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeNormalActivity;
-import com.xueyiche.zjyk.jiakao.examtext.kemuad.PracticeSpecialActivity;
+import com.xueyiche.zjyk.jiakao.constants.AppUrl;
+import com.xueyiche.zjyk.jiakao.exam.MoNiTestPage;
+import com.xueyiche.zjyk.jiakao.exam.bean.ReqQuestionBean;
+import com.xueyiche.zjyk.jiakao.exam.kemuad.PracticeNormalActivity;
 import com.xueyiche.zjyk.jiakao.homepage.bean.QuestionBean;
 import com.xueyiche.zjyk.jiakao.homepage.db.QuestionDBHelper;
+
+import com.xueyiche.zjyk.jiakao.myhttp.MyHttpUtils;
+import com.xueyiche.zjyk.jiakao.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 //科目一的fragment
@@ -37,6 +49,14 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     private TextView textProgress;
     private ProgressBar progressBar2;
     private TextView textProgress2;
+    private QuestionBean queryQuestionParams;
+    private List<QuestionBean> questionBeanList;
+    Long subject = null;
+    String model = null;
+
+    Integer pageNum = 1;
+    Integer pageSize = 1000;
+    Bundle args;
 
     @Override
     protected void lazyLoad() {
@@ -46,9 +66,7 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onStart() {
         super.onStart();
-        mHelper = mHelper.getInstance(getContext());
-        mHelper.openReadLink();
-        mHelper.openWriteLink();
+
     }
 
     @Override
@@ -58,51 +76,60 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected View setInitView() {
 
-        mHelper = new QuestionDBHelper(App.context);
+        args = getArguments();
 
+        if (args != null) {
+            subject = args.getLong("subject");
+            model = args.getString("model");
+        }
+
+        mHelper = QuestionDBHelper.getInstance(App.context);
 
         View view = View.inflate(App.context, R.layout.home_exam_subjecta, null);
-        ll_test_practice = (LinearLayout) view.findViewById(R.id.ll_test_practice);
-        //顺序练习
-        mTV_shunxuid = (TextView) view.findViewById(R.id.tv_shunxuid);
 
+        //顺序练习
+        ll_test_practice = view.findViewById(R.id.ll_test_practice);
+        //顺序联系的题目数量
+        mTV_shunxuid = view.findViewById(R.id.tv_shunxuid);
+        //专项
+        mTV_two = view.findViewById(R.id.tv_two);
+        //错题
+        mTV_three = view.findViewById(R.id.tv_three);
+        //收藏
+        mTV_four = view.findViewById(R.id.tv_four);
+        //我的成绩
+        mTV_five = view.findViewById(R.id.tv_five);
+        //模拟考试
+        tv_practice_test = view.findViewById(R.id.tv_practice_test);
+
+        //导入数据库进度条
         progressBar = view.findViewById(R.id.progress_par);
         textProgress = view.findViewById(R.id.text_progress);
 
-        showLayoutDialog();
 
-        // 启动后台任务
-        new ImportDataTask().execute();
+        queryQuestionParams = new QuestionBean(null, subject, model, null);
 
-        //专项
-        mTV_two = (TextView) view.findViewById(R.id.tv_two);
-        //错题
-        mTV_three = (TextView) view.findViewById(R.id.tv_three);
-        //收藏
-        mTV_four = (TextView) view.findViewById(R.id.tv_four);
-        //我的成绩
-        mTV_five = (TextView) view.findViewById(R.id.tv_five);
+
+        questionBeanList = mHelper.getAllQuestionByParams(queryQuestionParams);
+
+        if (questionBeanList.size() == 0) {
+            showLayoutDialog();
+            // 启动后台任务 查询后台数据库，导入到本地
+            new ImportDataTask().execute();
+        }
+
+
         mTV_five.setOnClickListener(this);
-
-        tv_practice_test = (TextView) view.findViewById(R.id.tv_practice_test);
         tv_practice_test.setOnClickListener(this);
         ll_test_practice.setOnClickListener(this);
-
         mTV_two.setOnClickListener(this);
         mTV_three.setOnClickListener(this);
         mTV_four.setOnClickListener(this);
 
-//        dbManager.copyDBFile();
-        String one_number = PrefUtils.getString(App.context, "one_number", "");
-        QuestionBean questionBean = new QuestionBean(null, "1", "c1", null);
-        if (!TextUtils.isEmpty(one_number)) {
-            mTV_shunxuid.setText(one_number + "/" + mHelper.getAllQuestionByParams(questionBean).size());
-        } else {
-            mTV_shunxuid.setText(0 + "/" + mHelper.getAllQuestionByParams(questionBean).size());
-        }
 
         return view;
     }
@@ -125,7 +152,7 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         switch (v.getId()) {
             //专项练习
             case R.id.tv_two:
-                startActivity(new Intent(App.context, PracticeSpecialActivity.class));
+//                startActivity(new Intent(App.context, PracticeSpecialActivity.class));
                 break;
 
 /*            //我的错题
@@ -157,7 +184,7 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
                 break;*/
             //顺序练习
             case R.id.ll_test_practice:
-                startActivity(new Intent(App.context, PracticeNormalActivity.class));
+                readyGo(PracticeNormalActivity.class, args);
                 break;
 
 
@@ -167,7 +194,6 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
                 intent6.putExtra("moni_style", "1");
                 startActivity(intent6);
                 break;
-
         }
     }
 
@@ -187,9 +213,9 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     private void showLayoutDialog() {
         //加载布局并初始化组件
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.daoru_jiakao, null);
-        TextView dialogText = (TextView) dialogView.findViewById(R.id.dialog_text);
-        progressBar2 = (ProgressBar) dialogView.findViewById(R.id.progress_par2);
-        textProgress2 = (TextView) dialogView.findViewById(R.id.text_progress2);
+        TextView dialogText = dialogView.findViewById(R.id.dialog_text);
+        progressBar2 = dialogView.findViewById(R.id.progress_par2);
+        textProgress2 = dialogView.findViewById(R.id.text_progress2);
         Button dialogBtnConfirm = dialogView.findViewById(R.id.dialog_btn_confirm);
         Button dialogBtnCancel = dialogView.findViewById(R.id.dialog_btn_cancel);
         final AlertDialog.Builder layoutDialog = new AlertDialog.Builder(getContext());
@@ -199,6 +225,7 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         final AlertDialog dialog = layoutDialog.show();
         //设置组件
         dialogText.setText("我是自定义layout的弹窗！！");
+
         dialogBtnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,6 +245,8 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onDismiss(DialogInterface dialog) {
                 Toast.makeText(getContext(), "对话框已关闭！", Toast.LENGTH_SHORT).show();
+                // 将整数转换为字符串
+                mTV_shunxuid.setText(String.valueOf(questionBeanList.size()));
             }
         });
 
@@ -229,44 +258,72 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         @Override
         protected Void doInBackground(Void... voids) {
 
-            // 假设这里是导入数据到数据库的操作
-            int totalDataToImport = 100; // 假设要导入的数据总数
 
-            progressBar.setMax(totalDataToImport);
+            Map<String, String> params = new HashMap<>();
+            params.put("subject", String.valueOf(subject));
+            params.put("model", model);
+            params.put("pageNum", String.valueOf(pageNum));
+            params.put("pageSize", String.valueOf(pageSize));
 
-            progressBar2.setMax(totalDataToImport);
 
-            for (int i = 0; i <= totalDataToImport; i++) {
-                // 模拟导入数据的过程
-                // 这里可以调用你的数据库操作方法来插入数据
-                // insertDataIntoDatabase();
+            MyHttpUtils.getHttpMessage(AppUrl.DRIVING_LIST, params, ReqQuestionBean.class, new RequestCallBack<ReqQuestionBean>() {
 
-                // 更新进度
-                publishProgress(i, totalDataToImport);
 
-                // 模拟延迟
-                try {
-                    Thread.sleep(50); // 模拟耗时操作
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                @Override
+                public void requestSuccess(ReqQuestionBean json) {
+
+                    int totalDataToImport = (int) json.getTotal();
+
+                    questionBeanList = json.getRows();
+
+                    if (questionBeanList != null) {
+
+                        progressBar.setMax(totalDataToImport);
+
+                        progressBar2.setMax(totalDataToImport);
+
+                        for (int i = 1; i <= totalDataToImport; i++) {
+                            QuestionBean questionBean = questionBeanList.get(i);
+
+                            boolean insert = mHelper.insert(questionBean);
+                            if (insert) {
+                                // 更新进度
+                                publishProgress(i, totalDataToImport);
+                            }
+
+
+                        }
+                    }
+
+
                 }
-            }
+
+
+                @Override
+                public void requestError(String errorMsg, int errorType) {
+
+                }
+            });
+
+
             return null;
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            int progress = (int) (((float) values[0] / values[1]) * 100);
-            progressBar.setProgress(progress);
-            textProgress.setText("Progress: " + values[0] + " / " + values[1]);
-            progressBar2.setProgress(progress);
-            textProgress2.setText("Progress: " + values[0] + " / " + values[1]);
+            Integer value0 = values[0] + 1;
+            Integer value1 = values[1];
+            progressBar.setProgress(value0);
+            textProgress.setText("导入进度: " + value0 + " / " + value1);
+            progressBar2.setProgress(value0);
+            textProgress2.setText("导入进度: " + value0 + " / " + value1);
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
         }
     }
 }

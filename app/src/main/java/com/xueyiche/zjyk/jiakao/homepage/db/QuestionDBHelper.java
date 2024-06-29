@@ -1,10 +1,12 @@
 package com.xueyiche.zjyk.jiakao.homepage.db;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -27,6 +29,7 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
 
     public QuestionDBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+
     }
 
     //利用单例模式获取数据库帮助器的唯一实例
@@ -86,6 +89,33 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
+    public boolean insert(QuestionBean questionBean) {
+        try {
+            wRDB = openWriteLink();
+            ContentValues values = new ContentValues();
+            values.put("subject", questionBean.getSubject());
+            values.put("model", questionBean.getModel());
+            values.put("questionType", questionBean.getQuestionType());
+            values.put("item1", questionBean.getItem1());
+            values.put("item2", questionBean.getItem2());
+            values.put("item3", questionBean.getItem3());
+            values.put("item4", questionBean.getItem4());
+            values.put("answer", questionBean.getAnswer());
+            values.put("question", questionBean.getQuestion());
+            values.put("explains", questionBean.getExplains());
+            values.put("url", questionBean.getUrl());
+//当values 为空时，nullColumnHack需指定一个字段
+
+
+            long result = wRDB.insert(TABLE_NAME, null, values);
+            Log.e("DATABASE", String.valueOf(result));
+            closeLink();
+            return result > 0;
+        } finally {
+            closeLink();
+        }
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -96,38 +126,79 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
      * 读取问题
      */
     public List<QuestionBean> getAllQuestionByParams(QuestionBean questionBean) {
-        String selection = "id=? AND subject=? AND model=? AND questionType=?";
-        String[] selectionArgs = {questionBean.getId(), questionBean.getSubject(), questionBean.getModel(), questionBean.getQuestionType()};
+        Cursor cursor = null;
+        String selection = "";
+        ArrayList<String> selectionArgsList = new ArrayList<>();
 
-        Cursor cursor = mRDB.query(false, TABLE_NAME, null, selection, selectionArgs,
-                null, null, null, null, null);
+        try {
+            mRDB = openReadLink();
 
-        List<QuestionBean> result = new ArrayList<>();
-        QuestionBean que;
-        while (cursor.moveToNext()) {
-            @SuppressLint("Range") String question = cursor.getString(cursor.getColumnIndex("question"));
-            @SuppressLint("Range") String item1 = cursor.getString(cursor.getColumnIndex("item1"));
-            @SuppressLint("Range") String item2 = cursor.getString(cursor.getColumnIndex("item2"));
-            @SuppressLint("Range") String item3 = cursor.getString(cursor.getColumnIndex("item3"));
-            @SuppressLint("Range") String item4 = cursor.getString(cursor.getColumnIndex("item4"));
-            @SuppressLint("Range") String url = cursor.getString(cursor.getColumnIndex("url"));
-            @SuppressLint("Range") String answer = cursor.getString(cursor.getColumnIndex("answer"));
-            @SuppressLint("Range") String explains = cursor.getString(cursor.getColumnIndex("explains"));
-            que = new QuestionBean();
-            que.setQuestion(question);
-            que.setItem1(item1);
-            que.setItem2(item2);
-            que.setItem3(item3);
-            que.setItem4(item4);
-            que.setUrl(url);
-            que.setAnswer(answer);
-            que.setExplains(explains);
-            result.add(que);
+
+// 构建查询条件
+            if (questionBean.getId() != null) {
+                selection += "id=? AND ";
+                selectionArgsList.add(String.valueOf(questionBean.getId()));
+            }
+            if (questionBean.getSubject() != null) {
+                selection += "subject=? AND ";
+                selectionArgsList.add(String.valueOf(questionBean.getSubject()));
+            }
+            if (questionBean.getModel() != null && !questionBean.getModel().isEmpty()) {
+                selection += "model=? AND ";
+                selectionArgsList.add(questionBean.getModel());
+            }
+            if (questionBean.getQuestionType() != null) {
+                selection += "questionType=? AND ";
+                selectionArgsList.add(String.valueOf(questionBean.getQuestionType()));
+            }
+
+// 去掉最后的 " AND "
+            if (selection.endsWith(" AND ")) {
+                selection = selection.substring(0, selection.length() - 5);
+            }
+
+// 转换成数组
+            String[] selectionArgs = selectionArgsList.toArray(new String[selectionArgsList.size()]);
+
+
+            cursor = mRDB.query(false, TABLE_NAME, null, selection, selectionArgs,
+                    null, null, null, null, null);
+
+
+            List<QuestionBean> result = new ArrayList<>();
+
+            QuestionBean que;
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String question = cursor.getString(cursor.getColumnIndex("question"));
+                @SuppressLint("Range") String item1 = cursor.getString(cursor.getColumnIndex("item1"));
+                @SuppressLint("Range") String item2 = cursor.getString(cursor.getColumnIndex("item2"));
+                @SuppressLint("Range") String item3 = cursor.getString(cursor.getColumnIndex("item3"));
+                @SuppressLint("Range") String item4 = cursor.getString(cursor.getColumnIndex("item4"));
+                @SuppressLint("Range") String url = cursor.getString(cursor.getColumnIndex("url"));
+                @SuppressLint("Range") String answer = cursor.getString(cursor.getColumnIndex("answer"));
+                @SuppressLint("Range") String explains = cursor.getString(cursor.getColumnIndex("explains"));
+                que = new QuestionBean();
+                que.setQuestion(question);
+                que.setItem1(item1);
+                que.setItem2(item2);
+                que.setItem3(item3);
+                que.setItem4(item4);
+                que.setUrl(url);
+                que.setAnswer(answer);
+                que.setExplains(explains);
+                result.add(que);
+            }
+
+            cursor.close();
+            mRDB.close();
+            return result;
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            closeLink();
         }
-        cursor.close();
-        closeLink();
-        return result;
+
+
     }
-
-
 }

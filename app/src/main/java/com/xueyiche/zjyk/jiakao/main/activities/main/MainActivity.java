@@ -1,7 +1,6 @@
 package com.xueyiche.zjyk.jiakao.main.activities.main;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
-import com.xueyiche.zjyk.jiakao.examtext.ExamFragment;
+import com.xueyiche.zjyk.jiakao.exam.ExamFragment;
 import com.xueyiche.zjyk.jiakao.message.MessageFragment;
 import com.xueyiche.zjyk.jiakao.mine.fragments.MineFragment;
 import com.xueyiche.zjyk.jiakao.utils.AppUtils;
