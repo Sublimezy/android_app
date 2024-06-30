@@ -105,7 +105,7 @@
             android:name="notch.config"
             android:value="portrait|landscape" /> <!-- 全新需要的Activity -->
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.splash.SplashActivity"
+            android:name="com.xueyiche.zjyk.jiakao.main.SplashActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:theme="@style/WelcomeTheme">
@@ -143,17 +143,17 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.main.activities.login.LoginFirstStepActivity"
+            android:name="com.xueyiche.zjyk.jiakao.login.activity.LoginFirstStepActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- 第二部登录 -->
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.main.activities.login.LoginSecondStepActivity"
+            android:name="com.xueyiche.zjyk.jiakao.login.activity.LoginSecondStepActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.exam.kemuad.PracticeNormalActivity"
+            android:name="com.xueyiche.zjyk.jiakao.exam.activity.question.PracticeNormalActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -164,7 +164,7 @@
             android:screenOrientation="portrait" /> <!-- 车保险的车型 -->
         <!-- 主页 -->
         <activity
-            android:name="com.xueyiche.zjyk.jiakao.main.activities.main.MainActivity"
+            android:name="com.xueyiche.zjyk.jiakao.main.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:launchMode="singleTask"
@@ -177,30 +177,7 @@
             android:screenOrientation="portrait" /> <!-- 性别 -->
 
 
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.exam.MyResult"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.exam.MoNiTestPage"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.exam.kemub.SubjectbWeb"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.xueyiche.zjyk.jiakao.exam.kemuc.KeMuSanVideo"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

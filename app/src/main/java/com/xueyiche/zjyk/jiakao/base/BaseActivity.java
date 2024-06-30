@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.xueyiche.zjyk.jiakao.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.jiakao.constants.App;
 
-import com.xueyiche.zjyk.jiakao.main.activities.login.LoginFirstStepActivity;
+import com.xueyiche.zjyk.jiakao.login.activity.LoginFirstStepActivity;
 import com.xueyiche.zjyk.jiakao.utils.AppUtils;
 
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;

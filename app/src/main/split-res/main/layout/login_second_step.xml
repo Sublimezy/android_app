@@ -45,7 +45,7 @@
             android:textSize="@dimen/text_fifteensp" />
     </LinearLayout>
 
-    <com.xueyiche.zjyk.jiakao.homepage.view.VerificationCodeInput
+    <com.xueyiche.zjyk.jiakao.view.VerificationCodeInput
         android:id="@+id/verificationCodeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

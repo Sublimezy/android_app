@@ -47,7 +47,7 @@
     <string name="located_failed">定位失败</string>
     <string name="home_page_city">城市</string>
     <string name="test_car_book">考驾照</string>
-    <string name="test_book_one">科目一</string>
+    <string name="test_book_one">科目一/四</string>
     <string name="test_book_two">科目二</string>
     <string name="test_book_three">科目三</string>
     <string name="test_book_four">科目四</string>

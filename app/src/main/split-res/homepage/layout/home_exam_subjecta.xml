@@ -128,6 +128,27 @@
                 </LinearLayout>
             </RelativeLayout>
 
+            <RadioGroup
+                android:id="@+id/subject_group"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/subject1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="科目一" />
+
+
+                <RadioButton
+                    android:id="@+id/subject4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="科目四" />
+
+            </RadioGroup>
+
             <ProgressBar
                 android:id="@+id/progress_par"
                 style="?android:attr/progressBarStyleHorizontal"

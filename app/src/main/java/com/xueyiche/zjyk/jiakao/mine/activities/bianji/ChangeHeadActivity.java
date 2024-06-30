@@ -39,8 +39,8 @@ import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
 import com.xueyiche.zjyk.jiakao.constants.bean.TokenBean;
 import com.xueyiche.zjyk.jiakao.constants.event.MyEvent;
-import com.xueyiche.zjyk.jiakao.homepage.bean.SuccessDisCoverBackBean;
-import com.xueyiche.zjyk.jiakao.mine.activities.bean.HeadBean;
+
+import com.xueyiche.zjyk.jiakao.mine.entity.dos.HeadBean;
 import com.xueyiche.zjyk.jiakao.utils.JsonUtil;
 import com.xueyiche.zjyk.jiakao.utils.LogUtil;
 import com.xueyiche.zjyk.jiakao.utils.PhotoUtils;
@@ -412,60 +412,6 @@ public class ChangeHeadActivity extends BaseActivity implements View.OnClickList
     }
 
     private void sendImage(final String trim) {
-
-        OkHttpUtils.post().url(AppUrl.Change_Head)
-                .addParams("user_id", user_id)
-                .addParams("head_img", TextUtils.isEmpty(key) ? "http://xychead.xueyiche.vip/" + key_panduan : "http://xychead.xueyiche.vip/" + key)
-                .addParams("nick_name", trim)
-                .build()
-                .execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response) throws IOException {
-                        String string = response.body().string();
-                        if (!TextUtils.isEmpty(string)) {
-                            SuccessDisCoverBackBean headImageBean = JsonUtil.parseJsonToBean(string, SuccessDisCoverBackBean.class);
-                            if (headImageBean != null) {
-                                final int code = headImageBean.getCode();
-                                App.handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (200 == code) {
-                                            showToastLong("上传成功");
-                                            String s = TextUtils.isEmpty(key) ? key_panduan : key;
-                                            PrefUtils.putString(App.context, "head_img", "http://xychead.xueyiche.vip/" + s);
-                                            PrefUtils.putString(App.context, "key_panduan", s);
-                                            PrefUtils.putString(App.context, "nickname", trim);
-                                            Picasso.with(ChangeHeadActivity.this).load("http://xychead.xueyiche.vip/" + s).into(iv_change_head);
-//                                            iv_change_head.setImageBitmap(bitmap);
-                                            finish();
-                                        } else {
-                                            showToastLong("上传失败");
-                                            String head_img = PrefUtils.getString(App.context, "head_img", "");
-                                            if (!TextUtils.isEmpty(head_img)) {
-                                                Picasso.with(ChangeHeadActivity.this).load(head_img).into(iv_change_head);
-                                            } else {
-                                                iv_change_head.setImageResource(R.mipmap.mine_head);
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                        return string;
-                    }
-
-                    @Override
-                    public void onError(Request request, Exception e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Object response) {
-
-                        EventBus.getDefault().post(new MyEvent("刷新FragmentLogin"));
-                        EventBus.getDefault().post(new MyEvent("刷新Fragment"));
-                    }
-                });
 
     }
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="76dp"
         layout="@layout/exam_question_include"/>
-    <com.xueyiche.zjyk.jiakao.homepage.view.ReaderViewPager
+    <com.xueyiche.zjyk.jiakao.view.ReaderViewPager
         android:id="@+id/vp_subjectA"
         android:layout_below="@+id/exam_question_include"
         android:layout_width="match_parent"

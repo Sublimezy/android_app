@@ -2,20 +2,16 @@ package com.xueyiche.zjyk.jiakao.message;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioGroup;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.event.MyEvent;
-import com.xueyiche.zjyk.jiakao.main.view.NoScrollViewPager;
-import com.xueyiche.zjyk.jiakao.mine.fragments.MineFragment;
+
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;

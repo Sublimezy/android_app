@@ -8,7 +8,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,15 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.xueyiche.zjyk.jiakao.base.view.BaseProgressDialog;
 import com.xueyiche.zjyk.jiakao.constants.App;
-import com.xueyiche.zjyk.jiakao.splash.MyPreferences;
+import com.xueyiche.zjyk.jiakao.main.MyPreferences;
 import com.xueyiche.zjyk.jiakao.utils.AppUtils;
 import com.xueyiche.zjyk.jiakao.utils.StatusBarUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import me.jessyan.autosize.internal.CustomAdapt;
 
 
 /**

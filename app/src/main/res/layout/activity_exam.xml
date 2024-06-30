@@ -49,18 +49,6 @@
             android:text="@string/test_book_three"
             android:textColor="@drawable/rb_select"
             android:textSize="15sp" />
-
-
-        <RadioButton
-            android:id="@+id/rb_subject4"
-            style="@style/MenuTab"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/mine_selector_back"
-            android:drawableBottom="@drawable/rb_xian_select"
-            android:drawablePadding="5dp"
-            android:text="@string/test_book_four"
-            android:textColor="@drawable/rb_select"
-            android:textSize="15sp" />
     </RadioGroup>
 
     <androidx.viewpager.widget.ViewPager

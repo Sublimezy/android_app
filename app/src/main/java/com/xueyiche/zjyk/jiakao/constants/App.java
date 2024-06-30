@@ -1,7 +1,5 @@
 package com.xueyiche.zjyk.jiakao.constants;
 
-import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NEW_VERSION;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -29,12 +27,8 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.tencent.bugly.Bugly;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.xuexiang.xupdate.XUpdate;
-import com.xuexiang.xupdate.entity.UpdateError;
-import com.xuexiang.xupdate.listener.OnUpdateFailureListener;
-import com.xuexiang.xupdate.utils.UpdateUtils;
 import com.xueyiche.zjyk.jiakao.R;
-import com.xueyiche.zjyk.jiakao.splash.MyPreferences;
+import com.xueyiche.zjyk.jiakao.main.MyPreferences;
 import com.xueyiche.zjyk.jiakao.utils.NetUtil;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;

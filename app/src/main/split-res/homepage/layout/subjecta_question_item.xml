@@ -21,22 +21,36 @@
             <TextView
                 android:id="@+id/question"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="@dimen/slide_top_and_left_two"
+                android:textColor="@color/_3232"
+                android:textSize="@dimen/all_16dp" />
 
             <TextView
+
                 android:id="@+id/question_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/question" />
+                android:layout_below="@id/question"
+                android:paddingLeft="@dimen/slide_top_and_left_two" />
+
+            <ImageView
+
+                android:id="@+id/image_url"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/question_type"
+                android:layout_centerHorizontal="true" />
 
             <LinearLayout
                 android:id="@+id/ll_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/question_type"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="100dp"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/slide_top_and_left_two">
+                android:paddingTop="@dimen/ershi">
 
                 <LinearLayout
                     android:id="@+id/ll_a"
@@ -64,10 +78,6 @@
                         android:textSize="@dimen/all_16dp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/xian" />
 
                 <LinearLayout
                     android:id="@+id/ll_b"
@@ -96,10 +106,6 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/xian" />
 
                 <LinearLayout
                     android:id="@+id/ll_c"
@@ -128,11 +134,6 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/xian_c"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/xian" />
 
                 <LinearLayout
                     android:id="@+id/ll_d"
@@ -162,12 +163,6 @@
                 </LinearLayout>
 
 
-                <ImageView
-                    android:id="@+id/xian_d"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/xian" />
-
             </LinearLayout>
 
 
@@ -182,14 +177,6 @@
                 android:paddingRight="@dimen/all_16dp"
                 android:visibility="invisible">
 
-                <TextView
-                    android:id="@+id/tv_analysis_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/slide_top_and_left_two"
-                    android:text="@string/zuijiajiexi"
-                    android:textColor="@color/_3232"
-                    android:textSize="@dimen/all_16dp" />
 
                 <TextView
                     android:id="@+id/tv_analysis_answer"
@@ -199,6 +186,17 @@
                     android:text="@string/zuijiajiexi"
                     android:textColor="@color/_3232"
                     android:textSize="@dimen/all_16dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_analysis_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/slide_top_and_left_two"
+                    android:text="@string/zuijiajiexi"
+                    android:textColor="@color/_3232"
+                    android:textSize="@dimen/all_16dp" />
+
 
                 <TextView
                     android:id="@+id/tv_analysis"
@@ -210,6 +208,14 @@
                     android:textColor="@color/_3232"
                     android:textSize="@dimen/text_fourteensp" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/answer_verify"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/ll_explan"
+                android:text="确认答案" />
 
         </RelativeLayout>
     </ScrollView>

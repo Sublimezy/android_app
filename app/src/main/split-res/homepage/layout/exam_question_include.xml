@@ -45,11 +45,13 @@
 
         <CheckBox
             android:id="@+id/ck_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:button="@null"
+            android:checked="false"
             android:text="@string/collection"
-            android:layout_width="wrap_content"
-            android:textColor="@color/color_white"
-            android:layout_height="match_parent" />
+            android:textColor="@color/color_white" />
+
     </LinearLayout>
 </RelativeLayout >

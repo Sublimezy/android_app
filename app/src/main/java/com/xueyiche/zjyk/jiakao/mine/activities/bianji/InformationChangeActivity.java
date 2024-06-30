@@ -13,7 +13,8 @@ import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseActivity;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
-import com.xueyiche.zjyk.jiakao.mine.activities.bean.BaseResponseBean;
+
+import com.xueyiche.zjyk.jiakao.mine.entity.dos.BaseResponseBean;
 import com.xueyiche.zjyk.jiakao.mine.view.MClearEditText;
 import com.xueyiche.zjyk.jiakao.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.jiakao.myhttp.RequestCallBack;
