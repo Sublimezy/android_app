@@ -27,66 +27,21 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
     private static SQLiteDatabase mRDB = null;
     private static SQLiteDatabase wRDB = null;
 
-
-    public QuestionDBHelper(@Nullable Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-
-    }
-
-    //利用单例模式获取数据库帮助器的唯一实例
-    public static QuestionDBHelper getInstance(Context context) {
-        if (mHelper == null) {
-            mHelper = new QuestionDBHelper(context);
-        }
-        return mHelper;
-    }
-
-    //打开数据库的读连接
-    public SQLiteDatabase openReadLink() {
-        if (mRDB == null || !mRDB.isOpen()) {
-            mRDB = mHelper.getReadableDatabase();
-        }
-
-        return mRDB;
-    }
-
-
-    //打开数据库的写连接
-    public SQLiteDatabase openWriteLink() {
-        if (wRDB == null || !wRDB.isOpen()) {
-            wRDB = mHelper.getWritableDatabase();
-        }
-        return wRDB;
-    }
-
-    //关闭数据库连接
-    public void closeLink() {
-        if (wRDB != null && wRDB.isOpen()) {
-            wRDB.close();
-            wRDB = null;
-        }
-        if (mRDB != null && mRDB.isOpen()) {
-            mRDB.close();
-            mRDB = null;
-        }
-    }
-
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                "subject VARCHAR NOT NULL," +
+                "subject INTEGER NOT NULL," +
                 "model VARCHAR NOT NULL," +
-                "questionType VARCHAR NOT NULL," +
+                "questionType INTEGER NOT NULL," +
                 "item1 VARCHAR NOT NULL," +
                 "item2 VARCHAR NOT NULL," +
                 "item3 VARCHAR NOT NULL," +
                 "item4 VARCHAR NOT NULL," +
-                "answer INTEGER NOT NULL," +
-                "question INTEGER NOT NULL," +
-                "explains INTEGER NOT NULL," +
-                "url INTEGER NOT NULL)";
+                "answer VARCHAR NOT NULL," +
+                "question VARCHAR NOT NULL," +
+                "explains VARCHAR NOT NULL," +
+                "url VARCHAR NOT NULL)";
         db.execSQL(sql);
     }
 
@@ -137,7 +92,7 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
 
 // 构建查询条件
             if (questionBean.getId() != null) {
-                selection += "id=? AND ";
+                selection += "_id=? AND ";
                 selectionArgsList.add(String.valueOf(questionBean.getId()));
             }
             if (questionBean.getSubject() != null) {
@@ -205,5 +160,47 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
         }
 
 
+    }
+
+    public QuestionDBHelper(@Nullable Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    //利用单例模式获取数据库帮助器的唯一实例
+    public static QuestionDBHelper getInstance(Context context) {
+        if (mHelper == null) {
+            mHelper = new QuestionDBHelper(context);
+        }
+        return mHelper;
+    }
+
+    //打开数据库的读连接
+    public SQLiteDatabase openReadLink() {
+        if (mRDB == null || !mRDB.isOpen()) {
+            mRDB = mHelper.getReadableDatabase();
+        }
+
+        return mRDB;
+    }
+
+
+    //打开数据库的写连接
+    public SQLiteDatabase openWriteLink() {
+        if (wRDB == null || !wRDB.isOpen()) {
+            wRDB = mHelper.getWritableDatabase();
+        }
+        return wRDB;
+    }
+
+    //关闭数据库连接
+    public void closeLink() {
+        if (wRDB != null && wRDB.isOpen()) {
+            wRDB.close();
+            wRDB = null;
+        }
+        if (mRDB != null && mRDB.isOpen()) {
+            mRDB.close();
+            mRDB = null;
+        }
     }
 }

@@ -1,47 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:background="@color/colorOrange"
     android:layout_width="match_parent"
-    android:layout_height="76dp">
+    android:layout_height="60dp"
+    android:background="@color/colorOrange">
 
     <LinearLayout
         android:id="@+id/ll_question_back"
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/sanshier"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
         android:layout_marginLeft="@dimen/slide_top_and_left_two"
-        android:layout_height="wrap_content">
+
+        android:orientation="horizontal">
+
         <ImageView
-            android:layout_gravity="center_vertical"
-            android:src="@mipmap/test_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/test_back" />
+
         <TextView
-            android:text="@string/all_back"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/text_sixteensp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/all_back"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_sixteensp" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_title_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="@dimen/dp_40"
         android:text="@string/shu"
-        android:layout_marginTop="34dp"
-        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_fifteensp" />
+
+
+    <TextView
+        android:id="@+id/count_down_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="倒计时"
         android:textColor="@color/color_white"
         android:textSize="@dimen/text_fifteensp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/tv_title_sum"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginStart="250dp"
+        android:text="交卷"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_fifteensp"
+        android:visibility="invisible"/>
+
     <LinearLayout
-        android:layout_alignParentRight="true"
-        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dp_40"
         android:id="@+id/ll_collection"
-        android:layout_marginRight="@dimen/slide_top_and_left_two"
-        android:layout_marginTop="18dp"
-        android:gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/slide_top_and_left_two"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <CheckBox
             android:id="@+id/ck_collection"
@@ -54,4 +82,4 @@
             android:textColor="@color/color_white" />
 
     </LinearLayout>
-</RelativeLayout >
+</RelativeLayout>

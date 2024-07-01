@@ -1,5 +1,7 @@
 package com.xueyiche.zjyk.jiakao.exam.fragment.question;
 
+import static com.xueyiche.zjyk.jiakao.constants.Constant.PRE_ALL_QUESTION;
+import static com.xueyiche.zjyk.jiakao.constants.Constant.PRE_MISTAKES_QUESTION;
 import static com.xueyiche.zjyk.jiakao.exam.entity.enums.AnswerEnum.A;
 import static com.xueyiche.zjyk.jiakao.exam.entity.enums.AnswerEnum.B;
 import static com.xueyiche.zjyk.jiakao.exam.entity.enums.AnswerEnum.C;
@@ -19,11 +21,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.luck.picture.lib.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.exam.entity.dos.QuestionBean;
-import com.xueyiche.zjyk.jiakao.exam.entity.enums.AnswerEnum;
-
+import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
+import com.xueyiche.zjyk.jiakao.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +34,8 @@ import java.util.List;
 
 public class QuestionFragment extends Fragment implements View.OnClickListener {
     private FragmentListener fragmentListener;
+
+    private List<String> mistakes;
 
 
     public interface FragmentListener {
@@ -45,8 +50,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private ImageView iv_b;
     private ImageView iv_c;
     private ImageView iv_d;
-    private List<ImageView> answerImageList = new ArrayList<>();
-    private List<ImageView> optionImageList = new ArrayList<>();
+    private final List<ImageView> answerImageList = new ArrayList<>();
+    private final List<ImageView> optionImageList = new ArrayList<>();
     private String answer;
     private LinearLayout mLL_a;
     private LinearLayout mLL_b;
@@ -54,6 +59,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private LinearLayout mLL_d;
     private String questionType = null;
     private Button answerVerify;
+    private QuestionBean questionBean;
 
     public static QuestionFragment newInstance(int size, int position, QuestionBean questionBean) {
         QuestionFragment fragment = new QuestionFragment();
@@ -79,7 +85,10 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
         int size = arguments.getInt("size", 0);
         position = arguments.getInt("position", 0);
-        QuestionBean questionBean = arguments.getParcelable("questionBean");
+        questionBean = arguments.getParcelable("questionBean");
+
+
+        mistakes = PrefUtils.getStrListValue(getContext(), "mistakes");
 
 
         final Long question_type = questionBean.getQuestionType();
@@ -228,7 +237,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
             if (this.option.contains(String.valueOf(option))) {
                 optionImageList.remove(optionImg);
-                this.option = removeCharacter(this.option, option);
+                this.option = StringUtils.removeCharacter(this.option, option);
 
                 switch (option) {
                     case 'A':
@@ -260,17 +269,50 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     void answerVerifyMethod() {
 
+        String questionId = String.valueOf(questionBean.getId());
         char[] arrOption = option.toCharArray();
         char[] arrAnswer = answer.toCharArray();
         Arrays.sort(arrOption);
         Arrays.sort(arrAnswer);
 
+        //模拟考试 记录做题（哪些没做）
+        List<String> mistakesAllList = PrefUtils.getStrListValue(getContext(), PRE_ALL_QUESTION);
+        if (!mistakesAllList.contains(questionId)) {
+            mistakesAllList.add(questionId);
+            PrefUtils.putStrListValue(getContext(), PRE_ALL_QUESTION, mistakesAllList);
+        }
+
+
         if (Arrays.equals(arrOption, arrAnswer)) {
+
+            if (mistakes.contains(questionId)) {
+                //添加我的错题  //移除错题 //不能重复
+                mistakes.remove(questionId);
+                PrefUtils.putStrListValue(getContext(), "mistakes", mistakes);
+                ToastUtils.showToast(getContext(), "移除id为" + questionId + "的错题");
+            }
+
             fragmentListener.process(position);
         } else {
             ll_explan.setVisibility(View.VISIBLE);
-            mTV_analysis_answer.setText("答案：" + sortStringByABCD(answer) + "您的选项" + sortStringByABCD(option));
+            mTV_analysis_answer.setText("答案：" + StringUtils.sortStringByABCD(answer) + "您的选项" + StringUtils.sortStringByABCD(option));
             showCuoImage();
+
+            if (!mistakes.contains(questionId)) {
+                //添加我的错题  //移除错题 //不能重复
+                mistakes.add(questionId);
+
+                PrefUtils.putStrListValue(getContext(), "mistakes", mistakes);
+
+                //模拟考试
+                List<String> mistakesQuestionList = PrefUtils.getStrListValue(getContext(), PRE_MISTAKES_QUESTION);
+                mistakesQuestionList.add(questionId);
+                PrefUtils.putStrListValue(getContext(), PRE_MISTAKES_QUESTION, mistakesQuestionList);
+
+                ToastUtils.showToast(getContext(), "添加id为" + questionId + "的错题");
+
+            }
+
         }
         showTrueImage();
 
@@ -311,45 +353,10 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.answer_verify:
-                answerVerifyMethod();
-                break;
+        if (view.getId() == R.id.answer_verify) {
+            answerVerifyMethod();
         }
     }
 
-    //移除字符
-    public String removeCharacter(String str, char ch) {
-        StringBuilder sb = new StringBuilder();
 
-        // 遍历字符串，只添加不等于指定字符的字符
-        for (int i = 0; i < str.length(); i++) {
-            char currentChar = str.charAt(i);
-            if (currentChar != ch) {
-                sb.append(currentChar);
-            }
-        }
-
-        return sb.toString();
-    }
-
-    //ABCD排序
-    public static String sortStringByABCD(String str) {
-        // 将字符串转换为字符数组
-        char[] charArray = str.toCharArray();
-
-        // 使用冒泡排序或者其他简单排序算法，根据字符在 "ABCD" 中的位置排序
-        for (int i = 0; i < charArray.length - 1; i++) {
-            for (int j = 0; j < charArray.length - i - 1; j++) {
-                if (charArray[j] > charArray[j + 1]) {
-                    char temp = charArray[j];
-                    charArray[j] = charArray[j + 1];
-                    charArray[j + 1] = temp;
-                }
-            }
-        }
-
-        // 构建排序后的字符串
-        return new String(charArray);
-    }
 }

@@ -65,8 +65,13 @@ public class QuestionBean implements Parcelable {
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
-        dest.writeLong(subject);
-        dest.writeString(model);
+        if (subject != null) {
+            dest.writeLong(subject);
+        }
+        if (model != null) {
+            dest.writeString(model);
+        }
+
         dest.writeLong(questionType);
         dest.writeString(content);
         dest.writeString(item1);
@@ -99,6 +104,7 @@ public class QuestionBean implements Parcelable {
             return new QuestionBean[size];
         }
     };
+
     public QuestionBean(Long id, Long subject, String model, Long questionType) {
         this.id = id;
         this.subject = subject;

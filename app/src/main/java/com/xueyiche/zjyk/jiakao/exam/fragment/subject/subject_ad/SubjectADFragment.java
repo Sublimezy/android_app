@@ -1,13 +1,20 @@
 package com.xueyiche.zjyk.jiakao.exam.fragment.subject.subject_ad;
 
 
+import static com.xueyiche.zjyk.jiakao.constants.Constant.PRE_ALL_QUESTION;
+import static com.xueyiche.zjyk.jiakao.constants.Constant.PRE_MISTAKES_QUESTION;
+import static com.xueyiche.zjyk.jiakao.constants.Constant.TAKE_START_TIME;
+import static com.xueyiche.zjyk.jiakao.exam.entity.enums.PageEnum.COLLECTION;
+import static com.xueyiche.zjyk.jiakao.exam.entity.enums.PageEnum.MISTAKES;
+import static com.xueyiche.zjyk.jiakao.exam.entity.enums.PageEnum.PRACTICE;
+import static com.xueyiche.zjyk.jiakao.exam.entity.enums.PageEnum.SEQUENCE;
+import static com.xueyiche.zjyk.jiakao.exam.entity.enums.PageEnum.SPECIALS;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,17 +29,18 @@ import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
-
 import com.xueyiche.zjyk.jiakao.exam.activity.question.PracticeNormalActivity;
-
+import com.xueyiche.zjyk.jiakao.exam.activity.special.SpecialQuestionActivity;
 import com.xueyiche.zjyk.jiakao.exam.database.QuestionDBHelper;
-
 import com.xueyiche.zjyk.jiakao.exam.entity.dos.QuestionBean;
 import com.xueyiche.zjyk.jiakao.exam.entity.dto.ReqQuestionBean;
 import com.xueyiche.zjyk.jiakao.myhttp.MyHttpUtils;
 import com.xueyiche.zjyk.jiakao.myhttp.RequestCallBack;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +63,11 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     private TextView textProgress2;
     private QuestionBean queryQuestionParams;
     private List<QuestionBean> questionBeanList;
+
+    private List<String> mistakes = new ArrayList<>();
+
+    private List<String> collect = new ArrayList<>();
+
     Long subject = null;
     String model = null;
 
@@ -76,7 +89,6 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onStop() {
         super.onStop();
-//        mHelper.close();
     }
 
 
@@ -117,6 +129,7 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         if (args != null) {
             model = args.getString("model");
         }
+
 
         mHelper = QuestionDBHelper.getInstance(App.context);
 
@@ -196,29 +209,8 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         shoucanga = allShouCangA.size() == 0;*/
 
         switch (v.getId()) {
-            //专项练习
-            case R.id.tv_two:
-//                startActivity(new Intent(App.context, PracticeSpecialActivity.class));
-                break;
 
-/*            //我的错题
-            case R.id.tv_three:
-                if (cuotia) {
-                    showToastShort("当前没有错题呦 ！");
-                } else {
-                    startActivity(new Intent(App.context, CuoTiA.class));
-                }
-                break;
-
-            //我的收藏
-            case R.id.tv_four:
-                if (shoucanga) {
-                    showToastShort("当前没有收藏呦 ！");
-                } else {
-                    startActivity(new Intent(App.context, CollectionA.class));
-                }
-                break;
-            //我的成绩
+  /*            //我的成绩
             case R.id.tv_five:
                 if (chengji) {
                     showToastShort("暂无成绩！");
@@ -230,8 +222,50 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
                 break;*/
             //顺序练习
             case R.id.ll_test_practice:
+                args.putString("page", SEQUENCE.name());
                 readyGo(PracticeNormalActivity.class, args);
                 break;
+            //我的错题
+            case R.id.tv_three:
+                mistakes = PrefUtils.getStrListValue(getContext(), "mistakes");
+                if (mistakes.size() == 0) {
+                    showToastShort("当前没有错题呦 ！");
+                } else {
+                    args.putString("page", MISTAKES.name());
+                    readyGo(PracticeNormalActivity.class, args);
+                }
+                break;
+            //我的收藏
+            case R.id.tv_four:
+                collect = PrefUtils.getStrListValue(getContext(), "collect");
+                if (collect.size() == 0) {
+                    showToastShort("当前没有收藏呦 ！");
+                } else {
+                    args.putString("page", COLLECTION.name());
+                    readyGo(PracticeNormalActivity.class, args);
+                }
+                break;
+            //专项练习
+            case R.id.tv_two:
+                args.putString("page", SPECIALS.name());
+                readyGo(SpecialQuestionActivity.class, args);
+                break;
+            //模拟练习
+            case R.id.tv_practice_test:
+
+                Date currentDate = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = dateFormat.format(currentDate);
+
+                collect = PrefUtils.getStrListValue(getContext(), "collect");
+
+                PrefUtils.putString(getContext(), TAKE_START_TIME, formattedDate);
+                PrefUtils.putStrListValue(getContext(), PRE_MISTAKES_QUESTION, new ArrayList<>());
+                PrefUtils.putStrListValue(getContext(), PRE_ALL_QUESTION, new ArrayList<>());
+                args.putString("page", PRACTICE.name());
+                readyGo(PracticeNormalActivity.class, args);
+                break;
+
         }
     }
 

@@ -61,7 +61,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginTop="38dp"
                         android:background="@mipmap/test_shunxu_practice"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
@@ -90,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginTop="140dp"
+                        android:layout_marginTop="40dp"
                         android:background="@mipmap/test_exam"
                         android:gravity="center"
                         android:text="模拟考试"
@@ -99,17 +98,19 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="38dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="38dp"
+                    android:paddingRight="30dp">
 
                     <TextView
                         android:id="@+id/tv_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
                         android:drawableTop="@mipmap/test_ptactice"
                         android:text="@string/zhuanxianglianxi"
                         android:textColor="@color/test_color"
@@ -119,13 +120,15 @@
                         android:id="@+id/tv_four"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="47dp"
                         android:drawableTop="@mipmap/test_selection"
                         android:text="@string/mycollection"
                         android:textColor="@color/test_color"
                         android:textSize="@dimen/text_fifteensp" />
-
                 </LinearLayout>
+
+
             </RelativeLayout>
 
             <RadioGroup

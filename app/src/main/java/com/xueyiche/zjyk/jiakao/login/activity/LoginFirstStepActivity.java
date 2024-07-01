@@ -22,6 +22,8 @@ import butterknife.OnClick;
 public class LoginFirstStepActivity extends BaseActivity {
     @BindView(R.id.etLoginPhone)
     EditText etLoginPhone;
+
+
     public static LoginFirstStepActivity instance;
 
     @Override

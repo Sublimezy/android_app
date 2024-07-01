@@ -313,4 +313,39 @@ public class StringUtils {
         Matcher m = pattern.matcher(strDate);
         return m.matches();
     }
+
+    //移除字符
+    public static String removeCharacter(String str, char ch) {
+        StringBuilder sb = new StringBuilder();
+
+        // 遍历字符串，只添加不等于指定字符的字符
+        for (int i = 0; i < str.length(); i++) {
+            char currentChar = str.charAt(i);
+            if (currentChar != ch) {
+                sb.append(currentChar);
+            }
+        }
+
+        return sb.toString();
+    }
+
+    //ABCD排序
+    public  static String sortStringByABCD(String str) {
+        // 将字符串转换为字符数组
+        char[] charArray = str.toCharArray();
+
+        // 使用冒泡排序或者其他简单排序算法，根据字符在 "ABCD" 中的位置排序
+        for (int i = 0; i < charArray.length - 1; i++) {
+            for (int j = 0; j < charArray.length - i - 1; j++) {
+                if (charArray[j] > charArray[j + 1]) {
+                    char temp = charArray[j];
+                    charArray[j] = charArray[j + 1];
+                    charArray[j + 1] = temp;
+                }
+            }
+        }
+
+        // 构建排序后的字符串
+        return new String(charArray);
+    }
 }
