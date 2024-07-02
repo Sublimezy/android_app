@@ -23,15 +23,18 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.luck.picture.lib.utils.ToastUtils;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.constants.AppUrl;
+import com.xueyiche.zjyk.jiakao.exam.activity.mygradle.MyGradleActivity;
 import com.xueyiche.zjyk.jiakao.exam.activity.question.PracticeNormalActivity;
 import com.xueyiche.zjyk.jiakao.exam.activity.special.SpecialQuestionActivity;
+import com.xueyiche.zjyk.jiakao.exam.database.MyGradeDBHelper;
 import com.xueyiche.zjyk.jiakao.exam.database.QuestionDBHelper;
+import com.xueyiche.zjyk.jiakao.exam.entity.dos.MyGradeBean;
 import com.xueyiche.zjyk.jiakao.exam.entity.dos.QuestionBean;
 import com.xueyiche.zjyk.jiakao.exam.entity.dto.ReqQuestionBean;
 import com.xueyiche.zjyk.jiakao.myhttp.MyHttpUtils;
@@ -47,15 +50,14 @@ import java.util.Map;
 
 
 //科目一的fragment
-public class SubjectADFragment extends BaseFragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class SubjectADFragment extends BaseFragment implements View.OnClickListener {
     private QuestionDBHelper mHelper;
     private LinearLayout ll_test_practice;
     private TextView mTV_shunxuid, tv_practice_test;
     private TextView mTV_four, mTV_three, mTV_two, mTV_five;
     private Integer questionBeanListSize;
-
-    private ProgressBar progressBar;
-    private TextView textProgress;
+    private Button dialogBtnCancel;
+    private Button genxing;
     private RadioGroup subjectGroup;
     private RadioButton subject1;
     private RadioButton subject2;
@@ -69,10 +71,10 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     private List<String> collect = new ArrayList<>();
 
     Long subject = null;
-    String model = null;
+
 
     Integer pageNum = 1;
-    Integer pageSize = 1000;
+    Integer pageSize = 10000;
     Bundle args;
 
     @Override
@@ -80,11 +82,6 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
 
     @Override
     public void onStop() {
@@ -95,6 +92,7 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     @Override
     protected View setInitView() {
+
 
         View view = View.inflate(App.context, R.layout.home_exam_subjecta, null);
 
@@ -119,16 +117,11 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
         subject2 = view.findViewById(R.id.subject4);
 
+        genxing = view.findViewById(R.id.genxing);
 
-        //导入数据库进度条
-        progressBar = view.findViewById(R.id.progress_par);
-        textProgress = view.findViewById(R.id.text_progress);
+        args = new Bundle();
 
-        args = getArguments();
-
-        if (args != null) {
-            model = args.getString("model");
-        }
+        String model = PrefUtils.getString(App.context, "model", "c1");
 
 
         mHelper = QuestionDBHelper.getInstance(App.context);
@@ -143,9 +136,9 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         mTV_two.setOnClickListener(this);
         mTV_three.setOnClickListener(this);
         mTV_four.setOnClickListener(this);
-
-        subjectGroup.setOnCheckedChangeListener(this);
-
+        genxing.setOnClickListener(this);
+        subject1.setOnClickListener(this);
+        subject2.setOnClickListener(this);
 
         if (subject == 1L) {
             subject1.setChecked(true);
@@ -162,17 +155,8 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.subject1:
-                subjectArgs(null, 1L, model, null);
-                PrefUtils.putInt(getContext(), "subject", Math.toIntExact(subject));
-                break;
-            case R.id.subject4:
-                subjectArgs(null, 4L, model, null);
-                PrefUtils.putInt(getContext(), "subject", Math.toIntExact(subject));
-                break;
-        }
+    public void onStart() {
+        super.onStart();
     }
 
 
@@ -181,6 +165,8 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
         this.subject = subject;
 
         args.putLong("subject", subject);
+
+        ToastUtils.showToast(getContext(), "已切换为" + (subject == 1 ? "科目一" : "科目四" + "驾照类型" + model));
 
         queryQuestionParams = new QuestionBean(id, subject, model, questionType);
 
@@ -201,29 +187,23 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-/*        List<QuestionBean> allCuoTiA = mHelper.findAllCuoTiA();
-        List<QuestionBean> allShouCangA = mHelper.findAllShouCangA();
-        List<MyResultBean> chengjiList = dbResult.findAllResult();
-        chengji = chengjiList.size() == 0;
-        cuotia = allCuoTiA.size() == 0;
-        shoucanga = allShouCangA.size() == 0;*/
+        String model = PrefUtils.getString(App.context, "model", "c1");
+
+        args.putString("model", model);
 
         switch (v.getId()) {
 
-  /*            //我的成绩
-            case R.id.tv_five:
-                if (chengji) {
-                    showToastShort("暂无成绩！");
-                } else {
-                    Intent intent5 = new Intent(App.context, MyResult.class);
-                    intent5.putExtra("myresult", "1");
-                    startActivity(intent5);
-                }
-                break;*/
             //顺序练习
             case R.id.ll_test_practice:
-                args.putString("page", SEQUENCE.name());
-                readyGo(PracticeNormalActivity.class, args);
+                queryQuestionParams = new QuestionBean(null, subject, model, null);
+                questionBeanListSize = mHelper.getAllQuestionByParams(queryQuestionParams).size();
+                if (questionBeanListSize == 0) {
+                    subjectArgs(null, subject, model, null);
+                } else {
+                    args.putString("page", SEQUENCE.name());
+                    readyGo(PracticeNormalActivity.class, args);
+                }
+
                 break;
             //我的错题
             case R.id.tv_three:
@@ -266,6 +246,45 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
                 readyGo(PracticeNormalActivity.class, args);
                 break;
 
+            //我的成绩
+            case R.id.tv_five:
+
+                MyGradeDBHelper myGradeDBHelper = MyGradeDBHelper.getInstance(App.context);
+                MyGradeBean myGradeBean = new MyGradeBean(Math.toIntExact(subject), model);
+                List<MyGradeBean> myGradeBeanList = myGradeDBHelper.getAllQuestionByParams(myGradeBean);
+                if (myGradeBeanList.size() == 0) {
+                    showToastShort("暂无成绩！");
+                } else {
+
+                    readyGo(MyGradleActivity.class, args);
+                }
+                break;
+
+            //更新题库
+            case R.id.genxing:
+
+                queryQuestionParams = new QuestionBean(null, subject, model, null);
+                showToastShort("正在执行清除操作！请等待");
+                for (int i = 0; i < questionBeanList.size(); i++) {
+                    mHelper.deleteAll(queryQuestionParams);
+                }
+                int size = mHelper.getAllQuestionByParams(queryQuestionParams).size();
+                if (size == 0) {
+                    showLayoutDialog();
+                    // 启动后台任务 查询后台数据库，导入到本地
+                    new ImportDataTask().execute();
+                }
+                break;
+            //科目一
+            case R.id.subject1:
+                subjectArgs(null, 1L, model, null);
+                PrefUtils.putInt(getContext(), "subject", Math.toIntExact(subject));
+                break;
+            //科目四
+            case R.id.subject4:
+                subjectArgs(null, 4L, model, null);
+                PrefUtils.putInt(getContext(), "subject", Math.toIntExact(subject));
+                break;
         }
     }
 
@@ -273,44 +292,50 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
     public void onResume() {
         super.onResume();
         mTV_shunxuid.setText(String.valueOf(questionBeanListSize));
+
+
     }
 
 
     private void showLayoutDialog() {
+        String model = PrefUtils.getString(App.context, "model", "c1");
         //加载布局并初始化组件
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.daoru_jiakao, null);
         TextView dialogText = dialogView.findViewById(R.id.dialog_text);
         progressBar2 = dialogView.findViewById(R.id.progress_par2);
         textProgress2 = dialogView.findViewById(R.id.text_progress2);
-        Button dialogBtnConfirm = dialogView.findViewById(R.id.dialog_btn_confirm);
-        Button dialogBtnCancel = dialogView.findViewById(R.id.dialog_btn_cancel);
+        dialogBtnCancel = dialogView.findViewById(R.id.dialog_btn_cancel);
         final AlertDialog.Builder layoutDialog = new AlertDialog.Builder(getContext());
-        layoutDialog.setTitle("我是标题");
+
+        layoutDialog.setTitle("导入题目");
 
         layoutDialog.setView(dialogView);
         final AlertDialog dialog = layoutDialog.show();
-        //设置组件
-        dialogText.setText("我是自定义layout的弹窗！！");
 
-        dialogBtnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "我是自定义layout的弹窗！！", Toast.LENGTH_SHORT).show();
-            }
-        });
+        dialog.setCancelable(false);
+
+        dialog.setCanceledOnTouchOutside(false);
+
+        //设置组件
+        dialogText.setText("正在导入科目" + subject + "的题目！" + "驾照类型" + model);
+
 
         dialogBtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 当点击取消按钮时，关闭对话框
-                dialog.dismiss();
+                if (questionBeanListSize == 0) {
+                    ToastUtils.showToast(getContext(), "请等待导入！");
+                } else {
+                    // 当点击取消按钮时，关闭对话框
+                    dialog.dismiss();
+                }
+
             }
         });
 
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                Toast.makeText(getContext(), "对话框已关闭！", Toast.LENGTH_SHORT).show();
                 // 将整数转换为字符串
                 mTV_shunxuid.setText(String.valueOf(questionBeanListSize));
             }
@@ -321,6 +346,8 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
 
     private class ImportDataTask extends AsyncTask<Void, Integer, Void> {
+
+        String model = PrefUtils.getString(App.context, "model", "c1");
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -347,8 +374,6 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
                     if (questionBeanList != null) {
 
-                        progressBar.setMax(totalDataToImport);
-
                         progressBar2.setMax(totalDataToImport);
 
                         for (int i = 1; i <= totalDataToImport; i++) {
@@ -362,6 +387,9 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
 
 
                         }
+                        ToastUtils.showToast(getContext(), "成功导入科目" + subject + "的题目！" + "驾照类型" + model);
+
+
                     }
 
 
@@ -383,8 +411,6 @@ public class SubjectADFragment extends BaseFragment implements View.OnClickListe
             super.onProgressUpdate(values);
             Integer value0 = values[0] + 1;
             Integer value1 = values[1];
-            progressBar.setProgress(value0);
-            textProgress.setText("导入进度: " + value0 + " / " + value1);
             progressBar2.setProgress(value0);
             textProgress2.setText("导入进度: " + value0 + " / " + value1);
         }

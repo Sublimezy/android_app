@@ -131,6 +131,11 @@ public class MyGradeBean {
     public MyGradeBean() {
     }
 
+    public MyGradeBean(int subject, String model) {
+        this.subject = subject;
+        this.model = model;
+    }
+
     public MyGradeBean(String examDate, int score, int totalQuestions, int mistakesNum, int trueNum, int unAnsweredNum, String mistakesQuestion, int allTime, int subject, String model) {
         this.examDate = examDate;
         this.score = score;

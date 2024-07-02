@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -25,7 +28,6 @@ import com.xueyiche.zjyk.jiakao.mine.activities.bianji.SetActivity;
 import com.xueyiche.zjyk.jiakao.mine.view.CircleImageView;
 import com.xueyiche.zjyk.jiakao.utils.DialogUtils;
 import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
-import com.xueyiche.zjyk.jiakao.utils.XueYiCheUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +35,7 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment implements AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.mine_head)
     CircleImageView mineHead;
@@ -43,11 +45,14 @@ public class MineFragment extends BaseFragment {
     ImageView ivMineSetting;
     @BindView(R.id.ll_shared_app)
     LinearLayout llSharedApp;
-    @BindView(R.id.ll_kefu)
-    LinearLayout llKefu;
     @BindView(R.id.ll_about)
     LinearLayout llAbout;
-    String avatar11;
+
+    @BindView(R.id.my_spinner)
+    Spinner mySpinner;
+
+
+    private String[] items;
 
     public static MineFragment newInstance(String tag) {
         Bundle bundle = new Bundle();
@@ -69,7 +74,15 @@ public class MineFragment extends BaseFragment {
         View viewHead = LayoutInflater.from(App.context).inflate(R.layout.mine_fragment_two_new, null);
         ButterKnife.bind(this, viewHead);
 
+        // 创建一个包含选项的数组
+        items = new String[]{"a1", "a2", "b1", "b2", "c1", "c2"};
 
+        // 创建 ArrayAdapter 并设置数据源
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.item_model_spinner, items);
+
+        mySpinner.setAdapter(adapter);
+
+        mySpinner.setOnItemSelectedListener(this);
         return viewHead;
     }
 
@@ -148,7 +161,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.mine_head, R.id.tv_mine_name, R.id.iv_mine_setting
-            , R.id.ll_shared_app, R.id.ll_kefu, R.id.ll_about})
+            , R.id.ll_shared_app, R.id.ll_about})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_head:
@@ -168,11 +181,18 @@ public class MineFragment extends BaseFragment {
                 }
                 break;
             case R.id.ll_shared_app:
-
-                break;
-            case R.id.ll_kefu:
-                XueYiCheUtils.CallPhone(getActivity(), "拨打客服电话", "1111-11111111");
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        showToastShort("已切换为" + items[i] + "驾照");
+        PrefUtils.putString(getContext(), "model", items[i]);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

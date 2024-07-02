@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".exam.activity.special.SpecialQuestionActivity">
+    tools:context=".exam.activity.mygradle.MyGradleActivity">
 
     <include
         android:id="@+id/my_return"
@@ -14,23 +14,12 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true" />
 
-    <TextView
-        android:id="@+id/single"
-        android:text="单选题"
+    <ListView
+        android:id="@+id/lv_plant"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:divider="@null"
 
-    <TextView
-        android:id="@+id/doubles"
-        android:text="多选题"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/judge"
-        android:text="判断题"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
+        android:dividerHeight="0dp"
+        android:listSelector="@color/transparent" />
 </LinearLayout>

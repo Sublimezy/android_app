@@ -1,7 +1,5 @@
 package com.xueyiche.zjyk.jiakao.exam.adapter.subject;
 
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 
 import com.xueyiche.zjyk.jiakao.exam.fragment.subject.subject_ad.SubjectADFragment;
@@ -20,7 +18,6 @@ public class FragmentFactory {
     public static Fragment getExamInstance(int position) {
         Fragment fragment = map.get(position);
         if (fragment == null) {
-            Bundle args = new Bundle();
             switch (position) {
                 case 0:
                     fragment = new SubjectADFragment();
@@ -32,8 +29,6 @@ public class FragmentFactory {
                     fragment = new SubjectCFragment();
                     break;
             }
-            args.putString("model", "c1");
-            fragment.setArguments(args);
         }
         return fragment;
     }

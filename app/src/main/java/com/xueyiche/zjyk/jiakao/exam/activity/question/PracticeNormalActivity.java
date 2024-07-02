@@ -117,13 +117,35 @@ public class PracticeNormalActivity extends BaseActivity implements QuestionFrag
     @Override
     protected void initView() {
 
+        readerViewPager = view.findViewById(R.id.vp_subjectA);
+
+        //题目顺序
+        questionNum = view.findViewById(R.id.exam_question_include).findViewById(R.id.tv_title_num);
+
+        //收藏
+        ckCollection = view.findViewById(R.id.exam_question_include).findViewById(R.id.ck_collection);
+
+        //返回
+        mLL_questionback = view.findViewById(R.id.exam_question_include).findViewById(R.id.ll_question_back);
+        mLL_questionback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         instance = this;
         mHelper = QuestionDBHelper.getInstance(App.context);
 
         Intent intent = getIntent();
+
         subject = intent.getLongExtra(PRE_SUBJECT, DEF_SUBJECT);
+
         model = intent.getStringExtra(PRE_MODEL);
+
         page = intent.getStringExtra(PRE_PAGE);
+
         questionType = intent.getLongExtra(PRE_QUESTION_TYPE, DEF_QUESTION_TYPE);
 
         collect = PrefUtils.getStrListValue(this, PRE_COLLECT);
@@ -145,8 +167,11 @@ public class PracticeNormalActivity extends BaseActivity implements QuestionFrag
                 questionBeanList.addAll(mHelper.getAllQuestionByParams(queryQuestionParams));
             }
         } else if (page.equals(SPECIALS.name())) {
+
             queryQuestionParams = new QuestionBean(id, subject, model, questionType);
+
             questionBeanList = mHelper.getAllQuestionByParams(queryQuestionParams);
+
         } else if (page.equals(PRACTICE.name()) || page.equals(SEQUENCE.name())) {
 
             queryQuestionParams = new QuestionBean(id, subject, model, null);
@@ -173,37 +198,22 @@ public class PracticeNormalActivity extends BaseActivity implements QuestionFrag
 
         }
 
+        if (readerViewPager.getCurrentItem() == 0) {
+            questionBean = questionBeanList.get(readerViewPager.getCurrentItem());
+            isCollect(readerViewPager.getCurrentItem());
+        }
+
         questionBeanListSize = questionBeanList.size();
 
 
-        //返回
-        mLL_questionback = view.findViewById(R.id.exam_question_include).findViewById(R.id.ll_question_back);
-        mLL_questionback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
-        //题目顺序
-        questionNum = view.findViewById(R.id.exam_question_include).findViewById(R.id.tv_title_num);
         questionNum.setText(1 + "/" + questionBeanListSize);
 
-        //收藏
-        ckCollection = view.findViewById(R.id.exam_question_include).findViewById(R.id.ck_collection);
 
-
-        readerViewPager = view.findViewById(R.id.vp_subjectA);
         QuestionAdapter adapter = new QuestionAdapter(getSupportFragmentManager(), questionBeanList);
         readerViewPager.setAdapter(adapter);
         readerViewPager.addOnPageChangeListener(this);
         ckCollection.setOnClickListener(this);
         tvTitleSum.setOnClickListener(this);
-        if (readerViewPager.getCurrentItem() == 0) {
-            questionBean = questionBeanList.get(readerViewPager.getCurrentItem());
-            isCollect(readerViewPager.getCurrentItem());
-        }
 
 
     }

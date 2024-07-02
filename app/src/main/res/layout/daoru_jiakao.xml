@@ -17,14 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/dialog_btn_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="提示"
-            android:textColor="@color/colorAccent"
-            android:textSize="15sp" />
 
         <Button
             android:id="@+id/dialog_btn_cancel"
@@ -32,12 +24,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            android:text="隐藏"
+            android:text="确定"
             android:textColor="@color/colorAccent"
             android:textSize="15sp" />
 
 
     </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/progress_par2"
         style="?android:attr/progressBarStyleHorizontal"

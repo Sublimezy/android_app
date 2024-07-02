@@ -1,7 +1,9 @@
 package com.xueyiche.zjyk.jiakao.exam.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -9,6 +11,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.xueyiche.zjyk.jiakao.exam.entity.dos.MyGradeBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyGradeDBHelper extends SQLiteOpenHelper {
 
@@ -64,6 +69,87 @@ public class MyGradeDBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * 读取问题
+     */
+    public List<MyGradeBean> getAllQuestionByParams(MyGradeBean myGradeBean) {
+        Cursor cursor = null;
+        String selection = "";
+        ArrayList<String> selectionArgsList = new ArrayList<>();
+
+        try {
+            mRDB = openReadLink();
+
+            Long subjects = (long) myGradeBean.getSubject();
+
+            if (subjects != null) {
+                selection += "subject=? AND ";
+                selectionArgsList.add(String.valueOf(myGradeBean.getSubject()));
+            }
+            if (myGradeBean.getModel() != null && !myGradeBean.getModel().isEmpty()) {
+                selection += "model=? AND ";
+                selectionArgsList.add(myGradeBean.getModel());
+            }
+
+// 去掉最后的 " AND "
+            if (selection.endsWith(" AND ")) {
+                selection = selection.substring(0, selection.length() - 5);
+            }
+
+// 转换成数组
+            String[] selectionArgs = selectionArgsList.toArray(new String[selectionArgsList.size()]);
+
+
+            cursor = mRDB.query(false, TABLE_NAME, null, selection, selectionArgs,
+                    null, null, null, null, null);
+
+
+            List<MyGradeBean> result = new ArrayList<>();
+
+            MyGradeBean que;
+
+
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex("_id"));
+                @SuppressLint("Range") String examDate = cursor.getString(cursor.getColumnIndex("examDate"));
+                @SuppressLint("Range") int score = cursor.getInt(cursor.getColumnIndex("score"));
+                @SuppressLint("Range") int totalQuestions = cursor.getInt(cursor.getColumnIndex("totalQuestions"));
+                @SuppressLint("Range") int mistakesNum = cursor.getInt(cursor.getColumnIndex("mistakesNum"));
+                @SuppressLint("Range") String mistakesQuestion = cursor.getString(cursor.getColumnIndex("mistakesQuestion"));
+                @SuppressLint("Range") int trueNum = cursor.getInt(cursor.getColumnIndex("trueNum"));
+                @SuppressLint("Range") int unAnsweredNum = cursor.getInt(cursor.getColumnIndex("unAnsweredNum"));
+                @SuppressLint("Range") int allTime = cursor.getInt(cursor.getColumnIndex("allTime"));
+                @SuppressLint("Range") int takeTime = cursor.getInt(cursor.getColumnIndex("takeTime"));
+                @SuppressLint("Range") int subject = cursor.getInt(cursor.getColumnIndex("subject"));
+                @SuppressLint("Range") String model = cursor.getString(cursor.getColumnIndex("model"));
+                que = new MyGradeBean();
+                que.setId((int) id);
+                que.setExamDate(examDate);
+                que.setScore(score);
+                que.setTotalQuestions(totalQuestions);
+                que.setMistakesQuestion(mistakesQuestion);
+                que.setMistakesNum(mistakesNum);
+                que.setTrueNum(trueNum);
+                que.setUnAnsweredNum(unAnsweredNum);
+                que.setAllTime(allTime);
+                que.setTakeTime(takeTime);
+                que.setSubject(subject);
+                que.setModel(model);
+                result.add(que);
+            }
+
+            cursor.close();
+            mRDB.close();
+            return result;
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            closeLink();
+        }
+
+
+    }
 
     public MyGradeDBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);

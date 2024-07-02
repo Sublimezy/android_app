@@ -10,7 +10,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-
 import com.xueyiche.zjyk.jiakao.exam.entity.dos.QuestionBean;
 
 import java.util.ArrayList;
@@ -26,6 +25,12 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
     private static QuestionDBHelper mHelper = null;
     private static SQLiteDatabase mRDB = null;
     private static SQLiteDatabase wRDB = null;
+
+    //查询条件key
+    private String selection = "";
+    private ArrayList<String> selectionArgsList = new ArrayList<>();
+    //查询条件 key值
+    private String[] selectionArgs;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -43,6 +48,19 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
                 "explains VARCHAR NOT NULL," +
                 "url VARCHAR NOT NULL)";
         db.execSQL(sql);
+    }
+
+    public long deleteAll(QuestionBean questionBean) {
+
+        try {
+            mRDB = openReadLink();
+            queryParams(questionBean);
+            int delete = mRDB.delete(TABLE_NAME, selection, selectionArgs);
+            return delete;
+        } finally {
+            closeLink();
+        }
+
     }
 
     public boolean insert(QuestionBean questionBean) {
@@ -83,43 +101,16 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
      */
     public List<QuestionBean> getAllQuestionByParams(QuestionBean questionBean) {
         Cursor cursor = null;
-        String selection = "";
-        ArrayList<String> selectionArgsList = new ArrayList<>();
+
 
         try {
             mRDB = openReadLink();
 
-
-// 构建查询条件
-            if (questionBean.getId() != null) {
-                selection += "_id=? AND ";
-                selectionArgsList.add(String.valueOf(questionBean.getId()));
-            }
-            if (questionBean.getSubject() != null) {
-                selection += "subject=? AND ";
-                selectionArgsList.add(String.valueOf(questionBean.getSubject()));
-            }
-            if (questionBean.getModel() != null && !questionBean.getModel().isEmpty()) {
-                selection += "model=? AND ";
-                selectionArgsList.add(questionBean.getModel());
-            }
-            if (questionBean.getQuestionType() != null) {
-                selection += "questionType=? AND ";
-                selectionArgsList.add(String.valueOf(questionBean.getQuestionType()));
-            }
-
-// 去掉最后的 " AND "
-            if (selection.endsWith(" AND ")) {
-                selection = selection.substring(0, selection.length() - 5);
-            }
-
-// 转换成数组
-            String[] selectionArgs = selectionArgsList.toArray(new String[selectionArgsList.size()]);
-
+            //封装查询条件
+            queryParams(questionBean);
 
             cursor = mRDB.query(false, TABLE_NAME, null, selection, selectionArgs,
                     null, null, null, null, null);
-
 
             List<QuestionBean> result = new ArrayList<>();
 
@@ -160,6 +151,37 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
         }
 
 
+    }
+
+    void queryParams(QuestionBean questionBean) {
+        selection = "";
+        selectionArgsList = new ArrayList<>();
+        selectionArgs = null;
+// 构建查询条件
+        if (questionBean.getId() != null) {
+            selection += "_id=? AND ";
+            selectionArgsList.add(String.valueOf(questionBean.getId()));
+        }
+        if (questionBean.getSubject() != null) {
+            selection += "subject=? AND ";
+            selectionArgsList.add(String.valueOf(questionBean.getSubject()));
+        }
+        if (questionBean.getModel() != null && !questionBean.getModel().isEmpty()) {
+            selection += "model=? AND ";
+            selectionArgsList.add(questionBean.getModel());
+        }
+        if (questionBean.getQuestionType() != null) {
+            selection += "questionType=? AND ";
+            selectionArgsList.add(String.valueOf(questionBean.getQuestionType()));
+        }
+
+// 去掉最后的 " AND "
+        if (selection.endsWith(" AND ")) {
+            selection = selection.substring(0, selection.length() - 5);
+        }
+
+// 转换成数组
+        selectionArgs = selectionArgsList.toArray(new String[selectionArgsList.size()]);
     }
 
     public QuestionDBHelper(@Nullable Context context) {

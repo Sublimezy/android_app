@@ -41,8 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="9dp"
-                     >
+                        android:layout_marginLeft="9dp">
                         <!--                           // 用于设置文本控件（如TextView）中当文本过长时，如何显示省略号的属性。-->
 
                         <TextView
@@ -51,8 +50,7 @@
                             android:layout_height="wrap_content"
                             android:text="点击头像登录"
                             android:textColor="#ff000000"
-                            android:textSize="13dp"
-                            />
+                            android:textSize="13dp" />
 
 
                     </LinearLayout>
@@ -63,9 +61,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="18dp"
                     android:layout_gravity="center"
-                    >
+                    android:layout_marginRight="18dp">
 
                     <ImageView
                         android:id="@+id/iv_mine_setting"
@@ -79,7 +76,6 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,10 +85,10 @@
 
 
                 <RelativeLayout
-                    android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="17dp">
+                    android:layout_marginHorizontal="17dp"
+                    android:layout_marginTop="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -150,52 +146,14 @@
                             android:src="@mipmap/pic_right_arrow" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/ll_kefu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:src="@mipmap/pic_mine_kefu" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_15"
-                            android:layout_weight="1"
-                            android:text="客服中心"
-                            android:textColor="@color/_000000"
-                            android:textSize="@dimen/sp_14" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/pic_right_arrow" />
-                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginBottom="8dp"
                         android:id="@+id/ll_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -229,7 +187,29 @@
                             android:src="@mipmap/pic_right_arrow" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/ll_about_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="19dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="驾考类型" />
+
+                        <Spinner
+                            android:id="@+id/my_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,17 +1,18 @@
 package com.xueyiche.zjyk.jiakao.exam.fragment;
 
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.xueyiche.zjyk.jiakao.R;
 import com.xueyiche.zjyk.jiakao.base.module.BaseFragment;
 import com.xueyiche.zjyk.jiakao.constants.App;
 import com.xueyiche.zjyk.jiakao.exam.adapter.subject.MyExamAdapter;
+import com.xueyiche.zjyk.jiakao.utils.PrefUtils;
 
 
 public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
@@ -55,6 +56,7 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_subject1:
+
                 viewPager.setCurrentItem(0, false);//禁用动画
                 break;
             case R.id.rb_subject2:
@@ -92,6 +94,8 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
     @Override
     public void onPageSelected(int position) {
+
+
         switch (position) {
             case 0:
                 mRG_exam_menutab.check(R.id.rb_subject1);
@@ -108,5 +112,13 @@ public class ExamFragment extends BaseFragment implements RadioGroup.OnCheckedCh
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        String string = PrefUtils.getString(App.context, "model", "c1");
+
+        showToastShort("当前的驾照类型---" + string);
     }
 }
