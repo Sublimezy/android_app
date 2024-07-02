@@ -16,7 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/sishisi">
-        <com.xueyiche.zjyk.jiakao.mine.view.MClearEditText
+        <com.gxuwz.zy.mine.view.MClearEditText
             android:id="@+id/ed_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/liushiba"

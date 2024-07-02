@@ -34,7 +34,7 @@
                     android:layout_marginLeft="@dimen/all_16dp"
                     android:orientation="vertical">
 
-                    <com.xueyiche.zjyk.jiakao.custom.RoundImageView
+                    <com.gxuwz.zy.custom.RoundImageView
                         android:layout_width="170dp"
                         android:layout_height="100dp"
                         android:scaleType="fitXY"
@@ -58,7 +58,7 @@
                     android:layout_marginRight="@dimen/all_16dp"
                     android:orientation="vertical">
 
-                    <com.xueyiche.zjyk.jiakao.custom.RoundImageView
+                    <com.gxuwz.zy.custom.RoundImageView
                         android:layout_width="170dp"
                         android:layout_height="100dp"
                         android:scaleType="fitXY"
@@ -88,7 +88,7 @@
                     android:layout_marginLeft="@dimen/all_16dp"
                     android:orientation="vertical">
 
-                    <com.xueyiche.zjyk.jiakao.custom.RoundImageView
+                    <com.gxuwz.zy.custom.RoundImageView
 
                         android:layout_width="170dp"
                         android:layout_height="100dp"
@@ -112,7 +112,7 @@
                     android:layout_marginRight="@dimen/all_16dp"
                     android:orientation="vertical">
 
-                    <com.xueyiche.zjyk.jiakao.custom.RoundImageView
+                    <com.gxuwz.zy.custom.RoundImageView
                         android:layout_width="170dp"
                         android:layout_height="100dp"
                         android:scaleType="fitXY"
@@ -141,7 +141,7 @@
                     android:layout_marginLeft="@dimen/all_16dp"
                     android:orientation="vertical">
 
-                    <com.xueyiche.zjyk.jiakao.custom.RoundImageView
+                    <com.gxuwz.zy.custom.RoundImageView
                         android:layout_width="170dp"
                         android:layout_height="100dp"
                         android:scaleType="fitXY"

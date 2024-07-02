@@ -131,32 +131,40 @@
 
             </RelativeLayout>
 
-            <RadioGroup
-                android:id="@+id/subject_group"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/subject1"
+                <RadioGroup
+                    android:id="@+id/subject_group"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="科目一" />
+                    android:layout_alignParentLeft="true"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/subject1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="科目一" />
 
 
-                <RadioButton
-                    android:id="@+id/subject4"
-                    android:layout_width="wrap_content"
+                    <RadioButton
+                        android:id="@+id/subject4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="科目四" />
+
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/genxing"
+                    android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:text="科目四" />
+                    android:layout_alignParentRight="true"
+                    android:text="更新题库" />
+            </RelativeLayout>
 
-            </RadioGroup>
-
-            <Button
-                android:id="@+id/genxing"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:text="更新题库" />
 
         </LinearLayout>
 

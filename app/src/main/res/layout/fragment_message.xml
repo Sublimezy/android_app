@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:windowTranslucentNavigation="false"
-    tools:context=".message.MessageFragment">
+    android:orientation="vertical">
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp">
 
-    <TextView
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息中心"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/shuaxing"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刷新" />
+
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/selector">
 
-</FrameLayout>
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="20dp"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

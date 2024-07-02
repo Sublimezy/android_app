@@ -29,7 +29,7 @@
                     android:layout_marginLeft="17dp"
                     android:layout_weight="1">
 
-                    <com.xueyiche.zjyk.jiakao.mine.view.CircleImageView
+                    <com.gxuwz.zy.mine.view.CircleImageView
                         android:id="@+id/mine_head"
                         android:layout_width="67dp"
                         android:layout_height="67dp"

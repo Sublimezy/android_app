@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.xueyiche.zjyk.jiakao">
+    package="com.gxuwz.zy">
     <!-- 用于声明应用程序需要的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -21,7 +21,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 保存或读出图片还应该添加读写权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Required  一些系统要求的权限，如访问网络等 -->
-    <uses-permission android:name="com.xueyiche.zjyk.xueyiche.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Optional for location -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -49,7 +48,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <permission
-        android:name="com.xueyiche.zjyk.jiakao.permission.JPUSH_MESSAGE"
+        android:name="com.gxuwz.zjyk.jiakao.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <supports-screens
@@ -73,7 +72,7 @@
     <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
 
     <application
-        android:name=".constants.App"
+        android:name="com.gxuwz.zy.constants.App"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/logo_user"
@@ -87,21 +86,21 @@
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".exam.activity.mygradle.MyGradleActivity"
+            android:name="com.gxuwz.zy.exam.activity.mygradle.MyGradleActivity"
             android:exported="false" />
         <activity
-            android:name=".exam.activity.practice.PracticeEndActivity"
+            android:name="com.gxuwz.zy.exam.activity.practice.PracticeEndActivity"
             android:exported="false" />
         <activity
-            android:name=".exam.activity.special.SpecialQuestionActivity"
+            android:name="com.gxuwz.zy.exam.activity.special.SpecialQuestionActivity"
             android:exported="false" />
         <activity
-            android:name=".mine.activities.bianji.SetActivity"
+            android:name="com.gxuwz.zy.mine.activities.bianji.SetActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".mine.activities.bianji.EditMySelfInfoActivity"
+            android:name="com.gxuwz.zy.mine.activities.bianji.EditMySelfInfoActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -116,7 +115,7 @@
             android:name="notch.config"
             android:value="portrait|landscape" /> <!-- 全新需要的Activity -->
         <activity
-            android:name=".main.SplashActivity"
+            android:name="com.gxuwz.zy.main.SplashActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:theme="@style/WelcomeTheme">
@@ -141,7 +140,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".receive.NetBroadcastReceiver">
+        <receiver android:name="com.gxuwz.zy.receive.NetBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -152,34 +151,34 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
         <activity
-            android:name=".login.activity.LoginFirstStepActivity"
+            android:name="com.gxuwz.zy.login.activity.LoginFirstStepActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- 第二部登录 -->
         <activity
-            android:name=".login.activity.LoginSecondStepActivity"
+            android:name="com.gxuwz.zy.login.activity.LoginSecondStepActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".exam.activity.question.PracticeNormalActivity"
+            android:name="com.gxuwz.zy.exam.activity.question.PracticeNormalActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".mine.activities.bianji.ChangeHeadActivity"
+            android:name="com.gxuwz.zy.mine.activities.bianji.ChangeHeadActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- 车保险的车型 -->
         <!-- 主页 -->
         <activity
-            android:name=".main.MainActivity"
+            android:name="com.gxuwz.zy.main.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" /> <!-- 赢现金答题页 -->
         <activity
-            android:name=".mine.activities.bianji.InformationChangeActivity"
+            android:name="com.gxuwz.zy.mine.activities.bianji.InformationChangeActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- 性别 -->

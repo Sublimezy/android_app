@@ -27,7 +27,7 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
-        applicationId "com.xueyiche.zjyk.jiakao"
+        applicationId "com.gxuwz.zy"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -38,7 +38,7 @@ android {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         vectorDrawables.useSupportLibrary = true
         manifestPlaceholders = [
-                JPUSH_PKGNAME: "com.xueyiche.zjyk.xueyiche",
+                JPUSH_PKGNAME: "com.gxuwz.zy",
                 JPUSH_APPKEY : "eb33a1f8367fc8257d0115b0",//值来自开发者平台取得的AppKey
                 JPUSH_CHANNEL: "default_developer",
         ]

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/messageImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/blue" />
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/messageImage"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/messageTextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:text="测试"
+                android:textColor="#000"
+                android:textSize="15dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/messageTextTitle">
+
+                <TextView
+                    android:id="@+id/messageTextDescribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:text="测试"
+                    android:textColor="#000"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/messageTextTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:text="测试"
+                    android:textColor="#000"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top">
+
+        <TextView
+            android:id="@+id/messageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="测试"
+            android:textColor="#000"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
