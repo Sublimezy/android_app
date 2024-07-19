@@ -70,7 +70,7 @@ android {
             // 自定义输出配置
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "xueyiche_v${defaultConfig.versionName}.apk"
+                    outputFileName = "zhangyan${defaultConfig.versionName}.apk"
                 }
             }
         }

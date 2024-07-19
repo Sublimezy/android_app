@@ -61,12 +61,6 @@ public class LoginFirstStepActivity extends BaseActivity {
             case R.id.btNextStep:
                 String phone = etLoginPhone.getText().toString().trim();
                 if (!TextUtils.isEmpty(phone)) {
-        /*            if (!StringUtils.isMobileNumber(phone)) {
-                        ToastUtils.showToast(LoginFirstStepActivity.this,"请填写正确的手机号");
-                    } else {
-
-
-                    }*/
                     if (XueYiCheUtils.IsHaveInternet(App.context)) {
                         Bundle bundle = new Bundle();
                         bundle.putString("phone", phone);
